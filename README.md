@@ -13,8 +13,9 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 ## See also
 
 * Disassembly of [**Pokémon Red/Blue**][pokered]
-* irc: [**freenode#pret**][irc]
+* Main IRC: [**freenode#pret**][irc]
+* Fork IRC: [**freenode#pkmnstygian**][myIrc]
 
 [pokered]: https://github.com/iimarckus/pokered
-[original irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pkmnstygian
+[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[myIrc]: https://kiwiirc.com/client/irc.freenode.net/?#pkmnstygian
