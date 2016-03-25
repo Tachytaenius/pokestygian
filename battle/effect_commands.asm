@@ -1664,7 +1664,7 @@ BattleCommand_DamageVariation: ; 34cfd
 	ret c
 
 .go
-; Start with the maximum damage.
+; Start with the maximum damage
 	xor a
 	ld [hMultiplicand + 0], a
 	dec hl
@@ -1695,10 +1695,29 @@ BattleCommand_DamageVariation: ; 34cfd
 	ld [hli], a
 	ld a, [hQuotient + 2]
 	ld [hl], a
+	
+	ld hl, BattleMonItem
+	ld a, [hBattleTurn]
+	and a
+	jr z, .player
+	ld hl, EnemyMonItem ; enemy
+
+.player
+	ld a, [hl]
+	ld hl, CurDamage
+	cp STICK
+	jr nz, .skip
+	ld b, [hl]
+	ld a, [hli]
+	ld c, a
+	call ReduceNumberByAPercent ; thanks PikalaxALT!
+	ld a, b
+	ld [CurDamage], a
+	ld a, c
+	ld [CurDamage + 1], a
+.skip
 	ret
-
 ; 34d32
-
 
 BattleCommand_CheckHit: ; 34d32
 ; checkhit

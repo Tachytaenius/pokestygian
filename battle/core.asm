@@ -2000,27 +2000,6 @@ GetMaxHP: ; 3ccac
 	ret
 ; 3ccc2
 
-GetHalfHP: ; 3ccc2
-; unreferenced
-	ld hl, BattleMonHP
-	ld a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, EnemyMonHP
-.ok
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld c, a
-	srl b
-	rr c
-	ld a, [hli]
-	ld [Buffer2], a
-	ld a, [hl]
-	ld [Buffer1], a
-	ret
-; 3ccde
-
 CheckUserHasEnoughHP: ; 3ccde
 	ld hl, BattleMonHP + 1
 	ld a, [hBattleTurn]
@@ -2133,6 +2112,7 @@ HandleEnemyMonFaint: ; 3cd55
 
 	ld a, 1
 	ld [BattleEnded], a
+	call AskCaptureFaintedMon
 	ret
 
 .trainer
@@ -2292,6 +2272,259 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld [wBattleParticipantsNotFainted], a
 	ret
 ; 3ceaa
+
+AskCaptureFaintedMon:
+	ld a, [wBattleMode]
+	cp a, 1
+	ret nz
+	
+	ld hl, AskTake
+	call PrintText
+	call YesNoBox
+	ret c
+	
+	ld hl, EnemyMonStatus
+	ld a, [hli]
+	push af
+	inc hl
+	ld a, [hli]
+	push af
+	ld a, [hl]
+	push af
+	push hl
+	ld hl, EnemyMonItem
+	ld a, [hl]
+	push af
+	push hl
+	ld hl, EnemySubStatus5
+	ld a, [hl]
+	push af
+	set SUBSTATUS_TRANSFORMED, [hl]
+	bit SUBSTATUS_TRANSFORMED, a
+	jr nz, .ditto
+	jr .not_ditto
+
+.ditto
+	ld a, DITTO
+	ld [TempEnemyMonSpecies], a
+	jr .load_data
+
+.not_ditto
+	set 3, [hl]
+	ld hl, wEnemyBackupDVs
+	ld a, [EnemyMonDVs]
+	ld [hli], a
+	ld a, [EnemyMonDVs + 1]
+	ld [hl], a
+
+.load_data
+	ld a, [TempEnemyMonSpecies]
+	ld [CurPartySpecies], a
+	ld a, [EnemyMonLevel]
+	ld [CurPartyLevel], a
+	callba LoadEnemyMon
+
+	pop af
+	ld [EnemySubStatus5], a
+
+	pop hl
+	pop af
+	ld [hl], a
+	pop hl
+	pop af
+	ld [hld], a
+	pop af
+	ld [hld], a
+	dec hl
+	pop af
+	ld [hl], a
+
+	ld hl, EnemySubStatus5
+	bit SUBSTATUS_TRANSFORMED, [hl]
+	jr nz, .Transformed
+	ld hl, wWildMonMoves
+	ld de, EnemyMonMoves
+	ld bc, NUM_MOVES
+	call CopyBytes
+
+	ld hl, wWildMonPP
+	ld de, EnemyMonPP
+	ld bc, NUM_MOVES
+	call CopyBytes
+.Transformed
+
+	ld a, [EnemyMonSpecies]
+	ld [wWildMon], a
+	ld [CurPartySpecies], a
+	ld [wd265], a
+	call ClearSprites
+
+	ld a, [wd265]
+	dec a
+	call CheckCaughtMon
+
+	ld a, c
+	push af
+	ld a, [wd265]
+	dec a
+	call SetSeenAndCaughtMon
+	pop af
+	and a
+	jr nz, .skip_pokedex
+
+	call CheckReceivedDex
+	jr z, .skip_pokedex
+
+	ld hl, _Text_AddedToPokedex
+	call PrintText
+
+	call ClearSprites
+
+	ld a, [EnemyMonSpecies]
+	ld [wd265], a
+	predef NewPokedexEntry
+
+.skip_pokedex
+	cp BATTLETYPE_CELEBI
+	jr nz, .not_celebi
+	ld hl, wBattleResult
+	set 6, [hl]
+.not_celebi
+
+	ld a, [PartyCount]
+	cp PARTY_LENGTH
+	jr z, .SendToPC
+
+	xor a ; PARTYMON
+	ld [MonType], a
+	call ClearSprites
+
+	predef TryAddMonToParty
+
+	callba SetCaughtData
+
+	ld hl, _Text_AskNicknameNewlyCaughtMon
+	call PrintText
+
+	ld a, [CurPartySpecies]
+	ld [wd265], a
+	call GetPokemonName
+
+	call YesNoBox
+	jp c, lost
+	ld a, [PartyCount]
+	dec a
+	ld [CurPartyMon], a
+	ld hl, PartyMonNicknames
+	ld bc, PKMN_NAME_LENGTH
+	call AddNTimes
+
+	ld d, h
+	ld e, l
+	push de
+	xor a ; PARTYMON
+	ld [MonType], a
+	ld b, 0
+	callba NamingScreen
+
+	call RotateThreePalettesRight
+
+	call LoadStandardFont
+
+	pop hl
+	ld de, StringBuffer1
+	call InitName
+
+	jp lost
+
+.SendToPC
+	call ClearSprites
+
+	predef SentPkmnIntoBox
+
+	callba SetBoxMonCaughtData
+
+	ld a, BANK(sBoxCount)
+	call GetSRAMBank
+
+	ld a, [sBoxCount]
+	cp MONS_PER_BOX
+	jr nz, .BoxNotFullYet
+	ld hl, wBattleResult
+	set 7, [hl]
+.BoxNotFullYet
+	call CloseSRAM
+
+	ld hl, _Text_AskNicknameNewlyCaughtMon
+	call PrintText
+
+	ld a, [CurPartySpecies]
+	ld [wd265], a
+	call GetPokemonName
+
+	call YesNoBox
+	jr c, .SkipBoxMonNickname
+
+	xor a
+	ld [CurPartyMon], a
+	ld a, BOXMON
+	ld [MonType], a
+	ld de, wMonOrItemNameBuffer
+	ld b, $0
+	callba NamingScreen
+
+	ld a, BANK(sBoxMonNicknames)
+	call GetSRAMBank
+
+	ld hl, wMonOrItemNameBuffer
+	ld de, sBoxMonNicknames
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
+
+	ld hl, sBoxMonNicknames
+	ld de, StringBuffer1
+	call InitName
+
+	call CloseSRAM
+
+.SkipBoxMonNickname
+	ld a, BANK(sBoxMonNicknames)
+	call GetSRAMBank
+
+	ld hl, sBoxMonNicknames
+	ld de, wMonOrItemNameBuffer
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
+
+	call CloseSRAM
+
+	ld hl, _Text_SentToBillsPC
+	call PrintText
+
+	call RotateThreePalettesRight
+	call LoadStandardFont
+	jp lost
+
+_Text_SentToBillsPC:
+	text_jump UnknownText_0x1c5b38
+	db "@"
+
+_Text_AskNicknameNewlyCaughtMon:
+	text_jump UnknownText_0x1c5b7f
+	db "@"
+	
+_Text_AddedToPokedex
+	text_jump UnknownText_0x1c5b53
+	db "@"
+	
+AskTake
+	text_jump .AskTake_
+	db "@"
+
+.AskTake_
+	text "Capture the #-"
+	line "mon?"
+	prompt
 
 IsAnyMonHoldingExpShare: ; 3ceaa
 	ld a, [PartyCount]
@@ -2689,7 +2922,7 @@ PlayVictoryMusic: ; 3d0ea
 	jr nz, .play_music
 	ld a, [wBattleParticipantsNotFainted]
 	and a
-	jr z, .lost
+	jr z, lost
 	jr .play_music
 
 .trainer_victory
@@ -2701,7 +2934,7 @@ PlayVictoryMusic: ; 3d0ea
 .play_music
 	call PlayMusic
 
-.lost
+lost
 	pop de
 	ret
 ; 3d123
@@ -2733,32 +2966,7 @@ IsGymLeaderCommon:
 ; 0x3d137
 
 JohtoGymLeaders:
-	db FALKNER
-	db WHITNEY
-	db BUGSY
-	db MORTY
-	db PRYCE
-	db JASMINE
-	db CHUCK
-	db CLAIR
-	db WILL
-	db BRUNO
-	db KAREN
-	db KOGA
-; fallthrough
-; these two entries are unused
-	db CHAMPION
-	db RED
-; fallthrough
 KantoGymLeaders:
-	db BROCK
-	db MISTY
-	db LT_SURGE
-	db ERIKA
-	db JANINE
-	db SABRINA
-	db BLAINE
-	db BLUE
 	db -1
 
 
@@ -5984,7 +6192,7 @@ MoveInfoBox: ; 3e6c8
 .Disabled
 	db "Disabled!@"
 .Type
-	db "TYPE/@"
+	db "Type/@"
 ; 3e75f
 
 
@@ -6845,20 +7053,6 @@ CheckUnownLetter: ; 3eb75
 
 ; 3ebc7
 
-
-SwapBattlerLevels: ; 3ebc7
-; unreferenced
-	push bc
-	ld a, [BattleMonLevel]
-	ld b, a
-	ld a, [EnemyMonLevel]
-	ld [BattleMonLevel], a
-	ld a, b
-	ld [EnemyMonLevel], a
-	pop bc
-	ret
-; 3ebd8
-
 BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 	xor a
 	ld [TempEnemyMonSpecies], a
@@ -6866,7 +7060,7 @@ BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 	ld a, [OtherTrainerClass]
 	ld [TrainerClass], a
 	ld de, VTiles2
-	callab GetTrainerPic
+	callab GetDeadTrainerPic
 	hlcoord 19, 0
 	ld c, 0
 
@@ -6885,7 +7079,7 @@ BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 .inner_loop
 	call .CopyColumn
 	inc hl
-	ld a, 7
+	ld a, 8
 	add d
 	ld d, a
 	dec c
@@ -7242,23 +7436,6 @@ _LoadHPBar: ; 3eda6
 	callab LoadHPBar
 	ret
 ; 3edad
-
-
-LoadHPExpBarGFX: ; unreferenced
-	ld de, EnemyHPBarBorderGFX
-	ld hl, VTiles2 tile $6c
-	lb bc, BANK(EnemyHPBarBorderGFX), 4
-	call Get1bpp
-	ld de, HPExpBarBorderGFX
-	ld hl, VTiles2 tile $73
-	lb bc, BANK(HPExpBarBorderGFX), 6
-	call Get1bpp
-	ld de, ExpBarGFX
-	ld hl, VTiles2 tile $55
-	lb bc, BANK(ExpBarGFX), 8
-	jp Get2bpp
-; 3edd1
-
 
 EmptyBattleTextBox: ; 3edd1
 	ld hl, .empty
@@ -8194,40 +8371,6 @@ TextJump_ComeBack: ; 3f35b
 	db "@"
 ; 3f360
 
-
-HandleSafariAngerEatingStatus: ; unreferenced
-	ld hl, wSafariMonEating
-	ld a, [hl]
-	and a
-	jr z, .angry
-	dec [hl]
-	ld hl, BattleText_WildPkmnIsEating
-	jr .finish
-
-.angry
-	dec hl ; wSafariMonAngerCount
-	ld a, [hl]
-	and a
-	ret z
-	dec [hl]
-	ld hl, BattleText_WildPkmnIsAngry
-	jr nz, .finish
-	push hl
-	ld a, [EnemyMonSpecies]
-	ld [CurSpecies], a
-	call GetBaseData
-	ld a, [BaseCatchRate]
-	ld [EnemyMonCatchRate], a
-	pop hl
-
-.finish
-	push hl
-	call Call_LoadTempTileMapToTileMap
-	pop hl
-	jp StdBattleTextBox
-; 3f390
-
-
 FillInExpBar: ; 3f390
 	push hl
 	call CalcExpBar
@@ -8236,6 +8379,7 @@ FillInExpBar: ; 3f390
 	add hl, de
 	jp PlaceExpBar
 ; 3f39c
+
 
 CalcExpBar: ; 3f39c
 ; Calculate the percent exp between this level and the next
@@ -8464,14 +8608,6 @@ StartBattle: ; 3f4c1
 	ret
 ; 3f4d9
 
-
-_DoBattle: ; 3f4d9
-; unreferenced
-	call DoBattle
-	ret
-; 3f4dd
-
-
 BattleIntro: ; 3f4dd
 	callba MobileFn_106050 ; mobile
 	call LoadTrainerOrWildMonPic
@@ -8578,7 +8714,7 @@ InitEnemyTrainer: ; 3f594
 	dec a
 	ld [wEnemyItemState], a
 	hlcoord 12, 0
-	lb bc, 7, 7
+	lb bc, 6, 8
 	predef PlaceGraphic
 	ld a, -1
 	ld [CurOTMon], a

@@ -307,6 +307,9 @@ Function511ec: ; 511ec
 	call FarDecompress
 	ret
 
+GetDeadTrainerPic:
+	ret
+
 GetTrainerPic: ; 5120d
 	ld a, [TrainerClass]
 	and a

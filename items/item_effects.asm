@@ -502,8 +502,8 @@ endr
 	ld de, EnemyMonPP
 	ld bc, NUM_MOVES
 	call CopyBytes
-.Transformed
 
+.Transformed
 	ld a, [EnemyMonSpecies]
 	ld [wWildMon], a
 	ld [CurPartySpecies], a
