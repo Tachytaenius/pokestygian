@@ -8,21 +8,22 @@ ENDM
 Item1Attributes:
 
 ; MASTER BALL
-	item_attribute     0, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
+	item_attribute     3, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
+
 
 Item2Attributes:
 
 ; ULTRA BALL
-	item_attribute  1200, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
+	item_attribute     3, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; BRIGHTPOWDER
 	item_attribute    10, HELD_BRIGHTPOWDER,   20,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; GREAT BALL
-	item_attribute   600, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
+	item_attribute     3, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; # BALL
-	item_attribute   200, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
+	item_attribute     3, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; TERU-SAMA
 	item_attribute $9999, 0,                 0,                       0, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE

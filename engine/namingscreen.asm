@@ -119,13 +119,20 @@ endr
 ; 11780 (4:5780)
 
 .NicknameStrings: ; 11780
-	db "'S@"
-	db "NICKNAME?@"
+	db "'s@"
+	db "nickname?@"
 
 ; 1178d
 
 .Player: ; 1178d (4:578d)
-	callba GetPlayerIcon
+	ld de, YoungsterSpriteGFX
+	ld b, BANK(YoungsterSpriteGFX)
+	ld a, [PlayerGender]
+	bit 0, a
+	jr z, .done
+	ld de, RedsMomSpriteGFX
+	ld b, BANK(RedsMomSpriteGFX)
+.done
 	call .LoadSprite
 	hlcoord 5, 2
 	ld de, .PlayerNameString
@@ -136,7 +143,7 @@ endr
 ; 117a3 (4:57a3)
 
 .PlayerNameString: ; 117a3
-	db "YOUR NAME?@"
+	db "Your name?@"
 
 ; 117ae
 

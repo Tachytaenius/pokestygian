@@ -1555,6 +1555,7 @@ LuckyNumberDigit1Buffer::
 wCurrentRadioLine::
 wMovementBufferCount::
 wMartItem1BCD::
+wPaletteBankBuffer::
 	ds 1
 wd003::
 LuckyNumberDigit2Buffer::
@@ -1562,12 +1563,14 @@ PhoneCallerLo::
 wNextRadioLine::
 wMovementBufferPerson::
 wPlaceBallsDirection::
+wPaletteHighBuffer::
 	ds 1
 wd004::
 LuckyNumberDigit3Buffer::
 PhoneCallerHi::
 wRadioTextDelay::
 wTrainerHUDTiles::
+wPaletteLowBuffer::
 	ds 1
 wd005::
 LuckyNumberDigit4Buffer::
@@ -2001,7 +2004,7 @@ TilesetCollisionAddress:: ; d1e0
 TilesetAnim:: ; d1e2
 ; bank 3f
 	ds 2
-; unused ; d1e4
+ItempicPointer ; d1e4
 	ds 2
 TilesetPalettes:: ; d1e6
 ; bank 3f
@@ -3030,6 +3033,8 @@ w3_dd68:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 	ds $11c
 w3_dfec:: ds $10
 w3_dffc:: ds 4
+
+SECTION "WRAM 4 STYGIAN", WRAMX, BANK [4]
 
 SECTION "GBC Video", WRAMX, BANK [5]
 

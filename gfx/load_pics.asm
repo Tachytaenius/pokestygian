@@ -308,6 +308,24 @@ Function511ec: ; 511ec
 	ret
 
 GetDeadTrainerPic:
+	ld a, [rSVBK]
+	push af
+	
+	ld hl, VTiles2
+	ld a, [ItempicPointer]
+	ld d, a
+	ld a, [ItempicPointer + 1]
+	ld e, a
+	ld c, 6 * 8
+	ld a, BANK(DeadGoblinPic) ;please don't move any pictures that'll use this routine out of the same bank as DeadGoblinPic.
+	ld b, a
+	call Get2bpp
+	
+	pop af
+	ld [rSVBK], a
+	call WaitBGMap
+	ld a, $1
+	ld [hBGMapMode], a
 	ret
 
 GetTrainerPic: ; 5120d

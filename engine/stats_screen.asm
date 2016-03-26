@@ -668,8 +668,8 @@ endr
 ; 4e119 (13:6119)
 
 .Status_Type: ; 4e119
-	db   "STATUS/"
-	next "TYPE/@"
+	db   "Status/"
+	next "Type/@"
 ; 4e127
 
 .OK_str: ; 4e127
@@ -677,19 +677,19 @@ endr
 ; 4e12b
 
 .ExpPointStr: ; 4e12b
-	db "EXP POINTS@"
+	db "Exp points@"
 ; 4e136
 
 .LevelUpStr: ; 4e136
-	db "LEVEL UP@"
+	db "Level up@"
 ; 4e13f
 
 .ToStr: ; 4e13f
-	db "TO@"
+	db "To@"
 ; 4e142
 
 .PkrsStr: ; 4e142
-	db "#RUS@"
+	db "#rus@"
 ; 4e147
 
 .GreenPage: ; 4e147 (13:6147)

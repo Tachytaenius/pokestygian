@@ -368,7 +368,6 @@ MenuJoypadLoop: ; 24216
 
 Do2DMenuRTCJoypad: ; 24249
 .loopRTC
-	call RTC
 	call Menu_WasButtonPressed
 	ret c
 	ld a, [w2DMenuFlags1]

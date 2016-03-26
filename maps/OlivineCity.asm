@@ -291,31 +291,26 @@ UnknownText_0x1a8cba:
 	text "BATTLE TOWER AHEAD"
 	done
 
-OlivineCity_MapEventHeader:
-	; filler
-	db 0, 0
+OlivineCity_MapEventHeader:: db 0, 0
 
-.Warps:
-	db 11
-	warp_def $15, $d, 1, OLIVINE_POKECENTER_1F
-	warp_def $b, $a, 1, OLIVINE_GYM
-	warp_def $b, $19, 1, OLIVINE_VOLTORB_HOUSE
-	warp_def $0, $0, 1, OLIVINE_HOUSE_BETA
-	warp_def $b, $1d, 1, OLIVINE_PUNISHMENT_SPEECH_HOUSE
-	warp_def $f, $d, 1, OLIVINE_GOOD_ROD_HOUSE
-	warp_def $15, $7, 1, OLIVINE_CAFE
-	warp_def $11, $13, 2, OLIVINE_MART
-	warp_def $1b, $1d, 1, OLIVINE_LIGHTHOUSE_1F
-	warp_def $1b, $13, 1, OLIVINE_PORT_PASSAGE
-	warp_def $1b, $14, 2, OLIVINE_PORT_PASSAGE
+.Warps: db 11
+	warp_def 21, 13, 1, OLIVINE_POKECENTER_1F
+	warp_def 11, 10, 1, OLIVINE_GYM
+	warp_def 11, 25, 1, OLIVINE_VOLTORB_HOUSE
+	warp_def 0, 0, 1, OLIVINE_HOUSE_BETA
+	warp_def 11, 29, 1, OLIVINE_PUNISHMENT_SPEECH_HOUSE
+	warp_def 15, 13, 1, OLIVINE_GOOD_ROD_HOUSE
+	warp_def 21, 7, 1, OLIVINE_CAFE
+	warp_def 17, 19, 2, OLIVINE_MART
+	warp_def 27, 29, 1, OLIVINE_LIGHTHOUSE_1F
+	warp_def 27, 19, 1, OLIVINE_PORT_PASSAGE
+	warp_def 27, 20, 2, OLIVINE_PORT_PASSAGE
 
-.XYTriggers:
-	db 2
-	xy_trigger 0, $c, $d, $0, UnknownScript_0x1a8833, $0, $0
-	xy_trigger 0, $d, $d, $0, UnknownScript_0x1a886b, $0, $0
+.CoordEvents: db 2
+	xy_trigger 0, 12, 13, 0, UnknownScript_0x1a8833, 0, 0
+	xy_trigger 0, 13, 13, 0, UnknownScript_0x1a886b, 0, 0
 
-.Signposts:
-	db 7
+.BGEvents: db 7
 	signpost 11, 17, SIGNPOST_READ, OlivineCitySign
 	signpost 24, 20, SIGNPOST_READ, OlivineCityPortSign
 	signpost 11, 7, SIGNPOST_READ, OlivineGymSign
@@ -324,8 +319,7 @@ OlivineCity_MapEventHeader:
 	signpost 21, 14, SIGNPOST_READ, OlivineCityPokeCenterSign
 	signpost 17, 20, SIGNPOST_READ, OlivineCityMartSign
 
-.PersonEvents:
-	db 4
+.ObjectEvents: db 4
 	person_event SPRITE_SAILOR, 27, 26, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x1a88a3, -1
 	person_event SPRITE_STANDING_YOUNGSTER, 13, 20, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, StandingYoungsterScript_0x1a88a6, -1
 	person_event SPRITE_SAILOR, 21, 17, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x1a88ba, -1

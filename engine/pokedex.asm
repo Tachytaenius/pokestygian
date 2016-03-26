@@ -1200,13 +1200,13 @@ Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	db $3b, " OPTION ", $3c, $ff
 
 .Modes: ; 408bd
-	db   "NEW #DEX MODE"
-	next "OLD #DEX MODE"
-	next "A to Z MODE"
+	db   "New #dex mode"
+	next "Old #dex mode"
+	next "A to Z mode"
 	db "@"
 
 .UnownMode: ; 408e5
-	db "UNOWN MODE@"
+	db "Unown mode@"
 
 Pokedex_DrawSearchScreenBG: ; 408f0 (10:48f0)
 	call Pokedex_FillBackgroundColor2

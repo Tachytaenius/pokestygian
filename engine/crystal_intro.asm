@@ -34,7 +34,6 @@ Copyright_GFPresents: ; e4579
 	bit 7, a
 	jr nz, .finish
 	call PlaceGameFreakPresents
-	callba PlaySpriteAnimations
 	call DelayFrame
 	jr .joy_loop
 
@@ -391,8 +390,6 @@ CrystalIntro: ; e48ac
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .done
-	call IntroSceneJumper
-	callba PlaySpriteAnimations
 	call DelayFrame
 	jp .loop
 

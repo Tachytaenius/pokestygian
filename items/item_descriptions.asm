@@ -290,8 +290,8 @@ ItemDescriptions:
 	dw TeruSama33Desc
 
 MasterBallDesc:
-	db   "The best BALL. It"
-	next "never misses.@"
+	db   "A note that you"
+	next "woke up next to.@"
 
 UltraBallDesc:
 	db   "A BALL with a high"
@@ -302,12 +302,12 @@ BrightpowderDesc:
 	next "accuracy. (HOLD)@"
 
 GreatBallDesc:
-	db   "A BALL with a de-"
-	next "cent success rate.@"
+	db   "A note found under"
+	next "a # ball.@"
 
 PokeBallDesc:
-	db   "An item for catch-"
-	next "ing #mon.@"
+	db   "A note found in a"
+	next "storage cache.@"
 
 TeruSama1Desc:
 	db   "?@"

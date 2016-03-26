@@ -48,7 +48,7 @@ String_1dd768:
 	db   "This certifies"
 	next "that you have"
 	next "completed the"
-	next "new #DEX."
+	next "new #dex."
 	next "Congratulations!"
 	db   "@"
 ; 1dd7ae
@@ -80,8 +80,8 @@ Function1dd7ae: ; 1dd7ae
 	ret
 ; 1dd7f0
 
-String_1dd7f0: db "PLAY TIME@"
-String_1dd7fa: db "GAME FREAK@"
+String_1dd7f0: db "Play time@"
+String_1dd7fa: db "wolfboyft@"
 ; 1dd805
 
 LZ_1dd805: ; 1dd805

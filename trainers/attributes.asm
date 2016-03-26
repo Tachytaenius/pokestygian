@@ -61,9 +61,9 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Will
-	db MAX_POTION, 0 ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db 0, 0 ; items
+	db 3 ; base reward
+	dw AI_BASIC + AI_CAUTIOUS + AI_STATUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Cal
@@ -85,9 +85,9 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Koga
-	db FULL_HEAL, FULL_RESTORE ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db FULL_HEAL, X_DEFEND ; items
+	db 2 ; base reward
+	dw AI_BASIC + AI_AGGRESSIVE
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Champion
@@ -104,14 +104,14 @@ TrainerClassAttributes: ; 3959c
 
 ; Misty
 	db FULL_HEAL, 0 ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db 2 ; base reward
+	dw AI_BASIC + AI_AGGRESSIVE
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Lt Surge
-	db HYPER_POTION, 0 ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db POTION, 0 ; items
+	db 4 ; base reward
+	dw AI_BASIC + AI_AGGRESSIVE
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Scientist
@@ -121,14 +121,14 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Erika
-	db HYPER_POTION, 0 ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db X_ATTACK, 0 ; items
+	db 2 ; base reward
+	dw AI_BASIC + AI_CAUTIOUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Youngster
 	db 0, 0 ; items
-	db 4 ; base reward
+	db 3 ; base reward
 	dw AI_BASIC + AI_STATUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
@@ -259,7 +259,7 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Hiker
-	db 0, 0 ; items
+	db POTION, 0 ; items
 	db 8 ; base reward
 	dw AI_BASIC + AI_OFFENSIVE + AI_STATUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES
@@ -357,7 +357,7 @@ TrainerClassAttributes: ; 3959c
 ; Kimono Girl
 	db 0, 0 ; items
 	db 18 ; base reward
-	dw AI_BASIC + AI_TYPES + AI_OPPORTUNIST + AI_CAUTIOUS + AI_STATUS
+	dw AI_BASIC + AI_AGGRESSIVE
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Twins

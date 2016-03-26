@@ -31,17 +31,17 @@ PrintDayOfWeek: ; 5b05
 ; 5b1c
 
 .Days ; 5b1c
-	db "SUN@"
-	db "MON@"
-	db "TUES@"
-	db "WEDNES@"
-	db "THURS@"
-	db "FRI@"
-	db "SATUR@"
+	db "Sun@"
+	db "Mon@"
+	db "Tues@"
+	db "Wednes@"
+	db "Thurs@"
+	db "Fri@"
+	db "Satur@"
 ; 5b40
 
 .Day ; 5b40
-	db "DAY@"
+	db "day@"
 ; 5b44
 
 NewGame_ClearTileMapEtc: ; 5b44
@@ -72,7 +72,6 @@ NewGame: ; 5b6b
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
 	call AreYouABoyOrAreYouAGirl
-	call OakSpeech
 	call InitializeWorld
 	ld a, 1
 	ld [wPreviousLandmark], a
@@ -199,7 +198,7 @@ _ResetWRAM: ; 5bae
 	ld [Coins], a
 	ld [Coins + 1], a
 
-START_MONEY EQU 3000
+START_MONEY EQU 0
 
 IF START_MONEY / $10000
 	ld a, START_MONEY / $10000
@@ -317,7 +316,7 @@ InitializeNPCNames: ; 5ce9
 ; 5d23
 
 InitializeWorld: ; 5d23
-	call ShrinkPlayer
+	call ClearTileMap
 	callba SpawnPlayer
 	callba _InitializeStartDay
 	ret
@@ -824,9 +823,9 @@ NamePlayer: ; 0x6074
 	ret
 
 .Chris
-	db "CHRIS@@@@@@"
+	db "Chris@@@@@@"
 .Kris
-	db "KRIS@@@@@@@"
+	db "Kris@@@@@@@"
 ; 60e9
 
 Function60e9: ; Unreferenced

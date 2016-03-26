@@ -360,11 +360,11 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 ; 50221
 
 .string_able: ; 50221
-	db "ABLE@"
+	db "Able@"
 ; 50226
 
 .string_not_able: ; 50226
-	db "NOT ABLE@"
+	db "Unable@"
 ; 5022f
 
 
@@ -449,10 +449,10 @@ endr
 ; 502a3
 
 .string_able: ; 502a3
-	db "ABLE@"
+	db "Able@"
 ; 502a8
 .string_not_able: ; 502a8
-	db "NOT ABLE@"
+	db "Unable@"
 ; 502b1
 
 

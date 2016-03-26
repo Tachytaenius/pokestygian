@@ -53,7 +53,7 @@ UnknownText_0x1c0705::
 
 UnknownText_0x1c071a::
 	text "Return to the last"
-	line "#MON CENTER."
+	line "#mon CENTER."
 	done
 
 UnknownText_0x1c073b::
@@ -64,7 +64,7 @@ UnknownText_0x1c073b::
 	done
 
 UnknownText_0x1c0751::
-	text "A #MON is using"
+	text "A #mon is using"
 	line "STRENGTH already."
 	prompt
 
@@ -81,7 +81,7 @@ UnknownText_0x1c0788::
 	prompt
 
 UnknownText_0x1c07a0::
-	text "A #MON may be"
+	text "A #mon may be"
 	line "able to move this."
 
 	para "Want to use"
@@ -94,7 +94,7 @@ UnknownText_0x1c07d8::
 	done
 
 UnknownText_0x1c07f4::
-	text "A #MON may be"
+	text "A #mon may be"
 	line "able to move this."
 	done
 
@@ -108,7 +108,7 @@ UnknownText_0x1c082b::
 	text "It's a vicious"
 	line "whirlpool!"
 
-	para "A #MON may be"
+	para "A #mon may be"
 	line "able to pass it."
 	done
 
@@ -131,7 +131,7 @@ UnknownText_0x1c08ac::
 	done
 
 UnknownText_0x1c08bc::
-	text "A #MON could be"
+	text "A #mon could be"
 	line "in this tree."
 
 	para "Want to HEADBUTT"
@@ -145,7 +145,7 @@ UnknownText_0x1c08f0::
 	prompt
 
 UnknownText_0x1c0906::
-	text "Maybe a #MON"
+	text "Maybe a #mon"
 	line "can break this."
 	done
 
@@ -217,7 +217,7 @@ UnknownText_0x1c0a2c::
 
 UnknownText_0x1c0a4e::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable #mon!"
 
 	para "<PLAYER> whited"
 	line "out!"
@@ -242,7 +242,7 @@ UnknownText_0x1c0acc::
 
 UnknownText_0x1c0ada::
 	text "<PLAYER> is out of"
-	line "useable #MON!"
+	line "useable #mon!"
 
 	para "<PLAYER> whited"
 	line "out!"
@@ -268,7 +268,7 @@ UnknownText_0x1c0b3b::
 	done
 
 UnknownText_0x1c0b65::
-	text "<PLAYER>'s #MON"
+	text "<PLAYER>'s #mon"
 	line "were all healed!"
 	done
 
@@ -292,14 +292,14 @@ UnknownText_0x1c0bbb::
 	text ""
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)?"
+	text "(s)?"
 	done
 
 UnknownText_0x1c0bd8::
 	text "Threw away"
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)."
+	text "(s)."
 	prompt
 
 UnknownText_0x1c0bee::
@@ -310,7 +310,7 @@ UnknownText_0x1c0bee::
 
 Text_YouDontHaveAPkmn::
 	text "You don't have a"
-	line "#MON!"
+	line "#mon!"
 	prompt
 
 UnknownText_0x1c0c2e::
@@ -570,18 +570,18 @@ UnknownText_0x1c0fbc::
 	db "@@"
 
 UnknownText_0x1c0fdd::
-	text "#MON number?"
+	text "#mon number?"
 	done
 
 Text_WasSentToBillsPC::
 	text_from_ram StringBuffer1
 	text " was"
-	line "sent to BILL's PC."
+	line "sent to Magincia."
 	prompt
 
 UnknownText_0x1c1006::
 	text "You gotta have"
-	line "#MON to call!"
+	line "#mon to call!"
 	prompt
 
 UnknownText_0x1c1024::
@@ -589,7 +589,7 @@ UnknownText_0x1c1024::
 	done
 
 UnknownText_0x1c102b::
-	text "There is a #MON"
+	text "There is a #mon"
 	line "holding MAIL."
 
 	para "Please remove the"
@@ -598,17 +598,17 @@ UnknownText_0x1c102b::
 
 UnknownText_0x1c1062::
 	text "You don't have a"
-	line "single #MON!"
+	line "single #mon!"
 	prompt
 
 UnknownText_0x1c1080::
 	text "You can't deposit"
-	line "your last #MON!"
+	line "your last #mon!"
 	prompt
 
 UnknownText_0x1c10a2::
 	text "You can't take any"
-	line "more #MON."
+	line "more #mon."
 	prompt
 
 UnknownText_0x1c10c0::
@@ -618,7 +618,7 @@ UnknownText_0x1c10c0::
 	prompt
 
 UnknownText_0x1c10cf::
-	text "Switch #MON?"
+	text "Switch #mon?"
 	done
 
 UnknownText_0x1c10dd::
@@ -741,13 +741,13 @@ UnknownText_0x1c12fc::
 
 UnknownText_0x1c1328::
 	text "Bzzzzt! You must"
-	line "have a #MON to"
+	line "have a #mon to"
 	cont "use this!"
 	prompt
 
 UnknownText_0x1c1353::
-	text "<PLAYER> turned on"
-	line "the PC."
+	text "<PLAYER> opened up"
+	line "the sub-hub."
 	prompt
 
 UnknownText_0x1c1368::
@@ -766,7 +766,7 @@ _KrissPCWithdrewItemsText::
 	text ""
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)."
+	text "(s)."
 	prompt
 
 _KrissPCNoRoomWithdrawText::
@@ -789,7 +789,7 @@ _KrissPCDepositItemsText::
 	text ""
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)."
+	text "(s)."
 	prompt
 
 _KrissPCNoRoomDepositText::
@@ -803,14 +803,14 @@ UnknownText_0x1c144d::
 	prompt
 
 UnknownText_0x1c1462::
-	text "Access whose PC?"
+	text "Access what?"
 	done
 
 UnknownText_0x1c1474::
-	text "BILL's PC"
+	text "Magincia"
 	line "accessed."
 
-	para "#MON Storage"
+	para "#mon Storage"
 	line "System opened."
 	prompt
 
@@ -822,16 +822,14 @@ UnknownText_0x1c14a4::
 	prompt
 
 UnknownText_0x1c14d2::
-	text "PROF.OAK's PC"
-	line "accessed."
+	text "Yew accessed."
 
 	para "#DEX Rating"
 	line "System opened."
 	prompt
 
 UnknownText_0x1c1505::
-	text "…"
-	line "Link closed…"
+	text "Link closed…"
 	done
 
 _OakPCText1::
@@ -846,17 +844,17 @@ _OakPCText2::
 
 _OakPCText3::
 	text_from_ram StringBuffer3
-	text " #MON seen"
+	text " #mon seen"
 	line "@"
 	text_from_ram StringBuffer4
-	text " #MON owned"
+	text " #mon owned"
 
 	para "PROF.OAK's"
 	line "Rating:"
 	done
 
 _OakRating01::
-	text "Look for #MON"
+	text "Look for #mon"
 	line "in grassy areas!"
 	done
 
@@ -879,7 +877,7 @@ _OakRating04::
 	line "up the #DEX."
 
 	para "Catch different"
-	line "kinds of #MON!"
+	line "kinds of #mon!"
 	done
 
 _OakRating05::
@@ -892,7 +890,7 @@ _OakRating05::
 
 _OakRating06::
 	text "To evolve, some"
-	line "#MON grow,"
+	line "#mon grow,"
 
 	para "others use the"
 	line "effects of STONES."
@@ -902,7 +900,7 @@ _OakRating07::
 	text "Have you gotten a"
 	line "fishing ROD? You"
 
-	para "can catch #MON"
+	para "can catch #mon"
 	line "by fishing."
 	done
 
@@ -913,7 +911,7 @@ _OakRating08::
 	done
 
 _OakRating09::
-	text "Some #MON only"
+	text "Some #mon only"
 	line "appear during"
 
 	para "certain times of"
@@ -930,7 +928,7 @@ _OakRating11::
 	text "I'm impressed."
 	line "You're evolving"
 
-	para "#MON, not just"
+	para "#mon, not just"
 	line "catching them."
 	done
 
@@ -942,7 +940,7 @@ _OakRating12::
 
 _OakRating13::
 	text "Wow. You've found"
-	line "more #MON than"
+	line "more #mon than"
 
 	para "the last #DEX"
 	line "research project."
@@ -950,7 +948,7 @@ _OakRating13::
 
 _OakRating14::
 	text "Are you trading"
-	line "your #MON?"
+	line "your #mon?"
 
 	para "It's tough to do"
 	line "this alone!"
@@ -964,7 +962,7 @@ _OakRating15::
 
 _OakRating16::
 	text "You've found so"
-	line "many #MON!"
+	line "many #mon!"
 
 	para "You've really"
 	line "helped my studies!"
@@ -974,7 +972,7 @@ _OakRating17::
 	text "Magnificent! You"
 	line "could become a"
 
-	para "#MON professor"
+	para "#mon professor"
 	line "right now!"
 	done
 
@@ -1033,7 +1031,7 @@ UnknownText_0x1c1a90::
 	text "Toss out how many"
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)?"
+	text "(s)?"
 	done
 
 UnknownText_0x1c1aad::
@@ -1042,14 +1040,14 @@ UnknownText_0x1c1aad::
 	text ""
 	line "@"
 	text_from_ram StringBuffer2
-	text "(S)?"
+	text "(s)?"
 	done
 
 UnknownText_0x1c1aca::
 	text "Discarded"
 	line "@"
 	text_from_ram StringBuffer1
-	text "(S)."
+	text "(s)."
 	prompt
 
 UnknownText_0x1c1adf::
@@ -1176,45 +1174,45 @@ _OakText1::
 	line "keep you waiting!"
 
 	para "Welcome to the"
-	line "world of #MON!"
+	line "world of #mon!"
 
 	para "My name is OAK."
 
 	para "People call me the"
-	line "#MON PROF."
+	line "#mon PROF."
 	prompt
 
 _OakText2::
 	text "This world is in-"
 	line "habited by crea-"
 	cont "tures that we call"
-	cont "#MON.@@"
+	cont "#mon.@@"
 
 _OakText3::
 	text_waitbutton
 	db "@@"
 
 _OakText4::
-	text "People and #MON"
+	text "People and #mon"
 	line "live together by"
 
 	para "supporting each"
 	line "other."
 
 	para "Some people play"
-	line "with #MON, some"
+	line "with #mon, some"
 	cont "battle with them."
 	prompt
 
 _OakText5::
 	text "But we don't know"
 	line "everything about"
-	cont "#MON yet."
+	cont "#mon yet."
 
 	para "There are still"
 	line "many mysteries to"
 	cont "solve."
 
 	para "That's why I study"
-	line "#MON every day."
+	line "#mon every day."
 	prompt

@@ -11,7 +11,7 @@ sprite_header: MACRO
 ENDM
 
 ChrisSprite: ; 14736
-	sprite_header ChrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
+	sprite_header ChrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
 ; 1473c
 
 ChrisBikeSprite: ; 1473c
@@ -111,7 +111,7 @@ ClairSprite: ; 147c6
 ; 147cc
 
 BrockSprite: ; 147cc
-	sprite_header BrockSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BROWN
+	sprite_header BrockSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
 ; 147d2
 
 KarenSprite: ; 147d2
@@ -163,7 +163,7 @@ TwinSprite: ; 14814
 ; 1481a
 
 YoungsterSprite: ; 1481a
-	sprite_header YoungsterSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BLUE
+	sprite_header YoungsterSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
 ; 14820
 
 LassSprite: ; 14820
@@ -355,7 +355,7 @@ PaperSprite: ; 14934
 ; 1493a
 
 VirtualBoySprite: ; 1493a
-	sprite_header VirtualBoySpriteGFX, 1, STILL_SPRITE, PAL_OW_RED
+	sprite_header VirtualBoySpriteGFX, 1, STILL_SPRITE, PAL_OW_SILVER
 ; 14940
 
 OldLinkReceptionistSprite: ; 14940
@@ -391,7 +391,7 @@ SilverTrophySprite: ; 1496a
 ; 14970
 
 KrisSprite: ; 14970
-	sprite_header KrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BLUE
+	sprite_header KrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
 ; 14976
 
 KrisBikeSprite: ; 14976

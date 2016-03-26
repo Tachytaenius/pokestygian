@@ -688,13 +688,13 @@ GetPocketName: ; 96ffe
 	dw .TM
 
 .Item
-	db "ITEM POCKET@"
+	db "Item pocket@"
 .Key
-	db "KEY POCKET@"
+	db "Key pocket@"
 .Ball
-	db "BALL POCKET@"
+	db "Ammo pocket@"
 .TM
-	db "TM POCKET@"
+	db "Tm pocket@"
 ; 97051
 
 CurItemName: ; 97051

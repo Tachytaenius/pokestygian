@@ -146,7 +146,7 @@ _YesNoBox:: ; 1dd9
 ; it was coded wrong.
 	ld a, b
 	cp SCREEN_WIDTH - 6
-	jr nz, .okay ; should this be "jr nc"?
+	jr nc, .okay ; should this be "jr nc"?
 	ld a, SCREEN_WIDTH - 6
 	ld b, a
 

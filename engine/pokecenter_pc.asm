@@ -51,11 +51,11 @@ PokemonCenterPC: ; 1559a
 	dw TurnOffPC, .String_TurnOff
 ; 155fa
 
-.String_PlayersPC:	db "<PLAYER>'s PC@"
-.String_BillsPC:	db "BILL's PC@"
-.String_OaksPC:	    db "PROF.OAK's PC@"
-.String_HallOfFame:	db "HALL OF FAME@"
-.String_TurnOff:	db "TURN OFF@"
+.String_PlayersPC:     db "Jhelom@"
+.String_BillsPC:       db "Magincia@"
+.String_OaksPC:        db "Yew@"
+.String_HallOfFame:    db "Hall of Fame@"
+.String_TurnOff:       db "Quit@"
 ; 1562c
 
 .WhichPC: ; 1562c
@@ -66,12 +66,12 @@ PokemonCenterPC: ; 1559a
 
 	; before Hall Of Fame
 	db  4 ; items
-	db  1, 0, 2, 4 ; bill's, player's, oak's, turn off
+	db  1, 0, 4 ; bill's, player's, oak's, turn off
 	db -1
 
 	; postgame
 	db  5 ; items
-	db  1, 0, 2, 3, 4 ; bill's, player's, oak's, hall of fame, turn off
+	db  1, 0, 4 ; bill's, player's, oak's, hall of fame, turn off
 	db -1
 ; 1563e
 
@@ -256,44 +256,35 @@ KrissPCMenuData: ; 0x15736
 	dw KrisWithdrawItemMenu, .WithdrawItem
 	dw KrisDepositItemMenu,  .DepositItem
 	dw KrisTossItemMenu,     .TossItem
-	dw KrisMailBoxMenu,      .MailBox
-	dw KrisDecorationMenu,   .Decoration
 	dw KrisLogOffMenu,       .LogOff
 	dw KrisLogOffMenu,       .TurnOff
 
-.WithdrawItem db "WITHDRAW ITEM@"
-.DepositItem  db "DEPOSIT ITEM@"
-.TossItem     db "TOSS ITEM@"
-.MailBox      db "MAIL BOX@"
-.Decoration   db "DECORATION@"
-.TurnOff      db "TURN OFF@"
-.LogOff       db "LOG OFF@"
+.WithdrawItem db "Withdraw@"
+.DepositItem  db "Deposit@"
+.TossItem     db "Discard@"
+.TurnOff      db "Quit@"
+.LogOff       db "Exit@"
 
 WITHDRAW_ITEM EQU 0
 DEPOSIT_ITEM  EQU 1
 TOSS_ITEM     EQU 2
-MAIL_BOX      EQU 3
-DECORATION    EQU 4
-TURN_OFF      EQU 5
-LOG_OFF       EQU 6
+TURN_OFF      EQU 3
+LOG_OFF       EQU 4
 
 .KrissPCMenuList1
-	db 5
+	db 4
 	db WITHDRAW_ITEM
 	db DEPOSIT_ITEM
 	db TOSS_ITEM
-	db MAIL_BOX
 	db TURN_OFF
 	db -1
 
 .KrissPCMenuList2
-	db 6
+	db 4
 	db WITHDRAW_ITEM
 	db DEPOSIT_ITEM
 	db TOSS_ITEM
-	db MAIL_BOX
-	db DECORATION
-	db LOG_OFF
+	db TURN_OFF
 	db -1
 
 PC_DisplayTextWaitMenu: ; 157bb
@@ -567,7 +558,6 @@ Function1590a: ; 0x1590a
 
 
 KrisMailBoxMenu: ; 0x1597d
-	callba _KrisMailBoxMenu
 	xor a
 	ret
 ; 0x15985

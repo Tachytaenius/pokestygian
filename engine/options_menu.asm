@@ -62,21 +62,21 @@ _OptionsMenu: ; e41d0
 ; e4241
 
 StringOptions: ; e4241
-	db "TEXT SPEED<LNBRK>"
+	db "Text speed<LNBRK>"
 	db "        :<LNBRK>"
-	db "BATTLE SCENE<LNBRK>"
+	db "Battle scene<LNBRK>"
 	db "        :<LNBRK>"
-	db "BATTLE STYLE<LNBRK>"
+	db "Battle style<LNBRK>"
 	db "        :<LNBRK>"
-	db "SOUND<LNBRK>"
+	db "Sound<LNBRK>"
 	db "        :<LNBRK>"
-	db "PRINT<LNBRK>"
+	db "Print<LNBRK>"
 	db "        :<LNBRK>"
-	db "MENU ACCOUNT<LNBRK>"
+	db "Menu account<LNBRK>"
 	db "        :<LNBRK>"
-	db "FRAME<LNBRK>"
-	db "        :TYPE<LNBRK>"
-	db "CANCEL@"
+	db "Frame<LNBRK>"
+	db "        :Type<LNBRK>"
+	db "Cancel@"
 ; e42d6
 
 
@@ -467,9 +467,9 @@ Options_MenuAccount: ; e44c1
 ; e44f2
 
 .Off
-	db "OFF@"
+	db "Off@"
 .On
-	db "ON @"
+	db "On @"
 ; e44fa
 
 
@@ -495,7 +495,7 @@ Options_Frame: ; e44fa
 .Save
 	and $7
 	ld [hl], a
-UpdateFrame: ; e4512
+UpdateFrame:: ; e4512
 	ld a, [TextBoxFrame]
 	hlcoord 16, 15 ; where on the screen the number is drawn
 	add "1"
@@ -529,7 +529,7 @@ OptionsControl: ; e452a
 
 .DownPressed
 	ld a, [hl] ; load the cursor position to a
-	cp $7 ; maximum number of items in option menu
+	cp $6 ; maximum number of items in option menu
 	jr nz, .CheckFive
 	ld [hl], $0
 	scf
@@ -556,7 +556,7 @@ OptionsControl: ; e452a
 .NotSix
 	and a
 	jr nz, .Decrease
-	ld [hl], $8 ; number of option items +1
+	ld [hl], $7 ; number of option items +1
 
 .Decrease
 	dec [hl]

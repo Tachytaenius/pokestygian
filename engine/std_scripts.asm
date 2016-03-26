@@ -53,114 +53,20 @@ StdScripts::
 	dba HappinessCheckScript
 
 PokeCenterNurseScript:
-; EVENT_WELCOMED_TO_POKECOM_CENTER is never set
-
-	opentext
-	checkmorn
-	iftrue .morn
-	checkday
-	iftrue .day
-	checknite
-	iftrue .nite
-	jump .ok
-
-.morn
-	checkevent EVENT_WELCOMED_TO_POKECOM_CENTER
-	iftrue .morn_comcenter
-	farwritetext NurseMornText
-	buttonsound
-	jump .ok
-.morn_comcenter
-	farwritetext PokeComNurseMornText
-	buttonsound
-	jump .ok
-
-.day
-	checkevent EVENT_WELCOMED_TO_POKECOM_CENTER
-	iftrue .day_comcenter
-	farwritetext NurseDayText
-	buttonsound
-	jump .ok
-.day_comcenter
-	farwritetext PokeComNurseDayText
-	buttonsound
-	jump .ok
-
-.nite
-	checkevent EVENT_WELCOMED_TO_POKECOM_CENTER
-	iftrue .nite_comcenter
-	farwritetext NurseNiteText
-	buttonsound
-	jump .ok
-.nite_comcenter
-	farwritetext PokeComNurseNiteText
-	buttonsound
-	jump .ok
-
-.ok
-	; only do this once
-	clearevent EVENT_WELCOMED_TO_POKECOM_CENTER
-
-	farwritetext NurseAskHealText
-	yesorno
-	iffalse .done
-
-	farwritetext NurseTakePokemonText
-	pause 20
-	special Mobile_HealParty
-	spriteface LAST_TALKED, LEFT
-	pause 10
-	special HealParty
-	playmusic MUSIC_NONE
-	writebyte 0 ; Machine is at a Pokemon Center
-	special HealMachineAnim
-	pause 30
-	special RestartMapMusic
-	spriteface LAST_TALKED, DOWN
-	pause 10
-
-	checkphonecall ; elm already called about pokerus
-	iftrue .no
-	checkflag ENGINE_POKERUS ; nurse already talked about pokerus
-	iftrue .no
-	special SpecialCheckPokerus
-	iftrue .pokerus
-.no
-
-	farwritetext NurseReturnPokemonText
-	pause 20
-
-.done
-	farwritetext NurseGoodbyeText
-
-	spriteface LAST_TALKED, UP
-	pause 10
-	spriteface LAST_TALKED, DOWN
-	pause 10
-
-	waitbutton
-	closetext
+	; now it's an item overflow check
+	callasm .check
 	end
-
-.pokerus
-	; already cleared earlier in the script
-	checkevent EVENT_WELCOMED_TO_POKECOM_CENTER
-	iftrue .pokerus_comcenter
-	farwritetext NursePokerusText
-	waitbutton
-	closetext
-	jump .pokerus_done
-
-.pokerus_comcenter
-	farwritetext PokeComNursePokerusText
-	waitbutton
-	closetext
-
-.pokerus_done
-	setflag ENGINE_POKERUS
-	specialphonecall SPECIALCALL_POKERUS
-	end
-
+.check
+	ld a, [NumItems]
+	cp MAX_ITEMS
+	jr nc, .yes
+	ld a, 0
+	ld [ScriptVar], a
+	ret
+.yes
+	ld a, 1
+	ld [ScriptVar], a
+	ret
 DifficultBookshelfScript:
 	farjumptext DifficultBookshelfText
 

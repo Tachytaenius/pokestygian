@@ -1095,41 +1095,12 @@ LtSurgeGroup:
 ; ================
 
 	; LT_SURGE (1)
-	db "LT.SURGE@"
-	db 1 ; moves
+	db "Ak'dek@"
+	db 0 ; moves
 
 	; party
 
-	db 44, RAICHU
-		db THUNDER_WAVE
-		db QUICK_ATTACK
-		db THUNDERBOLT
-		db THUNDER
-
-	db 40, ELECTRODE
-		db SCREECH
-		db DOUBLE_TEAM
-		db SWIFT
-		db EXPLOSION
-
-	db 40, MAGNETON
-		db LOCK_ON
-		db DOUBLE_TEAM
-		db SWIFT
-		db ZAP_CANNON
-
-	db 40, ELECTRODE
-		db SCREECH
-		db DOUBLE_TEAM
-		db SWIFT
-		db EXPLOSION
-
-	db 46, ELECTABUZZ
-		db QUICK_ATTACK
-		db THUNDERPUNCH
-		db LIGHT_SCREEN
-		db THUNDER
-
+	db 22, RAICHU
 	db $ff ; end
 
 ; ================
@@ -1252,11 +1223,11 @@ YoungsterGroup:
 ; ================
 
 	; YOUNGSTER (1)
-	db "JOEY@"
+	db "???@"
 	db 0 ; normal
 
 	; party
-	db 4, RATTATA
+	db 3, PIDGEY
 
 	db $ff ; end
 

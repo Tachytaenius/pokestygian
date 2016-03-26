@@ -215,6 +215,7 @@ StandardMart: ; 15b47
 .Sell: ; 15b9a
 	call ExitMenu
 	call SellMenu
+	call LoadStandardFont
 	ld a, $5 ; Anything else?
 	ret
 ; 15ba3
@@ -931,7 +932,7 @@ Text_Mart_HowMayIHelpYou: ; 0x15f83
 MenuDataHeader_BuySell: ; 0x15f88
 	db $40 ; flags
 	db 00, 00 ; start coords
-	db 08, 07 ; end coords
+	db 08, 09 ; end coords
 	dw .menudata2
 	db 1 ; default option
 ; 0x15f90
@@ -939,9 +940,9 @@ MenuDataHeader_BuySell: ; 0x15f88
 .menudata2: ; 0x15f90
 	db $80 ; strings
 	db 3 ; items
-	db "BUY@"
-	db "SELL@"
-	db "QUIT@"
+	db "<``>Buy.<''>@"
+	db "<``>Sell.<''>@"
+	db "<``>Quit.<''>@"
 ; 0x15f96
 
 Text_Mart_HereYouGo: ; 0x15fa0

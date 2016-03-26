@@ -305,8 +305,14 @@ DoPlayerMovement:: ; 80000
 	ret
 
 .walk
+	ld a, [CurInput]
+	bit 2, a
+	and 2
 	ld a, STEP_WALK
-	call .DoStep
+	jr z, .go
+	ld a, STEP_BIKE
+.go
+	call DoStep
 	scf
 	ret
 

@@ -195,11 +195,221 @@ ItemEffects: ; e73c
 	dw ItemB3
 ; e8a2
 
+GLOBAL EvosAttacks
+GLOBAL EvosAttacksPointers
 
-MasterBall:
-UltraBall:
+MasterBall::
+	ld hl, .sure_note
+	ld a, [TextBoxFrame]
+	push af
+	call Narrate
+	call YesNoBox
+	jr c, .no
+	ld hl, .read
+	call Narrate
+	pop af
+	ld [TexBoxFrame], a
+	call LoadFontsExtra
+	ld hl, .text
+	call PrintText
+	ld hl, .continue
+	ld a, [TextBoxFrame]
+	push af
+	call Narrate
+	call YesNoBox
+	jr c, .no
+	pop af
+	ld [TexBoxFrame], a
+	call LoadFontsExtra
+	ld hl, .text_
+	call PrintText
+	ld hl, .continue
+	ld a, [TextBoxFrame]
+	push af
+	call Narrate
+	call YesNoBox
+	jr c, .no
+	pop af
+	ld [TexBoxFrame], a
+	call LoadFontsExtra
+	ld hl, .text__
+	call PrintText
+.cancel
+	ret
+.no
+	pop af
+	ld [TexBoxFrame], a
+	jp LoadFontsExtra
+
+.sure_note
+	text "Read the note?"
+	line "It's very long."
+	prompt
+
+.read
+	text "You read the note."
+	prompt
+
+.continue
+	text "Continue reading?"
+	prompt
+
+.text
+	para "To whom it may"
+	line "concern, know that"
+	para "you have been put"
+	line "here with a benign"
+	para "wish. You are not"
+	line "safe, that is for"
+	para "sure, but you"
+	line "would be worse"
+	para "off on the sur-"
+	line "face, for the Arm-"
+	para "ageddon has"
+	line "struck."
+	prompt
+
+.text_
+	text "Firstly, when this"
+	line "note speaks of the"
+	para "surface, it means"
+	line "as opposed to your"
+	para "current location--"
+	line "the Stygian Abyss."
+	para "Secondly, you're"
+	line "almost certainly"
+	para "wanting to know"
+	line "what it means by"
+	para "the Armageddon."
+	line "To tell you, it"
+	para "is the cataclysm."
+	line "The sky went red."
+	para "Blood rained from"
+	line "the skies. Explo-"
+	para "sions shattered &"
+	line "upturned the land."
+	para "Clouds fell, laden"
+	line "with the stench of"
+	cont "evil."
+	prompt
+
+.text__
+	text "Certainly, some"
+	line "foul evil was at"
+	para "work here. What,"
+	line "not even our most"
+	para "powerful mystics"
+	line "were able to know."
+	para "Of course, most of"
+	line "us-- the no-longer"
+	para "surface dwellers--"
+	line "and our allies"
+	para "down here in the"
+	line "Abyss, know more"
+	para "than you. Seeing"
+	line "as it would be un-"
+	para "fair to keep you"
+	line "in unknowing, we"
+	para "gathered a few pe-"
+	line "ople at our shrine"
+	para "of knowledge, on"
+	line "this floor of the"
+	cont "Abyss."
+	prompt
+
 GreatBall:
+	ld hl, .sure_note
+	ld a, [TextBoxFrame]
+	push af
+	call Narrate
+	call YesNoBox
+	jr c, .no
+	ld hl, read
+	call Narrate
+	pop af
+	ld [TexBoxFrame], a
+	call LoadFontsExtra
+	ld hl, .text
+	call PrintText
+.cancel	
+	ret
+.no
+	pop af
+	ld [TexBoxFrame], a
+	jp LoadFontsExtra
+
+.sure_note
+	text "Read the note?"
+	line "It's quite short."
+	prompt
+
+.read
+	text "You read the note."
+	prompt
+
+.continue
+	text "Continue reading?"
+	prompt
+
+.text
+	text "Press this button"
+	line "to heal all your"
+	para "#mon. Know that"
+	line "it cannot be moved"
+	para "because if you"
+	line "try it will stop"
+	para "working. Use the"
+	line "crystal ball over"
+	para "there to access"
+	line "Magincia or"
+	para "Jhelom, two useful"
+	line "sub-worlds."
+	prompt
+
 PokeBall:
+	ld hl, .sure_note
+	ld a, [TextBoxFrame]
+	push af
+	call Narrate
+	call YesNoBox
+	jr c, .no
+	ld hl, read
+	call Narrate
+	pop af
+	ld [TexBoxFrame], a
+	call LoadFontsExtra
+	ld hl, .text
+	call PrintText
+.cancel	
+	ret
+.no
+	pop af
+	ld [TexBoxFrame], a
+	jp LoadFontsExtra
+
+.sure_note
+	text "Read the note?"
+	line "It's quite short."
+	prompt
+
+.read
+	text "You read the note."
+	prompt
+
+.continue
+	text "Continue reading?"
+	prompt
+
+.text
+	text "Please take care"
+	line "of this larvitar."
+	para "It is for your"
+	line "protection."
+	prompt
+
+TownMap: ; ee01
+	callba PokegearMap
+UltraBall:
 HeavyBall:
 LevelBall:
 LureBall:
@@ -207,976 +417,7 @@ FastBall:
 FriendBall:
 MoonBall:
 LoveBall:
-ParkBall: ; e8a2
-	ld a, [wBattleMode]
-	dec a
-	jp nz, UseBallInTrainerBattle
-
-	ld a, [PartyCount]
-	cp PARTY_LENGTH
-	jr nz, .room_in_party
-
-	ld a, BANK(sBoxCount)
-	call GetSRAMBank
-	ld a, [sBoxCount]
-	cp MONS_PER_BOX
-	call CloseSRAM
-	jp z, Ball_BoxIsFullMessage
-
-.room_in_party
-	xor a
-	ld [wWildMon], a
-	ld a, [CurItem]
-	cp PARK_BALL
-	call nz, ReturnToBattle_UseBall
-
-	ld hl, Options
-	res NO_TEXT_SCROLL, [hl]
-	ld hl, UsedItemText
-	call PrintText
-
-	ld a, [EnemyMonCatchRate]
-	ld b, a
-	ld a, [BattleType]
-	cp BATTLETYPE_TUTORIAL
-	jp z, .catch_without_fail
-	ld a, [CurItem]
-	cp MASTER_BALL
-	jp z, .catch_without_fail
-	ld a, [CurItem]
-	ld c, a
-	ld hl, BallMultiplierFunctionTable
-
-.get_multiplier_loop
-	ld a, [hli]
-	cp $ff
-	jr z, .skip_or_return_from_ball_fn
-	cp c
-	jr z, .call_ball_function
-rept 2
-	inc hl
-endr
-	jr .get_multiplier_loop
-
-.call_ball_function
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, .skip_or_return_from_ball_fn
-	push de
-	jp [hl]
-
-.skip_or_return_from_ball_fn
-	ld a, [CurItem]
-	cp LEVEL_BALL
-	ld a, b
-	jp z, .skip_hp_calc
-
-	ld a, b
-	ld [hMultiplicand + 2], a
-
-	ld hl, EnemyMonHP
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	sla c
-	rl b
-
-	ld h, d
-	ld l, e
-rept 2
-	add hl, de
-endr
-	ld d, h
-	ld e, l
-	ld a, d
-	and a
-	jr z, .okay_1
-
-	srl d
-	rr e
-	srl d
-	rr e
-	srl b
-	rr c
-	srl b
-	rr c
-
-	ld a, c
-	and a
-	jr nz, .okay_1
-	ld c, $1
-.okay_1
-	ld b, e
-
-	push bc
-	ld a, b
-	sub c
-	ld [hMultiplier], a
-	xor a
-	ld [hDividend + 0], a
-	ld [hMultiplicand + 0], a
-	ld [hMultiplicand + 1], a
-	call Multiply
-	pop bc
-
-	ld a, b
-	ld [hDivisor], a
-	ld b, $4
-	call Divide
-
-	ld a, [hQuotient + 2]
-	and a
-	jr nz, .statuscheck
-	ld a, 1
-.statuscheck
-; This routine is buggy. It was intended that SLP and FRZ provide a higher
-; catch rate than BRN/PSN/PAR, which in turn provide a higher catch rate than
-; no status effect at all. But instead, it makes BRN/PSN/PAR provide no
-; benefit.
-	ld b, a
-	ld a, [EnemyMonStatus]
-	and 1 << FRZ | SLP
-	ld c, 10
-	jr nz, .addstatus
-	and a
-	ld c, 5
-	jr nz, .addstatus
-	ld c, 0
-.addstatus
-	ld a, b
-	add c
-	jr nc, .max_1
-	ld a, $ff
-.max_1
-
-	ld d, a
-	push de
-
-	; BUG: callba overwrites a,
-	; and GetItemHeldEffect takes b anyway.
-
-	; This is probably the reason
-	; the HELD_CATCH_CHANCE effect
-	; is never used.
-
-	; Uncomment the line below to fix.
-
-	ld a, [BattleMonItem]
-;	ld b, a
-	callba GetItemHeldEffect
-	ld a, b
-	cp HELD_CATCH_CHANCE
-
-	pop de
-	ld a, d
-
-	jr nz, .skip_hp_calc
-	add c
-	jr nc, .skip_hp_calc
-	ld a, $ff
-.skip_hp_calc
-
-	ld b, a
-	ld [Buffer1], a
-	call Random
-
-	cp b
-	ld a, 0
-	jr z, .catch_without_fail
-	jr nc, .fail_to_catch
-
-.catch_without_fail
-	ld a, [EnemyMonSpecies]
-
-.fail_to_catch
-	ld [wWildMon], a
-	ld c, 20
-	call DelayFrames
-
-	ld a, [CurItem]
-	cp POKE_BALL + 1 ; Assumes Master/Ultra/Great come before
-	jr c, .not_kurt_ball
-	ld a, POKE_BALL
-.not_kurt_ball
-	ld [wBattleAnimParam], a
-
-	ld de, ANIM_THROW_POKE_BALL
-	ld a, e
-	ld [FXAnimIDLo], a
-	ld a, d
-	ld [FXAnimIDHi], a
-	xor a
-	ld [hBattleTurn], a
-	ld [Buffer2], a
-	ld [wNumHits], a
-	predef PlayBattleAnim
-
-	ld a, [wWildMon]
-	and a
-	jr nz, .caught
-	ld a, [Buffer2]
-	cp $1
-	ld hl, Text_NoShake
-	jp z, .shake_and_break_free
-	cp $2
-	ld hl, Text_OneShake
-	jp z, .shake_and_break_free
-	cp $3
-	ld hl, Text_TwoShakes
-	jp z, .shake_and_break_free
-	cp $4
-	ld hl, Text_ThreeShakes
-	jp z, .shake_and_break_free
-.caught
-
-	ld hl, EnemyMonStatus
-	ld a, [hli]
-	push af
-	inc hl
-	ld a, [hli]
-	push af
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemyMonItem
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemySubStatus5
-	ld a, [hl]
-	push af
-	set SUBSTATUS_TRANSFORMED, [hl]
-	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .ditto
-	jr .not_ditto
-
-.ditto
-	ld a, DITTO
-	ld [TempEnemyMonSpecies], a
-	jr .load_data
-
-.not_ditto
-	set SUBSTATUS_TRANSFORMED, [hl]
-	ld hl, wEnemyBackupDVs
-	ld a, [EnemyMonDVs]
-	ld [hli], a
-	ld a, [EnemyMonDVs + 1]
-	ld [hl], a
-
-.load_data
-	ld a, [TempEnemyMonSpecies]
-	ld [CurPartySpecies], a
-	ld a, [EnemyMonLevel]
-	ld [CurPartyLevel], a
-	callba LoadEnemyMon
-
-	pop af
-	ld [EnemySubStatus5], a
-
-	pop hl
-	pop af
-	ld [hl], a
-	pop hl
-	pop af
-	ld [hld], a
-	pop af
-	ld [hld], a
-	dec hl
-	pop af
-	ld [hl], a
-
-	ld hl, EnemySubStatus5
-	bit SUBSTATUS_TRANSFORMED, [hl]
-	jr nz, .Transformed
-	ld hl, wWildMonMoves
-	ld de, EnemyMonMoves
-	ld bc, NUM_MOVES
-	call CopyBytes
-
-	ld hl, wWildMonPP
-	ld de, EnemyMonPP
-	ld bc, NUM_MOVES
-	call CopyBytes
-
-.Transformed
-	ld a, [EnemyMonSpecies]
-	ld [wWildMon], a
-	ld [CurPartySpecies], a
-	ld [wd265], a
-	ld a, [BattleType]
-	cp BATTLETYPE_TUTORIAL
-	jp z, .FinishTutorial
-
-	callba MobileFn_10607f
-
-	ld hl, Text_GotchaMonWasCaught
-	call PrintText
-
-	call ClearSprites
-
-	ld a, [wd265]
-	dec a
-	call CheckCaughtMon
-
-	ld a, c
-	push af
-	ld a, [wd265]
-	dec a
-	call SetSeenAndCaughtMon
-	pop af
-	and a
-	jr nz, .skip_pokedex
-
-	call CheckReceivedDex
-	jr z, .skip_pokedex
-
-	ld hl, Text_AddedToPokedex
-	call PrintText
-
-	call ClearSprites
-
-	ld a, [EnemyMonSpecies]
-	ld [wd265], a
-	predef NewPokedexEntry
-
-.skip_pokedex
-	ld a, [BattleType]
-	cp BATTLETYPE_CONTEST
-	jp z, .catch_bug_contest_mon
-	cp BATTLETYPE_CELEBI
-	jr nz, .not_celebi
-	ld hl, wBattleResult
-	set 6, [hl]
-.not_celebi
-
-	ld a, [PartyCount]
-	cp PARTY_LENGTH
-	jr z, .SendToPC
-
-	xor a ; PARTYMON
-	ld [MonType], a
-	call ClearSprites
-
-	predef TryAddMonToParty
-
-	callba SetCaughtData
-
-	ld a, [CurItem]
-	cp FRIEND_BALL
-	jr nz, .SkipPartyMonFriendBall
-
-	ld a, [PartyCount]
-	dec a
-	ld hl, PartyMon1Happiness
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-
-	ld a, FRIEND_BALL_HAPPINESS
-	ld [hl], a
-.SkipPartyMonFriendBall
-
-	ld hl, Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	jp c, .return_from_capture
-
-	ld a, [PartyCount]
-	dec a
-	ld [CurPartyMon], a
-	ld hl, PartyMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call AddNTimes
-
-	ld d, h
-	ld e, l
-	push de
-	xor a ; PARTYMON
-	ld [MonType], a
-	ld b, 0
-	callba NamingScreen
-
-	call RotateThreePalettesRight
-
-	call LoadStandardFont
-
-	pop hl
-	ld de, StringBuffer1
-	call InitName
-
-	jp .return_from_capture
-
-.SendToPC
-	call ClearSprites
-
-	predef SentPkmnIntoBox
-
-	callba SetBoxMonCaughtData
-
-	ld a, BANK(sBoxCount)
-	call GetSRAMBank
-
-	ld a, [sBoxCount]
-	cp MONS_PER_BOX
-	jr nz, .BoxNotFullYet
-	ld hl, wBattleResult
-	set 7, [hl]
-.BoxNotFullYet
-	ld a, [CurItem]
-	cp FRIEND_BALL
-	jr nz, .SkipBoxMonFriendBall
-	; Bug: overwrites the happiness of the first mon in the box!
-	ld a, FRIEND_BALL_HAPPINESS
-	ld [sBoxMon1Happiness], a
-.SkipBoxMonFriendBall
-	call CloseSRAM
-
-	ld hl, Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	jr c, .SkipBoxMonNickname
-
-	xor a
-	ld [CurPartyMon], a
-	ld a, BOXMON
-	ld [MonType], a
-	ld de, wMonOrItemNameBuffer
-	ld b, $0
-	callba NamingScreen
-
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, wMonOrItemNameBuffer
-	ld de, sBoxMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	ld hl, sBoxMonNicknames
-	ld de, StringBuffer1
-	call InitName
-
-	call CloseSRAM
-
-.SkipBoxMonNickname
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, sBoxMonNicknames
-	ld de, wMonOrItemNameBuffer
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	call CloseSRAM
-
-	ld hl, Text_SentToBillsPC
-	call PrintText
-
-	call RotateThreePalettesRight
-	call LoadStandardFont
-	jr .return_from_capture
-
-.catch_bug_contest_mon
-	callba BugContest_SetCaughtContestMon
-	jr .return_from_capture
-
-.FinishTutorial
-	ld hl, Text_GotchaMonWasCaught
-
-.shake_and_break_free
-	call PrintText
-	call ClearSprites
-
-.return_from_capture
-	ld a, [BattleType]
-	cp BATTLETYPE_TUTORIAL
-	ret z
-	cp BATTLETYPE_DEBUG
-	ret z
-	cp BATTLETYPE_CONTEST
-	jr z, .used_park_ball
-
-	ld a, [wWildMon]
-	and a
-	jr z, .toss
-
-	call ClearBGPalettes
-	call ClearTileMap
-
-.toss
-	ld hl, NumItems
-	inc a
-	ld [wItemQuantityChangeBuffer], a
-	jp TossItem
-
-.used_park_ball
-	ld hl, wParkBallsRemaining
-	dec [hl]
-	ret
-; ec0a
-
-
-BallMultiplierFunctionTable:
-; table of routines that increase or decrease the catch rate based on
-; which ball is used in a certain situation.
-	dbw ULTRA_BALL,  UltraBallMultiplier
-	dbw GREAT_BALL,  GreatBallMultiplier
-	dbw SAFARI_BALL, SafariBallMultiplier ; Safari Ball, leftover from RBY
-	dbw HEAVY_BALL,  HeavyBallMultiplier
-	dbw LEVEL_BALL,  LevelBallMultiplier
-	dbw LURE_BALL,   LureBallMultiplier
-	dbw FAST_BALL,   FastBallMultiplier
-	dbw MOON_BALL,   MoonBallMultiplier
-	dbw LOVE_BALL,   LoveBallMultiplier
-	dbw PARK_BALL,   ParkBallMultiplier
-	db $ff
-
-UltraBallMultiplier:
-; multiply catch rate by 2
-	sla b
-	ret nc
-	ld b, $ff
-	ret
-
-SafariBallMultiplier:
-GreatBallMultiplier:
-ParkBallMultiplier:
-; multiply catch rate by 1.5
-	ld a, b
-	srl a
-	add b
-	ld b, a
-	ret nc
-	ld b, $ff
-	ret
-
-GetPokedexEntryBank:
-	push hl
-	push de
-	ld a, [EnemyMonSpecies]
-	rlca
-	rlca
-	and 3
-	ld hl, .PokedexEntryBanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	pop de
-	pop hl
-	ret
-
-.PokedexEntryBanks
-
-GLOBAL PokedexEntries1
-GLOBAL PokedexEntries2
-GLOBAL PokedexEntries3
-GLOBAL PokedexEntries4
-
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
-
-HeavyBallMultiplier:
-; subtract 20 from catch rate if weight < 102.4 kg
-; else add 0 to catch rate if weight < 204.8 kg
-; else add 20 to catch rate if weight < 307.2 kg
-; else add 30 to catch rate if weight < 409.6 kg
-; else add 40 to catch rate (never happens)
-	ld a, [EnemyMonSpecies]
-	ld hl, PokedexDataPointerTable
-	dec a
-	ld e, a
-	ld d, 0
-rept 2
-	add hl, de
-endr
-	ld a, BANK(PokedexDataPointerTable)
-	call GetFarHalfword
-
-.SkipText
-	call GetPokedexEntryBank
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .SkipText
-
-	call GetPokedexEntryBank
-	push bc
-rept 2
-	inc hl
-endr
-	call GetFarHalfword
-
-	srl h
-	rr l
-	ld b, h
-	ld c, l
-
-	rept 4
-	srl b
-	rr c
-	endr
-	call .subbc
-
-	srl b
-	rr c
-	call .subbc
-
-	ld a, h
-	pop bc
-	jr .compare
-
-.subbc
-	; subtract bc from hl
-	push bc
-	ld a, b
-	cpl
-	ld b, a
-	ld a, c
-	cpl
-	ld c, a
-	inc bc
-	add hl, bc
-	pop bc
-	ret
-
-.compare
-	ld c, a
-	cp 1024 >> 8 ; 102.4 kg
-	jr c, .lightmon
-
-	ld hl, .WeightsTable
-.lookup
-	ld a, c
-	cp [hl]
-	jr c, .heavymon
-rept 2
-	inc hl
-endr
-	jr .lookup
-
-.heavymon
-	inc hl
-	ld a, b
-	add [hl]
-	ld b, a
-	ret nc
-	ld b, $ff
-	ret
-
-.lightmon
-	ld a, b
-	sub 20
-	ld b, a
-	ret nc
-	ld b, $1
-	ret
-
-.WeightsTable
-; weight factor, boost
-	db 2048 >> 8, 0
-	db 3072 >> 8, 20
-	db 4096 >> 8, 30
-	db 65280 >> 8, 40
-
-LureBallMultiplier:
-; multiply catch rate by 3 if this is a fishing rod battle
-	ld a, [BattleType]
-	cp BATTLETYPE_FISH
-	ret nz
-
-	ld a, b
-	add a
-	jr c, .max
-
-	add b
-	jr nc, .done
-.max
-	ld a, $ff
-.done
-	ld b, a
-	ret
-
-MoonBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 4 if mon evolves with moon stone
-; Reality: no boost
-
-GLOBAL EvosAttacks
-GLOBAL EvosAttacksPointers
-
-	push bc
-	ld a, [TempEnemyMonSpecies]
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, EvosAttacksPointers
-rept 2
-	add hl, bc
-endr
-	ld a, BANK(EvosAttacksPointers)
-	call GetFarHalfword
-	pop bc
-
-	push bc
-	ld a, BANK(EvosAttacks)
-	call GetFarByte
-	cp EVOLVE_ITEM
-	pop bc
-	ret nz
-
-rept 3
-	inc hl
-endr
-
-; Moon Stone's constant from Pokémon Red is used.
-; No Pokémon evolve with Burn Heal,
-; so Moon Balls always have a catch rate of 1×.
-	push bc
-	ld a, BANK(EvosAttacks)
-	call GetFarByte
-	cp MOON_STONE_RED ; BURN_HEAL
-	pop bc
-	ret nz
-
-	sla b
-	jr c, .max
-	sla b
-	jr nc, .done
-.max
-	ld b, $ff
-.done
-	ret
-
-LoveBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 8 if mons are of same species, different sex
-; Reality: multiply catch rate by 8 if mons are of same species, same sex
-
-	; does species match?
-	ld a, [TempEnemyMonSpecies]
-	ld c, a
-	ld a, [TempBattleMonSpecies]
-	cp c
-	ret nz
-
-	; check player mon species
-	push bc
-	ld a, [TempBattleMonSpecies]
-	ld [CurPartySpecies], a
-	xor a ; PARTYMON
-	ld [MonType], a
-	ld a, [CurBattleMon]
-	ld [CurPartyMon], a
-	callba GetGender
-	jr c, .done1 ; no effect on genderless
-
-	ld d, 0 ; male
-	jr nz, .playermale
-	inc d   ; female
-.playermale
-
-	; check wild mon species
-	push de
-	ld a, [TempEnemyMonSpecies]
-	ld [CurPartySpecies], a
-	ld a, WILDMON
-	ld [MonType], a
-	callba GetGender
-	jr c, .done2 ; no effect on genderless
-
-	ld d, 0 ; male
-	jr nz, .wildmale
-	inc d   ; female
-.wildmale
-
-	ld a, d
-	pop de
-	cp d
-	pop bc
-	ret nz ; for the intended effect, this should be “ret z”
-
-	sla b
-	jr c, .max
-	sla b
-	jr c, .max
-	sla b
-	ret nc
-.max
-	ld b, $ff
-	ret
-
-.done2
-	pop de
-
-.done1
-	pop bc
-	ret
-
-FastBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 4 if enemy mon is in one of the three
-;          FleeMons tables.
-; Reality: multiply catch rate by 4 if enemy mon is one of the first three in
-;          the first FleeMons table.
-	ld a, [TempEnemyMonSpecies]
-	ld c, a
-	ld hl, FleeMons
-	ld d, 3
-
-.loop
-	ld a, BANK(FleeMons)
-	call GetFarByte
-
-	inc hl
-	cp -1
-	jr z, .next
-	cp c
-	jr nz, .next ; for the intended effect, this should be “jr nz, .loop”
-	sla b
-	jr c, .max
-
-	sla b
-	ret nc
-
-.max
-	ld b, $ff
-	ret
-
-.next
-	dec d
-	jr nz, .loop
-	ret
-
-LevelBallMultiplier:
-; multiply catch rate by 8 if player mon level / 4 > enemy mon level
-; multiply catch rate by 4 if player mon level / 2 > enemy mon level
-; multiply catch rate by 2 if player mon level > enemy mon level
-	ld a, [BattleMonLevel]
-	ld c, a
-	ld a, [EnemyMonLevel]
-	cp c
-	ret nc ; if player is lower level, we're done here
-	sla b
-	jr c, .max
-
-	srl c
-	cp c
-	ret nc ; if player/2 is lower level, we're done here
-	sla b
-	jr c, .max
-
-	srl c
-	cp c
-	ret nc ; if player/4 is lower level, we're done here
-	sla b
-	ret nc
-
-.max
-	ld b, $ff
-	ret
-
-; These two texts were carried over from gen 1.
-; They are not used in gen 2, and are dummied out.
-
-Text_RBY_CatchMarowak: ; 0xedab
-	; It dodged the thrown BALL! This #MON can't be caught!
-	text_jump UnknownText_0x1c5a5a
-	db "@"
-; 0xedb0
-
-Text_RBY_NoShake: ; 0xedb0
-	; You missed the #MON!
-	text_jump UnknownText_0x1c5a90
-	db "@"
-; 0xedb5
-
-Text_NoShake: ; 0xedb5
-	; Oh no! The #MON broke free!
-	text_jump UnknownText_0x1c5aa6
-	db "@"
-; 0xedba
-
-Text_OneShake: ; 0xedba
-	; Aww! It appeared to be caught!
-	text_jump UnknownText_0x1c5ac3
-	db "@"
-; 0xedbf
-
-Text_TwoShakes: ; 0xedbf
-	; Aargh! Almost had it!
-	text_jump UnknownText_0x1c5ae3
-	db "@"
-; 0xedc4
-
-Text_ThreeShakes: ; 0xedc4
-	; Shoot! It was so close too!
-	text_jump UnknownText_0x1c5afa
-	db "@"
-; 0xedc9
-
-Text_GotchaMonWasCaught: ; 0xedc9
-	; Gotcha! @ was caught!@ @
-	text_jump UnknownText_0x1c5b17
-	start_asm
-	call WaitSFX
-	push bc
-	ld de, MUSIC_NONE
-	call PlayMusic
-	call DelayFrame
-	ld de, MUSIC_CAPTURE
-	call PlayMusic
-	pop bc
-	ld hl, TextJump_Waitbutton
-	ret
-; ede6
-
-TextJump_Waitbutton: ; 0xede6
-	; @
-	text_jump Text_Waitbutton_2
-	db "@"
-; 0xedeb
-
-Text_SentToBillsPC: ; 0xedeb
-	; was sent to BILL's PC.
-	text_jump UnknownText_0x1c5b38
-	db "@"
-; 0xedf0
-
-Text_AddedToPokedex: ; 0xedf0
-	; 's data was newly added to the #DEX.@ @
-	text_jump UnknownText_0x1c5b53
-	db "@"
-; 0xedf5
-
-Text_AskNicknameNewlyCaughtMon: ; 0xedf5
-	; Give a nickname to @ ?
-	text_jump UnknownText_0x1c5b7f
-	db "@"
-; 0xedfa
-
-ReturnToBattle_UseBall: ; edfa (3:6dfa)
-	callba _ReturnToBattle_UseBall
-	ret
-
-TownMap: ; ee01
-	callba PokegearMap
+ParkBall:
 	ret
 ; ee08
 
@@ -1312,11 +553,11 @@ StatStrings: ; eeab
 	dw .speed
 	dw .special
 
-.health  db "HEALTH@"
-.attack  db "ATTACK@"
-.defense db "DEFENSE@"
-.speed   db "SPEED@"
-.special db "SPECIAL@"
+.health  db "Health@"
+.attack  db "Attack@"
+.defense db "Defense@"
+.speed   db "Speed@"
+.special db "Special@"
 ; eed9
 
 
@@ -1701,47 +942,6 @@ RevivePokemon: ; f0d6
 	ret
 ; f128
 
-
-FullRestore: ; f128
-	ld b, PARTYMENUACTION_HEALING_ITEM
-	call UseItem_SelectMon
-	jp c, StatusHealer_ExitMenu
-
-	call IsMonFainted
-	jp z, StatusHealer_NoEffect
-
-	call IsMonAtFullHealth
-	jr c, .NotAtFullHealth
-
-	jp FullyHealStatus
-
-.NotAtFullHealth
-	call .FullRestore
-	jp StatusHealer_Jumptable
-; f144
-
-
-.FullRestore: ; f144
-	xor a
-	ld [Danger], a
-	call ReviveFullHP
-	ld a, MON_STATUS
-	call GetPartyParamLocation
-	xor a
-	ld [hli], a
-	ld [hl], a
-	call HealStatus
-	call BattlemonRestoreHealth
-	call HealHP_SFX_GFX
-	ld a, PARTYMENUTEXT_HEAL_HP
-	ld [PartyMenuActionText], a
-	call ItemActionTextWaitButton
-	call UseDisposableItem
-	ld a, 0
-	ret
-; f16a
-
-
 BitterBerry: ; f16a
 	ld hl, PlayerSubStatus3
 	bit SUBSTATUS_CONFUSED, [hl]
@@ -1764,6 +964,34 @@ BitterBerry: ; f16a
 
 
 MaxPotion:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
+
+	ld a, MON_PKRUS
+	call GetPartyParamLocation
+	ld a, [hl]
+	and a
+	jr nz, .Fail
+
+	ld a, %11110000
+	ld [hl], a
+	call Play_SFX_FULL_HEAL
+	call UseDisposableItem
+	ld a, [CurPartyMon]
+	ld hl, PartyMonNicknames
+	call GetNick
+	ld hl, .GavePokerusText
+	jp PrintText
+
+.Fail
+	jp NoEffectMessage
+
+.GavePokerusText
+	text_from_ram StringBuffer1
+	text " got"
+	line "#rus!"
+	prompt
 HyperPotion:
 SuperPotion:
 Potion:
@@ -2832,6 +2060,7 @@ OpenBox: ; f769
 	db "@"
 ; 0xf77d
 
+FullRestore:
 Brightpowder:
 Item19:
 LuckyPunch:

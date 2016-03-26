@@ -290,11 +290,11 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	ret
 
 .Dex_PlayTime
-	db   "#DEX"
-	next "PLAY TIME@@"
+	db   "#dex"
+	next "Play time@@"
 
 .Badges
-	db "  BADGES▶@"
+	db "  Badges▶@"
 
 .StatusTilemap: ; 25366
 	db $29, $2a, $2b, $2c, $2d, $ff

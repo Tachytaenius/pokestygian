@@ -201,7 +201,7 @@ GotMoneyForWinningText:
 
 BattleText_EnemyWasDefeated: ; 0x809da
 	text "<ENEMY>"
-	line "was defeated!"
+	line "was slain!"
 	prompt
 ; 0x809eb
 

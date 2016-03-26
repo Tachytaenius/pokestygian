@@ -275,8 +275,6 @@ PlayerEvents: ; 9681f
 	and a
 	ret nz
 
-	call Dummy_CheckScriptFlags3Bit5 ; This is a waste of time
-
 	call CheckTrainerBattle3
 	jr c, .ok
 
@@ -518,12 +516,6 @@ CheckTimeEvents: ; 9693a
 	ret
 ; 96970
 
-.unused ; 96970
-	ld a, 8
-	scf
-	ret
-; 96974
-
 OWPlayerInput: ; 96974
 
 	call PlayerMovement
@@ -612,7 +604,7 @@ TryObjectEvent: ; 969b5
 	jp [hl]
 
 .nope_bugged
-	; pop bc
+	pop bc
 	xor a
 	ret
 
@@ -635,29 +627,11 @@ TryObjectEvent: ; 969b5
 	ld h, [hl]
 	ld l, a
 	call GetMapScriptHeaderBank
-	call CallScript
-	ret
+	jp CallScript
 ; 96a12
 
 .itemball ; 96a12
-	ld hl, MAPOBJECT_SCRIPT_POINTER
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call GetMapScriptHeaderBank
-	ld de, EngineBuffer1
-	ld bc, 2
-	call FarCopyBytes
-	ld a, PLAYEREVENT_ITEMBALL
-	scf
-	ret
-; 96a29
-
-.trainer ; 96a29
-	call TalkToTrainer
-	ld a, PLAYEREVENT_TALKTOTRAINER
-	scf
+.trainer
 	ret
 ; 96a30
 
@@ -994,12 +968,6 @@ CountStep: ; 96b79
 	ret
 ; 96bd3
 
-.unreferenced: ; 96bd3
-	ld a, 7
-	scf
-	ret
-; 96bd7
-
 DoRepelStep: ; 96bd7
 	ld a, [wRepelEffect]
 	and a
@@ -1059,10 +1027,6 @@ PlayerEventScriptPointers: ; 96c0c
 Invalid_0x96c2d: ; 96c2d
 	end
 ; 96c2e
-
-; unreferenced
-	end
-; 96c2f
 
 HatchEggScript: ; 96c2f
 	callasm OverworldHatchEgg

@@ -31,7 +31,7 @@ _MobileStadiumEntryText::
 	text "Data for use in"
 	line "the MOBILE STADIUM"
 
-	para "of the N64 #MON"
+	para "of the N64 #mon"
 	line "STADIUM 2 can be"
 	cont "read here."
 
@@ -44,7 +44,7 @@ _MobileStadiumSuccessText::
 	para "We hope you enjoy"
 	line "MOBILE STADIUM"
 	para "battles in the N64"
-	line "#MON STADIUM 2."
+	line "#mon STADIUM 2."
 	para ""
 	done
 
@@ -63,7 +63,7 @@ UnknownText_0x1c51b9::
 	done
 
 UnknownText_0x1c51d7::
-	text "Pick three #MON"
+	text "Pick three #mon"
 	line "for battle."
 	prompt
 
@@ -81,7 +81,7 @@ UnknownText_0x1c51f4::
 	done
 
 UnknownText_0x1c521c::
-	text "Only three #MON"
+	text "Only three #mon"
 	line "may enter."
 	prompt
 
@@ -115,7 +115,7 @@ UnknownText_0x1c531e::
 	line "a call from a"
 	para "mobile phone on"
 	line "the 2nd floor of a"
-	cont "#MON CENTER."
+	cont "#mon CENTER."
 	para ""
 	done
 
@@ -419,7 +419,7 @@ UnknownText_0x1c5962::
 
 UnknownText_0x1c5983::
 	text "You need at least"
-	line "three #MON."
+	line "three #mon."
 	para ""
 	done
 
@@ -430,7 +430,7 @@ UnknownText_0x1c59a3::
 	done
 
 Text_OnlyThreePkmnMayBeEntered::
-	text "Only three #MON"
+	text "Only three #mon"
 	line "may be entered."
 	para ""
 	done
@@ -438,7 +438,7 @@ Text_OnlyThreePkmnMayBeEntered::
 Text_ThePkmnMustAllBeDifferentKinds::
 	text "The @"
 	text_from_ram StringBuffer2
-	text " #MON"
+	text " #mon"
 	line "must all be"
 	cont "different kinds."
 	para ""
@@ -447,7 +447,7 @@ Text_ThePkmnMustAllBeDifferentKinds::
 Text_ThePkmnMustNotHoldTheSameItems::
 	text "The @"
 	text_from_ram StringBuffer2
-	text " #MON"
+	text " #mon"
 	line "must not hold the"
 	cont "same items."
 	para ""
@@ -463,17 +463,17 @@ UnknownText_0x1c5a5a::
 	text "It dodged the"
 	line "thrown BALL!"
 
-	para "This #MON"
+	para "This #mon"
 	line "can't be caught!"
 	prompt
 
 UnknownText_0x1c5a90::
 	text "You missed the"
-	line "#MON!"
+	line "#mon!"
 	prompt
 
 UnknownText_0x1c5aa6::
-	text "Oh no! The #MON"
+	text "Oh no! The #mon"
 	line "broke free!"
 	prompt
 
@@ -507,7 +507,7 @@ Text_Waitbutton_2::
 UnknownText_0x1c5b38::
 	text_from_ram wMonOrItemNameBuffer
 	text " was"
-	line "sent to BILL's PC."
+	line "sent to Magincia."
 	prompt
 
 UnknownText_0x1c5b53::
@@ -536,7 +536,7 @@ UnknownText_0x1c5b9a::
 
 UnknownText_0x1c5bac::
 	text "That can't be used"
-	line "on this #MON."
+	line "on this #mon."
 	prompt
 
 Text_RepelUsedEarlierIsStillInEffect::
@@ -555,7 +555,7 @@ UnknownText_0x1c5bf9::
 
 UnknownText_0x1c5c28::
 	text "All sleeping"
-	line "#MON woke up."
+	line "#mon woke up."
 	prompt
 
 UnknownText_0x1c5c44::
@@ -661,7 +661,7 @@ UnknownText_0x1c5e1d::
 	prompt
 
 UnknownText_0x1c5e3a::
-	text "The #MON BOX"
+	text "The #mon BOX"
 	line "is full. That"
 	cont "can't be used now."
 	prompt
@@ -697,7 +697,7 @@ UnknownText_0x1c5ea8::
 	prompt
 
 UnknownText_0x1c5eba::
-	text "That #MON knows"
+	text "That #mon knows"
 	line "only one move."
 	done
 
@@ -709,7 +709,7 @@ UnknownText_0x1c5eda::
 	done
 
 UnknownText_0x1c5ef5::
-	text "Done! Your #MON"
+	text "Done! Your #mon"
 	line "forgot the move."
 	done
 
@@ -732,15 +732,15 @@ UnknownText_0x1c5f74::
 	text "Um… Oh, yes, I'm"
 	line "the MOVE DELETER."
 
-	para "I can make #MON"
+	para "I can make #mon"
 	line "forget moves."
 
 	para "Shall I make a"
-	line "#MON forget?"
+	line "#mon forget?"
 	done
 
 UnknownText_0x1c5fd1::
-	text "Which #MON?"
+	text "Which #mon?"
 	prompt
 
 Text_DSTIsThatOK::
