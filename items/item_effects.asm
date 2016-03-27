@@ -200,46 +200,28 @@ GLOBAL EvosAttacksPointers
 
 MasterBall::
 	ld hl, .sure_note
-	ld a, [TextBoxFrame]
-	push af
-	call Narrate
+	call PrintText
 	call YesNoBox
-	jr c, .no
+	jr c, .cancel
 	ld hl, .read
-	call Narrate
-	pop af
-	ld [TexBoxFrame], a
-	call LoadFontsExtra
+	call PrintText
 	ld hl, .text
 	call PrintText
 	ld hl, .continue
-	ld a, [TextBoxFrame]
-	push af
-	call Narrate
+	call PrintText
 	call YesNoBox
-	jr c, .no
-	pop af
-	ld [TexBoxFrame], a
-	call LoadFontsExtra
+	jr c, .cancel
 	ld hl, .text_
 	call PrintText
 	ld hl, .continue
-	ld a, [TextBoxFrame]
-	push af
-	call Narrate
 	call YesNoBox
-	jr c, .no
-	pop af
-	ld [TexBoxFrame], a
-	call LoadFontsExtra
+	jr c, .cancel
 	ld hl, .text__
+	call PrintText
+	ld hl, .finish
 	call PrintText
 .cancel
 	ret
-.no
-	pop af
-	ld [TexBoxFrame], a
-	jp LoadFontsExtra
 
 .sure_note
 	text "Read the note?"
@@ -255,7 +237,7 @@ MasterBall::
 	prompt
 
 .text
-	para "To whom it may"
+	text "<``>To whom it may"
 	line "concern, know that"
 	para "you have been put"
 	line "here with a benign"
@@ -266,11 +248,11 @@ MasterBall::
 	para "off on the sur-"
 	line "face, for the Arm-"
 	para "ageddon has"
-	line "struck."
+	line "struck.<''>"
 	prompt
 
 .text_
-	text "Firstly, when this"
+	text "<``>Firstly, when this"
 	line "note speaks of the"
 	para "surface, it means"
 	line "as opposed to your"
@@ -290,11 +272,11 @@ MasterBall::
 	line "upturned the land."
 	para "Clouds fell, laden"
 	line "with the stench of"
-	cont "evil."
+	cont "evil.<''>"
 	prompt
 
 .text__
-	text "Certainly, some"
+	text "<``>Certainly, some"
 	line "foul evil was at"
 	para "work here. What,"
 	line "not even our most"
@@ -314,29 +296,27 @@ MasterBall::
 	line "ople at our shrine"
 	para "of knowledge, on"
 	line "this floor of the"
-	cont "Abyss."
+	cont "Abyss.<''>"
+	prompt
+	
+.finish
+	text "You finish reading"
+	line "the note."
 	prompt
 
-GreatBall:
+GreatBall::
 	ld hl, .sure_note
-	ld a, [TextBoxFrame]
-	push af
-	call Narrate
+	call PrintText
 	call YesNoBox
-	jr c, .no
-	ld hl, read
-	call Narrate
-	pop af
-	ld [TexBoxFrame], a
-	call LoadFontsExtra
+	jr c, .cancel
+	ld hl, .read
+	call PrintText
 	ld hl, .text
+	call PrintText
+	ld hl, .finish
 	call PrintText
 .cancel	
 	ret
-.no
-	pop af
-	ld [TexBoxFrame], a
-	jp LoadFontsExtra
 
 .sure_note
 	text "Read the note?"
@@ -352,7 +332,7 @@ GreatBall:
 	prompt
 
 .text
-	text "Press this button"
+	text "<``>Press this button"
 	line "to heal all your"
 	para "#mon. Know that"
 	line "it cannot be moved"
@@ -363,29 +343,27 @@ GreatBall:
 	para "there to access"
 	line "Magincia or"
 	para "Jhelom, two useful"
-	line "sub-worlds."
+	line "sub-worlds.<''>"
 	prompt
 
-PokeBall:
+.finish
+	text "You finish reading"
+	line "the note."
+	prompt
+
+PokeBall::
 	ld hl, .sure_note
-	ld a, [TextBoxFrame]
-	push af
-	call Narrate
+	call PrintText
 	call YesNoBox
-	jr c, .no
-	ld hl, read
-	call Narrate
-	pop af
-	ld [TexBoxFrame], a
-	call LoadFontsExtra
+	jr c, .cancel
+	ld hl, .read
+	call PrintText
 	ld hl, .text
+	call PrintText
+	ld hl, .finish
 	call PrintText
 .cancel	
 	ret
-.no
-	pop af
-	ld [TexBoxFrame], a
-	jp LoadFontsExtra
 
 .sure_note
 	text "Read the note?"
@@ -405,6 +383,11 @@ PokeBall:
 	line "of this larvitar."
 	para "It is for your"
 	line "protection."
+	prompt
+
+.finish
+	text "You finish reading"
+	line "the note."
 	prompt
 
 TownMap: ; ee01
@@ -2177,7 +2160,7 @@ UseDisposableItem: ; f795
 ; f7a0
 
 UseBallInTrainerBattle: ; f7a0
-	call ReturnToBattle_UseBall
+	; call ReturnToBattle_UseBall
 	ld de, ANIM_THROW_POKE_BALL
 	ld a, e
 	ld [FXAnimIDLo], a

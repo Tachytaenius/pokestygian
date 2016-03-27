@@ -2004,7 +2004,7 @@ TilesetCollisionAddress:: ; d1e0
 TilesetAnim:: ; d1e2
 ; bank 3f
 	ds 2
-ItempicPointer ; d1e4
+ItempicPointer:: ; d1e4
 	ds 2
 TilesetPalettes:: ; d1e6
 ; bank 3f

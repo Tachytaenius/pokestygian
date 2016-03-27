@@ -23,9 +23,7 @@
 *.sym
 
 # for the files that crowdmap uses
-tilesets/*.png
-tilesets/roofs/*.png
-tilesets/*.2bpp
+*.png
 
 # compare.sh
 baserom.txt
@@ -38,5 +36,3 @@ pokecrystal.txt
 .*.swp
 # swap files for gedit
 *~
-
-.gitignore

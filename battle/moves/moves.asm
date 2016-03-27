@@ -22,7 +22,7 @@ ENDM
 	move THUNDERPUNCH, EFFECT_PARALYZE_HIT,       75, ELECTRIC, 100, 15,  10
 	move SCRATCH,      EFFECT_NORMAL_HIT,         40, NORMAL,   100, 35,   0
 	move VICEGRIP,     EFFECT_NORMAL_HIT,         55, NORMAL,   100, 30,   0
-	move GUILLOTINE,   EFFECT_OHKO,                0, NORMAL,    30,  5,   0
+	move GUILLOTINE,   EFFECT_NORMAL_HIT,         99, NORMAL,    30,  5,   0
 	move RAZOR_WIND,   EFFECT_RAZOR_WIND,         80, NORMAL,    75, 10,   0
 	move SWORDS_DANCE, EFFECT_ATTACK_UP_2,         0, NORMAL,   100, 30,   0
 	move CUT,          EFFECT_NORMAL_HIT,         50, NORMAL,    95, 30,   0
@@ -42,7 +42,7 @@ ENDM
 	move HEADBUTT,     EFFECT_FLINCH_HIT,         70, NORMAL,   100, 15,  30
 	move HORN_ATTACK,  EFFECT_NORMAL_HIT,         65, NORMAL,   100, 25,   0
 	move FURY_ATTACK,  EFFECT_MULTI_HIT,          15, NORMAL,    85, 20,   0
-	move HORN_DRILL,   EFFECT_OHKO,                1, NORMAL,    30,  5,   0
+	move HORN_DRILL,   EFFECT_NORMAL_HIT,         99, NORMAL,    30,  5,   0
 	move TACKLE,       EFFECT_NORMAL_HIT,         35, NORMAL,    95, 35,   0
 	move BODY_SLAM,    EFFECT_PARALYZE_HIT,       85, NORMAL,   100, 15,  30
 	move WRAP,         EFFECT_BIND,               15, NORMAL,    85, 20,   0
@@ -100,7 +100,7 @@ ENDM
 	move THUNDER,      EFFECT_THUNDER,           120, ELECTRIC,  70, 10,  30
 	move ROCK_THROW,   EFFECT_NORMAL_HIT,         50, ROCK,      90, 15,   0
 	move EARTHQUAKE,   EFFECT_EARTHQUAKE,        100, GROUND,   100, 10,   0
-	move FISSURE,      EFFECT_OHKO,                1, GROUND,    30,  5,   0
+	move FISSURE,      EFFECT_NORMAL_HIT,         99, GROUND,    30,  5,   0
 	move DIG,          EFFECT_FLY,                60, GROUND,   100, 10,   0
 	move TOXIC,        EFFECT_TOXIC,               0, POISON,    85, 10,   0
 	move CONFUSION,    EFFECT_CONFUSE_HIT,        50, PSYCHIC,  100, 25,  10

@@ -33,6 +33,10 @@ HiJumpKick:
 QuickAttack:
 MachPunch:
 Extremespeed:
+Guillotine:
+HornDrill:
+Fissure:
+OHKOHit:
 NormalHit:
 	checkobedience
 	usedmovetext
@@ -1035,25 +1039,7 @@ FlinchHit:
 	buildopponentrage
 	flinchtarget
 	endmove
-
-Guillotine:
-HornDrill:
-Fissure:
-OHKOHit:
-	checkobedience
-	usedmovetext
-	doturn
-	stab
-	ohko
-	hittarget
-	failuretext
-	checkfaint
-	criticaltext
-	supereffectivetext
-	checkdestinybond
-	buildopponentrage
-	endmove
-
+	
 TakeDown:
 DoubleEdge:
 Submission:

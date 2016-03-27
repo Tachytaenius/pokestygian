@@ -694,7 +694,7 @@ GetPocketName: ; 96ffe
 .Ball
 	db "Ammo pocket@"
 .TM
-	db "Tm pocket@"
+	db "TM pocket@"
 ; 97051
 
 CurItemName: ; 97051

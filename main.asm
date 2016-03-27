@@ -10303,12 +10303,12 @@ ChrisNameMenuHeader: ; 882b5
 .MaleNames: ; 882be
 	db $91 ; flags
 	db 5 ; items
-	db "NEW NAME@"
+	db "Other…@"
 MalePlayerNameArray: ; 882c9
-	db "CHRIS@"
-	db "MAT@"
-	db "ALLAN@"
-	db "JON@"
+	db "Chris@"
+	db "Rollo@"
+	db "Jack@"
+	db "Arthur@"
 	db 2 ; displacement
 	db " NAME @" ; title
 
@@ -10323,12 +10323,12 @@ KrisNameMenuHeader: ; 882e5
 .FemaleNames: ; 882ee
 	db $91 ; flags
 	db 5 ; items
-	db "NEW NAME@"
+	db "Other…@"
 FemalePlayerNameArray: ; 882f9
-	db "KRIS@"
-	db "AMANDA@"
-	db "JUANA@"
-	db "JODI@"
+	db "Sarah@"
+	db "Olga@"
+	db "Saga@"
+	db "May@"
 	db 2 ; displacement
 	db " NAME @" ; title
 
@@ -10538,7 +10538,7 @@ INCLUDE "engine/buena_phone_scripts.asm"
 StartMenuSecondary:: ; 125cd
 	ld a, 0
 	ld [ScriptVar], a
-	call ResetTextRelatedRAM
+	call ClearWindowData
 
 	ld de, SFX_MENU
 	call PlaySFX
@@ -10575,7 +10575,7 @@ StartMenuSecondary:: ; 125cd
 	ld a, [wMenuCursorBuffer]
 	ld [wd0d2], a
 	call PlayClickSFX
-	call Function1bee
+	call PlaceHollowCursor
 	call .OpenMenu
 
 ; Menu items have different return functions.
@@ -10611,7 +10611,7 @@ endr
 .ReturnEnd
 	call ExitMenu
 .ReturnEnd2
-	call LoadMoveSprites
+	call CloseText
 	call UpdateTimePals
 	ret
 
@@ -10625,7 +10625,7 @@ endr
 	ld [MenuSelection], a
 .loop
 	call Function1f1a
-	ld a, [wcf73]
+	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
@@ -10673,12 +10673,12 @@ endr
 .Clear ; 126b7
 	call ClearBGPalettes
 	call Call_ExitMenu
-	call Function2bae
+	call ReloadTilesetAndPalettes
 
 	call MenuFunc_1e7f
 	call UpdateSprites
-	call Functiond90
-	call Function2b5c
+	call ret_d90
+	call FinishExitMenu
 	ret
 ; 126d3
 
@@ -10793,7 +10793,7 @@ endr
 .GetMenuAccountTextPointer ; 12819
 	ld e, a
 	ld d, 0
-	ld hl, wcf97
+	ld hl, wMenuData2PointerTableAddr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -10806,7 +10806,7 @@ endr
 
 .SetUpMenuItems ; 12829
 	xor a
-	ld [wcf76], a
+	ld [wWhichIndexSet], a
 	call .FillMenuList
 	ld a, 0 ; pokedex
 	call .AppendMenuList
@@ -12022,6 +12022,8 @@ BannerPic::
 INCBIN "gfx/stygian/banner.2bpp"
 AnkhPic::
 INCBIN "gfx/stygian/ankh.2bpp"
+BloodPic::
+INCBIN "gfx/stygian/blood.2bpp"
 ;people
 GoblinPic::
 INCBIN "gfx/trainers/youngster.2bpp"
@@ -12034,6 +12036,269 @@ INCBIN "gfx/trainers/lt_surge.2bpp"
 ;dead people
 DeadGoblinPic::
 INCBIN "gfx/stygian/youngster_dead.2bpp"
+
+_PhysicalSpecialSplit:: ;Determines if a move is Physical or Special
+	ld a, e
+	ld c,a
+	ld b, $00
+	ld hl,.MovesTable
+	add hl,bc
+	ld a,[hl]
+	ld e, a
+	ret
+
+.MovesTable
+	db POUND,        PHYSICAL
+	db KARATE_CHOP,  PHYSICAL
+	db DOUBLESLAP,   PHYSICAL
+	db COMET_PUNCH,  PHYSICAL
+	db MEGA_PUNCH,   PHYSICAL
+	db PAY_DAY,      PHYSICAL
+	db FIRE_PUNCH,   SPECIAL
+	db ICE_PUNCH,    PHYSICAL
+	db THUNDERPUNCH, SPECIAL
+	db SCRATCH,      PHYSICAL
+	db VICEGRIP,     PHYSICAL
+	db GUILLOTINE,   PHYSICAL
+	db RAZOR_WIND,   PHYSICAL
+	db SWORDS_DANCE, PHYSICAL
+	db CUT,          PHYSICAL
+	db GUST,         PHYSICAL
+	db WING_ATTACK,  PHYSICAL
+	db WHIRLWIND,    PHYSICAL
+	db FLY,          PHYSICAL
+	db BIND,         PHYSICAL
+	db SLAM,         PHYSICAL
+	db VINE_WHIP,    PHYSICAL
+	db STOMP,        PHYSICAL
+	db DOUBLE_KICK,  PHYSICAL
+	db MEGA_KICK,    PHYSICAL
+	db JUMP_KICK,    PHYSICAL
+	db ROLLING_KICK, PHYSICAL
+	db SAND_ATTACK,  PHYSICAL
+	db HEADBUTT,     PHYSICAL
+	db HORN_ATTACK,  PHYSICAL
+	db FURY_ATTACK,  PHYSICAL
+	db HORN_DRILL,   PHYSICAL
+	db TACKLE,       PHYSICAL
+	db BODY_SLAM,    PHYSICAL
+	db WRAP,         PHYSICAL
+	db TAKE_DOWN,    PHYSICAL
+	db THRASH,       PHYSICAL
+	db DOUBLE_EDGE,  PHYSICAL
+	db TAIL_WHIP,    PHYSICAL
+	db POISON_STING, SPECIAL
+	db TWINEEDLE,    PHYSICAL
+	db PIN_MISSILE,  PHYSICAL
+	db LEER,         PHYSICAL
+	db BITE,         SPECIAL
+	db GROWL,        SPECIAL
+	db ROAR,         SPECIAL
+	db SING,         SPECIAL
+	db SUPERSONIC,   SPECIAL
+	db SONICBOOM,    SPECIAL
+	db DISABLE,      SPECIAL
+	db ACID,         SPECIAL
+	db EMBER,        SPECIAL
+	db FLAMETHROWER, SPECIAL
+	db MIST,         SPECIAL
+	db WATER_GUN,    SPECIAL
+	db HYDRO_PUMP,   SPECIAL
+	db SURF,         SPECIAL
+	db ICE_BEAM,     SPECIAL
+	db BLIZZARD,     PHYSICAL
+	db PSYBEAM,      SPECIAL
+	db BUBBLEBEAM,   SPECIAL
+	db AURORA_BEAM,  PHYSICAL
+	db HYPER_BEAM,   SPECIAL
+	db PECK,         PHYSICAL
+	db DRILL_PECK,   PHYSICAL
+	db SUBMISSION,   PHYSICAL
+	db LOW_KICK,     PHYSICAL
+	db COUNTER,      PHYSICAL
+	db SEISMIC_TOSS, PHYSICAL
+	db STRENGTH,     PHYSICAL
+	db ABSORB,       PHYSICAL
+	db MEGA_DRAIN,   PHYSICAL
+	db LEECH_SEED,   PHYSICAL
+	db GROWTH,       PHYSICAL
+	db RAZOR_LEAF,   PHYSICAL
+	db SOLARBEAM,    PHYSICAL
+	db POISONPOWDER, SPECIAL
+	db STUN_SPORE,   PHYSICAL
+	db SLEEP_POWDER, PHYSICAL
+	db PETAL_DANCE,  PHYSICAL
+	db STRING_SHOT,  PHYSICAL
+	db DRAGON_RAGE,  PHYSICAL
+	db FIRE_SPIN,    SPECIAL
+	db THUNDERSHOCK, SPECIAL
+	db THUNDERBOLT,  SPECIAL
+	db THUNDER_WAVE, SPECIAL
+	db THUNDER,      SPECIAL
+	db ROCK_THROW,   PHYSICAL
+	db EARTHQUAKE,   PHYSICAL
+	db FISSURE,      PHYSICAL
+	db DIG,          PHYSICAL
+	db TOXIC,        SPECIAL
+	db CONFUSION,    SPECIAL
+	db PSYCHIC_M,    SPECIAL
+	db HYPNOSIS,     SPECIAL
+	db MEDITATE,     SPECIAL
+	db AGILITY,      SPECIAL
+	db QUICK_ATTACK, PHYSICAL
+	db RAGE,         PHYSICAL
+	db TELEPORT,     SPECIAL
+	db NIGHT_SHADE,  SPECIAL
+	db MIMIC,        SPECIAL
+	db SCREECH,      SPECIAL
+	db DOUBLE_TEAM,  SPECIAL
+	db RECOVER,      PHYSICAL
+	db HARDEN,       PHYSICAL
+	db MINIMIZE,     SPECIAL
+	db SMOKESCREEN,  PHYSICAL
+	db CONFUSE_RAY,  SPECIAL
+	db WITHDRAW,     SPECIAL
+	db DEFENSE_CURL, PHYSICAL
+	db BARRIER,      SPECIAL
+	db LIGHT_SCREEN, SPECIAL
+	db HAZE,         PHYSICAL
+	db REFLECT,      SPECIAL
+	db FOCUS_ENERGY, PHYSICAL
+	db BIDE,         PHYSICAL
+	db METRONOME,    PHYSICAL
+	db MIRROR_MOVE,  PHYSICAL
+	db SELFDESTRUCT, PHYSICAL
+	db EGG_BOMB,     PHYSICAL
+	db LICK,         SPECIAL
+	db SMOG,         SPECIAL
+	db SLUDGE,       SPECIAL
+	db BONE_CLUB,    PHYSICAL
+	db FIRE_BLAST,   SPECIAL
+	db WATERFALL,    SPECIAL
+	db CLAMP,        SPECIAL
+	db SWIFT,        PHYSICAL
+	db SKULL_BASH,   PHYSICAL
+	db SPIKE_CANNON, PHYSICAL
+	db CONSTRICT,    PHYSICAL
+	db AMNESIA,      SPECIAL
+	db KINESIS,      SPECIAL
+	db SOFTBOILED,   PHYSICAL
+	db HI_JUMP_KICK, PHYSICAL
+	db GLARE,        PHYSICAL
+	db DREAM_EATER,  SPECIAL
+	db POISON_GAS,   SPECIAL
+	db BARRAGE,      PHYSICAL
+	db LEECH_LIFE,   PHYSICAL
+	db LOVELY_KISS,  PHYSICAL
+	db SKY_ATTACK,   PHYSICAL
+	db TRANSFORM,    PHYSICAL
+	db BUBBLE,       SPECIAL
+	db DIZZY_PUNCH,  SPECIAL
+	db SPORE,        PHYSICAL
+	db FLASH,        PHYSICAL
+	db PSYWAVE,      SPECIAL
+	db SPLASH,       PHYSICAL
+	db ACID_ARMOR,   SPECIAL
+	db CRABHAMMER,   SPECIAL
+	db EXPLOSION,    PHYSICAL
+	db FURY_SWIPES,  PHYSICAL
+	db BONEMERANG,   PHYSICAL
+	db REST,         SPECIAL
+	db ROCK_SLIDE,   PHYSICAL
+	db HYPER_FANG,   PHYSICAL
+	db SHARPEN,      PHYSICAL
+	db CONVERSION,   SPECIAL
+	db TRI_ATTACK,   PHYSICAL
+	db SUPER_FANG,   PHYSICAL
+	db SLASH,        PHYSICAL
+	db SUBSTITUTE,   SPECIAL
+	db STRUGGLE,     PHYSICAL
+	db SKETCH,       SPECIAL
+	db TRIPLE_KICK,  PHYSICAL
+	db THIEF,        SPECIAL
+	db SPIDER_WEB,   PHYSICAL
+	db MIND_READER,  PHYSICAL
+	db NIGHTMARE,    SPECIAL
+	db FLAME_WHEEL,  SPECIAL
+	db SNORE,        PHYSICAL
+	db CURSE,        SPECIAL
+	db FLAIL,        PHYSICAL
+	db CONVERSION2,  PHYSICAL
+	db AEROBLAST,    PHYSICAL
+	db COTTON_SPORE, PHYSICAL
+	db REVERSAL,     PHYSICAL
+	db SPITE,        SPECIAL
+	db POWDER_SNOW,  PHYSICAL
+	db PROTECT,      SPECIAL
+	db MACH_PUNCH,   PHYSICAL
+	db SCARY_FACE,   PHYSICAL
+	db FAINT_ATTACK, SPECIAL
+	db SWEET_KISS,   PHYSICAL
+	db BELLY_DRUM,   PHYSICAL
+	db SLUDGE_BOMB,  PHYSICAL
+	db MUD_SLAP,     PHYSICAL
+	db OCTAZOOKA,    PHYSICAL
+	db SPIKES,       PHYSICAL
+	db ZAP_CANNON,   SPECIAL
+	db FORESIGHT,    PHYSICAL
+	db DESTINY_BOND, SPECIAL
+	db PERISH_SONG,  PHYSICAL
+	db ICY_WIND,     PHYSICAL
+	db DETECT,       PHYSICAL
+	db BONE_RUSH,    PHYSICAL
+	db LOCK_ON,      PHYSICAL
+	db OUTRAGE,      PHYSICAL
+	db SANDSTORM,    PHYSICAL
+	db GIGA_DRAIN,   PHYSICAL
+	db ENDURE,       PHYSICAL
+	db CHARM,        PHYSICAL
+	db ROLLOUT,      PHYSICAL
+	db FALSE_SWIPE,  SPECIAL
+	db SWAGGER,      PHYSICAL
+	db MILK_DRINK,   PHYSICAL
+	db SPARK,        SPECIAL
+	db FURY_CUTTER,  PHYSICAL
+	db STEEL_WING,   PHYSICAL
+	db MEAN_LOOK,    PHYSICAL
+	db ATTRACT,      PHYSICAL
+	db SLEEP_TALK,   PHYSICAL
+	db HEAL_BELL,    PHYSICAL
+	db RETURN,       PHYSICAL
+	db PRESENT,      PHYSICAL
+	db FRUSTRATION,  PHYSICAL
+	db SAFEGUARD,    PHYSICAL
+	db PAIN_SPLIT,   PHYSICAL
+	db SACRED_FIRE,  SPECIAL
+	db MAGNITUDE,    PHYSICAL
+	db DYNAMICPUNCH, PHYSICAL
+	db MEGAHORN,     PHYSICAL
+	db DRAGONBREATH, PHYSICAL
+	db BATON_PASS,   PHYSICAL
+	db ENCORE,       SPECIAL
+	db PURSUIT,      SPECIAL
+	db RAPID_SPIN,   PHYSICAL
+	db SWEET_SCENT,  SPECIAL
+	db IRON_TAIL,    PHYSICAL
+	db METAL_CLAW,   PHYSICAL
+	db VITAL_THROW,  PHYSICAL
+	db MORNING_SUN,  PHYSICAL
+	db SYNTHESIS,    PHYSICAL
+	db MOONLIGHT,    PHYSICAL
+	db HIDDEN_POWER, PHYSICAL
+	db CROSS_CHOP,   PHYSICAL
+	db TWISTER,      PHYSICAL
+	db RAIN_DANCE,   SPECIAL
+	db SUNNY_DAY,    SPECIAL
+	db CRUNCH,       SPECIAL
+	db MIRROR_COAT,  SPECIAL
+	db PSYCH_UP,     PHYSICAL
+	db EXTREMESPEED, PHYSICAL
+	db ANCIENTPOWER, PHYSICAL
+	db SHADOW_BALL,  SPECIAL
+	db FUTURE_SIGHT, SPECIAL
+	db ROCK_SMASH,   PHYSICAL
+	db WHIRLPOOL,    SPECIAL
+	db BEAT_UP,      SPECIAL
 
 SECTION "stadium2", ROMX[$8000-$220], BANK[$7F]
 

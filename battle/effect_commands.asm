@@ -2835,7 +2835,7 @@ PlayerAttackDamage: ; 352e2
 	ld d, a
 	ret z
 
-	ld a, [hl]
+	ld a, [CurPlayerMove]
 	cp SPECIAL
 	jr nc, .special
 
@@ -3099,7 +3099,8 @@ EnemyAttackDamage: ; 353f6
 	and a
 	ret z
 
-	ld a, [hl]
+	ld a, [CurEnemyMove]
+	call PhysicalSpecialSplit
 	cp SPECIAL
 	jr nc, .Special
 

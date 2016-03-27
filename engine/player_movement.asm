@@ -312,7 +312,7 @@ DoPlayerMovement:: ; 80000
 	jr z, .go
 	ld a, STEP_BIKE
 .go
-	call DoStep
+	call .DoStep
 	scf
 	ret
 

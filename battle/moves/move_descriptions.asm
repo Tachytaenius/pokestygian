@@ -310,7 +310,7 @@ VicegripDescription:
 	next "ful pincers.@"
 
 GuillotineDescription:
-	db   "A one-hit KO,"
+	db   "A powerful"
 	next "pincer attack.@"
 
 RazorWindDescription:
@@ -390,7 +390,7 @@ FuryAttackDescription:
 	next "2-5 times.@"
 
 HornDrillDescription:
-	db   "A one-hit KO,"
+	db   "A powerful"
 	next "drill attack.@"
 
 TackleDescription:
@@ -622,8 +622,8 @@ EarthquakeDescription:
 	next "vs. flying foes.@"
 
 FissureDescription:
-	db   "A ground-type,"
-	next "one-hit KO attack.@"
+	db   "A powerful ground-"
+	next "type attack.@"
 
 DigDescription:
 	db   "1st turn: Burrow"

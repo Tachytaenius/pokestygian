@@ -9,7 +9,7 @@ trigger_def: MACRO
 ENDM
 
 	trigger_def POKECENTER_2F,                          wPokecenter2FTrigger
-	trigger_def KRIS_HOUSE_2F,                          wTradeCenterTrigger
+	trigger_def KRISS_HOUSE_2F,                          wTradeCenterTrigger
 	trigger_def COLOSSEUM,                              wColosseumTrigger
 	trigger_def TIME_CAPSULE,                           wTimeCapsuleTrigger
 	trigger_def POWER_PLANT,                            wPowerPlantTrigger

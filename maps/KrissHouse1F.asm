@@ -1,418 +1,855 @@
-const_value set 2
-	const KRISSHOUSE1F_MOM1
-	const KRISSHOUSE1F_MOM2
-	const KRISSHOUSE1F_MOM3
-	const KRISSHOUSE1F_MOM4
-	const KRISSHOUSE1F_POKEFAN_F
-
 KrissHouse1F_MapScriptHeader:
 .MapTriggers:
-	db 2
-
-	; triggers
-	dw UnknownScript_0x7a4d6, 0
-	dw UnknownScript_0x7a4d7, 0
+	db 0
 
 .MapCallbacks:
 	db 0
 
-UnknownScript_0x7a4d6:
-	end
-
-UnknownScript_0x7a4d7:
-	end
-
-UnknownScript_0x7a4d8:
-	setevent EVENT_GAVE_KURT_APRICORNS
-
-UnknownScript_0x7a4db:
-	playmusic MUSIC_MOM
-	showemote EMOTE_SHOCK, KRISSHOUSE1F_MOM1, 15
-	spriteface PLAYER, LEFT
-	checkevent EVENT_GAVE_KURT_APRICORNS
-	iffalse UnknownScript_0x7a4f2
-	applymovement KRISSHOUSE1F_MOM1, MovementData_0x7a5fc
-	jump UnknownScript_0x7a4f6
-
-UnknownScript_0x7a4f2:
-	applymovement KRISSHOUSE1F_MOM1, MovementData_0x7a5fe
-UnknownScript_0x7a4f6:
-	opentext
-	writetext UnknownText_0x7a604
-	buttonsound
-	stringtotext GearName, $1
-	scall UnknownScript_0x7a57e
-	setflag ENGINE_POKEGEAR
-	setflag ENGINE_PHONE_CARD
-	addcellnum PHONE_MOM
-	dotrigger $1
-	setevent EVENT_KRISS_HOUSE_MOM_1
-	clearevent EVENT_KRISS_HOUSE_MOM_2
-	writetext UnknownText_0x7a6bd
-	buttonsound
-	special Special_SetDayOfWeek
-UnknownScript_0x7a519:
-	writetext UnknownText_0x7a742
-	yesorno
-	iffalse UnknownScript_0x7a52a
-	special Special_InitialSetDSTFlag
-	yesorno
-	iffalse UnknownScript_0x7a519
-	jump UnknownScript_0x7a531
-
-UnknownScript_0x7a52a:
-	special Special_InitialClearDSTFlag
-	yesorno
-	iffalse UnknownScript_0x7a519
-UnknownScript_0x7a531:
-	writetext UnknownText_0x7a763
-	yesorno
-	iffalse UnknownScript_0x7a542
-	jump UnknownScript_0x7a53b
-
-UnknownScript_0x7a53b:
-	writetext UnknownText_0x7a7cb
-	buttonsound
-	jump UnknownScript_0x7a549
-
-UnknownScript_0x7a542:
-	writetext UnknownText_0x7a807
-	buttonsound
-	jump UnknownScript_0x7a549
-
-UnknownScript_0x7a549:
-	writetext UnknownText_0x7a850
-	waitbutton
-	closetext
-	checkevent EVENT_GAVE_KURT_APRICORNS
-	iftrue UnknownScript_0x7a55d
-	checkevent EVENT_RECEIVED_BALLS_FROM_KURT
-	iffalse UnknownScript_0x7a564
-	jump UnknownScript_0x7a56b
-
-UnknownScript_0x7a55d:
-	applymovement KRISSHOUSE1F_MOM1, MovementData_0x7a600
-	jump UnknownScript_0x7a56b
-
-UnknownScript_0x7a564:
-	applymovement KRISSHOUSE1F_MOM1, MovementData_0x7a602
-	jump UnknownScript_0x7a56b
-
-UnknownScript_0x7a56b:
-	special RestartMapMusic
-	spriteface KRISSHOUSE1F_MOM1, LEFT
-	end
-
-UnknownScript_0x7a572:
-	playmusic MUSIC_MOM
-	jump UnknownScript_0x7a4f6
-
-GearName:
-	db "#GEAR@"
-
-UnknownScript_0x7a57e:
-	jumpstd receiveitem
-	end
-
-MomScript_0x7a582:
-	faceplayer
-	setevent EVENT_RECEIVED_BALLS_FROM_KURT
-	checktriggers
-	iffalse UnknownScript_0x7a572
-	opentext
-	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
-	iftrue UnknownScript_0x7a5af
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iftrue UnknownScript_0x7a5b8
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue UnknownScript_0x7a5b5
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue UnknownScript_0x7a5a9
-	writetext UnknownText_0x7a8b5
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x7a5a9:
-	writetext UnknownText_0x7a8e5
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x7a5af:
-	writetext UnknownText_0x7a957
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x7a5b5:
-	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
-UnknownScript_0x7a5b8:
-	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	special Special_BankOfMom
-	waitbutton
-	closetext
-	end
-
-NeighborScript:
-	faceplayer
-	opentext
-	checkmorn
-	iftrue .MornScript
-	checkday
-	iftrue .DayScript
-	checknite
-	iftrue .NiteScript
-
-.MornScript
-	writetext NeighborMornIntroText
-	buttonsound
-	jump .Main
-
-.DayScript
-	writetext NeighborDayIntroText
-	buttonsound
-	jump .Main
-
-.NiteScript
-	writetext NeighborNiteIntroText
-	buttonsound
-	jump .Main
-
-.Main
-	writetext NeighborText
-	waitbutton
-	closetext
-	spriteface KRISSHOUSE1F_POKEFAN_F, RIGHT
-	end
-
-TVScript:
-	jumptext TVText
-
-StoveScript:
-	jumptext StoveText
-
-SinkScript:
-	jumptext SinkText
-
-FridgeScript:
-	jumptext FridgeText
-
-MovementData_0x7a5fc:
-	turn_head_right
-	step_end
-
-MovementData_0x7a5fe:
-	slow_step_right
-	step_end
-
-MovementData_0x7a600:
-	turn_head_left
-	step_end
-
-MovementData_0x7a602:
-	slow_step_left
-	step_end
-
-UnknownText_0x7a604:
-	text "Oh, <PLAYER>…! Our"
-	line "neighbor, PROF."
-
-	para "ELM, was looking"
-	line "for you."
-
-	para "He said he wanted"
-	line "you to do some-"
-	cont "thing for him."
-
-	para "Oh! I almost for-"
-	line "got! Your #MON"
-
-	para "GEAR is back from"
-	line "the repair shop."
-
-	para "Here you go!"
-	done
-
-UnknownText_0x7a6bd:
-	text "#MON GEAR, or"
-	line "just #GEAR."
-
-	para "It's essential if"
-	line "you want to be a"
-	cont "good trainer."
-
-	para "Oh, the day of the"
-	line "week isn't set."
-
-	para "You mustn't forget"
-	line "that!"
-	done
-
-UnknownText_0x7a742:
-	text "Is it Daylight"
-	line "Saving Time now?"
-	done
-
-UnknownText_0x7a763:
-	text "Come home to"
-	line "adjust your clock"
-
-	para "for Daylight"
-	line "Saving Time."
-
-	para "By the way, do you"
-	line "know how to use"
-	cont "the PHONE?"
-	done
-
-UnknownText_0x7a7cb:
-	text "Don't you just"
-	line "turn the #GEAR"
-
-	para "on and select the"
-	line "PHONE icon?"
-	done
-
-UnknownText_0x7a807:
-	text "I'll read the"
-	line "instructions."
-
-	para "Turn the #GEAR"
-	line "on and select the"
-	cont "PHONE icon."
-	done
-
-UnknownText_0x7a850:
-	text "Phone numbers are"
-	line "stored in memory."
-
-	para "Just choose a name"
-	line "you want to call."
-
-	para "Gee, isn't that"
-	line "convenient?"
-	done
-
-UnknownText_0x7a8b5:
-	text "PROF.ELM is wait-"
-	line "ing for you."
-
-	para "Hurry up, baby!"
-	done
-
-UnknownText_0x7a8e5:
-	text "So, what was PROF."
-	line "ELM's errand?"
-
-	para "…"
-
-	para "That does sound"
-	line "challenging."
-
-	para "But, you should be"
-	line "proud that people"
-	cont "rely on you."
-	done
-
-UnknownText_0x7a957:
-	text "<PLAYER>, do it!"
-
-	para "I'm behind you all"
-	line "the way!"
-	done
-
-NeighborMornIntroText:
-	text "Good morning,"
-	line "<PLAY_G>!"
-
-	para "I'm visiting!"
-	done
-
-NeighborDayIntroText:
-	text "Hello, <PLAY_G>!"
-	line "I'm visiting!"
-	done
-
-NeighborNiteIntroText:
-	text "Good evening,"
-	line "<PLAY_G>!"
-
-	para "I'm visiting!"
-	done
-
-NeighborText:
-	text "<PLAY_G>, have you"
-	line "heard?"
-
-	para "My daughter is"
-	line "adamant about"
-
-	para "becoming PROF."
-	line "ELM's assistant."
-
-	para "She really loves"
-	line "#MON!"
-	done
-
-StoveText:
-	text "Mom's specialty!"
-
-	para "CINNABAR VOLCANO"
-	line "BURGER!"
-	done
-
-SinkText:
-	text "The sink is spot-"
-	line "less. Mom likes it"
-	cont "clean."
-	done
-
-FridgeText:
-	text "Let's see what's"
-	line "in the fridge…"
-
-	para "FRESH WATER and"
-	line "tasty LEMONADE!"
-	done
-
-TVText:
-	text "There's a movie on"
-	line "TV: Stars dot the"
-
-	para "sky as two boys"
-	line "ride on a train…"
-
-	para "I'd better get"
-	line "rolling too!"
-	done
-
 KrissHouse1F_MapEventHeader:
 	; filler
 	db 0, 0
-
+	
 .Warps:
-	db 3
-	warp_def $7, $6, 2, NEW_BARK_TOWN
-	warp_def $7, $7, 2, NEW_BARK_TOWN
-	warp_def $0, $9, 1, KRISS_HOUSE_2F
+	db 2
+	warp_def $3, $7, 1, KRISS_HOUSE_2F
+	warp_def $5, $3, 1, NEW_BARK_TOWN
 
 .XYTriggers:
-	db 2
-	xy_trigger 0, $4, $8, $0, UnknownScript_0x7a4d8, $0, $0
-	xy_trigger 0, $4, $9, $0, UnknownScript_0x7a4db, $0, $0
+	db 0
 
 .Signposts:
-	db 4
-	signpost 1, 0, SIGNPOST_READ, StoveScript
-	signpost 1, 1, SIGNPOST_READ, SinkScript
-	signpost 1, 2, SIGNPOST_READ, FridgeScript
-	signpost 1, 4, SIGNPOST_READ, TVScript
-
+	db 2
+	signpost 3, 7, SIGNPOST_READ, .warp1read
+	signpost 6, 3, SIGNPOST_READ, .warp2read
+	
 .PersonEvents:
-	db 5
-	person_event SPRITE_MOM, 4, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript_0x7a582, EVENT_KRISS_HOUSE_MOM_1
-	person_event SPRITE_MOM, 2, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, 1, 0, PERSONTYPE_SCRIPT, 0, MomScript_0x7a582, EVENT_KRISS_HOUSE_MOM_2
-	person_event SPRITE_MOM, 4, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, 2, 0, PERSONTYPE_SCRIPT, 0, MomScript_0x7a582, EVENT_KRISS_HOUSE_MOM_2
-	person_event SPRITE_MOM, 2, 0, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, 4, 0, PERSONTYPE_SCRIPT, 0, MomScript_0x7a582, EVENT_KRISS_HOUSE_MOM_2
-	person_event SPRITE_POKEFAN_F, 4, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
+	db 8
+	person_event SPRITE_PAPER, 2, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .map1Actions, EVENT_GOT_OLD_ROD ;done
+	person_event SPRITE_POKEDEX, 3, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .magicBookActions, EVENT_GOT_A_POKEMON_FROM_ELM ;done
+	person_event SPRITE_POKE_BALL, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, .firstMonActions, EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE ;done
+	person_event SPRITE_PAPER, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .note1Actions, EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL ;done
+	person_event SPRITE_BOULDER, 5, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .blockedActions, EVENT_GOT_SUPER_ROD ;done
+	person_event SPRITE_N64, 5, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .ItemFragment_PokerusInfectionDevice1Actions, EVENT_MOUNT_MORTAR_2F_INSIDE_MAX_POTION ;done
+	person_event SPRITE_VIRTUAL_BOY, 1, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .pushButtonHealMonActions, -1 ;done
+	person_event SPRITE_FISHING_GURU, 2, 4, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_TREE, PERSONTYPE_SCRIPT, 0, .crystalBallActions, -1 
+
+.warp1read
+	jumptext .warp1text
+.warp2read
+	jumptext .warp2text
+.warp1text
+	text "Ladder up to"
+	line "initial room."
+	done
+.warp2text
+	text "Opening to"
+	line "square."
+	done
+.NotePalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00
+.PokeballPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/poke.pal"
+	RGB 00, 00, 00
+.boulderPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/boulder.pal"
+	RGB 00, 00, 00
+.GelPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/gel.pal"
+	RGB 00, 00, 00
+.lookAtNote
+	lb bc, BANK(NotePic), 6*7
+	ld hl, NotePic
+	
+	ld hl, .NotePalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.NotePalette)
+	ld [wPaletteBankBuffer], a
+	
+	jp .ok
+.lookAtBall
+	lb bc, BANK(BallPic), 6*7
+	ld hl, BallPic
+	
+	ld hl, .GelPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.GelPalette)
+	ld [wPaletteBankBuffer], a
+	
+	jr .ok
+.lookAtPoke
+	lb bc, BANK(PokePic), 6*7
+	ld hl, PokePic
+	ld hl, .PokeballPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.PokeballPalette)
+	ld [wPaletteBankBuffer], a
+	
+	jr .ok
+.lookAtBoulder
+	lb bc, BANK(BoulderPic), 6*7
+	ld hl, BoulderPic
+	
+	ld hl, .boulderPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.boulderPalette)
+	ld [wPaletteBankBuffer], a
+	
+	jr .ok
+.lookAtButton
+	lb bc, BANK(ButtonPic), 6*7
+	ld hl, ButtonPic
+	
+	ld hl, .boulderPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.boulderPalette)
+	ld [wPaletteBankBuffer], a
+	
+	jr .ok
+.lookAtBook
+	lb bc, BANK(BookPic), 6*7
+	ld hl, BookPic
+	
+	ld hl, .NotePalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.NotePalette)
+	ld [wPaletteBankBuffer], a
+	
+	jr .ok
+.lookAtGel
+	lb bc, BANK(GelPic), 6*7
+	ld hl, GelPic
+
+	ld hl, .GelPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.GelPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+	;jr .ok ;fallthrough
+.ok
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+	callba Itempic
+	ret
+.map1Actions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKmap
+	if_equal 2, .TCHmap
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKmap
+	if_equal 5, .INGmap
+	if_equal 6, .TKEmap
+	if_equal 7, .USEmap
+	end
+	
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "No response."
+	done
+
+.LOKmap
+	callasm .lookAtNote
+	waitbutton
+	jumptext .lookmap
+.lookmap
+	text "You see a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+	
+.ATKmap
+	opentext
+	writetext .destroymapQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_GOT_OLD_ROD
+	disappear 2
+	writetext .mapDestroyed
+	closetext
+	end
+	
+.destroymapQuestion
+	text "You are able to"
+	line "destroy the note."
+	cont "Do so?"
+	prompt
+
+.mapDestroyed
+	text "You destroy"
+	line "the note."
+	done
+
+.TCHmap
+	opentext
+	writetext .touchmapQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchmapText
+.touchmapText
+	text "You feel a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+	
+.touchmapQuestion
+	text "The note is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.USEmap
+	opentext
+	callasm .GoGreatBall
+	closetext
+	end
+.GoGreatBall
+	callba GreatBall
+	ret
+
+.readmapQuestion
+	text "Read the note?"
+	line "It's quite short."
+	prompt
+
+.TKEmap
+	opentext
+	writetext .takemapquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_GOT_OLD_ROD
+	disappear 2
+	giveitem POKE_BALL, 1
+	iffalse .oops
+	jumptext .takemaptext
+.takemapquestion
+	text "You're able to"
+	line "take the note."
+	prompt
+.takemaptext
+	text "Nothing happens"
+	line "as you take"
+	cont "the note."
+	done
+
+.note1Actions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKnote
+	if_equal 2, .TCHnote
+	if_equal 3, .TLKnote
+	if_equal 4, .LOKnote
+	if_equal 5, .INGnote
+	if_equal 6, .TKEnote
+	if_equal 7, .USEnote
+	end
+	
+.TLKnote
+	jumptext .talkNote
+.talkNote
+	text "No response."
+	done
+
+.LOKnote
+	callasm .lookAtNote
+	waitbutton
+	jumptext .lookNote
+.lookNote
+	text "You see a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+
+.INGnote
+	jumptext .ingestNoteNo
+.ingestNoteNo
+	text "That is not"
+	line "edible."
+	done
+	
+.ATKnote
+	opentext
+	writetext .destroyNoteQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_HEALED_MOOMOO
+	disappear 5
+	jumptext .noteDestroyed
+	
+.destroyNoteQuestion
+	text "You are able to"
+	line "destroy the note."
+	cont "Do so?"
+	prompt
+
+.noteDestroyed
+	text "You destroy"
+	line "the note."
+	done
+
+.classicNothing
+	text "Nothing happens."
+	done
+
+.TCHnote
+	opentext
+	writetext .touchNoteQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchNoteText
+.touchNoteText
+	text "You feel a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+	
+.touchNoteQuestion
+	text "The note is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.USEnote
+	opentext
+	callasm .GoPokeBall
+	closetext
+	end
+.GoPokeBall
+	callba PokeBall
+	ret
+.Done
+	closetext
+	end
+
+.TKEnote
+	opentext
+	writetext .takenotequestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
+	disappear 5
+	giveitem GREAT_BALL, 1
+	iffalse .oops
+	jumptext .takenotetext
+.takenotequestion
+	text "You are able to"
+	line "take the note."
+	prompt
+.takenotetext
+	text "Nothing happens"
+	line "as you take"
+	cont "the note."
+	done
+	
+.firstMonActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKmon
+	if_equal 2, .TCHmon
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKmon
+	if_equal 5, .INGmon
+	if_equal 6, .TKEmon
+	if_equal 7, .USEmon
+	end
+
+.alreadyGotDex
+	text "You already"
+	line "have a #dex."
+	done
+
+.USEmon
+	jumptext .cannotUse
+
+.ATKmon
+	jumptext .noAtk
+.noAtk
+	text "No! You may"
+	line "not! You are"
+	cont "able, though."
+	done
+
+.TCHmon
+	opentext
+	writetext .touchMonQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchedMon
+.touchedMon
+	text "You feel a"
+	line "smooth #"
+	para "ball. It seems to"
+	line "contain a level 5"
+	cont "larvitar."
+	done
+	
+.touchMonQuestion
+	text "The ball is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+	
+.LOKmon
+	callasm .lookAtPoke
+	waitbutton
+	jumptext .lookMonText
+.lookMonText
+	text "You see a"
+	line "metallic #"
+	cont "ball."
+	done
+
+.INGmon
+	jumptext .ingestmonNo
+.ingestmonNo
+	text "That is not"
+	line "edible."
+	done
+
+.TKEmon
+	opentext
+	writetext .monAble
+	checkcode VAR_PARTYCOUNT
+	if_equal PARTY_LENGTH, .partyfull
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
+	disappear 4
+	givepoke LARVITAR, 5
+	clearevent EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
+	appear 5
+	writetext .noteFound
+	closetext
+	jump .check
+.monAble
+	text "You are able to"
+	line "take the #"
+	cont "ball."
+	prompt
+.partyfull
+	jumptext .partytoofull
+.partytoofull
+	text "But your party is"
+	line "full!"
+	done
+	
+.noteFound
+	text "There's a note."
+	done
+	
+.magicBookActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKbook
+	if_equal 2, .TCHbook
+	if_equal 3, .TLKbook
+	if_equal 4, .LOKbook
+	if_equal 5, .INGbook
+	if_equal 6, .TKEbook
+	if_equal 7, .USEitem
+	end
+.ATKbook
+	jumptext .noAtk
+.TCHbook
+	opentext
+	writetext .touchBookQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchBookDesc
+.touchBookQuestion
+	text "The #dex is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.touchBookDesc
+	text "You feel the rough"
+	line "edges of a #-"
+	cont "dex."
+	done
+.TLKbook
+	jumptext .talkmap
+.LOKbook
+	callasm .lookAtBook
+	waitbutton
+	jumptext .lookBook
+.lookBook
+	text "You see a"
+	line "#dex."
+	done
+.INGbook
+	jumptext .ingestmapNo
+.TKEbook
+	opentext
+	writetext .ablebook
+	checkflag ENGINE_POKEDEX
+	iftrue .alreadyGotDex
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setflag ENGINE_POKEDEX
+	disappear 3
+	setevent EVENT_GOT_A_POKEMON_FROM_ELM
+	closetext
+	callasm .dexID
+	jump .check
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.ablebook
+	text "You are able to"
+	line "take the #dex."
+	prompt
+	
+.dexID
+	ld a, 1
+	ld [ScriptVar], a
+	ret
+	
+.blockedActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKblock
+	if_equal 2, .TCHblock
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKblock
+	if_equal 5, .INGmap
+	if_equal 6, .TKEblock
+	if_equal 7, .USEblock
+	end
+
+.ATKblock
+	jumptext .reckon
+.reckon
+	text "You reckon you"
+	line "would not be able"
+	para "to break this"
+	line "boulder."
+	done
+.TCHblock
+	opentext
+	writetext .touchquestion
+	yesorno
+	iffalse .Done
+	jumptext .touchBlockedDesc
+.touchquestion
+	text "The boulder is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.touchBlockedDesc
+	text "You feel a"
+	line "hard, craggy"
+	cont "rock's surface."
+	done
+.LOKblock
+	callasm .lookAtBoulder
+	waitbutton
+	jumptext .lookAtIt
+.lookAtIt
+	text "You see a"
+	line "giant boulder."
+	para "It blocks the way"
+	line "through the pass-"
+	cont "age behind it."
+	done
+
+.touchBlockReach
+	text "You are able to"
+	line "try to take the"
+	cont "boulder."
+	prompt
+
+.TKEblock
+	opentext
+	writetext .touchBlockReach
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	jumptext .failedToDoSo
+.failedToDoSo
+	text "It is too heavy"
+	line "to pick up."
+	done
+.USEblock
+	jumptext .cannotUse
+.cannotUse
+	text "There is no way"
+	line "to use that."
+	done
+.reachBlock
+	text "The boulder is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.ItemFragment_PokerusInfectionDevice1Actions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_MOUNT_MORTAR_2F_INSIDE_MAX_POTION
+	disappear 7
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You are able to"
+	line "destroy the #-"
+	cont "rus gels. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy"
+	line "the #rus gels."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The #rus gels"
+	line "are within reach."
+	cont "Touch them?"
+	prompt
+.touchItemText
+	text "You feel"
+	line "the smooth, wet"
+	para "and wobbly jelly-"
+	line "like surface of"
+	cont "the #rus gels."
+	done
+.LOKitem
+	callasm .lookAtGel
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see 2"
+	line "#rus gels."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "You must"
+	line "pick that up"
+	cont "first."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_MOUNT_MORTAR_2F_INSIDE_MAX_POTION
+	disappear 7
+	giveitem MAX_POTION, 2
+	iffalse .oops
+	jumptext .takeitemtext
+.takeitemquestion
+	text "You're able to"
+	line "take the #rus"
+	cont "gels."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the #rus gels."
+	done
+.pushButtonHealMonActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKmon
+	if_equal 2, .TCHbutton
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKbutton
+	if_equal 5, .INGmap
+	if_equal 6, .TKEno
+	if_equal 7, .USEbutton
+	end
+.TCHbutton
+	opentext
+	writetext .inReachButton
+	yesorno
+	iffalse .Done
+	jumptext .buttonTouch
+.inReachButton
+	text "The button is"
+	line "within reach."
+	cont "Touch it?"
+	prompt
+.buttonTouch
+	text "You feel a"
+	line "makeshift stone"
+	cont "button."
+	done
+.LOKbutton
+	callasm .lookAtButton
+	waitbutton
+	jumptext .lookButton
+.lookButton
+	text "You see a"
+	line "makeshift stone"
+	cont "button."
+	done
+.TKEno
+	jumptext .noAtk
+.USEbutton
+	opentext
+	writetext .buttonAble
+	yesorno
+	iffalse .Done
+	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
+	iffalse .noMon
+	special HealParty
+	jumptext .thyPartyWasHealed
+.noMon
+	jumptext .butThereIsNoParty
+.butThereIsNoParty
+	text "But you have"
+	line "no party to"
+	cont "heal."
+	done
+.buttonAble
+	text "The button is"
+	line "within reach."
+	cont "Press it?"
+	prompt
+.thyPartyWasHealed
+	text "Thy party was"
+	line "healed."
+	done
+.crystalBallActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKmon
+	if_equal 2, .TCHball
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKball
+	if_equal 5, .INGmap
+	if_equal 6, .TKEno
+	if_equal 7, .USEball
+	end
+.TCHball
+	opentext
+	writetext .inReachBall
+	yesorno
+	iffalse .Done
+	jumptext .ballTouch
+.inReachBall
+	text "The ball is"
+	line "within reach."
+	cont "Touch it?"
+	prompt
+.ballTouch
+	text "You feel a"
+	line "smooth crystal"
+	cont "ball's surface."
+	done
+.LOKball
+	callasm .lookAtBall
+	waitbutton
+	jumptext .lookBall
+.lookBall
+	text "You see a"
+	line "smooth crystal"
+	cont "ball."
+	done
+.USEball
+	opentext
+	writetext .ballAble
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	writetext .activate
+	special PokemonCenterPC
+	jump .Done
+.ballAble
+	text "You able to"
+	line "activate the"
+	cont "crystal ball."
+	prompt
+.activate
+	text "You activ-"
+	line "ate the crystal"
+	cont "ball."
+	prompt
+.doSo
+	text "Do so?"
+	prompt
+.check
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue .check2
+.end
+	end
+.check2
+	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
+	iffalse .end
+	setevent EVENT_GOT_SUPER_ROD
+	disappear 6
+	jumptext .okB
+.okB
+	text "The boulder dis-"
+	line "appeared!"
+	done

@@ -72,6 +72,15 @@ NewGame: ; 5b6b
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
 	call AreYouABoyOrAreYouAGirl
+	xor a
+	ld [CurPartySpecies], a
+	ld hl, OakText6
+	call PrintText
+	callba DrawIntroPlayerPic
+	ld b, SCGB_FRONTPICPALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+	call NamePlayer
 	call InitializeWorld
 	ld a, 1
 	ld [wPreviousLandmark], a
@@ -744,9 +753,6 @@ OakSpeech: ; 0x5f99
 
 	ld hl, OakText6
 	call PrintText
-	call NamePlayer
-	ld hl, OakText7
-	call PrintText
 	ret
 
 OakText1: ; 0x6045
@@ -1013,9 +1019,6 @@ Intro_PlacePlayerSprite: ; 61cd
 
 
 CrystalIntroSequence: ; 620b
-	callab Copyright_GFPresents
-	jr c, StartTitleScreen
-	callba CrystalIntro
 
 StartTitleScreen: ; 6219
 	ld a, [rSVBK]

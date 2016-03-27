@@ -436,7 +436,7 @@ TMCharText:: db "TM@" ; 1273
 TrainerCharText:: db "TRAINER@" ; 1276
 PCCharText:: db "PC@" ; 127e
 RocketCharText:: db "ROCKET@" ; 1281
-PlacePOKeText:: db "POKé@" ; 1288
+PlacePOKeText:: db "Poké@" ; 1288
 KougekiText:: db "こうげき@" ; 128d
 SixDotsCharText:: db "……@" ; 1292
 EnemyText:: db "Enemy @" ; 1295

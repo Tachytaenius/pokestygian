@@ -48,6 +48,13 @@ PokepicMenuDataHeader: ; 0x24547
 	dw NULL
 	db 1 ; default option
 
+MenuDataHeader_Person: ; 0x24547
+	db $40 ; flags
+	db 01, 01 ; start coords
+	db 10, 08 ; end coords
+	dw NULL
+	db 1 ; default option
+
 PaletteSetSeven::
 	ld a, [rSVBK]
 	push af
@@ -77,10 +84,8 @@ PaletteSetSeven::
 	ret
 	
 Itempic:: ; 244e3
-	call LoadStandardFont
-	ld hl, MenuDataHeader_0x24547
-	call CopyMenuDataHeader
-	ld hl, MenuDataHeader_0x24547
+	call LoadStandardFont 
+	ld hl, MenuDataHeader_Item
 	call CopyMenuDataHeader
 	call MenuBox
 	xor a
@@ -88,6 +93,7 @@ Itempic:: ; 244e3
 	ld a, [rSVBK]
 	push af
 	
+	call PaletteSetSeven
 	ld hl, VTiles1
 	ld a, [ItempicPointer]
 	ld d, a
@@ -108,9 +114,15 @@ Itempic:: ; 244e3
 	ld c, a
 	call Coord2Tile
 	ld a, $80
-	ld [hFillBox], a
+	ld [hGraphicStartTile], a
 	lb bc, 6, 7
 	jp finishPics
+MenuDataHeader_Item: ; 0x24547
+	db $40 ; flags
+	db 01, 01 ; start coords
+	db 09, 08 ; end coords
+	dw NULL
+	db 1 ; default option
 Personpic:: ; 244e3
 	call LoadStandardFont
 	ld hl, MenuDataHeader_Person
@@ -142,14 +154,14 @@ Personpic:: ; 244e3
 	ld c, a
 	call Coord2Tile
 	ld a, $80
-	ld [hFillBox], a
+	ld [hGraphicStartTile], a
 	lb bc, 6, 8
 	;fallthrough, no need to jp
 
 finishPics
 	ld a, 0
-	ld [wc2c6], a
-	predef FillBox
+	ld [wBoxAlignment], a
+	predef PlaceGraphic
 	call UpdateSprites
 	call ApplyTilemap
 	call WaitBGMap

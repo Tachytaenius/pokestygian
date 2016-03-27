@@ -3056,7 +3056,6 @@ PlayerMonFaintHappinessMod: ; 3d1aa
 	ld a, [wWhichMonFaintedFirst]
 	and a
 	ret z
-	ret ; ??????????
 ; 3d1f8
 
 AskUseNextPokemon: ; 3d1f8
@@ -6171,11 +6170,27 @@ MoveInfoBox: ; 3e6c8
 	and $3f
 	ld [StringBuffer1], a
 	call .PrintPP
-
+	ld a, [CurPlayerMove]
+	call PhysicalSpecialSplit
+	cp 2
+	jr nz, .other
+	cp 1
+	jr nz, .physical
+;.special
+	hlcoord 1, 9
+	ld de, .Special
+	call PlaceString
+	jr .continue
+.physical
+	hlcoord 1, 9
+	ld de, .Physical
+	call PlaceString
+	jr .continue
+.other
 	hlcoord 1, 9
 	ld de, .Type
 	call PlaceString
-
+.continue
 	hlcoord 7, 11
 	ld [hl], "/"
 
@@ -6192,17 +6207,16 @@ MoveInfoBox: ; 3e6c8
 .Disabled
 	db "Disabled!@"
 .Type
-	db "Type/@"
+	db "Other@"
+.Special
+	db "Magical@"
+.Physical
+	db "Physical@"
 ; 3e75f
 
 
 .PrintPP: ; 3e75f
 	hlcoord 5, 11
-	ld a, [wLinkMode] ; What's the point of this check?
-	cp LINK_MOBILE
-	jr c, .ok
-	hlcoord 5, 11
-.ok
 	push hl
 	ld de, StringBuffer1
 	lb bc, 1, 2
@@ -8360,12 +8374,6 @@ TextJump_GoodComeBack: ; 3f352
 	db "@"
 ; 3f357
 
-UnusedFunction_TextJump_ComeBack: ; 3f357
-; this function doesn't seem to be used
-	ld hl, TextJump_ComeBack
-	ret
-; 3f35b
-
 TextJump_ComeBack: ; 3f35b
 	text_jump Text_ComeBack
 	db "@"
@@ -9759,3 +9767,12 @@ BattleStartMessage: ; 3fc8b
 
 	ret
 ; 3fd26
+
+; Determine if a move is Physical, Special, or Status
+; INPUT: Move ID in register a
+; OUTPUT: Move Physical/Special/Status type in register a
+PhysicalSpecialSplit: ; Credit goes to Mateo for this whole system.
+	ld e, a
+	callba _PhysicalSpecialSplit
+	ld a, e
+	ret

@@ -17,7 +17,6 @@ Copyright_GFPresents: ; e4579
 	call GetSGBLayout
 	call SetPalettes
 	ld c, 10
-	call DelayFrames
 	callab Copyright
 	call WaitBGMap
 	ld c, 100

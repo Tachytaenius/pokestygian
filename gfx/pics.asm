@@ -487,8 +487,8 @@ SECTION "Pics 15", ROMX, BANK[PICS_15]
 
 MewtwoBackpic:       INCBIN "gfx/pics/mewtwo/back.2bpp.lz"
 PokemonProfPic:      INCBIN "gfx/trainers/oak.2bpp.lz"
-CalPic:              INCBIN "gfx/trainers/cal.2bpp.lz"
-SwimmerfPic:         INCBIN "gfx/trainers/swimmer_f.2bpp.lz"
+CalPic:
+SwimmerfPic:
 DiglettFrontpic:     INCBIN "gfx/pics/diglett/front.2bpp.lz"
 OfficerPic:          INCBIN "gfx/trainers/officer.2bpp.lz"
 MukBackpic:          INCBIN "gfx/pics/muk/back.2bpp.lz"

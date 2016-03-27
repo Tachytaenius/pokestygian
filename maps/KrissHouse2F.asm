@@ -1,145 +1,252 @@
-const_value set 2
-	const KRISSHOUSE2F_CONSOLE
-	const KRISSHOUSE2F_DOLL_1
-	const KRISSHOUSE2F_DOLL_2
-	const KRISSHOUSE2F_BIG_DOLL
-
 KrissHouse2F_MapScriptHeader:
 .MapTriggers:
-	db 0
+	db 2
+	
+	dw .Trigger1, 0
+	dw off2, 1
 
 .MapCallbacks:
-	db 2
+	db 1
 
 	; callbacks
+	dbw 1, SetSpawn
 
-	dbw MAPCALLBACK_NEWMAP, .InitializeRoom
-
-	dbw MAPCALLBACK_TILES, .SetSpawn
-
-.Null:
+.Trigger1:
+	checkevent EVENT_KRISS_HOUSE_MOM_1
+	iffalse StartGameIntro
+triggerswap2
+	dotrigger 1
+off2:
 	end
+StartGameIntro:
+	pause 30
+	showemote EMOTE_SHOCK, PLAYER, 30
+	showemote EMOTE_FISH, PLAYER, 15
+	opentext
+	writetext .StartGameIntroText1
+	closetext
+	applymovement PLAYER, .Left
+	pause 20
+	applymovement PLAYER, .Right
+	pause 20
+	applymovement PLAYER, .Up
+	pause 20
+	applymovement PLAYER, .Right
+	pause 20
+	showemote EMOTE_QUESTION, PLAYER, 30
+	setevent EVENT_KRISS_HOUSE_MOM_1
+	setevent EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
+	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	jump triggerswap2
 
-.InitializeRoom:
-	special ToggleDecorationsVisibility
-	setevent EVENT_IN_YOUR_ROOM
-	checkevent EVENT_INITIALIZED_EVENTS
-	iftrue .SkipInizialization
-	jumpstd initializeevents
+.StartGameIntroText1
+	text "<PLAYER>: Huh…?"
+	prompt
+
+.Left
+	turn_head_left
+	step_end
+	
+.Right
+	turn_head_right
+	step_end
+	
+.Up
+	turn_head_up
+	step_end
+
+.SkipInizialization
 	return
-
-.SkipInizialization:
-	return
-
-.SetSpawn:
-	special ToggleMaptileDecorations
+	
+SetSpawn
 	return
 
 
 	db 0, 0, 0 ; filler
-
-
-Doll1:
-	describedecoration 1
-
-Doll2:
-	describedecoration 2
-
-BigDoll:
-	describedecoration 3
-
-GameConsole:
-	describedecoration 4
-
-KrissHousePoster:
-	dw EVENT_KRISS_ROOM_POSTER, .Script
-.Script
-	describedecoration 0
-
-KrissHouseRadio:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .NormalRadio
-	checkevent EVENT_LISTENED_TO_INITIAL_RADIO
-	iftrue .AbbreviatedRadio
-	playmusic MUSIC_POKEMON_TALK
-	opentext
-	writetext KrisRadioText1
-	pause 45
-	writetext KrisRadioText2
-	pause 45
-	writetext KrisRadioText3
-	pause 45
-	musicfadeout MUSIC_NEW_BARK_TOWN, 16
-	writetext KrisRadioText4
-	pause 45
-	closetext
-	setevent EVENT_LISTENED_TO_INITIAL_RADIO
-	end
-
-.NormalRadio
-	jumpstd radio1
-
-.AbbreviatedRadio
-	opentext
-	writetext KrisRadioText4
-	pause 45
-	closetext
-	end
-
-KrissHouseBookshelf:
-	jumpstd picturebookshelf
-
-KrissHousePC:
-	opentext
-	special Special_KrissHousePC
-	iftrue .Warp
-	closetext
-	end
+	
 .Warp
 	warp NONE, $0, $0
 	end
 
-KrisRadioText1:
-	text "PROF.OAK'S #MON"
-	line "TALK! Please tune"
-	cont "in next time!"
-	done
-
-KrisRadioText2:
-	text "#MON CHANNEL!"
-	done
-
-KrisRadioText3:
-	text "This is DJ MARY,"
-	line "your co-host!"
-	done
-
-KrisRadioText4:
-	text "#MON!"
-	line "#MON CHANNEL…"
-	done
-
-KrissHouse2F_MapEventHeader:
+KrissHouse2F_MapEventHeader
 	; filler
 	db 0, 0
-
-.Warps:
+	
+.Warps
 	db 1
-	warp_def $0, $7, 3, KRISS_HOUSE_1F
+	warp_def $3, $5, 1, KRISS_HOUSE_1F
 
-.XYTriggers:
+.XYTriggers
 	db 0
 
-.Signposts:
-	db 4
-	signpost 1, 2, SIGNPOST_UP, KrissHousePC
-	signpost 1, 3, SIGNPOST_READ, KrissHouseRadio
-	signpost 1, 5, SIGNPOST_READ, KrissHouseBookshelf
-	signpost 0, 6, SIGNPOST_IFSET, KrissHousePoster
+.Signposts
+	db 1
+	signpost 3, 5, SIGNPOST_READ, .warp_1Read
 
-.PersonEvents:
-	db 4
-	person_event SPRITE_CONSOLE, 2, 4, SPRITEMOVEDATA_ITEM_TREE, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GameConsole, EVENT_KRISS_HOUSE_2F_CONSOLE
-	person_event SPRITE_DOLL_1, 4, 4, SPRITEMOVEDATA_ITEM_TREE, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Doll1, EVENT_KRISS_HOUSE_2F_DOLL_1
-	person_event SPRITE_DOLL_2, 4, 5, SPRITEMOVEDATA_ITEM_TREE, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Doll2, EVENT_KRISS_HOUSE_2F_DOLL_2
-	person_event SPRITE_BIG_DOLL, 1, 0, SPRITEMOVEDATA_BIGDOLL, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BigDoll, EVENT_KRISS_HOUSE_2F_BIG_DOLL
+.PersonEvents
+	db 1
+	person_event SPRITE_PAPER, 3, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .noteActions, EVENT_HEALED_MOOMOO
+
+.lookAtNote
+	lb bc, BANK(NotePic), 8*7
+	ld hl, NotePic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+	ld hl, .NotePalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.NotePalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.noteActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKnote
+	if_equal 2, .TCHnote
+	if_equal 3, .TLKnote
+	if_equal 4, .LOKnote
+	if_equal 5, .INGnote
+	if_equal 6, .TKEnote
+	if_equal 7, .USEnote
+	end
+	
+.TLKnote
+	jumptext .talkNote
+.talkNote
+	text "No response."
+	done
+
+.LOKnote
+	callasm .lookAtNote
+	waitbutton
+	jumptext .lookNote
+.lookNote
+	text "You see a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+
+.INGnote
+	jumptext .ingestNoteNo
+.ingestNoteNo
+	text "That is not"
+	line "edible."
+	done
+	
+.ATKnote
+	opentext
+	writetext .destroyNoteQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_HEALED_MOOMOO
+	disappear 2
+	jumptext .noteDestroyed
+	
+.destroyNoteQuestion
+	text "You are able to"
+	line "destroy the note."
+	cont "Do so?"
+	prompt
+
+.noteDestroyed
+	text "You destroy"
+	line "the note."
+	done
+
+.classicNothing
+	text "Nothing happens."
+	done
+
+.TCHnote
+	opentext
+	writetext .touchNoteQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchNoteText
+.touchNoteText
+	text "You feel a"
+	line "fresh piece of"
+	cont "reed parchment."
+	done
+	
+.touchNoteQuestion
+	text "The note is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.USEnote
+	opentext
+	callasm .GoMasterBall
+	closetext
+	end
+.GoMasterBall
+	callba MasterBall
+	ret
+
+.NotePalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00
+
+.readNoteQuestion
+	text "Read the note?"
+	line "It's very long."
+	prompt
+	
+.Done
+	closetext
+	end
+
+.takenotequestion
+	text "You are able to"
+	line "take the note."
+	cont "Do so?"
+	prompt
+.takenotetext
+	text "Nothing happens"
+	line "as you take"
+	cont "the note."
+	done
+.oops
+	jumptext .packfull
+.packfull
+	text "Your pack is"
+	line "full."
+	done
+
+.TKEnote
+	opentext
+	writetext .takemapquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_HEALED_MOOMOO
+	disappear 2
+	giveitem MASTER_BALL, 1
+	iffalse .oops
+	jumptext .takenotetext
+	
+.warp_1Read
+	jumptext .warp_1ReadText
+	
+.warp_1ReadText
+	text "Ladder down to"
+	line "storage cache."
+	done
+
+.takemapquestion
+	text "You are able to"
+	line "take the note."
+	prompt
+.doSo
+	text "Do so?"
+	prompt
