@@ -1,5 +1,5 @@
 
-	map_header_2 NewBarkTown, NEW_BARK_TOWN, $5, WEST | EAST
+	map_header_2 NewBarkTown, NEW_BARK_TOWN, $9, 0
 	connection west, ROUTE_29, Route29, 0, 0, 9, NEW_BARK_TOWN
 	connection east, ROUTE_27, Route27, 0, 0, 9, NEW_BARK_TOWN
 
@@ -50,9 +50,7 @@
 	map_header_2 Route26, ROUTE_26, $5, WEST
 	connection west, ROUTE_27, Route27, 45, 0, 9, ROUTE_26
 
-	map_header_2 Route27, ROUTE_27, $35, WEST | EAST
-	connection west, NEW_BARK_TOWN, NewBarkTown, 0, 0, 9, ROUTE_27
-	connection east, ROUTE_26, Route26, -3, 42, 12, ROUTE_27
+	map_header_2 Route27, ROUTE_27, $9, 0
 
 	map_header_2 Route28, ROUTE_28, $2c, WEST
 	connection west, SILVER_CAVE_OUTSIDE, SilverCaveOutside, -3, 6, 12, ROUTE_28

@@ -10434,36 +10434,6 @@ HOF_LoadTrainerFrontpic: ; 88840
 	ret
 
 DrawIntroPlayerPic: ; 88874
-; Draw the player pic at (6,4).
-
-; Get class
-	ld e, CHRIS
-	ld a, [PlayerGender]
-	bit 0, a
-	jr z, .GotClass
-	ld e, KRIS
-.GotClass
-	ld a, e
-	ld [TrainerClass], a
-
-; Load pic
-	ld de, ChrisPic
-	ld a, [PlayerGender]
-	bit 0, a
-	jr z, .GotPic
-	ld de, KrisPic
-.GotPic
-	ld hl, VTiles2
-	ld b, BANK(ChrisPic) ; BANK(KrisPic)
-	ld c, 7 * 7 ; dimensions
-	call Get2bpp
-
-; Draw
-	xor a
-	ld [hGraphicStartTile], a
-	hlcoord 6, 4
-	lb bc, 7, 7
-	predef PlaceGraphic
 	ret
 
 ChrisPic: ; 888a9

@@ -67,7 +67,7 @@ startshrineintro
 	db "<``>May we trade?<''>@"
 	db "<``>That is all.<''>@"
 	db "<``>What's your"
-		next "name?<''>@"
+	next "name?<''>@"
 
 .introduceMoe
 	text "???: My name is"

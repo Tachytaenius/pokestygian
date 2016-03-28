@@ -37,6 +37,8 @@ StartGameIntro:
 	setevent EVENT_KRISS_HOUSE_MOM_1
 	setevent EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
 	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	setevent EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
+	setevent EVENT_BEAT_YOUNGSTER_JOEY
 	jump triggerswap2
 
 .StartGameIntroText1

@@ -34,43 +34,10 @@ UpdateTime:: ; 5a7
 
 
 GetClock:: ; 5b7
-; store clock data in hRTCDayHi-hRTCSeconds
-
-; enable clock r/w
-	ld a, SRAM_ENABLE
-	ld [MBC3SRamEnable], a
-
-; clock data is 'backwards' in hram
-
-	call LatchClock
-	ld hl, MBC3SRamBank
-	ld de, MBC3RTC
-
-	ld [hl], RTC_S
-	ld a, [de]
-	and $3f
-	ld [hRTCSeconds], a
-
-	ld [hl], RTC_M
-	ld a, [de]
-	and $3f
-	ld [hRTCMinutes], a
-
-	ld [hl], RTC_H
-	ld a, [de]
-	and $1f
-	ld [hRTCHours], a
-
-	ld [hl], RTC_DL
-	ld a, [de]
-	ld [hRTCDayLo], a
-
-	ld [hl], RTC_DH
-	ld a, [de]
-	ld [hRTCDayHi], a
-
-; unlatch clock / disable clock r/w
-	call CloseSRAM
+	ld bc, hSeconds - hRTCDayHi
+	ld hl, hRTCDayHi
+	ld a, 0
+	call ByteFill
 	ret
 ; 5e8
 

@@ -15,18 +15,6 @@ _MainMenu: ; 5ae8
 ; 5b05
 
 PrintDayOfWeek: ; 5b05
-	push de
-	ld hl, .Days
-	ld a, b
-	call GetNthString
-	ld d, h
-	ld e, l
-	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .Day
-	call PlaceString
 	ret
 ; 5b1c
 
@@ -76,10 +64,6 @@ NewGame: ; 5b6b
 	ld [CurPartySpecies], a
 	ld hl, OakText6
 	call PrintText
-	callba DrawIntroPlayerPic
-	ld b, SCGB_FRONTPICPALS
-	call GetSGBLayout
-	call Intro_RotatePalettesLeftFrontpic
 	call NamePlayer
 	call InitializeWorld
 	ld a, 1
@@ -394,7 +378,6 @@ Continue: ; 5d65
 	call DelayFrames
 	callba JumpRoamMons
 	callba MysteryGift_CopyReceivedDecosToPC ; Mystery Gift
-	callba Function140ae ; time-related
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_LANCE
 	jr z, .SpawnAfterE4
@@ -531,7 +514,6 @@ DisplaySaveInfoOnSave: ; 5e9a
 DisplayNormalContinueData: ; 5e9f
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
-	call Continue_PrintGameTime
 	call LoadFontsExtra
 	call UpdateSprites
 	ret
@@ -540,7 +522,6 @@ DisplayNormalContinueData: ; 5e9f
 DisplayContinueDataWithRTCError: ; 5eaf
 	call Continue_LoadMenuHeader
 	call Continue_DisplayBadgesDexPlayerName
-	call Continue_UnknownGameTime
 	call LoadFontsExtra
 	call UpdateSprites
 	ret
@@ -573,10 +554,10 @@ Continue_LoadMenuHeader: ; 5ebf
 .MenuData2_Dex: ; 5ee1
 	db $00 ; flags
 	db 4 ; items
-	db "PLAYER@"
-	db "BADGES@"
-	db "#DEX@"
-	db "TIME@"
+	db "Player@"
+	db "Badges@"
+	db "#dex@"
+	db "@"
 ; 5efb
 
 .MenuDataHeader_NoDex: ; 5efb
@@ -590,10 +571,10 @@ Continue_LoadMenuHeader: ; 5ebf
 .MenuData2_NoDex: ; 5f03
 	db $00 ; flags
 	db 4 ; items
-	db "PLAYER <PLAYER>@"
-	db "BADGES@"
+	db "Player <PLAYER>@"
+	db "Badges@"
 	db " @"
-	db "TIME@"
+	db "@"
 ; 5f1c
 
 
@@ -622,17 +603,10 @@ Continue_DisplayBadgesDexPlayerName: ; 5f1c
 ; 5f40
 
 Continue_PrintGameTime: ; 5f40
-	decoord 9, 8, 0
-	add hl, de
-	call Continue_DisplayGameTime
 	ret
 ; 5f48
 
 Continue_UnknownGameTime: ; 5f48
-	decoord 9, 8, 0
-	add hl, de
-	ld de, .three_question_marks
-	call PlaceString
 	ret
 
 .three_question_marks
@@ -669,14 +643,7 @@ ENDC
 ; 5f84
 
 Continue_DisplayGameTime: ; 5f84
-	ld de, GameTimeHours
-	lb bc, 2, 3
-	call PrintNum
-	ld [hl], "<COLON>"
-	inc hl
-	ld de, GameTimeMinutes
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	ret
 ; 5f99
 
 
@@ -789,14 +756,11 @@ OakText7: ; 0x606f
 	db "@"
 
 NamePlayer: ; 0x6074
-	callba MovePlayerPicRight
 	callba ShowPlayerNamingChoices
 	ld a, [wMenuCursorY]
 	dec a
 	jr z, .NewName
 	call StorePlayerName
-	callba ApplyMonOrTrainerPals
-	callba MovePlayerPicLeft
 	ret
 
 .NewName
@@ -812,11 +776,6 @@ NamePlayer: ; 0x6074
 
 	xor a
 	ld [CurPartySpecies], a
-	callba DrawIntroPlayerPic
-
-	ld b, SCGB_FRONTPICPALS
-	call GetSGBLayout
-	call RotateThreePalettesLeft
 
 	ld hl, PlayerName
 	ld de, .Chris
@@ -1052,7 +1011,6 @@ StartTitleScreen: ; 6219
 	ld [hWY], a
 	ld b, SCGB_08
 	call GetSGBLayout
-	call UpdateTimePals
 	ld a, [wcf64]
 	cp $5
 	jr c, .ok

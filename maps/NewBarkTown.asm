@@ -275,6 +275,16 @@ NewBarkTown_MapEventHeader:
 	ld [ItempicPointer], a
 	ld a, l
 	ld [ItempicPointer + 1], a
+	
+	ld hl, .MoneyPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.MoneyPalette)
+	ld [wPaletteBankBuffer], a
+	
 	callba Itempic
 	ret
 .lookAtGGob
@@ -303,10 +313,6 @@ INCLUDE "gfx/stygian/bones.pal"
 .BonesPalette
 	RGB 31, 31, 31
 INCLUDE "gfx/stygian/bones.pal"
-	RGB 00, 00, 00
-.PotionPalette
-	RGB 31, 31, 31
-INCLUDE "gfx/stygian/gel.pal"
 	RGB 00, 00, 00
 .GGobPalette
 	RGB 31, 31, 31
@@ -356,6 +362,12 @@ firstpokeballsactions
 	line "smooth, round"
 	cont "glass bottles."
 	done
+
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/gel.pal"
+	RGB 00, 00, 00	
+
 .lookAtPotion
 	lb bc, BANK(GelPic), 6*7
 	ld hl, GelPic
@@ -363,6 +375,16 @@ firstpokeballsactions
 	ld [ItempicPointer], a
 	ld a, l
 	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
 	callba Itempic
 	ret
 .LOKitem
@@ -628,3 +650,33 @@ TLKmap
 	text "No response."
 	done
 skeletonScript
+	callasm StartMenuSecondary
+	if_equal 1, .ATKskeleton
+	if_equal 2, .TCHskeleton
+	if_equal 3, .TLKskeleton
+	if_equal 4, .LOKskeleton
+	if_equal 5, .INGskeleton
+	if_equal 6, .TKEskeleton
+	if_equal 7, .USEskeleton
+	end
+
+.ATKskeleton
+	
+
+.TCHskeleton
+
+
+.TLKskeleton
+
+
+.LOKskeleton
+
+
+.INGskeleton
+
+
+.TKEskeleton
+
+
+.USEskeleton
+	end

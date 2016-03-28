@@ -61,10 +61,7 @@ INCLUDE "gfx/stygian/boulder.pal"
 	RGB 31, 31, 31
 INCLUDE "gfx/stygian/gel.pal"
 	RGB 00, 00, 00
-.lookAtNote
-	lb bc, BANK(NotePic), 6*7
-	ld hl, NotePic
-	
+.lookAtNote	
 	ld hl, .NotePalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -74,11 +71,11 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.NotePalette)
 	ld [wPaletteBankBuffer], a
 	
+	lb bc, BANK(NotePic), 6*7
+	ld hl, NotePic
+	
 	jp .ok
 .lookAtBall
-	lb bc, BANK(BallPic), 6*7
-	ld hl, BallPic
-	
 	ld hl, .GelPalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -88,10 +85,11 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.GelPalette)
 	ld [wPaletteBankBuffer], a
 	
+	lb bc, BANK(BallPic), 6*7
+	ld hl, BallPic
+	
 	jr .ok
 .lookAtPoke
-	lb bc, BANK(PokePic), 6*7
-	ld hl, PokePic
 	ld hl, .PokeballPalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -101,11 +99,25 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.PokeballPalette)
 	ld [wPaletteBankBuffer], a
 	
+	lb bc, BANK(PokePic), 6*7
+	ld hl, PokePic
+	
 	jr .ok
 .lookAtBoulder
+	ld hl, .boulderPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+
+	ld a, BANK(.boulderPalette)
+	ld [wPaletteBankBuffer], a
+	
 	lb bc, BANK(BoulderPic), 6*7
 	ld hl, BoulderPic
 	
+	jr .ok
+.lookAtButton
 	ld hl, .boulderPalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -115,25 +127,11 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.boulderPalette)
 	ld [wPaletteBankBuffer], a
 	
-	jr .ok
-.lookAtButton
 	lb bc, BANK(ButtonPic), 6*7
 	ld hl, ButtonPic
 	
-	ld hl, .boulderPalette
-	ld a, h
-	ld [wPaletteHighBuffer], a
-	ld a, l
-	ld [wPaletteLowBuffer], a
-
-	ld a, BANK(.boulderPalette)
-	ld [wPaletteBankBuffer], a
-	
 	jr .ok
 .lookAtBook
-	lb bc, BANK(BookPic), 6*7
-	ld hl, BookPic
-	
 	ld hl, .NotePalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -143,11 +141,11 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.NotePalette)
 	ld [wPaletteBankBuffer], a
 	
+	lb bc, BANK(BookPic), 6*7
+	ld hl, BookPic
+	
 	jr .ok
 .lookAtGel
-	lb bc, BANK(GelPic), 6*7
-	ld hl, GelPic
-
 	ld hl, .GelPalette
 	ld a, h
 	ld [wPaletteHighBuffer], a
@@ -157,8 +155,9 @@ INCLUDE "gfx/stygian/gel.pal"
 	ld a, BANK(.GelPalette)
 	ld [wPaletteBankBuffer], a
 	
-	callba Itempic
-	ret
+	lb bc, BANK(GelPic), 6*7
+	ld hl, GelPic
+
 	;jr .ok ;fallthrough
 .ok
 	ld a, h
@@ -469,7 +468,9 @@ INCLUDE "gfx/stygian/gel.pal"
 	appear 5
 	writetext .noteFound
 	closetext
-	jump .check
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue .check
+	jumptext .nothingHappensMon
 .monAble
 	text "You are able to"
 	line "take the #"
@@ -539,8 +540,9 @@ INCLUDE "gfx/stygian/gel.pal"
 	disappear 3
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	closetext
-	callasm .dexID
-	jump .check
+	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
+	iftrue .check
+	jumptext .nothingHappensDex
 .oops
 	jumptext .packfull
 .packfull
@@ -551,12 +553,16 @@ INCLUDE "gfx/stygian/gel.pal"
 	text "You are able to"
 	line "take the #dex."
 	prompt
-	
-.dexID
-	ld a, 1
-	ld [ScriptVar], a
-	ret
-	
+.nothingHappensDex
+	text "Nothing happens as"
+	line "you take the #-"
+	cont "dex."
+	done
+.nothingHappensMon
+	text "Nothing happens as"
+	line "you take the #"
+	cont "ball."
+	done
 .blockedActions
 	showemote EMOTE_SAD, LAST_TALKED, 15
 	callasm StartMenuSecondary
@@ -790,6 +796,7 @@ INCLUDE "gfx/stygian/gel.pal"
 	if_equal 5, .INGmap
 	if_equal 6, .TKEno
 	if_equal 7, .USEball
+.end
 	end
 .TCHball
 	opentext
@@ -826,24 +833,18 @@ INCLUDE "gfx/stygian/gel.pal"
 	special PokemonCenterPC
 	jump .Done
 .ballAble
-	text "You able to"
+	text "You are able to"
 	line "activate the"
 	cont "crystal ball."
 	prompt
 .activate
-	text "You activ-"
-	line "ate the crystal"
-	cont "ball."
+	text "You activate the"
+	line "crystal ball."
 	prompt
 .doSo
 	text "Do so?"
 	prompt
 .check
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .check2
-.end
-	end
-.check2
 	checkevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
 	iffalse .end
 	setevent EVENT_GOT_SUPER_ROD

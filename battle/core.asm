@@ -3310,8 +3310,7 @@ LostBattle: ; 3d38e
 	hlcoord 0, 0
 	lb bc, 8, 21
 	call ClearBox
-	call BattleWinSlideInEnemyTrainerFrontpic
-
+	
 	ld c, 40
 	call DelayFrames
 
@@ -8631,7 +8630,7 @@ BattleIntro: ; 3f4dd
 	callba ClearBattleRAM
 	call InitEnemy
 	call BackUpVBGMap2
-	ld b, SCGB_BATTLE_GRAYSCALE
+	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
 	ld hl, rLCDC
 	res 6, [hl]
@@ -8729,7 +8728,6 @@ InitEnemyTrainer: ; 3f594
 	ld a, TRAINER_BATTLE
 	ld [wBattleMode], a
 
-	call IsJohtoGymLeader
 	jr nc, .done
 	xor a
 	ld [CurPartyMon], a
