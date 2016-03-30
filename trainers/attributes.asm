@@ -121,7 +121,7 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Erika
-	db X_ATTACK, 0 ; items
+	db POTION, 0 ; items
 	db 2 ; base reward
 	dw AI_BASIC + AI_CAUTIOUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES

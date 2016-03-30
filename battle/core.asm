@@ -2727,6 +2727,7 @@ WinTrainerBattle: ; 3cfa4
 	ld a, [wMonStatusFlags]
 	bit 0, a
 	jr nz, .skip_win_loss_text
+	call LoadStandardFont
 	call PrintWinLossText
 
 .skip_win_loss_text
@@ -6172,9 +6173,11 @@ MoveInfoBox: ; 3e6c8
 	ld a, [CurPlayerMove]
 	call PhysicalSpecialSplit
 	cp 2
-	jr nz, .other
+	jr nc, .other
 	cp 1
 	jr nz, .physical
+;	cp 0
+;	jr nz, .special
 ;.special
 	hlcoord 1, 9
 	ld de, .Special
@@ -6208,9 +6211,9 @@ MoveInfoBox: ; 3e6c8
 .Type
 	db "Other@"
 .Special
-	db "Magical@"
-.Physical
 	db "Physical@"
+.Physical ; Due to a "glitch in the matrix," the physical and special things got muddled up and thus had to be switched around.
+	db "Magical@"
 ; 3e75f
 
 
@@ -9538,7 +9541,6 @@ InitBattleDisplay: ; 3fb6c
 	call WaitBGMap
 	xor a
 	ld [hBGMapMode], a
-	callba BattleIntroSlidingPics
 	ld a, $1
 	ld [hBGMapMode], a
 	ld a, $31

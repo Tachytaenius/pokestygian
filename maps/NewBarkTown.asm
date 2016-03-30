@@ -16,7 +16,7 @@ NewBarkTown_MapEventHeader:
 	
 .XYTriggers:
 	db 1
-	xy_trigger 0, 15, 15, 0, .encounterBoris, 0, 0
+	xy_trigger 0, 15, 14, 0, .encounterBoris, 0, 0
 
 .Signposts:
 	db 2
@@ -24,13 +24,14 @@ NewBarkTown_MapEventHeader:
 	signpost 9, 3, SIGNPOST_READ, .gate2
 	
 .PersonEvents:
-	db 6
+	db 7
 	person_event SPRITE_SNES, 13, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .ItemFragment_MoneySix1actions, EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
-	person_event SPRITE_CAL, 14, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .goblinborisscriptactions, EVENT_ROUTE_30_YOUNGSTER_JOEY
-	person_event SPRITE_N64, 14, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, firstpokeballsactions, EVENT_GOT_CYNDAQUIL_FROM_ELM
-	person_event SPRITE_BROCK, 14, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, skeletonScript, EVENT_BEAT_YOUNGSTER_JOEY
-	person_event SPRITE_FISHING_GURU, 14, 15, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, bloodGreenScript, EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
+	person_event SPRITE_CAL, 14, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, .goblinborisscriptactions, EVENT_ROUTE_30_YOUNGSTER_JOEY
+	person_event SPRITE_N64, 14, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, firstpokeballsactions, EVENT_GOT_CYNDAQUIL_FROM_ELM
+	person_event SPRITE_MORTY, 13, 13, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, bonesScript, EVENT_BEAT_YOUNGSTER_JOEY
+	person_event SPRITE_FISHING_GURU, 14, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, bloodGreenScript, EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
 	person_event SPRITE_FISHING_GURU, 2, 16, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, bloodRedScript, -1
+	person_event SPRITE_MORTY, 14, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, skullScript, EVENT_GOT_TOTODILE_FROM_ELM
 
 .gate:
 	jumptext .gateread
@@ -44,16 +45,16 @@ NewBarkTown_MapEventHeader:
 	end
 
 .GreyGoblinBoris1SeenText:
-	text "???: Heh… heh…"
-	line "heh…"
+	text "???: <``>Heh… heh…"
+	line "heh…<''>"
 	prompt
 	
 .GreyGoblinBoris1BeatenText:
-	text "???: Ack!!"
+	text "???: [Ack!!]"
 	prompt
 	
 .ggbWhiteout:
-	text "???: Ha-ha!"
+	text "???: [Ha-ha!]"
 	prompt
 	
 .gate2:
@@ -196,13 +197,13 @@ NewBarkTown_MapEventHeader:
 	db "Provoke@"
 	db "Cancel@"
 .borisHuh
-	text "???: Huh!??!"
+	text "???: <``>Huh!??!<''>"
 	prompt
 .borisDead
-	text "???: Ack!!"
+	text "???: [Ack!!]"
 	done
 .borisWins
-	text "???: Ha-ha!!"
+	text "???: [Ha-ha!!]"
 	done
 .withinReachBoris
 	text "The grey goblin"
@@ -238,6 +239,8 @@ NewBarkTown_MapEventHeader:
 	clearevent EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
 	appear 6
 	clearevent EVENT_GOT_CYNDAQUIL_FROM_ELM
+	appear 8
+	clearevent EVENT_GOT_TOTODILE_FROM_ELM
 .leave
 	end
 .LoadDeadGrey
@@ -649,34 +652,258 @@ TLKmap
 .talkmap
 	text "No response."
 	done
-skeletonScript
+
+skullScript
+	showemote EMOTE_SAD, LAST_TALKED, 15
 	callasm StartMenuSecondary
-	if_equal 1, .ATKskeleton
-	if_equal 2, .TCHskeleton
-	if_equal 3, .TLKskeleton
-	if_equal 4, .LOKskeleton
-	if_equal 5, .INGskeleton
-	if_equal 6, .TKEskeleton
-	if_equal 7, .USEskeleton
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
 	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_GOT_TOTODILE_FROM_ELM
+	disappear 8
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You're able to"
+	line "destroy the"
+	cont "skull. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy the"
+	line "skull."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The skull is"
+	line "within reach."
+	cont "Touch it?"
+	prompt
+.touchItemText
+	text "You feel a"
+	line "skull."
+	done
 
-.ATKskeleton
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00	
+
+.lookAtPotion
+	lb bc, BANK(SkullPic), 6*7
+	ld hl, SkullPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
 	
-
-.TCHskeleton
-
-
-.TLKskeleton
-
-
-.LOKskeleton
-
-
-.INGskeleton
-
-
-.TKEskeleton
-
-
-.USEskeleton
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.LOKitem
+	callasm .lookAtPotion
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see a skull."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_GOT_TOTODILE_FROM_ELM
+	disappear 8
+	giveitem FULL_HEAL, 1
+	iffalse .oops
+	jumptext .takeitemtext
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.takeitemquestion
+	text "You are able to"
+	line "take the skull."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the skull."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.Done
+	closetext
 	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "No response."
+	done
+	
+bonesScript
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_BEAT_YOUNGSTER_JOEY
+	disappear 5
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You're able to"
+	line "destroy the"
+	cont "bones. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy the"
+	line "bones."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The bones are"
+	line "within reach."
+	cont "Touch them?"
+	prompt
+.touchItemText
+	text "You feel some"
+	line "bones."
+	done
+
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00	
+
+.lookAtPotion
+	lb bc, BANK(BonesPic), 6*7
+	ld hl, BonesPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.LOKitem
+	callasm .lookAtPotion
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see a pile of"
+	line "3 bones."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_BEAT_YOUNGSTER_JOEY
+	disappear 5
+	giveitem FULL_RESTORE, 3
+	iffalse .oops
+	jumptext .takeitemtext
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.takeitemquestion
+	text "You are able to"
+	line "take the bones."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the bones."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.Done
+	closetext
+	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "No response."
+	done

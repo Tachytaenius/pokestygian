@@ -39,10 +39,11 @@ StartGameIntro:
 	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
 	setevent EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
 	setevent EVENT_BEAT_YOUNGSTER_JOEY
+	setevent EVENT_GOT_TOTODILE_FROM_ELM
 	jump triggerswap2
 
 .StartGameIntroText1
-	text "<PLAYER>: Huh…?"
+	text "<PLAYER>: <``>Huh…?<''>"
 	prompt
 
 .Left

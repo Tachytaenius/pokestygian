@@ -243,7 +243,7 @@ FisherSprite: ; 1488c
 ; 14892
 
 FishingGuruSprite: ; 14892
-	sprite_header FishingGuruSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BLUE
+	sprite_header FishingGuruSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
 ; 14898
 
 ScientistSprite: ; 14898

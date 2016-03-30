@@ -125,7 +125,6 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	lb bc, 8, 10
 	ld a, $0
 	call FillBoxCGB
-	call FillBoxCGB
 	hlcoord 0, 0, AttrMap
 	lb bc, 4, 10
 	ld a, $2
@@ -141,9 +140,7 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	hlcoord 10, 0, AttrMap
 	lb bc, 7, 10
 	ld a, $1
-	hlcoord 0, 12, AttrMap
-	ld bc, 6 * SCREEN_WIDTH
-	ld a, $7
+	call FillBoxCGB
 	call ByteFill
 	ld hl, Palettes_979c
 	ld de, UnknOBPals + 2 palettes

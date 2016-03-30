@@ -705,7 +705,6 @@ BurnHeal:
 IceHeal:
 Awakening:
 ParlyzHeal:
-FullHeal:
 Psncureberry:
 Przcureberry:
 BurntBerry:
@@ -2044,6 +2043,7 @@ OpenBox: ; f769
 ; 0xf77d
 
 FullRestore:
+FullHeal:
 Brightpowder:
 Item19:
 LuckyPunch:

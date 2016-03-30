@@ -50,7 +50,7 @@ Item2Attributes:
 	item_attribute   200, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
 
 ; FULL RESTORE
-	item_attribute  3000, 0,                -1,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
+	item_attribute     1, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; MAX POTION
 	item_attribute  2500, 0,                -1,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
@@ -122,7 +122,7 @@ Item2Attributes:
 	item_attribute  1000, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
 
 ; FULL HEAL
-	item_attribute   600, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
+	item_attribute     1, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; REVIVE
 	item_attribute  1500, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY

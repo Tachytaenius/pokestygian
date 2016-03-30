@@ -345,8 +345,8 @@ FullRestoreDesc:
 	next "& status.@"
 
 MaxPotionDesc:
-	db   "Fully restores"
-	next "#mon HP.@"
+	db   "Gives a #mon"
+	next "#rus."
 
 HyperPotionDesc:
 	db   "Restores #mon"

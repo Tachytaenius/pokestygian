@@ -1,7 +1,5 @@
 
-	map_header_2 NewBarkTown, NEW_BARK_TOWN, $9, 0
-	connection west, ROUTE_29, Route29, 0, 0, 9, NEW_BARK_TOWN
-	connection east, ROUTE_27, Route27, 0, 0, 9, NEW_BARK_TOWN
+	map_header_2 NewBarkTown, NEW_BARK_TOWN, 9, 0
 
 	map_header_2 CherrygroveCity, CHERRYGROVE_CITY, $35, NORTH | EAST
 	connection north, ROUTE_30, Route30, 5, 0, 10, CHERRYGROVE_CITY
@@ -565,7 +563,7 @@
 	map_header_2 Route2NuggetSpeechHouse, ROUTE_2_NUGGET_SPEECH_HOUSE, $0, 0
 	map_header_2 Route2Gate, ROUTE_2_GATE, $0, 0
 	map_header_2 VictoryRoadGate, VICTORY_ROAD_GATE, $0, 0
-	map_header_2 ElmsLab, ELMS_LAB, $9, 0
+	map_header_2 ElmsLab, ELMS_LAB, 9, 0
 	map_header_2 KrissHouse1F, KRISS_HOUSE_1F, $9, 0
 	map_header_2 KrissHouse2F, KRISS_HOUSE_2F, $9, 0
 	map_header_2 KrissNeighborsHouse, KRISS_NEIGHBORS_HOUSE, $0, 0

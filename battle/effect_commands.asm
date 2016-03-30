@@ -3100,7 +3100,6 @@ EnemyAttackDamage: ; 353f6
 	ret z
 
 	ld a, [CurEnemyMove]
-	call PhysicalSpecialSplit
 	cp SPECIAL
 	jr nc, .Special
 
