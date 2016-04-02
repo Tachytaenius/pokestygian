@@ -699,7 +699,6 @@ TryReadSign: ; 96a38
 	jp nz, .dontread
 
 .read
-	call PlayTalkObject
 	ld hl, EngineBuffer4
 	ld a, [hli]
 	ld h, [hl]
@@ -743,7 +742,6 @@ TryReadSign: ; 96a38
 
 .thenread
 	push hl
-	call PlayTalkObject
 	pop hl
 	inc hl
 	inc hl

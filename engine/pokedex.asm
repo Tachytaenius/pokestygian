@@ -418,49 +418,16 @@ Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 	ret
 
 DexEntryScreen_ArrowCursorData: ; 402e8
-	db D_RIGHT | D_LEFT, 4
+	db D_RIGHT | D_LEFT, 3
 	dwcoord 1, 17
-	dwcoord 6, 17
 	dwcoord 11, 17
 	dwcoord 15, 17
 
 
 DexEntryScreen_MenuActionJumptable: ; 402f2
 	dw Pokedex_Page
-	dw .Area
 	dw .Cry
 	dw .Print
-
-.Area: ; 402fa
-	call Pokedex_BlackOutBG
-	xor a
-	ld [hSCX], a
-	call DelayFrame
-	ld a, $7
-	ld [hWX], a
-	ld a, $90
-	ld [hWY], a
-	call Pokedex_GetSelectedMon
-	ld a, [wDexCurrentLocation]
-	ld e, a
-	predef _Area
-	call Pokedex_BlackOutBG
-	call DelayFrame
-	xor a
-	ld [hBGMapMode], a
-	ld a, $90
-	ld [hWY], a
-	ld a, $5
-	ld [hSCX], a
-	call DelayFrame
-	call Pokedex_RedisplayDexEntry
-	call Pokedex_LoadSelectedMonTiles
-	call WaitBGMap
-	call Pokedex_GetSelectedMon
-	ld [CurPartySpecies], a
-	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
-	ret
 
 .Cry: ; 40340
 	call Pokedex_GetSelectedMon
@@ -1172,7 +1139,7 @@ Pokedex_DrawDexEntryScreenBG: ; 407fd
 .Weight: ; 4085c
 	db "WT   ???lb", $ff ; WT   ???lb
 .MenuItems: ; 40867
-	db $3b, " PAGE AREA CRY PRNT", $ff
+	db $3b, " Page      Cry Prnt", $ff
 
 Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	call Pokedex_FillBackgroundColor2

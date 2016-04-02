@@ -6,8 +6,7 @@ LoadBattleMenu: ; 24ef2
 	call InterpretBattleMenu
 	ld a, [wMenuCursorBuffer]
 	ld [wd0d2], a
-	call ExitMenu
-	ret
+	jp ExitMenu
 ; 24f0b
 
 SafariBattleMenu: ; 24f0b
@@ -28,8 +27,7 @@ Function24f19: ; 24f19
 	call _2DMenu
 	ld a, [wMenuCursorBuffer]
 	ld [wd0d2], a
-	call ExitMenu
-	ret
+	jp ExitMenu
 ; 24f2c
 
 BattleMenuDataHeader: ; 24f2c
@@ -49,10 +47,10 @@ MenuData_0x24f34: ; 0x24f34
 ; 0x24f3d
 
 Strings24f3d: ; 0x24f3d
-	db "FIGHT@"
+	db "Fight@"
 	db "<PKMN>@"
-	db "PACK@"
-	db "RUN@"
+	db "Pack@"
+	db "Run@"
 ; 24f4e
 
 MenuDataHeader_0x24f4e: ; 24f4e

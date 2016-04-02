@@ -1779,6 +1779,8 @@ wCurMessageIndex:: ds 1
 wd0f2::
 wMailboxCount:: ds 1
 wMailboxItems:: ds MAILBOX_CAPACITY
+wTameChance::
+wContinueBattle::
 wMailboxEnd:: ds 1 ; d1fe
 	ds 2
 

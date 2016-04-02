@@ -40,6 +40,7 @@ StartGameIntro:
 	setevent EVENT_REFUSED_TO_HELP_LANCE_AT_LAKE_OF_RAGE
 	setevent EVENT_BEAT_YOUNGSTER_JOEY
 	setevent EVENT_GOT_TOTODILE_FROM_ELM
+	clearevent EVENT_105
 	jump triggerswap2
 
 .StartGameIntroText1

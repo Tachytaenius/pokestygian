@@ -49,9 +49,6 @@ MainMenu: ; 49cdc
 	db "Continue@"
 	db "New game@"
 	db "Options@"
-	db "@"
-	db "@"
-	db "@"
 
 .Jumptable: ; 0x49d60
 	
@@ -207,67 +204,24 @@ MainMenuJoypadLoop: ; 49de4
 ; 49e09
 
 MainMenu_PrintCurrentTimeAndDay: ; 49e09
-	ld a, [wSaveFileExists]
-	and a
-	ret z
-	xor a
-	ld [hBGMapMode], a
-	call .PlaceBox
-	ld hl, Options
-	ld a, [hl]
-	push af
-	set NO_TEXT_SCROLL, [hl]
-	call .PlaceTime
-	pop af
-	ld [Options], a
-	ld a, $1
-	ld [hBGMapMode], a
 	ret
 ; 49e27
 
 
 .PlaceBox: ; 49e27
-	call CheckRTCStatus
-	and $80
-	jr nz, .TimeFail
-	hlcoord 0, 14
-	ld b, 2
-	ld c, 18
-	call TextBox
 	ret
 
 .TimeFail
-	call SpeechTextBox
 	ret
 ; 49e3d
 
 
 .PlaceTime: ; 49e3d
-	ld a, [wSaveFileExists]
-	and a
-	ret z
-	call CheckRTCStatus
-	and $80
-	jp nz, .PrintTimeNotSet
-	call UpdateTime
-	call GetWeekday
-	ld b, a
-	decoord 1, 15
-	call .PlaceCurrentDay
-	decoord 4, 16
-	ld a, [hHours]
-	ld c, a
-	callba PrintHour
-	ld [hl], ":"
-	inc hl
-	ld de, hMinutes
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
 	ret
 
 .min
 ; unreferenced
-	db "min.@"
+	db "@"
 ; 49e75
 
 .PrintTimeNotSet: ; 49e75
@@ -278,7 +232,7 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 ; 49e7f
 
 .TimeNotSet ; 49e7f
-	db "TIME NOT SET@"
+	db "@"
 ; 49e8c
 
 .UnusedText ; 49e8c
@@ -304,15 +258,15 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 ; 49ea8
 
 .Days
-	db "SUN@"
-	db "MON@"
-	db "TUES@"
-	db "WEDNES@"
-	db "THURS@"
-	db "FRI@"
-	db "SATUR@"
+	db "@"
+	db "@"
+	db "@"
+	db "@"
+	db "@"
+	db "@"
+	db "@"
 .Day
-	db "DAY@"
+	db "@"
 ; 49ed0
 
 Function49ed0: ; 49ed0

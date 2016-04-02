@@ -341,12 +341,12 @@ ParlyzHealDesc:
 	next "#mon.@"
 
 FullRestoreDesc:
-	db   "Fully restores HP"
-	next "& status.@"
+	db   "The bodily struct-"
+	next "ure of a dead one.@"
 
 MaxPotionDesc:
 	db   "Gives a #mon"
-	next "#rus."
+	next "#rus.@"
 
 HyperPotionDesc:
 	db   "Restores #mon"
@@ -366,7 +366,7 @@ EscapeRopeDesc:
 
 RepelDesc:
 	db   "Repels weak #-"
-	next "MON for 100 steps.@"
+	next "mon for 100 steps.@"
 
 MaxElixerDesc:
 	db   "Fully restores the"
@@ -436,8 +436,8 @@ PokeDollDesc:
 	next "a wild #mon.@"
 
 FullHealDesc:
-	db   "Eliminates all"
-	next "status problems.@"
+	db   "The casing for a"
+	next "dead one's brain.@"
 
 ReviveDesc:
 	db   "Restores a fainted"
@@ -453,11 +453,11 @@ GuardSpecDesc:
 
 SuperRepelDesc:
 	db   "Repels weak #-"
-	next "MON for 200 steps.@"
+	next "mon for 200 steps.@"
 
 MaxRepelDesc:
 	db   "Repels weak #-"
-	next "MON for 250 steps.@"
+	next "mon for 250 steps.@"
 
 DireHitDesc:
 	db   "Ups critical hit"
@@ -781,8 +781,8 @@ LuckyEggDesc:
 	next "points. (HOLD)@"
 
 CardKeyDesc:
-	db   "Opens shutters in"
-	next "the RADIO TOWER.@"
+	db   "Use this to smash"
+	next "rocks. (L1)@"
 
 MachinePartDesc:
 	db   "A machine part for"

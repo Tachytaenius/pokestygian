@@ -517,7 +517,7 @@ StartMenu_Pack: ; 1295b
 ; 12976
 
 
-StartMenu_Pokemon: ; 12976
+StartMenu_Pokemon:: ; 12976
 
 	ld a, [PartyCount]
 	and a

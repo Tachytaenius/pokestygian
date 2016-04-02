@@ -124,7 +124,7 @@
 	db "Revival herb@"
 	db "Hard stone@"
 	db "Lucky egg@"
-	db "Card key@"
+	db "Rock Hammer@" ; card key
 	db "Machine part@"
 	db "Egg ticket@"
 	db "Lost item@"

@@ -35,8 +35,7 @@
 	connection west, ROUTE_42, Route42, 0, 0, 9, MAHOGANY_TOWN
 	connection east, ROUTE_44, Route44, 0, 0, 9, MAHOGANY_TOWN
 
-	map_header_2 LakeofRage, LAKE_OF_RAGE, $5, SOUTH
-	connection south, ROUTE_43, Route43, 5, 0, 10, LAKE_OF_RAGE
+	map_header_2 LakeofRage, LAKE_OF_RAGE, 9, 0
 
 	map_header_2 BlackthornCity, BLACKTHORN_CITY, $71, SOUTH | WEST
 	connection south, ROUTE_45, Route45, 0, 0, 10, BLACKTHORN_CITY

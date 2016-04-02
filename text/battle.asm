@@ -299,7 +299,7 @@ BattleText_CantEscape2: ; 0x80b3b
 
 BattleText_TheresNoEscapeFromTrainerBattle: ; 0x80b49
 	text "You try to run…"
-	line "But the enemy"
+	line "but the enemy"
 	cont "blocks the way!"
 	prompt
 

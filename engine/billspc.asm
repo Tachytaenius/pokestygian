@@ -243,10 +243,10 @@ BillsPCDepositMenuDataHeader: ; 0xe253d (38:653d)
 .MenuData2: ; 0xe2545 (38:6545)
 	db $80 ; flags
 	db 4 ; items
-	db "DEPOSIT@"
-	db "STATS@"
-	db "RELEASE@"
-	db "CANCEL@"
+	db "Deposit@"
+	db "Stats@"
+	db "Release@"
+	db "Cancel@"
 ; 0xe2564 (38:6564)
 
 BillsPC_ClearThreeBoxes: ; e2564
@@ -507,10 +507,10 @@ endr
 .MenuData: ; 0xe2739
 	db $80 ; flags
 	db 4 ; items
-	db "WITHDRAW@"
-	db "STATS@"
-	db "RELEASE@"
-	db "CANCEL@"
+	db "Withdraw@"
+	db "Stats@"
+	db "Release@"
+	db "Cancel@"
 ; 0xe2759
 
 _MovePKMNWithoutMail: ; e2759
@@ -733,9 +733,9 @@ endr
 .MenuData2: ; 0xe28cb
 	db $80 ; flags
 	db 3 ; items
-	db "MOVE@"
-	db "STATS@"
-	db "CANCEL@"
+	db "Move@"
+	db "Stats@"
+	db "CanceL@"
 ; 0xe28df
 
 .PrepInsertCursor: ; e28df
@@ -2302,7 +2302,7 @@ PCString_Bye: db "Bye,@"
 PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
 PCString_Non: db "Non.@"
-PCString_BoxFull: db "The BOX is full.@"
+PCString_BoxFull: db "The box is full.@"
 PCString_PartyFull: db "The party's full!@"
 PCString_NoReleasingEGGS: db "No releasing EGGS!@"
 ; e35aa
@@ -2584,10 +2584,10 @@ BillsPC_ChangeBoxSubmenu: ; e36f9 (38:76f9)
 .MenuData2: ; 0xe3783
 	db $80 ; flags
 	db 4 ; items
-	db "SWITCH@"
-	db "NAME@"
-	db "PRINT@"
-	db "QUIT@"
+	db "Switch@"
+	db "Name@"
+	db "Print@"
+	db "Quit@"
 ; 0xe379c
 
 BillsPC_PlaceChooseABoxString: ; e379c (38:779c)
@@ -2596,7 +2596,7 @@ BillsPC_PlaceChooseABoxString: ; e379c (38:779c)
 ; e37a1 (38:77a1)
 
 .ChooseABox: ; e37a1
-	db "Choose a BOX.@"
+	db "Choose a box.@"
 ; e37af
 
 BillsPC_PlaceWhatsUpString: ; e37af (38:77af)

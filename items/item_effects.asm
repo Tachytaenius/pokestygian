@@ -214,6 +214,7 @@ MasterBall::
 	ld hl, .text_
 	call PrintText
 	ld hl, .continue
+	call PrintText
 	call YesNoBox
 	jr c, .cancel
 	ld hl, .text__
@@ -237,7 +238,7 @@ MasterBall::
 	prompt
 
 .text
-	text "<``>To whom it may"
+	text "To whom it may"
 	line "concern, know that"
 	para "you have been put"
 	line "here with a benign"
@@ -248,11 +249,11 @@ MasterBall::
 	para "off on the sur-"
 	line "face, for the Arm-"
 	para "ageddon has"
-	line "struck.<''>"
+	line "struck."
 	prompt
 
 .text_
-	text "<``>Firstly, when this"
+	text "Firstly, when this"
 	line "note speaks of the"
 	para "surface, it means"
 	line "as opposed to your"
@@ -272,11 +273,11 @@ MasterBall::
 	line "upturned the land."
 	para "Clouds fell, laden"
 	line "with the stench of"
-	cont "evil.<''>"
+	cont "evil."
 	prompt
 
 .text__
-	text "<``>Certainly, some"
+	text "Certainly, some"
 	line "foul evil was at"
 	para "work here. What,"
 	line "not even our most"
@@ -296,7 +297,7 @@ MasterBall::
 	line "ople at our shrine"
 	para "of knowledge, on"
 	line "this floor of the"
-	cont "Abyss.<''>"
+	cont "Abyss."
 	prompt
 	
 .finish
@@ -332,7 +333,7 @@ GreatBall::
 	prompt
 
 .text
-	text "<``>Press this button"
+	text "Press this button"
 	line "to heal all your"
 	para "#mon. Know that"
 	line "it cannot be moved"
@@ -343,7 +344,7 @@ GreatBall::
 	para "there to access"
 	line "Magincia or"
 	para "Jhelom, two useful"
-	line "sub-worlds.<''>"
+	line "sub-worlds."
 	prompt
 
 .finish
@@ -1997,13 +1998,6 @@ Squirtbottle: ; f73e
 	ret
 ; f745
 
-
-CardKey: ; f745
-	callba _CardKey
-	ret
-; f74c
-
-
 BasementKey: ; f74c
 	callba _BasementKey
 	ret
@@ -2134,7 +2128,7 @@ UpGrade:
 ItemB0:
 RainbowWing:
 ItemB3:
-TeruSama: ; f77d
+TeruSama:
 	jp IsntTheTimeMessage
 ; f780
 
@@ -2144,6 +2138,7 @@ Play_SFX_FULL_HEAL: ; f780
 	ld de, SFX_FULL_HEAL
 	call WaitPlaySFX
 	pop de
+CardKey:
 	ret
 ; f789
 

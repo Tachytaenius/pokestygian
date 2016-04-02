@@ -296,14 +296,13 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 	call PlaceString
 	hlcoord 0, 12
 	lb bc, 4, 18
-	call TextBox
 	call Pokegear_UpdateClock
 	ret
 
 ; 90e36 (24:4e36)
 
 .switch
-	db " SWITCH▶@"
+	db " Switch▶@"
 ; 90e3f
 
 .Map: ; 90e3f
@@ -505,18 +504,6 @@ PokegearClock_Joypad: ; 90f3e (24:4f3e)
 	ret
 
 Pokegear_UpdateClock: ; 90f86 (24:4f86)
-	hlcoord 3, 5
-	lb bc, 5, 14
-	call ClearBox
-	ld a, [hHours]
-	ld b, a
-	ld a, [hMinutes]
-	ld c, a
-	decoord 6, 8
-	callba PrintHoursMins
-	ld hl, .DayText
-	bccoord 6, 6
-	call PlaceWholeStringInBoxAtOnce
 	ret
 
 ; 90fa8 (24:4fa8)
@@ -524,7 +511,6 @@ Pokegear_UpdateClock: ; 90f86 (24:4f86)
 	db "ごご@"
 
 .DayText: ; 0x90faf
-	text_jump UnknownText_0x1c5821
 	db "@"
 
 ; 0x90fb4
@@ -566,7 +552,7 @@ PokegearMap_KantoMap: ; 90fe9 (24:4fe9)
 	jr PokegearMap_ContinueMap
 
 PokegearMap_JohtoMap: ; 90fee (24:4fee)
-	ld d, SILVER_CAVE
+	ld d, CYANWOOD_CITY
 	ld e, NEW_BARK_TOWN
 PokegearMap_ContinueMap: ; 90ff2 (24:4ff2)
 	ld hl, hJoyLast
@@ -660,7 +646,7 @@ PokegearMap_InitPlayerIcon: ; 9106a
 	ld a, [PlayerGender]
 	bit 0, a
 	jr z, .got_gender
-	ld b, SPRITE_ANIM_INDEX_BLUE_WALK
+	ld b, SPRITE_ANIM_INDEX_RED_WALK
 .got_gender
 	ld a, b
 	call _InitSpriteAnimStruct
@@ -2632,7 +2618,7 @@ _Area: ; 91d11
 ; 91e16
 
 .String_SNest:
-	db "'S NEST@"
+	db "'s nest@"
 ; 91e1e
 
 .GetAndPlaceNest: ; 91e1e
@@ -2880,7 +2866,7 @@ TownMapPals: ; 91f13
 
 TownMapPalMap:
 	dn 1, 1, 2, 1, 2, 2, 0, 0, 1, 1, 1, 3, 5, 4, 5, 4
-	dn 1, 1, 2, 1, 2, 2, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0
+	dn 1, 1, 2, 1, 2, 2, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0
 	dn 1, 1, 2, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	dn 0, 0, 0, 0, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0
 	dn 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3

@@ -65,12 +65,12 @@ PokemonCenterPC: ; 1559a
 	db -1
 
 	; before Hall Of Fame
-	db  4 ; items
+	db  3 ; items
 	db  1, 0, 4 ; bill's, player's, oak's, turn off
 	db -1
 
 	; postgame
-	db  5 ; items
+	db  3 ; items
 	db  1, 0, 4 ; bill's, player's, oak's, hall of fame, turn off
 	db -1
 ; 1563e

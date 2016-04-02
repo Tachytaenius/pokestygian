@@ -200,7 +200,7 @@ MAP_NONE   EQU 0
 	mapgroup ROUTE_43_MAHOGANY_GATE,                      4,  5 ;  3
 	mapgroup ROUTE_43_GATE,                               4,  5 ;  4
 	mapgroup ROUTE_43,                                   27, 10 ;  5
-	mapgroup LAKE_OF_RAGE,                               18, 20 ;  6
+	mapgroup LAKE_OF_RAGE, 18, 20
 
 	newgroup                                                    ; 10
 

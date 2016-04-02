@@ -97,12 +97,67 @@ WindowScript:
 	farjumptext WindowText
 
 TVScript:
-	opentext
-	farwritetext TVText
-	waitbutton
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, ATKno
+	if_equal 2, .TCHankh
+	if_equal 3, TLKno
+	if_equal 4, .LOKankh
+	if_equal 5, INGno
+	if_equal 6, TKEno
+	if_equal 7, USEno
+	end
+.Done
 	closetext
 	end
+.TCHankh
+	opentext
+	writetext .reachAnkh
+	yesorno
+	iffalse .Done
+	jumptext .touchAnkh
+.touchAnkh
+	text "You feel an ankh"
+	line "shrine's smooth"
+	cont "metal surface."
+	done
+.reachAnkh
+	text "The ankh shrine"
+	line "is within your"
+	para "reach of touch."
+	line "Touch it?"
+	prompt
+.LOKankh
+	callasm .lookAtAnkh
+	waitbutton
+	jumptext .seeAnAnkh
+.seeAnAnkh
+	text "You see an"
+	line "ankh shrine."
+	done
+.lookAtAnkh
+	lb bc, BANK(AnkhPic), 6*8
+	ld hl, AnkhPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
 
+	ld hl, .BloodGreenPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.BloodGreenPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.BloodGreenPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/ankh.pal"
+	RGB 00, 00, 00
 HomepageScript:
 	farjumptext HomepageText
 
@@ -121,8 +176,98 @@ Radio2Script:
 	closetext
 	end
 
-TrashCanScript: ; 0xbc1a5
-	farjumptext TrashCanText
+TrashCanScript: ; ankh banner
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, ATKno
+	if_equal 2, .TCHbanner
+	if_equal 3, TLKno
+	if_equal 4, .LOKbanner
+	if_equal 5, INGno
+	if_equal 6, TKEno
+	if_equal 7, USEno
+	end
+.Done
+	closetext
+	end
+.TCHbanner
+	opentext
+	writetext .reachbanner
+	yesorno
+	iffalse .Done
+	jumptext .touchbanner
+.touchbanner
+	text "You feel a cloth"
+	line "bannner."
+	done
+.reachbanner
+	text "The ankh banner"
+	line "is within your"
+	para "reach of touch."
+	line "Touch it?"
+	prompt
+.LOKbanner
+	callasm .lookAtBanner
+	waitbutton
+	jumptext .seeABanner
+.seeABanner
+	text "You see an"
+	line "ankh banner."
+	done
+.lookAtBanner
+	lb bc, BANK(BannerPic), 6*8
+	ld hl, BannerPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .BloodGreenPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.BloodGreenPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.BloodGreenPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/banner.pal"
+	RGB 00, 00, 00
+
+TLKno
+	jumptext .noResponse
+.noResponse
+	text "No response."
+	done
+ATKno
+	jumptext .noAtk
+.noAtk
+	text "No! You may"
+	line "not! You are"
+	cont "able, though."
+	done
+INGno
+	jumptext .ingestNo
+.ingestNo
+	text "That is not"
+	line "edible."
+	done
+TKEno
+	jumptext .noTke
+.noTke
+	text "You are unable"
+	line "to take that."
+	prompt
+USEno
+	jumptext .cannotUse
+.cannotUse
+	text "There is no way"
+	line "to use that."
+	done
 
 PCScript:
 	opentext
@@ -130,12 +275,102 @@ PCScript:
 	closetext
 	end
 
-ElevatorButtonScript:
-	playsound SFX_READ_TEXT_2
-	pause 15
-	playsound SFX_ELEVATOR_END
+ElevatorButtonScript: ; you're a plant now
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKblock
+	if_equal 2, .TCHblock
+	if_equal 3, .TLKplant
+	if_equal 4, .LOKblock
+	if_equal 5, .INGplant
+	if_equal 6, .TKEblock
+	if_equal 7, .USEblock
 	end
+ 
+.ATKblock
+	jumptext .reckon
+.reckon
+	text "It's a very tough"
+	line "plant, this."
+	para "You reckon you'd"
+	line "be unable to break"
+	cont "it."
+	done
+.TCHblock
+	opentext
+	writetext .touchquestion
+	yesorno
+	iffalse .Done
+	jumptext .touchBlockedDesc
+.touchquestion
+	text "The plant is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.touchBlockedDesc
+	text "You feel a tough,"
+	line "strong plant."
+	done
+.LOKblock
+	callasm .lookAtBoulder
+	waitbutton
+	jumptext .lookAtIt
+.lookAtIt
+	text "You see a"
+	line "plant."
+	done
 
+.touchBlockReach
+	text "It is rooted deep"
+	line "into the ground."
+	prompt
+.Done
+	closetext
+	end
+.TKEblock
+	opentext
+	writetext .touchBlockReach
+	closetext
+	end
+.USEblock
+	jumptext .cannotUse
+.cannotUse
+	text "There is no way"
+	line "to use that."
+	done
+.INGplant
+	jumptext .inedible
+.inedible
+	text "That is inedible."
+	done
+.TLKplant
+	jumptext .noResponse
+.noResponse
+	text "No response."
+	done
+.lookAtBoulder
+	lb bc, BANK(PlantPic), 6*8
+	ld hl, PlantPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .BloodGreenPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.BloodGreenPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.BloodGreenPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bloodGreen.pal"
+	RGB 00, 00, 00
 StrengthBoulderScript:
 	farjump AskStrengthScript
 
@@ -149,51 +384,213 @@ MartSignScript
 	farjumptext MartSignText
 
 DayToTextScript:
-	checkcode VAR_WEEKDAY
-	if_equal MONDAY, .Monday
-	if_equal TUESDAY, .Tuesday
-	if_equal WEDNESDAY, .Wednesday
-	if_equal THURSDAY, .Thursday
-	if_equal FRIDAY, .Friday
-	if_equal SATURDAY, .Saturday
-	stringtotext .SundayText, 0
+; green blood stain
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKblock
+	if_equal 2, .TCHblock
+	if_equal 3, TLKmap
+	if_equal 4, .LOKblock
+	if_equal 5, INGmap
+	if_equal 6, .TKEblock
+	if_equal 7, .USEblock
 	end
-.Monday
-	stringtotext .MondayText, 0
+.Done
+	closetext
 	end
-.Tuesday
-	stringtotext .TuesdayText, 0
-	end
-.Wednesday
-	stringtotext .WednesdayText, 0
-	end
-.Thursday
-	stringtotext .ThursdayText, 0
-	end
-.Friday
-	stringtotext .FridayText, 0
-	end
-.Saturday
-	stringtotext .SaturdayText, 0
-	end
-.SundayText
-	db "SUNDAY@"
-.MondayText
-	db "MONDAY@"
-.TuesdayText
-	db "TUESDAY@"
-.WednesdayText
-	db "WEDNESDAY@"
-.ThursdayText
-	db "THURSDAY@"
-.FridayText
-	db "FRIDAY@"
-.SaturdayText
-	db "SATURDAY@"
+
+.ATKblock
+	jumptext .reckon
+.reckon
+	text "You reckon you"
+	line "would not be able"
+	para "to clean off this"
+	line "blood stain."
+	done
+.TCHblock
+	opentext
+	writetext .touchquestion
+	yesorno
+	iffalse .Done
+	jumptext .touchBlockedDesc
+.touchquestion
+	text "The stain is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.touchBlockedDesc
+	text "You feel the"
+	line "pebbly ground"
+	para "that the blood"
+	line "stained into."
+	done
+.LOKblock
+	callasm .lookAtBoulder
+	waitbutton
+	jumptext .lookAtIt
+.lookAtIt
+	text "You see a green"
+	line "blood stain."
+	done
+
+.touchBlockReach
+	text "You reckon you"
+	line "would not be able"
+	para "to clean off this"
+	line "blood stain."
+	prompt
+
+.TKEblock
+	jumptext .touchBlockReach
+.failedToDoSo
+	text "It is too heavy"
+	line "to pick up."
+	done
+.USEblock
+	jumptext .cannotUse
+.cannotUse
+	text "There is no way"
+	line "to use that."
+	done
+.reachBlock
+	text "The stain is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.lookAtBoulder
+	lb bc, BANK(BloodPic), 6*8
+	ld hl, BloodPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .BloodGreenPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.BloodGreenPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.BloodGreenPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bloodGreen.pal"
+	RGB 00, 00, 00
 
 GoldenrodRocketsScript:
-	clearevent EVENT_GOLDENROD_CITY_ROCKET_TAKEOVER
+; red blood stain
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKblock
+	if_equal 2, .TCHblock
+	if_equal 3, TLKmap
+	if_equal 4, .LOKblock
+	if_equal 5, INGmap
+	if_equal 6, .TKEblock
+	if_equal 7, .USEblock
 	end
+.Done
+	closetext
+	end
+.ATKblock
+	jumptext .reckon
+.reckon
+	text "You reckon you"
+	line "would not be able"
+	para "to clean off this"
+	line "blood stain."
+	done
+.TCHblock
+	opentext
+	writetext .touchquestion
+	yesorno
+	iffalse .Done
+	jumptext .touchBlockedDesc
+.touchquestion
+	text "The stain is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.touchBlockedDesc
+	text "You feel the"
+	line "pebbly ground"
+	para "that the blood"
+	line "stained into."
+	done
+.LOKblock
+	callasm .lookAtRedBlood
+	waitbutton
+	jumptext .lookAtIt
+.lookAtIt
+	text "You see a red"
+	line "blood stain."
+	done
+
+.touchBlockReach
+	text "You reckon you"
+	line "would not be able"
+	para "to clean off this"
+	line "blood stain."
+	prompt
+
+.TKEblock
+	jumptext .touchBlockReach
+.failedToDoSo
+	text "It is too heavy"
+	line "to pick up."
+	done
+.USEblock
+	jumptext .cannotUse
+.cannotUse
+	text "There is no way"
+	line "to use that."
+	done
+.reachBlock
+	text "The stain is in"
+	line "your reach of"
+	cont "touch. Touch it?"
+	prompt
+.lookAtRedBlood
+	lb bc, BANK(BloodPic), 6*8
+	ld hl, BloodPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .BloodRedPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.BloodRedPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.BloodRedPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bloodRed.pal"
+	RGB 00, 00, 00
+INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+	
+TLKmap
+	jumptext .talkmap
+.talkmap
+	text "No response."
+	done
+
+
 
 RadioTowerRocketsScript:
 	setflag ENGINE_ROCKETS_IN_RADIO_TOWER

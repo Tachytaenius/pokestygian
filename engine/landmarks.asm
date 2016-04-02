@@ -57,14 +57,14 @@ landmark: MACRO
 ENDM
 
 	landmark   0,   0, SpecialMapName
-	landmark 148, 116, NewBarkTownName
-	landmark 136, 116, Route29Name
-	landmark 108, 116, CherrygroveCityName
-	landmark 108,  96, Route30Name
-	landmark 104,  76, Route31Name
-	landmark  92,  76, VioletCityName
-	landmark  93,  74, SproutTowerName
-	landmark  92, 108, Route32Name
+	landmark 148, 116, NewBarkTownName    
+	landmark 136, 116, CherrygroveCityName
+	landmark 108, 116, VioletCityName     
+	landmark 108,  96, AzaleaTownName     
+	landmark 104,  76, GoldenrodCityName  
+	landmark  92,  76, EcruteakCityName   
+	landmark  93,  74, OlivineCityName    
+	landmark  92, 108, CianwoodCityName   
 	landmark  84,  92, RuinsOfAlphName
 	landmark  92, 140, UnionCaveName
 	landmark  90, 140, Route33Name
@@ -154,15 +154,15 @@ ENDM
 	landmark 148, 132, FastShipName
 
 
-NewBarkTownName:     db "Stygian Abyss¯B1@"
-CherrygroveCityName: db "Stygian Abyss¯B2@"
-VioletCityName:      db "Stygian Abyss¯B3@"
-AzaleaTownName:      db "Stygian Abyss¯B4@"
-GoldenrodCityName:   db "Stygian Abyss¯B5@"
-EcruteakCityName:    db "Stygian Abyss¯B6@"
-OlivineCityName:     db "Stygian Abyss¯B7@"
-CianwoodCityName:    db "Stygian Abyss¯B8@"
-MahoganyTownName:    db "Surface@"
+NewBarkTownName:     db "Stygian¯Abyss B1@"
+CherrygroveCityName: db "Stygian¯Abyss B2@"
+VioletCityName:      db "Stygian¯Abyss B3@"
+AzaleaTownName:      db "Stygian¯Abyss B4@"
+GoldenrodCityName:   db "Stygian¯Abyss B5@"
+EcruteakCityName:    db "Stygian¯Abyss B6@"
+OlivineCityName:     db "Stygian¯Abyss B7@"
+CianwoodCityName:    db "Stygian¯Abyss B8@"
+MahoganyTownName:    db "Rollennia@"
 BlackthornCityName:  db "Doom@"
 LakeOfRageName:      db "LAKE OF¯RAGE@"
 SilverCaveName:      db "SILVER CAVE@"

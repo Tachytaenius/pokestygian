@@ -2112,7 +2112,6 @@ HandleEnemyMonFaint: ; 3cd55
 
 	ld a, 1
 	ld [BattleEnded], a
-	call AskCaptureFaintedMon
 	ret
 
 .trainer
@@ -2272,259 +2271,6 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld [wBattleParticipantsNotFainted], a
 	ret
 ; 3ceaa
-
-AskCaptureFaintedMon:
-	ld a, [wBattleMode]
-	cp a, 1
-	ret nz
-	
-	ld hl, AskTake
-	call PrintText
-	call YesNoBox
-	ret c
-	
-	ld hl, EnemyMonStatus
-	ld a, [hli]
-	push af
-	inc hl
-	ld a, [hli]
-	push af
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemyMonItem
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemySubStatus5
-	ld a, [hl]
-	push af
-	set SUBSTATUS_TRANSFORMED, [hl]
-	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .ditto
-	jr .not_ditto
-
-.ditto
-	ld a, DITTO
-	ld [TempEnemyMonSpecies], a
-	jr .load_data
-
-.not_ditto
-	set 3, [hl]
-	ld hl, wEnemyBackupDVs
-	ld a, [EnemyMonDVs]
-	ld [hli], a
-	ld a, [EnemyMonDVs + 1]
-	ld [hl], a
-
-.load_data
-	ld a, [TempEnemyMonSpecies]
-	ld [CurPartySpecies], a
-	ld a, [EnemyMonLevel]
-	ld [CurPartyLevel], a
-	callba LoadEnemyMon
-
-	pop af
-	ld [EnemySubStatus5], a
-
-	pop hl
-	pop af
-	ld [hl], a
-	pop hl
-	pop af
-	ld [hld], a
-	pop af
-	ld [hld], a
-	dec hl
-	pop af
-	ld [hl], a
-
-	ld hl, EnemySubStatus5
-	bit SUBSTATUS_TRANSFORMED, [hl]
-	jr nz, .Transformed
-	ld hl, wWildMonMoves
-	ld de, EnemyMonMoves
-	ld bc, NUM_MOVES
-	call CopyBytes
-
-	ld hl, wWildMonPP
-	ld de, EnemyMonPP
-	ld bc, NUM_MOVES
-	call CopyBytes
-.Transformed
-
-	ld a, [EnemyMonSpecies]
-	ld [wWildMon], a
-	ld [CurPartySpecies], a
-	ld [wd265], a
-	call ClearSprites
-
-	ld a, [wd265]
-	dec a
-	call CheckCaughtMon
-
-	ld a, c
-	push af
-	ld a, [wd265]
-	dec a
-	call SetSeenAndCaughtMon
-	pop af
-	and a
-	jr nz, .skip_pokedex
-
-	call CheckReceivedDex
-	jr z, .skip_pokedex
-
-	ld hl, _Text_AddedToPokedex
-	call PrintText
-
-	call ClearSprites
-
-	ld a, [EnemyMonSpecies]
-	ld [wd265], a
-	predef NewPokedexEntry
-
-.skip_pokedex
-	cp BATTLETYPE_CELEBI
-	jr nz, .not_celebi
-	ld hl, wBattleResult
-	set 6, [hl]
-.not_celebi
-
-	ld a, [PartyCount]
-	cp PARTY_LENGTH
-	jr z, .SendToPC
-
-	xor a ; PARTYMON
-	ld [MonType], a
-	call ClearSprites
-
-	predef TryAddMonToParty
-
-	callba SetCaughtData
-
-	ld hl, _Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	jp c, lost
-	ld a, [PartyCount]
-	dec a
-	ld [CurPartyMon], a
-	ld hl, PartyMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call AddNTimes
-
-	ld d, h
-	ld e, l
-	push de
-	xor a ; PARTYMON
-	ld [MonType], a
-	ld b, 0
-	callba NamingScreen
-
-	call RotateThreePalettesRight
-
-	call LoadStandardFont
-
-	pop hl
-	ld de, StringBuffer1
-	call InitName
-
-	jp lost
-
-.SendToPC
-	call ClearSprites
-
-	predef SentPkmnIntoBox
-
-	callba SetBoxMonCaughtData
-
-	ld a, BANK(sBoxCount)
-	call GetSRAMBank
-
-	ld a, [sBoxCount]
-	cp MONS_PER_BOX
-	jr nz, .BoxNotFullYet
-	ld hl, wBattleResult
-	set 7, [hl]
-.BoxNotFullYet
-	call CloseSRAM
-
-	ld hl, _Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	jr c, .SkipBoxMonNickname
-
-	xor a
-	ld [CurPartyMon], a
-	ld a, BOXMON
-	ld [MonType], a
-	ld de, wMonOrItemNameBuffer
-	ld b, $0
-	callba NamingScreen
-
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, wMonOrItemNameBuffer
-	ld de, sBoxMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	ld hl, sBoxMonNicknames
-	ld de, StringBuffer1
-	call InitName
-
-	call CloseSRAM
-
-.SkipBoxMonNickname
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, sBoxMonNicknames
-	ld de, wMonOrItemNameBuffer
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	call CloseSRAM
-
-	ld hl, _Text_SentToBillsPC
-	call PrintText
-
-	call RotateThreePalettesRight
-	call LoadStandardFont
-	jp lost
-
-_Text_SentToBillsPC:
-	text_jump UnknownText_0x1c5b38
-	db "@"
-
-_Text_AskNicknameNewlyCaughtMon:
-	text_jump UnknownText_0x1c5b7f
-	db "@"
-	
-_Text_AddedToPokedex
-	text_jump UnknownText_0x1c5b53
-	db "@"
-	
-AskTake
-	text_jump .AskTake_
-	db "@"
-
-.AskTake_
-	text "Capture the #-"
-	line "mon?"
-	prompt
 
 IsAnyMonHoldingExpShare: ; 3ceaa
 	ld a, [PartyCount]
@@ -8610,6 +8356,9 @@ StartBattle: ; 3f4c1
 	ld a, [TimeOfDayPal]
 	push af
 	call BattleIntro
+	ld a, [wContinueBattle]
+	and a
+	ret z
 	call DoBattle
 	call ExitBattle
 	pop af
@@ -8656,8 +8405,35 @@ BattleIntro: ; 3f4dd
 	call z, UpdateEnemyHUD
 	ld a, $1
 	ld [hBGMapMode], a
+	ld a, [wBattleMode]
+	cp WILD_BATTLE
+	ret z
+	ld hl, MenuDataHeader_WildActions
+	c
 	ret
 ; 3f54e
+
+db $40 ; flags
+	db 12, 08 ; start coords
+	db 17, 19 ; end coords
+	dw MenuData_0x24f34
+	db 1 ; default option
+; 24f34
+
+MenuData_0x24f34: ; 0x24f34
+	db $81 ; flags
+	dn 2, 2 ; rows, columns
+	db 6 ; spacing
+	dba Strings24f3d
+	dbw BANK(MenuData_0x24f34), 0
+; 0x24f3d
+
+Strings24f3d: ; 0x24f3d
+	db "Fight@"
+	db "<PKMN>@"
+	db "Pack@"
+	db "Run@"
+; 24f4e
 
 LoadTrainerOrWildMonPic: ; 3f54e
 	ld a, [OtherTrainerClass]
