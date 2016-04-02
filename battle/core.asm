@@ -8356,9 +8356,7 @@ StartBattle: ; 3f4c1
 	ld a, [TimeOfDayPal]
 	push af
 	call BattleIntro
-	ld a, [wContinueBattle]
-	and a
-	ret z
+	ret nc
 	call DoBattle
 	call ExitBattle
 	pop af
@@ -8407,32 +8405,74 @@ BattleIntro: ; 3f4dd
 	ld [hBGMapMode], a
 	ld a, [wBattleMode]
 	cp WILD_BATTLE
+	scf
 	ret z
-	ld hl, MenuDataHeader_WildActions
-	c
+.loop
+	ld hl, BattleMenuDataHeader
+	call LoadMenuDataHeader
+	ld a, [wd0d2]
+	ld [wMenuCursorBuffer], a
+	call InterpretBattleMenu
+	ld a, [wMenuCursorBuffer]
+	ld [wd0d2], a
+	cp 1
+	jr z, .attack
+	cp 2
+	jr z, .tryTame
+	cp 3
+	jr z, .tryCatch
+;.flee
+	ld hl, ArtThouSureFlee
+	call PrintText
+	call YesNoBox
+	jr c, .loop
+	call ExitMenu
+	ccf
 	ret
+.attack
+	ld hl, ArtThouSureAttack
+	call PrintText
+	call YesNoBox
+	jr c, .loop
+	call ExitMenu
+	scf
+	ret
+.tryTame
+	jr .loop
+.tryCatch
+	jr .loop
+ArtThouSureAttack
+	text "Are you sure you"
+	line "want to attack the"
+	cont "wild #mon?"
+	prompt
+ArtThouSureFlee
+	text "Are you sure you"
+	line "wish to leave the"
+	cont "wild #mon?"
+	prompt
 ; 3f54e
-
-db $40 ; flags
+WildMenuDataHeader
+	db $40 ; flags
 	db 12, 08 ; start coords
 	db 17, 19 ; end coords
-	dw MenuData_0x24f34
+	dw .sub
 	db 1 ; default option
 ; 24f34
 
-MenuData_0x24f34: ; 0x24f34
+.sub: ; 0x24f34
 	db $81 ; flags
 	dn 2, 2 ; rows, columns
 	db 6 ; spacing
-	dba Strings24f3d
-	dbw BANK(MenuData_0x24f34), 0
+	dba .strings
+	dbw BANK(.sub), 0
 ; 0x24f3d
 
-Strings24f3d: ; 0x24f3d
+.strings: ; 0x24f3d
 	db "Fight@"
-	db "<PKMN>@"
-	db "Pack@"
-	db "Run@"
+	db "Tame@"
+	db "Catch@"
+	db "Exit@"
 ; 24f4e
 
 LoadTrainerOrWildMonPic: ; 3f54e

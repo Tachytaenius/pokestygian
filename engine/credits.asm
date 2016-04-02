@@ -1084,6 +1084,8 @@ CreditsScript: ; 10acb4
 
 	db CREDITS_WAIT, 9
 
+; player credits
+	
 ; Display "The End" graphic.
 	db CREDITS_THEEND
 
