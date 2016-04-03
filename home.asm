@@ -1984,3 +1984,17 @@ ReinitSpriteAnimFrame:: ; 3b3c
 
 INCLUDE "home/audio.asm"
 INCLUDE "home/mobile.asm"
+SaveSpaceByPuttingAPartOfBattleIntroAtHome::
+	call LoadTrainerOrWildMonPic
+	xor a
+	ld [TempBattleMonSpecies], a
+	ld [wd0d2], a
+	xor a
+	ld [hMapAnims], a
+	callba PlayBattleMusic
+	callba ShowLinkBattleParticipants
+	callba FindFirstAliveMon
+	call DisableSpriteUpdates
+	callba ClearBattleRAM
+	call InitEnemy
+	ret

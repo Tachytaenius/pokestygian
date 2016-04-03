@@ -50,7 +50,7 @@ Item2Attributes:
 	item_attribute   200, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
 
 ; FULL RESTORE
-	item_attribute     2, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
+	item_attribute     2, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; MAX POTION
 	item_attribute  2500, 0,                -1,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
@@ -122,7 +122,7 @@ Item2Attributes:
 	item_attribute  1000, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
 
 ; FULL HEAL
-	item_attribute     10, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
+	item_attribute     10, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; REVIVE
 	item_attribute  1500, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_PARTY,   ITEMMENU_PARTY
@@ -491,7 +491,7 @@ Item2Attributes:
 	item_attribute   150, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
 
 ; FAST BALL
-	item_attribute   150, 0,                 0,             CANT_SELECT, BALL,     ITEMMENU_NOUSE,   ITEMMENU_CLOSE
+	item_attribute     45, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_CURRENT,   ITEMMENU_NOUSE
 
 ; TERU-SAMA
 	item_attribute $9999, 0,                 0,                       0, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE

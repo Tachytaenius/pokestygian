@@ -552,7 +552,7 @@ PokegearMap_KantoMap: ; 90fe9 (24:4fe9)
 	jr PokegearMap_ContinueMap
 
 PokegearMap_JohtoMap: ; 90fee (24:4fee)
-	ld d, CYANWOOD_CITY
+	ld d, CIANWOOD_CITY
 	ld e, NEW_BARK_TOWN
 PokegearMap_ContinueMap: ; 90ff2 (24:4ff2)
 	ld hl, hJoyLast

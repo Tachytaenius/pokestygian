@@ -116,8 +116,7 @@ RandomEncounter:: ; 97cc0
 	jr .ok
 
 .bug_contest
-	call _
-_BugContest
+	call _TryWildEncounter_BugContest
 	jr nc, .nope
 	jr .ok_bug_contest
 

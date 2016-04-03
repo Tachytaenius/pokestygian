@@ -904,8 +904,7 @@ LureBallDesc:
 	next "hooked by a ROD.@"
 
 FastBallDesc:
-	db   "A BALL for catch-"
-	next "ing fast #mon.@"
+	db   "Food for #mon.@"
 
 TeruSama21Desc:
 	db   "?@"

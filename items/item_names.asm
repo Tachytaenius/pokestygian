@@ -102,7 +102,7 @@
 	db "Blackglasses@"
 	db "Slowpoketail@"
 	db "Pink bow@"
-	db "Stick@"
+	db "Magic Scarf@"
 	db "Smoke ball@"
 	db "Nevermeltice@"
 	db "Magnet@"
@@ -124,7 +124,7 @@
 	db "Revival herb@"
 	db "Hard stone@"
 	db "Lucky egg@"
-	db "Rock Hammer@" ; card key
+	db "Rock hammer@" ; card key
 	db "Machine part@"
 	db "Egg ticket@"
 	db "Lost item@"
@@ -158,7 +158,7 @@
 	db "Flower mail@"
 	db "Level ball@"
 	db "Lure ball@"
-	db "Fast ball@"
+	db "# bits@"
 	db "Teru-sama@"
 	db "Light ball@"
 	db "Friend ball@"

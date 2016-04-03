@@ -38,12 +38,13 @@ MartsEnd
 
 
 Mart0: ; 160ed
-	db 5 ; # items
+	db 6 ; # items
 	db POTION
 	db ANTIDOTE
 	db PARLYZ_HEAL
 	db AWAKENING
 	db CARD_KEY
+	db FAST_BALL
 	db $ff
 ; 160f3
 

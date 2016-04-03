@@ -8356,8 +8356,9 @@ StartBattle: ; 3f4c1
 	ld a, [TimeOfDayPal]
 	push af
 	call BattleIntro
-	ret nc
+	jr nc, .dontDoBattle
 	call DoBattle
+.dontDoBattle
 	call ExitBattle
 	pop af
 	ld [TimeOfDayPal], a
@@ -8366,19 +8367,7 @@ StartBattle: ; 3f4c1
 ; 3f4d9
 
 BattleIntro: ; 3f4dd
-	callba MobileFn_106050 ; mobile
-	call LoadTrainerOrWildMonPic
-	xor a
-	ld [TempBattleMonSpecies], a
-	ld [wd0d2], a
-	xor a
-	ld [hMapAnims], a
-	callba PlayBattleMusic
-	callba ShowLinkBattleParticipants
-	callba FindFirstAliveMon
-	call DisableSpriteUpdates
-	callba ClearBattleRAM
-	call InitEnemy
+	call SaveSpaceByPuttingAPartOfBattleIntroAtHome
 	call BackUpVBGMap2
 	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
@@ -8406,9 +8395,12 @@ BattleIntro: ; 3f4dd
 	ld a, [wBattleMode]
 	cp WILD_BATTLE
 	scf
-	ret z
+	ret nz
+	
+	ld a, 3
+	ld [wMonIsTame], a
 .loop
-	ld hl, BattleMenuDataHeader
+	ld hl, WildMenuDataHeader
 	call LoadMenuDataHeader
 	ld a, [wd0d2]
 	ld [wMenuCursorBuffer], a
@@ -8427,7 +8419,7 @@ BattleIntro: ; 3f4dd
 	call YesNoBox
 	jr c, .loop
 	call ExitMenu
-	ccf
+	or a
 	ret
 .attack
 	ld hl, ArtThouSureAttack
@@ -8438,23 +8430,99 @@ BattleIntro: ; 3f4dd
 	scf
 	ret
 .tryTame
+	ld hl, ArtThouSureTame
+	call PrintText
+	call YesNoBox
+	jr c, .loop
+	ld a, FAST_BALL
+	ld [CurItem], a
+	ld hl, NumItems
+	call CheckItem
+	jr nc, .sayYouHaveNoBitsAndLoop
+	ld a, [wMonIsTame]
+	cp 0
+	jr z, .decItemAndLoop ; otherwise decrement the taming counter and only THEN go to decItemAndLoop
+	dec a
+.decItemAndLoop
+	ld a, FAST_BALL
+	ld [CurItem], a
+	ld a, 1
+	ld [CurItemQuantity], a
+	call TossItem
+	ld hl, Fed
+	call PrintText
+	ld [wMonIsTame], a
+	cp 0
+	call z, .tamed
 	jr .loop
+.sayYouHaveNoBitsAndLoop
+	ld hl, OutOfBits
+	call PrintText
+	jp .loop
 .tryCatch
-	jr .loop
+	ld a, [wMonIsTame]
+	cp 0
+	jr z, .catch
+	ld hl, Declined
+	call PrintText
+	jp .loop
+.catch
+	ld hl, CaptureTheMon
+	call PrintText
+	call YesNoBox
+	jp c, .loop
+	callba AskCaptureFaintedMon ; it's no longer a question and it's no longer about FAINTED mons
+	or a
+	ret
+.tamed
+	push hl
+	push af ; might not be necessary, unsure about what gets affected in PrintText
+	ld hl, Tamed
+	call PrintText
+	pop af ; might not be necessary, unsure about what gets affected in PrintText
+	pop hl
+	ret
+CaptureTheMon
+	text "Capture the #-"
+	line "mon?"
+	prompt
+Fed
+	text "You feed the wild"
+	line "#mon some #"
+	cont "bits."
+	prompt
+OutOfBits
+	text "You have no #"
+	line "bits."
+	prompt
+ArtThouSureFlee
+	text "Are you sure you"
+	line "want to leave the"
+	cont "wild #mon?"
+	prompt
 ArtThouSureAttack
 	text "Are you sure you"
 	line "want to attack the"
 	cont "wild #mon?"
 	prompt
-ArtThouSureFlee
-	text "Are you sure you"
-	line "wish to leave the"
-	cont "wild #mon?"
+ArtThouSureTame
+	text "Feed the wild"
+	line "#mon some #"
+	cont "bits?"
+	prompt
+Tamed
+	text "The wild #mon"
+	line "shows affection!"
+	prompt
+Declined
+	text "The wild #mon"
+	line "doesn't want to"
+	cont "be captured!"
 	prompt
 ; 3f54e
 WildMenuDataHeader
 	db $40 ; flags
-	db 12, 08 ; start coords
+	db 12, 00 ; start coords
 	db 17, 19 ; end coords
 	dw .sub
 	db 1 ; default option
@@ -8463,7 +8531,7 @@ WildMenuDataHeader
 .sub: ; 0x24f34
 	db $81 ; flags
 	dn 2, 2 ; rows, columns
-	db 6 ; spacing
+	db 12 ; spacing
 	dba .strings
 	dbw BANK(.sub), 0
 ; 0x24f3d
@@ -8475,7 +8543,7 @@ WildMenuDataHeader
 	db "Exit@"
 ; 24f4e
 
-LoadTrainerOrWildMonPic: ; 3f54e
+LoadTrainerOrWildMonPic:: ; 3f54e
 	ld a, [OtherTrainerClass]
 	and a
 	jr nz, .Trainer
@@ -8487,7 +8555,7 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ret
 ; 3f55e
 
-InitEnemy: ; 3f55e
+InitEnemy:: ; 3f55e
 	ld a, [OtherTrainerClass]
 	and a
 	jp nz, InitEnemyTrainer ; trainer

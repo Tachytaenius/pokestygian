@@ -397,20 +397,29 @@ UltraBall:
 HeavyBall:
 LevelBall:
 LureBall:
-FastBall:
 FriendBall:
 MoonBall:
 LoveBall:
 ParkBall:
 	ret
 ; ee08
-
-
+FastBall:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
+	ld c, HAPPINESS_USEDITEM
+	callba ChangeHappiness
+	ld hl, FeedMon
+	call PrintText
+	ret
 Bicycle: ; ee08
 	callba BikeFunction
 	ret
 ; ee0f
-
+FeedMon
+	text "You feed your"
+	line "#mon."
+	prompt
 
 MoonStone:
 FireStone:

@@ -6252,7 +6252,7 @@ ConvertBerriesToBerryJuice: ; 2ede6
 	pop af
 	ret
 
-ShowLinkBattleParticipants: ; 2ee18
+ShowLinkBattleParticipants:: ; 2ee18
 ; If we're not in a communications room,
 ; we don't need to be here.
 	ld a, [wLinkMode]
@@ -6266,7 +6266,7 @@ ShowLinkBattleParticipants: ; 2ee18
 	call ClearSprites
 	ret
 
-FindFirstAliveMon: ; 2ee2f
+FindFirstAliveMon:: ; 2ee2f
 	xor a
 	ld [hMapAnims], a
 	call DelayFrame
@@ -6300,7 +6300,7 @@ FindFirstAliveMon: ; 2ee2f
 	ld [hMapAnims], a
 	ret
 
-PlayBattleMusic: ; 2ee6c
+PlayBattleMusic:: ; 2ee6c
 
 	push hl
 	push de
@@ -6401,7 +6401,7 @@ PlayBattleMusic: ; 2ee6c
 	pop hl
 	ret
 
-ClearBattleRAM: ; 2ef18
+ClearBattleRAM:: ; 2ef18
 	xor a
 	ld [wPlayerAction], a
 	ld [wBattleResult], a
@@ -12018,11 +12018,6 @@ AskCaptureFaintedMon:
 	cp a, 1
 	ret nz
 	
-	ld hl, AskTake
-	call PrintText
-	call YesNoBox
-	ret c
-	
 	ld hl, EnemyMonStatus
 	ld a, [hli]
 	push af
@@ -12256,15 +12251,6 @@ _Text_AskNicknameNewlyCaughtMon:
 _Text_AddedToPokedex
 	text_jump UnknownText_0x1c5b53
 	db "@"
-	
-AskTake
-	text_jump .AskTake_
-	db "@"
-
-.AskTake_
-	text "Capture the #-"
-	line "mon?"
-	prompt
 
 MOVETYPE_PHYSICAL EQU 1
 MOVETYPE_SPECIAL EQU 0

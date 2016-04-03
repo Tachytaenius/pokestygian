@@ -1772,6 +1772,7 @@ wUsingItemWithSelect:: ds 1
 CurMart:: ds 16
 CurMartEnd::
 	ds CurMart - @
+wMonIsTame::
 CurElevator:: ds 1
 wd0f1::
 CurElevatorFloors::
@@ -1779,7 +1780,6 @@ wCurMessageIndex:: ds 1
 wd0f2::
 wMailboxCount:: ds 1
 wMailboxItems:: ds MAILBOX_CAPACITY
-wMonIsTame::
 wMailboxEnd:: ds 1 ; d1fe
 	ds 2
 

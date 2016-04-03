@@ -17,6 +17,19 @@ INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
 INCLUDE "macros/pals.asm"
 
+ramswitch: MACRO
+	ld a, [rSVBK]
+	push af
+	ld a, BANK(\1)
+	ld [rSVBK]
+	ENDM
+; credit to Sanqui for teaching me how to do this
+ramswitchback: MACRO
+	pop af
+	ld [rSVBK], a
+	ENDM
+
+
 RGB: MACRO
 	dw ((\3) << 10) + ((\2) << 5) + (\1)
 	ENDM
