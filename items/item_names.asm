@@ -174,7 +174,7 @@
 	db "Gold berry@"
 	db "Squirtbottle@"
 	db "Teru-sama@"
-	db "Plain rock@"
+	db "Super Rock@"
 	db "Devo-stone@"
 	db "Teru-sama@"
 	db "Brick piece@"

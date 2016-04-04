@@ -1189,7 +1189,7 @@
 	db 23, GOLBAT
 
 	map NEW_BARK_TOWN
-	db 3 percent, 3 percent, 3 percent ; encounter rates: morn/day/nite
+	db 2 percent, 2 percent, 2 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, BULBASAUR
 	db 3, CHARMANDER

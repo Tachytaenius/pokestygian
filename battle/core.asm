@@ -8443,18 +8443,19 @@ BattleIntro: ; 3f4dd
 	cp 0
 	jr z, .decItemAndLoop ; otherwise decrement the taming counter and only THEN go to decItemAndLoop
 	dec a
+	ld [wMonIsTame], a
 .decItemAndLoop
 	ld a, FAST_BALL
 	ld [CurItem], a
 	ld a, 1
-	ld [CurItemQuantity], a
+	ld [wItemQuantityChangeBuffer], a
 	call TossItem
 	ld hl, Fed
 	call PrintText
-	ld [wMonIsTame], a
+	ld a, [wMonIsTame]
 	cp 0
 	call z, .tamed
-	jr .loop
+	jp .loop
 .sayYouHaveNoBitsAndLoop
 	ld hl, OutOfBits
 	call PrintText

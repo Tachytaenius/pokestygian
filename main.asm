@@ -12146,7 +12146,7 @@ AskCaptureFaintedMon:
 	call GetPokemonName
 
 	call YesNoBox
-	jp c, lost
+	ret c
 	ld a, [PartyCount]
 	dec a
 	ld [CurPartyMon], a
@@ -12170,7 +12170,7 @@ AskCaptureFaintedMon:
 	ld de, StringBuffer1
 	call InitName
 
-	jp lost
+	ret
 
 .SendToPC
 	call ClearSprites
@@ -12238,7 +12238,7 @@ AskCaptureFaintedMon:
 
 	call RotateThreePalettesRight
 	call LoadStandardFont
-	jp lost
+	ret
 
 _Text_SentToBillsPC:
 	text_jump UnknownText_0x1c5b38

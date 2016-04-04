@@ -860,8 +860,8 @@ TMHMSubmenu: ; 105dc (4:45dc)
 .UsableMenuData2: ; 0x10609
 	db $c0 ; flags
 	db 2 ; items
-	db "USE@"
-	db "QUIT@"
+	db "Use@"
+	db "Quit@"
 ; 0x10614
 
 .UsableJumptable: ; 10614
@@ -881,7 +881,7 @@ TMHMSubmenu: ; 105dc (4:45dc)
 .UnusableMenuData2: ; 0x10620
 	db $c0 ; flags
 	db 1 ; items
-	db "QUIT@"
+	db "Quit@"
 ; 0x10627
 
 .UnusableJumptable: ; 10627

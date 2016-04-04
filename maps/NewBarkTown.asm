@@ -19,10 +19,12 @@ NewBarkTown_MapEventHeader:
 	xy_trigger 0, 15, 14, 0, .encounterBoris, 0, 0
 
 .Signposts:
-	db 3
+	db 4
 	signpost 13, 17, SIGNPOST_READ, .gate
 	signpost 9, 3, SIGNPOST_READ, .gate2
 	signpost 5, 2, SIGNPOST_READ, .rockHammer
+	signpost 4, 3, SIGNPOST_READ, .pokeBit
+	
 .PersonEvents:
 	db 12
 	person_event SPRITE_SNES, 13, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .ItemFragment_MoneySix1actions, EVENT_GOT_MYSTERY_EGG_FROM_MR_POKEMON
@@ -45,7 +47,7 @@ NewBarkTown_MapEventHeader:
 	prompt
 .rockHammer
 	checkevent EVENT_106
-	iftrue .Done
+	iftrue .neverMind
 	opentext
 	writetext .whatsthis
 	yesorno
@@ -55,6 +57,7 @@ NewBarkTown_MapEventHeader:
 	jumptext .takehammernothing
 .Done:
 	closetext
+.neverMind
 	end
 .takehammernothing
 	text "Nothing happens"
@@ -80,10 +83,32 @@ NewBarkTown_MapEventHeader:
 .ggbWhiteout:
 	text "???: [Ha-ha!]"
 	prompt
-	
+.pokeBit
+	checkevent EVENT_107
+	iftrue .neverMind
+	opentext
+	writetext .whatsthis2
+	yesorno
+	iffalse .Done
+	setevent EVENT_107
+	giveitem FAST_BALL, 3
+	jumptext .takehammernothing2
+	closetext
+	end
+.takehammernothing2
+	text "Nothing happens"
+	line "as you take the"
+	cont "# bits."
+	done
+.whatsthis2
+	text "What's this? 3"
+	line "chunks of #"
+	para "bits were hidden"
+	line "in-between the"
+	cont "rocks! Take them?"
+	prompt
 .gate2:
 	jumptext .g2t
-	
 .g2t:
 	text "Passage to"
 	line "shrine."

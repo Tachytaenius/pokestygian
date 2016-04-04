@@ -463,9 +463,9 @@ INCLUDE "gfx/stygian/gel.pal"
 	iffalse .Done
 	setevent EVENT_TOLD_ELM_ABOUT_TOGEPI_OVER_THE_PHONE
 	disappear 4
+	appear 5
 	givepoke LARVITAR, 5
 	clearevent EVENT_GOT_KINGS_ROCK_IN_SLOWPOKE_WELL
-	appear 5
 	writetext .noteFound
 	closetext
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
