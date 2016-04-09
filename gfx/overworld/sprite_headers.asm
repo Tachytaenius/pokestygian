@@ -11,7 +11,7 @@ sprite_header: MACRO
 ENDM
 
 ChrisSprite: ; 14736
-	sprite_header ChrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
+	sprite_header ChrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
 ; 1473c
 
 ChrisBikeSprite: ; 1473c
@@ -391,7 +391,7 @@ SilverTrophySprite: ; 1496a
 ; 14970
 
 KrisSprite: ; 14970
-	sprite_header KrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
+	sprite_header KrisSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
 ; 14976
 
 KrisBikeSprite: ; 14976
