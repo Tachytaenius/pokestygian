@@ -123,7 +123,7 @@ KrissHouse2F_MapEventHeader
 .TLKnote
 	jumptext .talkNote
 .talkNote
-	text "No response."
+	text "That cannot talk."
 	done
 
 .LOKnote

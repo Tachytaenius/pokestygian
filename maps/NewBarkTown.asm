@@ -130,7 +130,7 @@ NewBarkTown_MapEventHeader:
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 .ATKitem
 	opentext
@@ -218,7 +218,7 @@ NewBarkTown_MapEventHeader:
 .goblinborisscriptactions
 	showemote EMOTE_SAD, LAST_TALKED, 15
 	callasm StartMenuSecondary
-	if_equal 1, .ATKgob
+	if_equal 1, .ATKgob_
 	if_equal 2, .TCHgob
 	if_equal 3, .TLKgob
 	if_equal 4, .LOKgob
@@ -269,6 +269,17 @@ NewBarkTown_MapEventHeader:
 .lookUp
 	turn_head_up
 	step_end
+.AttackGobQ
+	text "The grey goblin is"
+	line "within reach."
+	cont "Attack it?"
+	prompt
+.ATKgob_
+	opentext
+	writetext .AttackGobQ
+	yesorno
+	iffalse .Done
+	closetext
 .ATKgob
 	faceplayer
 	showemote EMOTE_FISH, 3, 15
@@ -496,7 +507,7 @@ INCLUDE "gfx/stygian/gel.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 bloodGreenScript
 	jumpstd daytotext
@@ -626,7 +637,7 @@ INCLUDE "gfx/stygian/bones.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 skullScript2
 	showemote EMOTE_SAD, LAST_TALKED, 15
@@ -752,7 +763,7 @@ INCLUDE "gfx/stygian/bones.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 bonesScript
 	showemote EMOTE_SAD, LAST_TALKED, 15
@@ -879,7 +890,7 @@ INCLUDE "gfx/stygian/bones.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 bonesScript2
 	showemote EMOTE_SAD, LAST_TALKED, 15
@@ -1006,7 +1017,7 @@ INCLUDE "gfx/stygian/bones.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 bannerScript
 	jumpstd trashcan

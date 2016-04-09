@@ -281,29 +281,6 @@ DoPlayerMovement:: ; 80000
 	call CheckIceTile
 	jr nc, .ice
 
-; Downhill riding is slower when not moving down.
-	call .BikeCheck
-	jr nz, .walk
-
-	ld hl, BikeFlags
-	bit 2, [hl] ; downhill
-	jr z, .fast
-
-	ld a, [WalkingDirection]
-	cp DOWN
-	jr z, .fast
-
-	ld a, STEP_WALK
-	call .DoStep
-	scf
-	ret
-
-.fast
-	ld a, STEP_BIKE
-	call .DoStep
-	scf
-	ret
-
 .walk
 	ld a, [CurInput]
 	bit 2, a

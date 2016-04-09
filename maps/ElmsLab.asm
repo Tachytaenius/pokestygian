@@ -23,7 +23,6 @@ startshrineintro
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	opentext
 	writetext .moeSurprise
-	pause 20
 	closetext
 	pause 10
 	applymovement 4, .down
@@ -32,8 +31,75 @@ startshrineintro
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	opentext
 	writetext .introduceMoe
-	pause 20
-	;
+	buttonsound
+	loadmenudata .Wha
+	verticalmenu
+	closewindow
+	writetext .greetingsPlayer
+	buttonsound
+	loadmenudata .DidYouFind
+	verticalmenu
+	closewindow
+	if_equal 1, .good
+	if_equal 2, .didYouSeeIt
+	if_equal 4, .directions
+	writetext .thatWasStupid
+	jump .back
+.thatWasStupid
+	text "Moe: [That was not"
+	line "a good thing. Oh,"
+	cont "well.]"
+.didYouSeeIt
+	writetext .didYouSeeIt_
+	buttonsound
+	loadmenudata .yesno
+	verticalmenu
+	closewindow
+	if_equal 1, .youShouldRead
+.directions
+	writetext .directions_
+	jump .back
+.youShouldRead
+	writetext .youShouldRead_
+	jump .back
+.gud
+	text "Moe: [Good.]"
+	prompt
+.didYouSeeIt_
+	text "Moe: [Did you see"
+	line "it?]"
+	prompt
+.yesno
+	db $40 ; flags
+	db 00, 00 ; start coords
+	db 11, 19 ; end coords
+	dw .yesno2
+	db 1 ; default option
+.yesno2
+	db $81 ; flags
+	db 2 ; items
+	db "[Yes.]@"
+	db "[No.]@"
+.directions_
+	text "Moe: [Leave this"
+	line "shrine, through"
+	para "the southern pass-"
+	line "age, and continue"
+	para "through the square"
+	line "to the storage"
+	para "cache. Climb the"
+	line "ladder, to where"
+	para "you awoke. It"
+	line "should be there.]"
+	prompt
+.youShouldRead_
+	text "Moe: [You should"
+	line "read it.]"
+	prompt
+.good
+	writetext .gud
+.back
+
 	applymovement 4, .up
 	pause 10
 	applymovement 4, .depart
@@ -41,7 +107,11 @@ startshrineintro
 	setevent EVENT_KURT_GAVE_YOU_LURE_BALL
 	jump triggerswap
 	end
-
+.greetingsPlayer
+	text "Moe: [Greetings,"
+	line "<PLAYER>. Did you"
+	cont "find our note?]"
+	prompt
 .Wha
 	db $40 ; flags
 	db 00, 00 ; start coords
@@ -50,15 +120,26 @@ startshrineintro
 	db 1 ; default option
 .Wha2
 	db $81 ; flags
-	db 3 ; items
-	db "<``>Greetings, Moe.<''>@"
-	db "<``>Um… hello?<''>@"
-	db "<``>Was I summoned?<''>@"
-
+	db 2 ; items
+	db "[Greetings, Moe.]@"
+	db "[Um… hello?]@"
+.DidYouFind
+	db $40
+	db 00, 00
+	db 11, 19
+	dw .DidYouFind2
+	db 1
+.DidYouFind2
+	db $81
+	db 4
+	db "[Ah, yes. I did.]@"
+	db "[No, I did not.]@"
+	db "[I destroyed it.]@"
+	db "[What note?]@"
 .introduceMoe
-	text "???: <``>My name is"
-	line "Moe.<''>"
-	done
+	text "???: [My name is"
+	line "Moe.]"
+	prompt
 
 .down
 	turn_head_down
@@ -79,9 +160,9 @@ startshrineintro
 	step_end
 
 .moeSurprise:
-	text "???: <``>You have"
-	line "come.<''>"
-	done
+	text "???: [You have"
+	line "come.]"
+	prompt
 
 ElmsLab_MapEventHeader:
 	; filler
@@ -140,7 +221,7 @@ ElmsLab_MapEventHeader:
 	line "Touch it?"
 	prompt
 .lanugoWhat
-	text "Lanugo: <``>Hey!<''>"
+	text "Lanugo: [Hey!]"
 	done
 .LOKlanugo
 	callasm .lookAtLanugo
@@ -152,7 +233,7 @@ ElmsLab_MapEventHeader:
 	cont "goblin."
 	done
 .greetingsFromlanugo
-	text "Lanugo: <``>'Ello.<''>"
+	text "Lanugo: ['Ello.]"
 	done
 .TLKlanugo
 	opentext
@@ -179,11 +260,11 @@ ElmsLab_MapEventHeader:
 	writetext .greys
 	jump .looplanugo
 .greys
-	text "Lanugo: <``>Oh, yeah,"
+	text "Lanugo: [Oh, yeah,"
 	line "them goblins. Not"
 	para "good, ya see--"
 	line "evil group, they"
-	cont "are. Stay away.<''>"
+	cont "are. Stay away.]"
 	prompt
 .WhatTwo3
 	writetext .myNameIslanugo
@@ -207,18 +288,18 @@ ElmsLab_MapEventHeader:
 .NameLanugo
 	db "Lanugo@"
 .ohokthen3
-	text "Lanugo: <``>OK.<''>"
+	text "Lanugo: [OK.]"
 	prompt
 .myNameIslanugo
-	text "Lanugo: <``>Me name's"
-	line "Lanugo!<''>"
+	text "Lanugo: [Me name's"
+	line "Lanugo!]"
 	prompt
 .looplanugo
 	writetext .anythingElselanugo
 	jump .looplanugo2
 .anythingElselanugo
-	text "Lanugo: <``>D'you"
-	line "need any more?<''>"
+	text "Lanugo: [D'you"
+	line "need any more?]"
 	prompt
 .What3
 	db $40 ; flags
@@ -229,10 +310,10 @@ ElmsLab_MapEventHeader:
 .What3a
 	db $81 ; flags
 	db 4 ; items
-	db "<``>Grey goblins…?<''>@"
-	db "<``>Your name?<''>@"
-	db "<``>May we trade?<''>@"
-	db "<``>That is all.<''>@"
+	db "[Grey goblins…?]@"
+	db "[Your name?]@"
+	db "[May we trade?]@"
+	db "[That is all.]@"
 	
 .leavetext:
 	jumptext .leavetextactual
@@ -267,8 +348,8 @@ ElmsLab_MapEventHeader:
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .moeWhat
 .moeWhat
-	text "Moe: <``>Don't do"
-	line "that!<''>"
+	text "Moe: [Don't do"
+	line "that!]"
 	done
 .withinReachMoe
 	text "The human is"
@@ -286,7 +367,7 @@ ElmsLab_MapEventHeader:
 	closetext
 	end
 .greetingsFromMoe
-	text "Moe: <``>Greetings!<''>"
+	text "Moe: [Greetings!]"
 	done
 .startTalkingToMoe
 	faceplayer
@@ -313,42 +394,42 @@ ElmsLab_MapEventHeader:
 	writetext .cannotTrade
 	jump .loopMoe
 .ohokthen
-	text "Moe: <``>OK, then.<''>"
+	text "Moe: [OK, then.]"
 	prompt
 .loopMoe
 	writetext .anythingElseMoe
 	jump .loopMoe2
 .anythingElseMoe
-	text "Moe: <``>Do you"
-	line "need any more?<''>"
+	text "Moe: [Do you"
+	line "need any more?]"
 	prompt
 .whatIsAnAnkhResponse
-	text "Moe: <``>The symbol"
+	text "Moe: [The symbol"
 	line "of the Stygian"
 	para "Sun, an entity"
 	line "that lies at the"
 	para "bottom of the"
 	line "Abyss, providing"
 	para "ambient light and"
-	line "energy.<''>"
+	line "energy.]"
 	prompt
 .whatIsAnAnkhResponse2
-	text "Isaac: <``>The logo"
+	text "Isaac: [The logo"
 	line "of the Stygian"
 	para "Sun, an entity"
 	line "that lies at the"
 	para "bottom of the"
 	line "Abyss, providing"
 	para "ambient light and"
-	line "energy.<''>"
+	line "energy.]"
 	prompt
 .myNameIsMoe
-	text "Moe: <``>My name is"
-	line "Moe.<''>"
+	text "Moe: [My name is"
+	line "Moe.]"
 	prompt
 .cannotTrade
-	text "Moe: <``>I have nowt"
-	line "to barter with.<''>"
+	text "Moe: [I have nowt"
+	line "to barter with.]"
 	prompt
 .Greet
 	db $40 ; flags
@@ -359,7 +440,7 @@ ElmsLab_MapEventHeader:
 .Greet2
 	db $81 ; flags
 	db 2 ; items
-	db "<``>Hello!!<''>@"
+	db "[Hello!!]@"
 	db "Cancel@"
 .What
 	db $40 ; flags
@@ -370,10 +451,10 @@ ElmsLab_MapEventHeader:
 .What2
 	db $81 ; flags
 	db 4 ; items
-	db "<``>What's an ankh?<''>@"
-	db "<``>Your name?<''>@"
-	db "<``>May we trade?<''>@"
-	db "<``>That is all.<''>@"
+	db "[What's an ankh?]@"
+	db "[Your name?]@"
+	db "[May we trade?]@"
+	db "[That is all.]@"
 .humanPalette
 	RGB 31, 31, 31
 INCLUDE "gfx/trainers/hiker.pal"
@@ -484,7 +565,7 @@ INCLUDE "gfx/trainers/will.pal"
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .IsaacWhat
 .IsaacWhat
-	text "Isaac: <``>Oi!<''>"
+	text "Isaac: [Oi!]"
 	done
 .withinReachIsaac
 	text "The elf is"
@@ -501,7 +582,7 @@ INCLUDE "gfx/trainers/will.pal"
 	closetext
 	end
 .greetingsFromIsaac
-	text "Isaac: <``>Hello!<''>"
+	text "Isaac: [Hello!]"
 	done
 .startTalkingToIsaac
 	faceplayer
@@ -532,19 +613,16 @@ INCLUDE "gfx/trainers/will.pal"
 	writetext .cannotTrade2
 	jump .loopIsaac
 .ohokthen2
-	text "Isaac: <``>All right,"
-	line "then.<''>"
+	text "Isaac: [All right,"
+	line "then.]"
 	prompt
 .anythingElseIsaac
-	text "Isaac: <``>Will that"
-	line "be all, <PLAYER>?<''>"
+	text "Isaac: [Will that"
+	line "be all, <PLAYER>?]"
 	prompt
-.loopi
-	writetext .anythingElseIsaac
-	jump .loopi
 .myNameIsIsaac
-	text "Isaac: <``>My name is"
-	line "Isaac.<''>"
+	text "Isaac: [My name is"
+	line "Isaac.]"
 	prompt
 .Greet2s
 	db $40 ; flags
@@ -555,7 +633,7 @@ INCLUDE "gfx/trainers/will.pal"
 .Greet2a
 	db $81 ; flags
 	db 2 ; items
-	db "<``>Greetings.<''>@"
+	db "[Greetings.]@"
 	db "Cancel@"
 .What2s
 	db $40 ; flags
@@ -566,10 +644,10 @@ INCLUDE "gfx/trainers/will.pal"
 .What2a
 	db $81 ; flags
 	db 4 ; items
-	db "<``>What's an ankh?<''>@"
-	db "<``>May we trade?<''>@"
-	db "<``>Your name?" 
-	db "<``>That is all.<''>@"
+	db "[What's an ankh?]@"
+	db "[Your name?]@" 
+	db "[May we trade?]@"
+	db "[That is all.]@"
 .LOKIsaac
 	callasm .lookAtIsaac
 	waitbutton
@@ -579,13 +657,14 @@ INCLUDE "gfx/trainers/will.pal"
 	line "friendly elf."
 	done
 .cannotTrade2
-	text "Isaac: <``>I have nowt"
-	line "to barter with.<''>"
+	text "Isaac: [I have"
+	line "nowt to barter"
+	cont "with.]"
 	prompt
 .TLKno
 	jumptext .noResponse
 .noResponse
-	text "No response."
+	text "That cannot talk."
 	done
 .ankhScript
 	jumpstd tv

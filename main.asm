@@ -747,14 +747,14 @@ SpawnPlayer: ; 8029
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
 	add hl, bc
-	ln e, (1 << 3) | PAL_OW_SILVER, PERSONTYPE_SCRIPT
+	ln e, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT
 	ld a, [wPlayerSpriteSetupFlags]
 	bit 2, a
 	jr nz, .ok
 	ld a, [PlayerGender]
 	bit 0, a
 	jr z, .ok
-	ln e, (1 << 3) | PAL_OW_SILVER, PERSONTYPE_SCRIPT
+	ln e, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT
 
 .ok
 	ld [hl], e
@@ -2194,7 +2194,7 @@ CutFunction: ; c785
 	ret
 
 .Jumptable: ; c796 (3:4796)
-	
+
 	dw .CheckAble
 	dw .DoCut
 	dw .FailCut
@@ -9278,11 +9278,11 @@ PrintTempMonStats: ; 50b7b
 	ret
 
 .StatNames: ; 50bb5
-	db   "ATTACK"
-	next "DEFENSE"
+	db   "Attack"
+	next "Defense"
 	next "SPCL.ATK"
 	next "SPCL.DEF"
-	next "SPEED"
+	next "Speed"
 	next "@"
 
 GetGender: ; 50bdd
@@ -10310,7 +10310,7 @@ MalePlayerNameArray: ; 882c9
 	db "Jack@"
 	db "Arthur@"
 	db 2 ; displacement
-	db " NAME @" ; title
+	db " Name @" ; title
 
 KrisNameMenuHeader: ; 882e5
 	db $40 ; flags
@@ -10325,12 +10325,12 @@ KrisNameMenuHeader: ; 882e5
 	db 5 ; items
 	db "Other…@"
 FemalePlayerNameArray: ; 882f9
-	db "Sarah@"
+	db "Kris@"
 	db "Olga@"
 	db "Saga@"
 	db "May@"
 	db 2 ; displacement
-	db " NAME @" ; title
+	db " Name @" ; title
 
 GetPlayerNameArray: ; 88318 This Function is never called
 	ld hl, PlayerName
@@ -10933,6 +10933,513 @@ INCLUDE "engine/radio.asm"
 INCLUDE "gfx/mail.asm"
 
 SECTION "bank2F", ROMX, BANK[$2F]
+
+AskCaptureFaintedMon:
+	ld a, [wBattleMode]
+	cp a, 1
+	ret nz
+
+	ld hl, EnemyMonStatus
+	ld a, [hli]
+	push af
+	inc hl
+	ld a, [hli]
+	push af
+	ld a, [hl]
+	push af
+	push hl
+	ld hl, EnemyMonItem
+	ld a, [hl]
+	push af
+	push hl
+	ld hl, EnemySubStatus5
+	ld a, [hl]
+	push af
+	set SUBSTATUS_TRANSFORMED, [hl]
+	bit SUBSTATUS_TRANSFORMED, a
+	jr nz, .ditto
+	jr .not_ditto
+
+.ditto
+	ld a, DITTO
+	ld [TempEnemyMonSpecies], a
+	jr .load_data
+
+.not_ditto
+	set 3, [hl]
+	ld hl, wEnemyBackupDVs
+	ld a, [EnemyMonDVs]
+	ld [hli], a
+	ld a, [EnemyMonDVs + 1]
+	ld [hl], a
+
+.load_data
+	ld a, [TempEnemyMonSpecies]
+	ld [CurPartySpecies], a
+	ld a, [EnemyMonLevel]
+	ld [CurPartyLevel], a
+	callba LoadEnemyMon
+
+	pop af
+	ld [EnemySubStatus5], a
+
+	pop hl
+	pop af
+	ld [hl], a
+	pop hl
+	pop af
+	ld [hld], a
+	pop af
+	ld [hld], a
+	dec hl
+	pop af
+	ld [hl], a
+
+	ld hl, EnemySubStatus5
+	bit SUBSTATUS_TRANSFORMED, [hl]
+	jr nz, .Transformed
+	ld hl, wWildMonMoves
+	ld de, EnemyMonMoves
+	ld bc, NUM_MOVES
+	call CopyBytes
+
+	ld hl, wWildMonPP
+	ld de, EnemyMonPP
+	ld bc, NUM_MOVES
+	call CopyBytes
+.Transformed
+
+	ld a, [EnemyMonSpecies]
+	ld [wWildMon], a
+	ld [CurPartySpecies], a
+	ld [wd265], a
+	call ClearSprites
+
+	ld a, [wd265]
+	dec a
+	call CheckCaughtMon
+
+	ld a, c
+	push af
+	ld a, [wd265]
+	dec a
+	call SetSeenAndCaughtMon
+	pop af
+	and a
+	jr nz, .skip_pokedex
+
+	call CheckReceivedDex
+	jr z, .skip_pokedex
+
+	ld hl, _Text_AddedToPokedex
+	call PrintText
+
+	call ClearSprites
+
+	ld a, [EnemyMonSpecies]
+	ld [wd265], a
+	predef NewPokedexEntry
+
+.skip_pokedex
+	cp BATTLETYPE_CELEBI
+	jr nz, .not_celebi
+	ld hl, wBattleResult
+	set 6, [hl]
+.not_celebi
+
+	ld a, [PartyCount]
+	cp PARTY_LENGTH
+	jr z, .SendToPC
+
+	xor a ; PARTYMON
+	ld [MonType], a
+	call ClearSprites
+
+	predef TryAddMonToParty
+
+	callba SetCaughtData
+
+	ld hl, _Text_AskNicknameNewlyCaughtMon
+	call PrintText
+
+	ld a, [CurPartySpecies]
+	ld [wd265], a
+	call GetPokemonName
+
+	call YesNoBox
+	ret c
+	ld a, [PartyCount]
+	dec a
+	ld [CurPartyMon], a
+	ld hl, PartyMonNicknames
+	ld bc, PKMN_NAME_LENGTH
+	call AddNTimes
+
+	ld d, h
+	ld e, l
+	push de
+	xor a ; PARTYMON
+	ld [MonType], a
+	ld b, 0
+	callba NamingScreen
+
+	call RotateThreePalettesRight
+
+	call LoadStandardFont
+
+	pop hl
+	ld de, StringBuffer1
+	call InitName
+
+	ret
+
+.SendToPC
+	call ClearSprites
+
+	predef SentPkmnIntoBox
+
+	callba SetBoxMonCaughtData
+
+	ld a, BANK(sBoxCount)
+	call GetSRAMBank
+
+	ld a, [sBoxCount]
+	cp MONS_PER_BOX
+	jr nz, .BoxNotFullYet
+	ld hl, wBattleResult
+	set 7, [hl]
+.BoxNotFullYet
+	call CloseSRAM
+
+	ld hl, _Text_AskNicknameNewlyCaughtMon
+	call PrintText
+
+	ld a, [CurPartySpecies]
+	ld [wd265], a
+	call GetPokemonName
+
+	call YesNoBox
+	jr c, .SkipBoxMonNickname
+
+	xor a
+	ld [CurPartyMon], a
+	ld a, BOXMON
+	ld [MonType], a
+	ld de, wMonOrItemNameBuffer
+	ld b, $0
+	callba NamingScreen
+
+	ld a, BANK(sBoxMonNicknames)
+	call GetSRAMBank
+
+	ld hl, wMonOrItemNameBuffer
+	ld de, sBoxMonNicknames
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
+
+	ld hl, sBoxMonNicknames
+	ld de, StringBuffer1
+	call InitName
+
+	call CloseSRAM
+
+.SkipBoxMonNickname
+	ld a, BANK(sBoxMonNicknames)
+	call GetSRAMBank
+
+	ld hl, sBoxMonNicknames
+	ld de, wMonOrItemNameBuffer
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
+
+	call CloseSRAM
+
+	ld hl, _Text_SentToBillsPC
+	call PrintText
+
+	call RotateThreePalettesRight
+	call LoadStandardFont
+	ret
+
+_Text_SentToBillsPC:
+	text_jump UnknownText_0x1c5b38
+	db "@"
+
+_Text_AskNicknameNewlyCaughtMon:
+	text_jump UnknownText_0x1c5b7f
+	db "@"
+
+_Text_AddedToPokedex
+	text_jump UnknownText_0x1c5b53
+	db "@"
+
+MOVETYPE_PHYSICAL EQU 1
+MOVETYPE_SPECIAL EQU 0
+MOVETYPE_OTHER EQU 2
+
+_PhysicalSpecialSplit:: ;Determines if a move is Physical or Special  ; credit to Mateo
+	ld a, e
+	ld c,a
+	ld b, $00
+	ld hl,.MovesTable
+	add hl,bc
+	ld a,[hl]
+	ld e, a
+	ret
+
+.MovesTable
+	db MOVETYPE_OTHER    ; DUMMY
+	db MOVETYPE_PHYSICAL ; POUND
+	db MOVETYPE_PHYSICAL ; KARATE_CHOP
+	db MOVETYPE_PHYSICAL ; DOUBLESLAP
+	db MOVETYPE_PHYSICAL ; COMET_PUNCH
+	db MOVETYPE_PHYSICAL ; MEGA_PUNCH
+	db MOVETYPE_PHYSICAL ; PAY_DAY
+	db MOVETYPE_SPECIAL  ; FIRE_PUNCH
+	db MOVETYPE_SPECIAL  ; ICE_PUNCH
+	db MOVETYPE_SPECIAL  ; THUNDERPUNCH
+	db MOVETYPE_PHYSICAL ; SCRATCH
+	db MOVETYPE_PHYSICAL ; VICEGRIP
+	db MOVETYPE_PHYSICAL ; GUILLOTINE
+	db MOVETYPE_PHYSICAL ; RAZOR_WIND
+	db MOVETYPE_PHYSICAL ; SWORDS_DANCE
+	db MOVETYPE_PHYSICAL ; CUT
+	db MOVETYPE_PHYSICAL ; GUST
+	db MOVETYPE_PHYSICAL ; WING_ATTACK
+	db MOVETYPE_PHYSICAL ; WHIRLWIND
+	db MOVETYPE_PHYSICAL ; FLY
+	db MOVETYPE_PHYSICAL ; BIND
+	db MOVETYPE_PHYSICAL ; SLAM
+	db MOVETYPE_SPECIAL  ; VINE_WHIP
+	db MOVETYPE_PHYSICAL ; STOMP
+	db MOVETYPE_PHYSICAL ; DOUBLE_KICK
+	db MOVETYPE_PHYSICAL ; MEGA_KICK
+	db MOVETYPE_PHYSICAL ; JUMP_KICK
+	db MOVETYPE_PHYSICAL ; ROLLING_KICK
+	db MOVETYPE_PHYSICAL ; SAND_ATTACK
+	db MOVETYPE_PHYSICAL ; HEADBUTT
+	db MOVETYPE_PHYSICAL ; HORN_ATTACK
+	db MOVETYPE_PHYSICAL ; FURY_ATTACK
+	db MOVETYPE_PHYSICAL ; HORN_DRILL
+	db MOVETYPE_PHYSICAL ; TACKLE
+	db MOVETYPE_PHYSICAL ; BODY_SLAM
+	db MOVETYPE_PHYSICAL ; WRAP
+	db MOVETYPE_PHYSICAL ; TAKE_DOWN
+	db MOVETYPE_PHYSICAL ; THRASH
+	db MOVETYPE_PHYSICAL ; DOUBLE_EDGE
+	db MOVETYPE_PHYSICAL ; TAIL_WHIP
+	db MOVETYPE_PHYSICAL ; POISON_STING
+	db MOVETYPE_PHYSICAL ; TWINEEDLE
+	db MOVETYPE_PHYSICAL ; PIN_MISSILE
+	db MOVETYPE_PHYSICAL ; LEER
+	db MOVETYPE_SPECIAL  ; BITE
+	db MOVETYPE_PHYSICAL ; GROWL
+	db MOVETYPE_PHYSICAL ; ROAR
+	db MOVETYPE_PHYSICAL ; SING
+	db MOVETYPE_PHYSICAL ; SUPERSONIC
+	db MOVETYPE_PHYSICAL ; SONICBOOM
+	db MOVETYPE_PHYSICAL ; DISABLE
+	db MOVETYPE_PHYSICAL ; ACID
+	db MOVETYPE_SPECIAL  ; EMBER
+	db MOVETYPE_SPECIAL  ; FLAMETHROWER
+	db MOVETYPE_SPECIAL  ; MIST
+	db MOVETYPE_SPECIAL  ; WATER_GUN
+	db MOVETYPE_SPECIAL  ; HYDRO_PUMP
+	db MOVETYPE_SPECIAL  ; SURF
+	db MOVETYPE_SPECIAL  ; ICE_BEAM
+	db MOVETYPE_SPECIAL  ; BLIZZARD
+	db MOVETYPE_SPECIAL  ; PSYBEAM
+	db MOVETYPE_SPECIAL  ; BUBBLEBEAM
+	db MOVETYPE_SPECIAL  ; AURORA_BEAM
+	db MOVETYPE_PHYSICAL ; HYPER_BEAM
+	db MOVETYPE_PHYSICAL ; PECK
+	db MOVETYPE_PHYSICAL ; DRILL_PECK
+	db MOVETYPE_PHYSICAL ; SUBMISSION
+	db MOVETYPE_PHYSICAL ; LOW_KICK
+	db MOVETYPE_PHYSICAL ; COUNTER
+	db MOVETYPE_PHYSICAL ; SEISMIC_TOSS
+	db MOVETYPE_PHYSICAL ; STRENGTH
+	db MOVETYPE_SPECIAL  ; ABSORB
+	db MOVETYPE_SPECIAL  ; MEGA_DRAIN
+	db MOVETYPE_SPECIAL  ; LEECH_SEED
+	db MOVETYPE_PHYSICAL ; GROWTH
+	db MOVETYPE_SPECIAL  ; RAZOR_LEAF
+	db MOVETYPE_SPECIAL  ; SOLARBEAM
+	db MOVETYPE_PHYSICAL ; POISONPOWDER
+	db MOVETYPE_SPECIAL  ; STUN_SPORE
+	db MOVETYPE_SPECIAL  ; SLEEP_POWDER
+	db MOVETYPE_SPECIAL  ; PETAL_DANCE
+	db MOVETYPE_PHYSICAL ; STRING_SHOT
+	db MOVETYPE_SPECIAL  ; DRAGON_RAGE
+	db MOVETYPE_SPECIAL  ; FIRE_SPIN
+	db MOVETYPE_SPECIAL  ; THUNDERSHOCK
+	db MOVETYPE_SPECIAL  ; THUNDERBOLT
+	db MOVETYPE_SPECIAL  ; THUNDER_WAVE
+	db MOVETYPE_SPECIAL  ; THUNDER
+	db MOVETYPE_PHYSICAL ; ROCK_THROW
+	db MOVETYPE_PHYSICAL ; EARTHQUAKE
+	db MOVETYPE_PHYSICAL ; FISSURE
+	db MOVETYPE_PHYSICAL ; DIG
+	db MOVETYPE_PHYSICAL ; TOXIC
+	db MOVETYPE_SPECIAL  ; CONFUSION
+	db MOVETYPE_SPECIAL  ; PSYCHIC_M
+	db MOVETYPE_SPECIAL  ; HYPNOSIS
+	db MOVETYPE_SPECIAL  ; MEDITATE
+	db MOVETYPE_SPECIAL  ; AGILITY
+	db MOVETYPE_PHYSICAL ; QUICK_ATTACK
+	db MOVETYPE_PHYSICAL ; RAGE
+	db MOVETYPE_SPECIAL  ; TELEPORT
+	db MOVETYPE_PHYSICAL ; NIGHT_SHADE
+	db MOVETYPE_PHYSICAL ; MIMIC
+	db MOVETYPE_PHYSICAL ; SCREECH
+	db MOVETYPE_PHYSICAL ; DOUBLE_TEAM
+	db MOVETYPE_PHYSICAL ; RECOVER
+	db MOVETYPE_PHYSICAL ; HARDEN
+	db MOVETYPE_PHYSICAL ; MINIMIZE
+	db MOVETYPE_PHYSICAL ; SMOKESCREEN
+	db MOVETYPE_PHYSICAL ; CONFUSE_RAY
+	db MOVETYPE_SPECIAL  ; WITHDRAW
+	db MOVETYPE_PHYSICAL ; DEFENSE_CURL
+	db MOVETYPE_SPECIAL  ; BARRIER
+	db MOVETYPE_SPECIAL  ; LIGHT_SCREEN
+	db MOVETYPE_SPECIAL  ; HAZE
+	db MOVETYPE_SPECIAL  ; REFLECT
+	db MOVETYPE_PHYSICAL ; FOCUS_ENERGY
+	db MOVETYPE_PHYSICAL ; BIDE
+	db MOVETYPE_PHYSICAL ; METRONOME
+	db MOVETYPE_PHYSICAL ; MIRROR_MOVE
+	db MOVETYPE_PHYSICAL ; SELFDESTRUCT
+	db MOVETYPE_PHYSICAL ; EGG_BOMB
+	db MOVETYPE_PHYSICAL ; LICK
+	db MOVETYPE_PHYSICAL ; SMOG
+	db MOVETYPE_PHYSICAL ; SLUDGE
+	db MOVETYPE_PHYSICAL ; BONE_CLUB
+	db MOVETYPE_SPECIAL  ; FIRE_BLAST
+	db MOVETYPE_SPECIAL  ; WATERFALL
+	db MOVETYPE_SPECIAL  ; CLAMP
+	db MOVETYPE_PHYSICAL ; SWIFT
+	db MOVETYPE_PHYSICAL ; SKULL_BASH
+	db MOVETYPE_PHYSICAL ; SPIKE_CANNON
+	db MOVETYPE_PHYSICAL ; CONSTRICT
+	db MOVETYPE_SPECIAL  ; AMNESIA
+	db MOVETYPE_SPECIAL  ; KINESIS
+	db MOVETYPE_PHYSICAL ; SOFTBOILED
+	db MOVETYPE_PHYSICAL ; HI_JUMP_KICK
+	db MOVETYPE_PHYSICAL ; GLARE
+	db MOVETYPE_SPECIAL  ; DREAM_EATER
+	db MOVETYPE_PHYSICAL ; POISON_GAS
+	db MOVETYPE_PHYSICAL ; BARRAGE
+	db MOVETYPE_PHYSICAL ; LEECH_LIFE
+	db MOVETYPE_PHYSICAL ; LOVELY_KISS
+	db MOVETYPE_PHYSICAL ; SKY_ATTACK
+	db MOVETYPE_PHYSICAL ; TRANSFORM
+	db MOVETYPE_SPECIAL  ; BUBBLE
+	db MOVETYPE_PHYSICAL ; DIZZY_PUNCH
+	db MOVETYPE_SPECIAL  ; SPORE
+	db MOVETYPE_PHYSICAL ; FLASH
+	db MOVETYPE_SPECIAL  ; PSYWAVE
+	db MOVETYPE_PHYSICAL ; SPLASH
+	db MOVETYPE_PHYSICAL ; ACID_ARMOR
+	db MOVETYPE_SPECIAL  ; CRABHAMMER
+	db MOVETYPE_PHYSICAL ; EXPLOSION
+	db MOVETYPE_PHYSICAL ; FURY_SWIPES
+	db MOVETYPE_PHYSICAL ; BONEMERANG
+	db MOVETYPE_SPECIAL  ; REST
+	db MOVETYPE_PHYSICAL ; ROCK_SLIDE
+	db MOVETYPE_PHYSICAL ; HYPER_FANG
+	db MOVETYPE_PHYSICAL ; SHARPEN
+	db MOVETYPE_PHYSICAL ; CONVERSION
+	db MOVETYPE_PHYSICAL ; TRI_ATTACK
+	db MOVETYPE_PHYSICAL ; SUPER_FANG
+	db MOVETYPE_PHYSICAL ; SLASH
+	db MOVETYPE_PHYSICAL ; SUBSTITUTE
+	db MOVETYPE_PHYSICAL ; STRUGGLE
+	db MOVETYPE_PHYSICAL ; SKETCH
+	db MOVETYPE_PHYSICAL ; TRIPLE_KICK
+	db MOVETYPE_SPECIAL  ; THIEF
+	db MOVETYPE_PHYSICAL ; SPIDER_WEB
+	db MOVETYPE_PHYSICAL ; MIND_READER
+	db MOVETYPE_PHYSICAL ; NIGHTMARE
+	db MOVETYPE_SPECIAL  ; FLAME_WHEEL
+	db MOVETYPE_PHYSICAL ; SNORE
+	db MOVETYPE_OTHER    ; CURSE
+	db MOVETYPE_PHYSICAL ; FLAIL
+	db MOVETYPE_PHYSICAL ; CONVERSION2
+	db MOVETYPE_PHYSICAL ; AEROBLAST
+	db MOVETYPE_SPECIAL  ; COTTON_SPORE
+	db MOVETYPE_PHYSICAL ; REVERSAL
+	db MOVETYPE_PHYSICAL ; SPITE
+	db MOVETYPE_SPECIAL  ; POWDER_SNOW
+	db MOVETYPE_PHYSICAL ; PROTECT
+	db MOVETYPE_PHYSICAL ; MACH_PUNCH
+	db MOVETYPE_PHYSICAL ; SCARY_FACE
+	db MOVETYPE_SPECIAL  ; FAINT_ATTACK
+	db MOVETYPE_PHYSICAL ; SWEET_KISS
+	db MOVETYPE_PHYSICAL ; BELLY_DRUM
+	db MOVETYPE_PHYSICAL ; SLUDGE_BOMB
+	db MOVETYPE_PHYSICAL ; MUD_SLAP
+	db MOVETYPE_SPECIAL  ; OCTAZOOKA
+	db MOVETYPE_PHYSICAL ; SPIKES
+	db MOVETYPE_SPECIAL  ; ZAP_CANNON
+	db MOVETYPE_PHYSICAL ; FORESIGHT
+	db MOVETYPE_PHYSICAL ; DESTINY_BOND
+	db MOVETYPE_PHYSICAL ; PERISH_SONG
+	db MOVETYPE_SPECIAL  ; ICY_WIND
+	db MOVETYPE_PHYSICAL ; DETECT
+	db MOVETYPE_PHYSICAL ; BONE_RUSH
+	db MOVETYPE_PHYSICAL ; LOCK_ON
+	db MOVETYPE_SPECIAL  ; OUTRAGE
+	db MOVETYPE_PHYSICAL ; SANDSTORM
+	db MOVETYPE_SPECIAL  ; GIGA_DRAIN
+	db MOVETYPE_PHYSICAL ; ENDURE
+	db MOVETYPE_PHYSICAL ; CHARM
+	db MOVETYPE_PHYSICAL ; ROLLOUT
+	db MOVETYPE_PHYSICAL ; FALSE_SWIPE
+	db MOVETYPE_PHYSICAL ; SWAGGER
+	db MOVETYPE_PHYSICAL ; MILK_DRINK
+	db MOVETYPE_SPECIAL  ; SPARK
+	db MOVETYPE_PHYSICAL ; FURY_CUTTER
+	db MOVETYPE_PHYSICAL ; STEEL_WING
+	db MOVETYPE_PHYSICAL ; MEAN_LOOK
+	db MOVETYPE_PHYSICAL ; ATTRACT
+	db MOVETYPE_PHYSICAL ; SLEEP_TALK
+	db MOVETYPE_PHYSICAL ; HEAL_BELL
+	db MOVETYPE_PHYSICAL ; RETURN
+	db MOVETYPE_PHYSICAL ; PRESENT
+	db MOVETYPE_PHYSICAL ; FRUSTRATION
+	db MOVETYPE_PHYSICAL ; SAFEGUARD
+	db MOVETYPE_PHYSICAL ; PAIN_SPLIT
+	db MOVETYPE_SPECIAL  ; SACRED_FIRE
+	db MOVETYPE_PHYSICAL ; MAGNITUDE
+	db MOVETYPE_PHYSICAL ; DYNAMICPUNCH
+	db MOVETYPE_PHYSICAL ; MEGAHORN
+	db MOVETYPE_SPECIAL  ; DRAGONBREATH
+	db MOVETYPE_PHYSICAL ; BATON_PASS
+	db MOVETYPE_PHYSICAL ; ENCORE
+	db MOVETYPE_SPECIAL  ; PURSUIT
+	db MOVETYPE_PHYSICAL ; RAPID_SPIN
+	db MOVETYPE_PHYSICAL ; SWEET_SCENT
+	db MOVETYPE_PHYSICAL ; IRON_TAIL
+	db MOVETYPE_PHYSICAL ; METAL_CLAW
+	db MOVETYPE_PHYSICAL ; VITAL_THROW
+	db MOVETYPE_PHYSICAL ; MORNING_SUN
+	db MOVETYPE_SPECIAL  ; SYNTHESIS
+	db MOVETYPE_PHYSICAL ; MOONLIGHT
+	db MOVETYPE_PHYSICAL ; HIDDEN_POWER
+	db MOVETYPE_PHYSICAL ; CROSS_CHOP
+	db MOVETYPE_SPECIAL  ; TWISTER
+	db MOVETYPE_SPECIAL  ; RAIN_DANCE
+	db MOVETYPE_SPECIAL  ; SUNNY_DAY
+	db MOVETYPE_SPECIAL  ; CRUNCH
+	db MOVETYPE_SPECIAL  ; MIRROR_COAT
+	db MOVETYPE_PHYSICAL ; PSYCH_UP
+	db MOVETYPE_PHYSICAL ; EXTREMESPEED
+	db MOVETYPE_PHYSICAL ; ANCIENTPOWER
+	db MOVETYPE_PHYSICAL ; SHADOW_BALL
+	db MOVETYPE_SPECIAL  ; FUTURE_SIGHT
+	db MOVETYPE_PHYSICAL ; ROCK_SMASH
+	db MOVETYPE_SPECIAL  ; WHIRLPOOL
+	db MOVETYPE_SPECIAL  ; BEAT_UP
 
 INCLUDE "engine/std_scripts.asm"
 
@@ -12000,6 +12507,8 @@ SkullPic::
 INCBIN "gfx/stygian/skull.2bpp"
 PlantPic::
 INCBIN "gfx/stygian/plant.2bpp"
+ArmourPic::
+INCBIN "gfx/stygian/armour.2bpp"
 ;people
 GoblinPic::
 INCBIN "gfx/trainers/youngster.2bpp"
@@ -12012,513 +12521,6 @@ INCBIN "gfx/trainers/lt_surge.2bpp"
 ;dead people
 DeadGoblinPic::
 INCBIN "gfx/stygian/youngster_dead.2bpp"
-
-AskCaptureFaintedMon:
-	ld a, [wBattleMode]
-	cp a, 1
-	ret nz
-	
-	ld hl, EnemyMonStatus
-	ld a, [hli]
-	push af
-	inc hl
-	ld a, [hli]
-	push af
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemyMonItem
-	ld a, [hl]
-	push af
-	push hl
-	ld hl, EnemySubStatus5
-	ld a, [hl]
-	push af
-	set SUBSTATUS_TRANSFORMED, [hl]
-	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .ditto
-	jr .not_ditto
-
-.ditto
-	ld a, DITTO
-	ld [TempEnemyMonSpecies], a
-	jr .load_data
-
-.not_ditto
-	set 3, [hl]
-	ld hl, wEnemyBackupDVs
-	ld a, [EnemyMonDVs]
-	ld [hli], a
-	ld a, [EnemyMonDVs + 1]
-	ld [hl], a
-
-.load_data
-	ld a, [TempEnemyMonSpecies]
-	ld [CurPartySpecies], a
-	ld a, [EnemyMonLevel]
-	ld [CurPartyLevel], a
-	callba LoadEnemyMon
-
-	pop af
-	ld [EnemySubStatus5], a
-
-	pop hl
-	pop af
-	ld [hl], a
-	pop hl
-	pop af
-	ld [hld], a
-	pop af
-	ld [hld], a
-	dec hl
-	pop af
-	ld [hl], a
-
-	ld hl, EnemySubStatus5
-	bit SUBSTATUS_TRANSFORMED, [hl]
-	jr nz, .Transformed
-	ld hl, wWildMonMoves
-	ld de, EnemyMonMoves
-	ld bc, NUM_MOVES
-	call CopyBytes
-
-	ld hl, wWildMonPP
-	ld de, EnemyMonPP
-	ld bc, NUM_MOVES
-	call CopyBytes
-.Transformed
-
-	ld a, [EnemyMonSpecies]
-	ld [wWildMon], a
-	ld [CurPartySpecies], a
-	ld [wd265], a
-	call ClearSprites
-
-	ld a, [wd265]
-	dec a
-	call CheckCaughtMon
-
-	ld a, c
-	push af
-	ld a, [wd265]
-	dec a
-	call SetSeenAndCaughtMon
-	pop af
-	and a
-	jr nz, .skip_pokedex
-
-	call CheckReceivedDex
-	jr z, .skip_pokedex
-
-	ld hl, _Text_AddedToPokedex
-	call PrintText
-
-	call ClearSprites
-
-	ld a, [EnemyMonSpecies]
-	ld [wd265], a
-	predef NewPokedexEntry
-
-.skip_pokedex
-	cp BATTLETYPE_CELEBI
-	jr nz, .not_celebi
-	ld hl, wBattleResult
-	set 6, [hl]
-.not_celebi
-
-	ld a, [PartyCount]
-	cp PARTY_LENGTH
-	jr z, .SendToPC
-
-	xor a ; PARTYMON
-	ld [MonType], a
-	call ClearSprites
-
-	predef TryAddMonToParty
-
-	callba SetCaughtData
-
-	ld hl, _Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	ret c
-	ld a, [PartyCount]
-	dec a
-	ld [CurPartyMon], a
-	ld hl, PartyMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call AddNTimes
-
-	ld d, h
-	ld e, l
-	push de
-	xor a ; PARTYMON
-	ld [MonType], a
-	ld b, 0
-	callba NamingScreen
-
-	call RotateThreePalettesRight
-
-	call LoadStandardFont
-
-	pop hl
-	ld de, StringBuffer1
-	call InitName
-
-	ret
-
-.SendToPC
-	call ClearSprites
-
-	predef SentPkmnIntoBox
-
-	callba SetBoxMonCaughtData
-
-	ld a, BANK(sBoxCount)
-	call GetSRAMBank
-
-	ld a, [sBoxCount]
-	cp MONS_PER_BOX
-	jr nz, .BoxNotFullYet
-	ld hl, wBattleResult
-	set 7, [hl]
-.BoxNotFullYet
-	call CloseSRAM
-
-	ld hl, _Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
-	ld a, [CurPartySpecies]
-	ld [wd265], a
-	call GetPokemonName
-
-	call YesNoBox
-	jr c, .SkipBoxMonNickname
-
-	xor a
-	ld [CurPartyMon], a
-	ld a, BOXMON
-	ld [MonType], a
-	ld de, wMonOrItemNameBuffer
-	ld b, $0
-	callba NamingScreen
-
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, wMonOrItemNameBuffer
-	ld de, sBoxMonNicknames
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	ld hl, sBoxMonNicknames
-	ld de, StringBuffer1
-	call InitName
-
-	call CloseSRAM
-
-.SkipBoxMonNickname
-	ld a, BANK(sBoxMonNicknames)
-	call GetSRAMBank
-
-	ld hl, sBoxMonNicknames
-	ld de, wMonOrItemNameBuffer
-	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
-
-	call CloseSRAM
-
-	ld hl, _Text_SentToBillsPC
-	call PrintText
-
-	call RotateThreePalettesRight
-	call LoadStandardFont
-	ret
-
-_Text_SentToBillsPC:
-	text_jump UnknownText_0x1c5b38
-	db "@"
-
-_Text_AskNicknameNewlyCaughtMon:
-	text_jump UnknownText_0x1c5b7f
-	db "@"
-	
-_Text_AddedToPokedex
-	text_jump UnknownText_0x1c5b53
-	db "@"
-
-MOVETYPE_PHYSICAL EQU 1
-MOVETYPE_SPECIAL EQU 0
-MOVETYPE_OTHER EQU 2
-
-_PhysicalSpecialSplit:: ;Determines if a move is Physical or Special  ; credit to Mateo
-	ld a, e
-	ld c,a
-	ld b, $00
-	ld hl,.MovesTable
-	add hl,bc
-	ld a,[hl]
-	ld e, a
-	ret
-
-.MovesTable
-	db MOVETYPE_OTHER ;DUMMY ; can be any value
-	db MOVETYPE_PHYSICAL  ;      POUND,        
-	db MOVETYPE_PHYSICAL  ;      KARATE_CHOP,  
-	db MOVETYPE_PHYSICAL  ;      DOUBLESLAP,   
-	db MOVETYPE_PHYSICAL  ;      COMET_PUNCH,  
-	db MOVETYPE_PHYSICAL  ;      MEGA_PUNCH,   
-	db MOVETYPE_PHYSICAL  ;      PAY_DAY,      
-	db MOVETYPE_SPECIAL   ;     FIRE_PUNCH,   
-	db MOVETYPE_PHYSICAL  ;      ICE_PUNCH,    
-	db MOVETYPE_SPECIAL   ;     THUNDERPUNCH, 
-	db MOVETYPE_PHYSICAL  ;      SCRATCH,      
-	db MOVETYPE_PHYSICAL  ;      VICEGRIP,     
-	db MOVETYPE_PHYSICAL  ;      GUILLOTINE,   
-	db MOVETYPE_PHYSICAL  ;      RAZOR_WIND,   
-	db MOVETYPE_PHYSICAL  ;      SWORDS_DANCE, 
-	db MOVETYPE_PHYSICAL  ;      CUT,          
-	db MOVETYPE_PHYSICAL  ;      GUST,         
-	db MOVETYPE_PHYSICAL  ;      WING_ATTACK,  
-	db MOVETYPE_PHYSICAL  ;      WHIRLWIND,    
-	db MOVETYPE_PHYSICAL  ;      FLY,          
-	db MOVETYPE_PHYSICAL  ;      BIND,         
-	db MOVETYPE_PHYSICAL  ;      SLAM,         
-	db MOVETYPE_PHYSICAL  ;      VINE_WHIP,    
-	db MOVETYPE_PHYSICAL  ;      STOMP,        
-	db MOVETYPE_PHYSICAL  ;      DOUBLE_KICK,  
-	db MOVETYPE_PHYSICAL  ;      MEGA_KICK,    
-	db MOVETYPE_PHYSICAL  ;      JUMP_KICK,    
-	db MOVETYPE_PHYSICAL  ;      ROLLING_KICK, 
-	db MOVETYPE_PHYSICAL  ;      SAND_ATTACK,  
-	db MOVETYPE_PHYSICAL  ;      HEADBUTT,     
-	db MOVETYPE_PHYSICAL  ;      HORN_ATTACK,  
-	db MOVETYPE_PHYSICAL  ;      FURY_ATTACK,  
-	db MOVETYPE_PHYSICAL  ;      HORN_DRILL,   
-	db MOVETYPE_PHYSICAL  ;      TACKLE,       
-	db MOVETYPE_PHYSICAL  ;      BODY_SLAM,    
-	db MOVETYPE_PHYSICAL  ;      WRAP,         
-	db MOVETYPE_PHYSICAL  ;      TAKE_DOWN,    
-	db MOVETYPE_PHYSICAL  ;      THRASH,       
-	db MOVETYPE_PHYSICAL  ;      DOUBLE_EDGE,  
-	db MOVETYPE_PHYSICAL  ;      TAIL_WHIP,    
-	db MOVETYPE_SPECIAL   ;     POISON_STING, 
-	db MOVETYPE_PHYSICAL  ;      TWINEEDLE,    
-	db MOVETYPE_PHYSICAL  ;      PIN_MISSILE,  
-	db MOVETYPE_SPECIAL  ;      LEER,         
-	db MOVETYPE_PHYSICAL   ;     BITE,         
-	db MOVETYPE_SPECIAL   ;     GROWL,        
-	db MOVETYPE_SPECIAL   ;     ROAR,         
-	db MOVETYPE_SPECIAL   ;     SING,         
-	db MOVETYPE_SPECIAL   ;     SUPERSONIC,   
-	db MOVETYPE_SPECIAL   ;     SONICBOOM,    
-	db MOVETYPE_SPECIAL   ;     DISABLE,      
-	db MOVETYPE_SPECIAL   ;     ACID,         
-	db MOVETYPE_SPECIAL   ;     EMBER,        
-	db MOVETYPE_SPECIAL   ;     FLAMETHROWER, 
-	db MOVETYPE_SPECIAL   ;     MIST,         
-	db MOVETYPE_SPECIAL   ;     WATER_GUN,    
-	db MOVETYPE_SPECIAL   ;     HYDRO_PUMP,   
-	db MOVETYPE_SPECIAL   ;     SURF,         
-	db MOVETYPE_SPECIAL   ;     ICE_BEAM,     
-	db MOVETYPE_PHYSICAL  ;      BLIZZARD,     
-	db MOVETYPE_SPECIAL   ;     PSYBEAM,      
-	db MOVETYPE_SPECIAL   ;     BUBBLEBEAM,   
-	db MOVETYPE_PHYSICAL  ;      AURORA_BEAM,  
-	db MOVETYPE_SPECIAL   ;     HYPER_BEAM,   
-	db MOVETYPE_PHYSICAL  ;      PECK,         
-	db MOVETYPE_PHYSICAL  ;      DRILL_PECK,   
-	db MOVETYPE_PHYSICAL  ;      SUBMISSION,   
-	db MOVETYPE_PHYSICAL  ;      LOW_KICK,     
-	db MOVETYPE_PHYSICAL  ;      COUNTER,      
-	db MOVETYPE_PHYSICAL  ;      SEISMIC_TOSS, 
-	db MOVETYPE_PHYSICAL  ;      STRENGTH,     
-	db MOVETYPE_PHYSICAL  ;      ABSORB,       
-	db MOVETYPE_PHYSICAL  ;      MEGA_DRAIN,   
-	db MOVETYPE_PHYSICAL  ;      LEECH_SEED,   
-	db MOVETYPE_PHYSICAL  ;      GROWTH,       
-	db MOVETYPE_PHYSICAL  ;      RAZOR_LEAF,   
-	db MOVETYPE_PHYSICAL  ;      SOLARBEAM,    
-	db MOVETYPE_SPECIAL   ;     POISONPOWDER, 
-	db MOVETYPE_PHYSICAL  ;      STUN_SPORE,   
-	db MOVETYPE_PHYSICAL  ;      SLEEP_POWDER, 
-	db MOVETYPE_PHYSICAL  ;      PETAL_DANCE,  
-	db MOVETYPE_PHYSICAL  ;      STRING_SHOT,  
-	db MOVETYPE_PHYSICAL  ;      DRAGON_RAGE,  
-	db MOVETYPE_SPECIAL   ;     FIRE_SPIN,    
-	db MOVETYPE_SPECIAL   ;     THUNDERSHOCK, 
-	db MOVETYPE_SPECIAL   ;     THUNDERBOLT,  
-	db MOVETYPE_SPECIAL   ;     THUNDER_WAVE, 
-	db MOVETYPE_SPECIAL   ;     THUNDER,      
-	db MOVETYPE_PHYSICAL  ;      ROCK_THROW,   
-	db MOVETYPE_PHYSICAL  ;      EARTHQUAKE,   
-	db MOVETYPE_PHYSICAL  ;      FISSURE,      
-	db MOVETYPE_PHYSICAL  ;      DIG,          
-	db MOVETYPE_SPECIAL   ;     TOXIC,        
-	db MOVETYPE_SPECIAL   ;     CONFUSION,    
-	db MOVETYPE_SPECIAL   ;     PSYCHIC_M,    
-	db MOVETYPE_SPECIAL   ;     HYPNOSIS,     
-	db MOVETYPE_SPECIAL   ;     MEDITATE,     
-	db MOVETYPE_SPECIAL   ;     AGILITY,      
-	db MOVETYPE_PHYSICAL  ;      QUICK_ATTACK, 
-	db MOVETYPE_PHYSICAL  ;      RAGE,         
-	db MOVETYPE_SPECIAL   ;     TELEPORT,     
-	db MOVETYPE_SPECIAL   ;     NIGHT_SHADE,  
-	db MOVETYPE_SPECIAL   ;     MIMIC,        
-	db MOVETYPE_SPECIAL   ;     SCREECH,      
-	db MOVETYPE_SPECIAL   ;     DOUBLE_TEAM,  
-	db MOVETYPE_PHYSICAL  ;      RECOVER,      
-	db MOVETYPE_PHYSICAL  ;      HARDEN,       
-	db MOVETYPE_SPECIAL   ;     MINIMIZE,     
-	db MOVETYPE_PHYSICAL  ;      SMOKESCREEN,  
-	db MOVETYPE_SPECIAL   ;     CONFUSE_RAY,  
-	db MOVETYPE_SPECIAL   ;     WITHDRAW,     
-	db MOVETYPE_PHYSICAL  ;      DEFENSE_CURL, 
-	db MOVETYPE_SPECIAL   ;     BARRIER,      
-	db MOVETYPE_SPECIAL   ;     LIGHT_SCREEN, 
-	db MOVETYPE_PHYSICAL  ;      HAZE,         
-	db MOVETYPE_SPECIAL   ;     REFLECT,      
-	db MOVETYPE_PHYSICAL  ;      FOCUS_ENERGY, 
-	db MOVETYPE_PHYSICAL  ;      BIDE,         
-	db MOVETYPE_PHYSICAL  ;      METRONOME,    
-	db MOVETYPE_PHYSICAL  ;      MIRROR_MOVE,  
-	db MOVETYPE_PHYSICAL  ;      SELFDESTRUCT, 
-	db MOVETYPE_PHYSICAL  ;      EGG_BOMB,     
-	db MOVETYPE_SPECIAL   ;     LICK,         
-	db MOVETYPE_SPECIAL   ;     SMOG,         
-	db MOVETYPE_SPECIAL   ;     SLUDGE,       
-	db MOVETYPE_PHYSICAL  ;      BONE_CLUB,    
-	db MOVETYPE_SPECIAL   ;     FIRE_BLAST,   
-	db MOVETYPE_SPECIAL   ;     WATERFALL,    
-	db MOVETYPE_SPECIAL   ;     CLAMP,        
-	db MOVETYPE_PHYSICAL  ;      SWIFT,        
-	db MOVETYPE_PHYSICAL  ;      SKULL_BASH,   
-	db MOVETYPE_PHYSICAL  ;      SPIKE_CANNON, 
-	db MOVETYPE_PHYSICAL  ;      CONSTRICT,    
-	db MOVETYPE_SPECIAL   ;     AMNESIA,      
-	db MOVETYPE_SPECIAL   ;     KINESIS,      
-	db MOVETYPE_PHYSICAL  ;      SOFTBOILED,   
-	db MOVETYPE_PHYSICAL  ;      HI_JUMP_KICK, 
-	db MOVETYPE_PHYSICAL  ;      GLARE,        
-	db MOVETYPE_SPECIAL   ;     DREAM_EATER,  
-	db MOVETYPE_SPECIAL   ;     POISON_GAS,   
-	db MOVETYPE_PHYSICAL  ;      BARRAGE,      
-	db MOVETYPE_PHYSICAL  ;      LEECH_LIFE,   
-	db MOVETYPE_PHYSICAL  ;      LOVELY_KISS,  
-	db MOVETYPE_PHYSICAL  ;      SKY_ATTACK,   
-	db MOVETYPE_PHYSICAL  ;      TRANSFORM,    
-	db MOVETYPE_SPECIAL   ;     BUBBLE,       
-	db MOVETYPE_SPECIAL   ;     DIZZY_PUNCH,  
-	db MOVETYPE_PHYSICAL  ;      SPORE,        
-	db MOVETYPE_PHYSICAL  ;      FLASH,        
-	db MOVETYPE_SPECIAL   ;     PSYWAVE,      
-	db MOVETYPE_PHYSICAL  ;      SPLASH,       
-	db MOVETYPE_SPECIAL   ;     ACID_ARMOR,   
-	db MOVETYPE_SPECIAL   ;     CRABHAMMER,   
-	db MOVETYPE_PHYSICAL  ;      EXPLOSION,    
-	db MOVETYPE_PHYSICAL  ;      FURY_SWIPES,  
-	db MOVETYPE_PHYSICAL  ;      BONEMERANG,   
-	db MOVETYPE_SPECIAL   ;     REST,         
-	db MOVETYPE_PHYSICAL  ;      ROCK_SLIDE,   
-	db MOVETYPE_PHYSICAL  ;      HYPER_FANG,   
-	db MOVETYPE_PHYSICAL  ;      SHARPEN,      
-	db MOVETYPE_SPECIAL   ;     CONVERSION,   
-	db MOVETYPE_PHYSICAL  ;      TRI_ATTACK,   
-	db MOVETYPE_PHYSICAL  ;      SUPER_FANG,   
-	db MOVETYPE_PHYSICAL  ;      SLASH,        
-	db MOVETYPE_SPECIAL   ;     SUBSTITUTE,   
-	db MOVETYPE_PHYSICAL  ;      STRUGGLE,     
-	db MOVETYPE_SPECIAL   ;     SKETCH,       
-	db MOVETYPE_PHYSICAL  ;      TRIPLE_KICK,  
-	db MOVETYPE_SPECIAL   ;     THIEF,        
-	db MOVETYPE_PHYSICAL  ;      SPIDER_WEB,   
-	db MOVETYPE_PHYSICAL  ;      MIND_READER,  
-	db MOVETYPE_SPECIAL   ;     NIGHTMARE,    
-	db MOVETYPE_SPECIAL   ;     FLAME_WHEEL,  
-	db MOVETYPE_PHYSICAL  ;      SNORE,        
-	db MOVETYPE_SPECIAL   ;     CURSE,        
-	db MOVETYPE_PHYSICAL  ;      FLAIL,        
-	db MOVETYPE_PHYSICAL  ;      CONVERSION2,  
-	db MOVETYPE_PHYSICAL  ;      AEROBLAST,    
-	db MOVETYPE_PHYSICAL  ;      COTTON_SPORE, 
-	db MOVETYPE_PHYSICAL  ;      REVERSAL,     
-	db MOVETYPE_SPECIAL   ;     SPITE,        
-	db MOVETYPE_PHYSICAL  ;      POWDER_SNOW,  
-	db MOVETYPE_SPECIAL   ;     PROTECT,      
-	db MOVETYPE_PHYSICAL  ;      MACH_PUNCH,   
-	db MOVETYPE_PHYSICAL  ;      SCARY_FACE,   
-	db MOVETYPE_SPECIAL   ;     FAINT_ATTACK, 
-	db MOVETYPE_PHYSICAL  ;      SWEET_KISS,   
-	db MOVETYPE_PHYSICAL  ;      BELLY_DRUM,   
-	db MOVETYPE_PHYSICAL  ;      SLUDGE_BOMB,  
-	db MOVETYPE_PHYSICAL  ;      MUD_SLAP,     
-	db MOVETYPE_PHYSICAL  ;      OCTAZOOKA,    
-	db MOVETYPE_PHYSICAL  ;      SPIKES,       
-	db MOVETYPE_SPECIAL   ;     ZAP_CANNON,   
-	db MOVETYPE_PHYSICAL  ;      FORESIGHT,    
-	db MOVETYPE_SPECIAL   ;     DESTINY_BOND, 
-	db MOVETYPE_PHYSICAL  ;      PERISH_SONG,  
-	db MOVETYPE_PHYSICAL  ;      ICY_WIND,     
-	db MOVETYPE_PHYSICAL  ;      DETECT,       
-	db MOVETYPE_PHYSICAL  ;      BONE_RUSH,    
-	db MOVETYPE_PHYSICAL  ;      LOCK_ON,      
-	db MOVETYPE_PHYSICAL  ;      OUTRAGE,      
-	db MOVETYPE_PHYSICAL  ;      SANDSTORM,    
-	db MOVETYPE_PHYSICAL  ;      GIGA_DRAIN,   
-	db MOVETYPE_PHYSICAL  ;      ENDURE,       
-	db MOVETYPE_PHYSICAL  ;      CHARM,        
-	db MOVETYPE_PHYSICAL  ;      ROLLOUT,      
-	db MOVETYPE_SPECIAL   ;     FALSE_SWIPE,  
-	db MOVETYPE_PHYSICAL  ;      SWAGGER,      
-	db MOVETYPE_PHYSICAL  ;      MILK_DRINK,   
-	db MOVETYPE_SPECIAL   ;     SPARK,        
-	db MOVETYPE_PHYSICAL  ;      FURY_CUTTER,  
-	db MOVETYPE_PHYSICAL  ;      STEEL_WING,   
-	db MOVETYPE_PHYSICAL  ;      MEAN_LOOK,    
-	db MOVETYPE_PHYSICAL  ;      ATTRACT,      
-	db MOVETYPE_PHYSICAL  ;      SLEEP_TALK,   
-	db MOVETYPE_PHYSICAL  ;      HEAL_BELL,    
-	db MOVETYPE_PHYSICAL  ;      RETURN,       
-	db MOVETYPE_PHYSICAL  ;      PRESENT,      
-	db MOVETYPE_PHYSICAL  ;      FRUSTRATION,  
-	db MOVETYPE_PHYSICAL  ;      SAFEGUARD,    
-	db MOVETYPE_PHYSICAL  ;      PAIN_SPLIT,   
-	db MOVETYPE_SPECIAL   ;     SACRED_FIRE,  
-	db MOVETYPE_PHYSICAL  ;      MAGNITUDE,    
-	db MOVETYPE_PHYSICAL  ;      DYNAMICPUNCH, 
-	db MOVETYPE_PHYSICAL  ;      MEGAHORN,     
-	db MOVETYPE_PHYSICAL  ;      DRAGONBREATH, 
-	db MOVETYPE_PHYSICAL  ;      BATON_PASS,   
-	db MOVETYPE_SPECIAL   ;     ENCORE,       
-	db MOVETYPE_SPECIAL   ;     PURSUIT,      
-	db MOVETYPE_PHYSICAL  ;      RAPID_SPIN,   
-	db MOVETYPE_SPECIAL   ;     SWEET_SCENT,  
-	db MOVETYPE_PHYSICAL  ;      IRON_TAIL,    
-	db MOVETYPE_PHYSICAL  ;      METAL_CLAW,   
-	db MOVETYPE_PHYSICAL  ;      VITAL_THROW,  
-	db MOVETYPE_PHYSICAL  ;      MORNING_SUN,  
-	db MOVETYPE_PHYSICAL  ;      SYNTHESIS,    
-	db MOVETYPE_PHYSICAL  ;      MOONLIGHT,    
-	db MOVETYPE_PHYSICAL  ;      HIDDEN_POWER, 
-	db MOVETYPE_PHYSICAL  ;      CROSS_CHOP,   
-	db MOVETYPE_PHYSICAL  ;      TWISTER,      
-	db MOVETYPE_SPECIAL   ;     RAIN_DANCE,   
-	db MOVETYPE_SPECIAL   ;     SUNNY_DAY,    
-	db MOVETYPE_SPECIAL   ;     CRUNCH,       
-	db MOVETYPE_SPECIAL   ;     MIRROR_COAT,  
-	db MOVETYPE_PHYSICAL  ;      PSYCH_UP,     
-	db MOVETYPE_PHYSICAL  ;      EXTREMESPEED, 
-	db MOVETYPE_PHYSICAL  ;      ANCIENTPOWER, 
-	db MOVETYPE_SPECIAL   ;     SHADOW_BALL,  
-	db MOVETYPE_SPECIAL   ;     FUTURE_SIGHT, 
-	db MOVETYPE_PHYSICAL  ;      ROCK_SMASH,   
-	db MOVETYPE_SPECIAL   ;     WHIRLPOOL,    
-	db MOVETYPE_SPECIAL   ;     BEAT_UP,      
 
 SECTION "stadium2", ROMX[$8000-$220], BANK[$7F]
 

@@ -181,7 +181,7 @@ INCLUDE "gfx/stygian/gel.pal"
 .TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 
 .LOKmap
@@ -292,7 +292,7 @@ INCLUDE "gfx/stygian/gel.pal"
 .TLKnote
 	jumptext .talkNote
 .talkNote
-	text "No response."
+	text "That cannot talk."
 	done
 
 .LOKnote
@@ -485,7 +485,7 @@ INCLUDE "gfx/stygian/gel.pal"
 	
 .noteFound
 	text "There's a note."
-	done
+	prompt
 	
 .magicBookActions
 	showemote EMOTE_SAD, LAST_TALKED, 15
@@ -785,7 +785,7 @@ INCLUDE "gfx/stygian/gel.pal"
 	cont "Press it?"
 	prompt
 .thyPartyWasHealed
-	text "Thy party was"
+	text "Your party was"
 	line "healed."
 	done
 .crystalBallActions

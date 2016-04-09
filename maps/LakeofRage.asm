@@ -32,8 +32,9 @@ LakeofRage_MapEventHeader:: db 0, 0
 	signpost 13, 13, SIGNPOST_READ, x6y6
 	signpost 12, 13, SIGNPOST_READ, x6y6
 
-.ObjectEvents: db 1
+.ObjectEvents: db 2
 	person_event SPRITE_POKE_BALL, 30, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, monactions, EVENT_109
+	person_event SPRITE_CHRIS_BIKE, 20, 37, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, armourActions, EVENT_10A
 
 .shrine
 	jumptext .intoShrine
@@ -51,12 +52,12 @@ x6y6
 	opentext
 	writetext breakable
 	yesorno
-	iffalse .finish
+	iffalse finish
 	setevent EVENT_105
 	changeblock 12, 12, 2
 	reloadmappart
 	jumptext broken
-.finish
+finish
 	closetext
 	end
 y16x4
@@ -106,7 +107,7 @@ monactions
 .TLKmon
 	jumptext .noresponse
 .noresponse
-	text "No response."
+	text "That cannot talk."
 	done
 .ATKmon
 	jumptext .noAtk
@@ -208,4 +209,118 @@ INCLUDE "gfx/stygian/poke.pal"
 .partytoofull
 	text "But your party is"
 	line "full!"
+	done
+armourActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKarmour
+	if_equal 2, .TCHarmour
+	if_equal 3, .TLKarmour
+	if_equal 4, .LOKarmour
+	if_equal 5, .INGarmour
+	if_equal 6, .TKEarmour
+	if_equal 7, .USEarmour
+	end
+
+.ATKarmour
+	jumptext .noAtk
+.noAtk
+	text "No! You may"
+	line "not! You are"
+	cont "able, though."
+	done
+
+.TCHarmour
+	opentext
+	writetext .reachOfTouch
+	yesorno
+	iffalse finish
+	jumptext .feel
+.feel
+	text "You feel a hard"
+	line "suit of armour."
+	done
+.TLKarmour
+	jumptext .no
+.no
+	text "That cannot talk."
+	done
+
+.LOKarmour
+	callasm .lokarmour
+	waitbutton
+	jumptext .seenArmour
+.seenArmour
+	text "You see a suit of"
+	line "armour."
+	prompt
+.lokarmour
+	lb bc, BANK(ArmourPic), 6*7
+	ld hl, ArmourPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+	
+	ld hl, .ArmourPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.ArmourPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.ArmourPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/armour.pal"
+	RGB 00, 00, 00
+.INGarmour
+	jumptext .inedible
+.inedible
+	text "That is inedible."
+	done
+.TKEarmour
+	opentext
+	writetext .armourQ
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse finish
+	setevent EVENT_10A
+	disappear 3
+	giveitem BICYCLE, 1
+	iffalse .oops
+	jumptext .nowt
+.armourQ
+	text "You're able to"
+	line "take the armour."
+	prompt
+.doSo
+	text "Do so?"
+	prompt
+.nowt
+	text "Nothing happens"
+	line "as you take"
+	cont "the armour."
+	done
+.reachOfTouch
+	text "The armour is"
+	line "within reach."
+	cont "Touch it?"
+	prompt
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.USEarmour
+	jumptext .noCanDo
+.noCanDo
+	text "There is no way to"
+	line "use that."
 	done

@@ -15,7 +15,7 @@ ChrisSprite: ; 14736
 ; 1473c
 
 ChrisBikeSprite: ; 1473c
-	sprite_header ChrisBikeSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
+	sprite_header ChrisBikeSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
 ; 14742
 
 GameboyKidSprite: ; 14742
@@ -395,7 +395,7 @@ KrisSprite: ; 14970
 ; 14976
 
 KrisBikeSprite: ; 14976
-	sprite_header KrisBikeSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BLUE
+	sprite_header KrisBikeSpriteGFX, 3, WALKING_SPRITE, PAL_OW_SILVER
 ; 1497c
 
 KurtOutsideSprite: ; 1497c

@@ -313,8 +313,8 @@ TeruSama1Desc:
 	db   "?@"
 
 BicycleDesc:
-	db   "A collapsible bike"
-	next "for fast movement.@"
+	db   "A tough suit of"
+	next "iron armour.@"
 
 MoonStoneDesc:
 	db   "Evolves certain"

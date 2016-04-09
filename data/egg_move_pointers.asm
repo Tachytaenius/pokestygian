@@ -28,8 +28,8 @@ EggMovePointers:: ; 0x23b11
 	dw SandshrewEggMoves
 	dw NoEggMoves
 	dw NidoranFEggMoves
-	dw NoEggMoves
-	dw NoEggMoves
+	dw NidoranFEggMoves
+	dw NidoranFEggMoves
 	dw NidoranMEggMoves
 	dw NoEggMoves
 	dw NoEggMoves

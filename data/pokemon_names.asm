@@ -26,12 +26,12 @@
 	db "Raichu@@@@"
 	db "Sandshrew@"
 	db "Sandslash@"
-	db "Nidoran♀@@"
-	db "Nidorina@@"
-	db "Nidoqueen@"
-	db "Nidoran♂@@"
-	db "Nidorino@@"
-	db "Nidoking@@"
+	db "Nidoran@@@"
+	db "Nidorin@@@"
+	db "Nidak@@@@@"
+	db "@@@@@@@@@@" ; to be decided
+	db "@@@@@@@@@@" ; to be decided
+	db "@@@@@@@@@@" ; to be decided
 	db "Clefairy@@"
 	db "Clefable@@"
 	db "Vulpix@@@@"

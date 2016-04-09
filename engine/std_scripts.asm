@@ -241,7 +241,7 @@ INCLUDE "gfx/stygian/banner.pal"
 TLKno
 	jumptext .noResponse
 .noResponse
-	text "No response."
+	text "That cannot talk."
 	done
 ATKno
 	jumptext .noAtk
@@ -346,7 +346,7 @@ ElevatorButtonScript: ; you're a plant now
 .TLKplant
 	jumptext .noResponse
 .noResponse
-	text "No response."
+	text "That cannot talk."
 	done
 .lookAtBoulder
 	lb bc, BANK(PlantPic), 6*8
@@ -587,7 +587,7 @@ INGmap
 TLKmap
 	jumptext .talkmap
 .talkmap
-	text "No response."
+	text "That cannot talk."
 	done
 
 

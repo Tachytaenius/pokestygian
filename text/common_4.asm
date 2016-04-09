@@ -665,7 +665,7 @@ UnknownText_0x1c4ff9::
 UnknownText_0x1c500d::
 	text "Can I do anything"
 	line "else for you?"
-	done
+	prompt
 
 UnknownText_0x1c502e::
 	text "Got ¥@"

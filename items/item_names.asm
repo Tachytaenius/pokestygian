@@ -4,7 +4,7 @@
 	db "Note@"
 	db "Note@"
 	db "Teru-sama@"
-	db "Bicycle@"
+	db "Armour@"
 	db "Moon stone@"
 	db "Antidote@"
 	db "Burn heal@"
