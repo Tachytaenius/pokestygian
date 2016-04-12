@@ -49,6 +49,7 @@ startshrineintro
 	text "Moe: [That was not"
 	line "a good thing. Oh,"
 	cont "well.]"
+	prompt
 .didYouSeeIt
 	writetext .didYouSeeIt_
 	buttonsound
@@ -68,7 +69,7 @@ startshrineintro
 .didYouSeeIt_
 	text "Moe: [Did you see"
 	line "it?]"
-	prompt
+	done
 .yesno
 	db $40 ; flags
 	db 00, 00 ; start coords
@@ -99,7 +100,6 @@ startshrineintro
 .good
 	writetext .gud
 .back
-
 	applymovement 4, .up
 	pause 10
 	applymovement 4, .depart
@@ -110,8 +110,8 @@ startshrineintro
 .greetingsPlayer
 	text "Moe: [Greetings,"
 	line "<PLAYER>. Did you"
-	cont "find our note?]"
-	prompt
+	cont "read our note?]"
+	done
 .Wha
 	db $40 ; flags
 	db 00, 00 ; start coords
@@ -121,8 +121,8 @@ startshrineintro
 .Wha2
 	db $81 ; flags
 	db 2 ; items
-	db "[Greetings, Moe.]@"
-	db "[Um… hello?]@"
+	db "[I'm <PLAYER>.]@"
+	db "[My name's <PLAYER>.]@"
 .DidYouFind
 	db $40
 	db 00, 00
@@ -139,7 +139,7 @@ startshrineintro
 .introduceMoe
 	text "???: [My name is"
 	line "Moe.]"
-	prompt
+	done
 
 .down
 	turn_head_down

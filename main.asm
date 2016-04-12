@@ -3779,17 +3779,7 @@ BikeFunction: ; d0b3
 	ld de, Script_GetOnBike_Register
 	call .CheckIfRegistered
 	call QueueScript
-	xor a
-	ld [MusicFade], a
-	ld de, MUSIC_NONE
-	call PlayMusic
-	call DelayFrame
-	call MaxVolume
-	ld de, MUSIC_BICYCLE
-	ld a, e
-	ld [wMapMusic], a
-	call PlayMusic
-	ld a, $1
+	ld a, 1
 	ret
 
 .GetOffBike
@@ -3824,16 +3814,6 @@ BikeFunction: ; d0b3
 	ret
 
 .CheckEnvironment: ; d121
-	call GetMapPermission
-	call CheckOutdoorMap
-	jr z, .ok
-	cp CAVE
-	jr z, .ok
-	cp GATE
-	jr z, .ok
-	jr .nope
-
-.ok
 	call GetPlayerStandingTile
 	and $f ; can't use our bike in a wall or on water
 	jr nz, .nope
@@ -3846,17 +3826,23 @@ BikeFunction: ; d0b3
 
 Script_GetOnBike: ; 0xd13e
 	reloadmappart
-	special UpdateTimePals
 	writecode VAR_MOVEMENT, PLAYER_BIKE
-	writetext GotOnTheBikeText
 	waitbutton
 	closetext
+	
+	writebyte (1 << 7) | (PAL_OW_SILVER << 4)
+    special Special_SetPlayerPalette
+	
 	special ReplaceKrisSprite
 	end
 
 Script_GetOnBike_Register: ; 0xd14e
 	writecode VAR_MOVEMENT, PLAYER_BIKE
 	closetext
+	
+	writebyte (1 << 7) | (PAL_OW_SILVER << 4)
+    special Special_SetPlayerPalette
+	
 	special ReplaceKrisSprite
 	end
 
@@ -3866,15 +3852,16 @@ Script_GetOnBike_Register: ; 0xd14e
 
 Script_GetOffBike: ; 0xd158
 	reloadmappart
-	special UpdateTimePals
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
-	writetext GotOffTheBikeText
 	waitbutton
 
 FinishGettingOffBike:
 	closetext
+	
+	writebyte (1 << 7) | (PAL_OW_RED << 4)
+    special Special_SetPlayerPalette
+	
 	special ReplaceKrisSprite
-	special PlayMapMusic
 	end
 
 Script_GetOffBike_Register: ; 0xd16b
@@ -7604,8 +7591,8 @@ _ResetClock: ; 4d3b1
 .NoYes_MenuData2: ; 0x4d415
 	db $c0 ; flags
 	db 2 ; items
-	db "NO@"
-	db "YES@"
+	db "No@"
+	db "Yes@"
 
 ClockResetPassword: ; 4d41e
 	call .CalculatePassword
@@ -7842,8 +7829,8 @@ _DeleteSaveData: ; 4d54c
 .MenuData2: ; 0x4d58d
 	db $c0 ; flags
 	db 2 ; items
-	db "NO@"
-	db "YES@"
+	db "No@"
+	db "Yes@"
 
 Tilesets::
 INCLUDE "tilesets/tileset_headers.asm"

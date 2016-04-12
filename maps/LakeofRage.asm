@@ -253,7 +253,7 @@ armourActions
 .seenArmour
 	text "You see a suit of"
 	line "armour."
-	prompt
+	done
 .lokarmour
 	lb bc, BANK(ArmourPic), 6*7
 	ld hl, ArmourPic

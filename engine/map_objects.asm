@@ -2572,6 +2572,9 @@ SetPlayerPalette: ; 57e2
 	ld [hl], a
 	ret
 ; 5803
+.CheckArmour
+	checkcode VAR_MOVEMENT
+	end
 
 StartFollow:: ; 5803
 	push bc
