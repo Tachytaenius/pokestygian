@@ -84,12 +84,12 @@ UnknownText_0x9baf1:
 	line "MT.SILVER."
 
 	para "You'll see scary-"
-	line "strong #MON out"
+	line "strong #mon out"
 	cont "there."
 	done
 
 UnknownText_0x9bb37:
-	text "Off to the #MON"
+	text "Off to the #mon"
 	line "LEAGUE, are you?"
 
 	para "The ELITE FOUR are"

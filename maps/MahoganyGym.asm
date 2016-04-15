@@ -150,7 +150,7 @@ MahoganyGymStatue:
 	jumpstd gymstatue2
 
 UnknownText_0x199b8d:
-	text "#MON have many"
+	text "#mon have many"
 	line "experiences in"
 
 	para "their lives, just "
@@ -165,7 +165,7 @@ UnknownText_0x199b8d:
 	cont "you what I mean."
 
 	para "I have been with"
-	line "#MON since"
+	line "#mon since"
 
 	para "before you were"
 	line "born."
@@ -202,10 +202,10 @@ UnknownText_0x199d3b:
 UnknownText_0x199d55:
 	text "That BADGE will"
 	line "raise the SPECIAL"
-	cont "stats of #MON."
+	cont "stats of #mon."
 
 	para "It also lets your"
-	line "#MON use WHIRL-"
+	line "#mon use WHIRL-"
 	cont "POOL to get across"
 	cont "real whirlpools."
 
@@ -242,7 +242,7 @@ UnknownText_0x199e59:
 
 BoarderRonaldSeenText:
 	text "I'll freeze your"
-	line "#MON, so you"
+	line "#mon, so you"
 	cont "can't do a thing!"
 	done
 
@@ -253,7 +253,7 @@ BoarderRonaldBeatenText:
 
 UnknownText_0x199f2d:
 	text "I think there's a"
-	line "move a #MON"
+	line "move a #mon"
 
 	para "can use while it's"
 	line "frozen."
@@ -279,7 +279,7 @@ BoarderBradBeatenText:
 UnknownText_0x199fdd:
 	text "This GYM is great."
 	line "I love boarding"
-	cont "with my #MON!"
+	cont "with my #mon!"
 	done
 
 BoarderDouglasSeenText:
@@ -344,7 +344,7 @@ MahoganyGymGuyText:
 	text "PRYCE is a veteran"
 	line "who has trained"
 
-	para "#MON for some"
+	para "#mon for some"
 	line "50 years."
 
 	para "He's said to be"

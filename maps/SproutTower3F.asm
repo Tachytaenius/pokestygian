@@ -167,12 +167,12 @@ UnknownText_0x184a27:
 	line "this: You should"
 
 	para "treat your"
-	line "#MON better."
+	line "#mon better."
 
 	para "The way you battle"
 	line "is far too harsh."
 
-	para "#MON are not"
+	para "#mon are not"
 	line "tools of war…"
 	done
 
@@ -191,15 +191,15 @@ UnknownText_0x184aec:
 	line "fools who babble"
 
 	para "about being nice"
-	line "to #MON."
+	line "to #mon."
 
 	para "I only care about"
-	line "strong #MON"
+	line "strong #mon"
 	cont "that can win."
 
 	para "I really couldn't"
 	line "care less about"
-	cont "weak #MON."
+	cont "weak #mon."
 	done
 
 UnknownText_0x184bc8:
@@ -214,7 +214,7 @@ SageLiSeenText:
 	para "SPROUT TOWER is a"
 	line "place of training."
 
-	para "People and #MON"
+	para "People and #mon"
 	line "test their bonds"
 
 	para "to build a bright"
@@ -226,7 +226,7 @@ SageLiSeenText:
 	para "Allow me to check"
 	line "the ties between"
 
-	para "your #MON and"
+	para "your #mon and"
 	line "you!"
 	done
 
@@ -266,7 +266,7 @@ UnknownText_0x184d88:
 SageJinSeenText:
 	text "I train to find"
 	line "enlightenment in"
-	cont "#MON!"
+	cont "#mon!"
 	done
 
 SageJinBeatenText:
@@ -275,7 +275,7 @@ SageJinBeatenText:
 	done
 
 UnknownText_0x184dfa:
-	text "As #MON grow"
+	text "As #mon grow"
 	line "stronger, so does"
 	cont "the trainer."
 
@@ -283,13 +283,13 @@ UnknownText_0x184dfa:
 	line "trainer grows"
 
 	para "stronger, so do"
-	line "the #MON."
+	line "the #mon."
 	done
 
 SageTroySeenText:
 	text "Let me see how"
 	line "much you trust"
-	cont "your #MON."
+	cont "your #mon."
 	done
 
 SageTroyBeatenText:
@@ -325,7 +325,7 @@ UnknownText_0x184f37:
 	done
 
 UnknownText_0x184f61:
-	text "A #MON statue…"
+	text "A #mon statue…"
 
 	para "It looks very"
 	line "distinguished."

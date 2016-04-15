@@ -60,7 +60,7 @@ MoveDeletion:
 	ret
 
 .OnlyOneMoveText: ; 0x2c5d1
-	; That #MON knows only one move.
+	; That #mon knows only one move.
 	text_jump UnknownText_0x1c5eba
 	db "@"
 ; 0x2c5d6
@@ -72,7 +72,7 @@ MoveDeletion:
 ; 0x2c5db
 
 .MoveDeletedText: ; 0x2c5db
-	; Done! Your #MON forgot the move.
+	; Done! Your #mon forgot the move.
 	text_jump UnknownText_0x1c5ef5
 	db "@"
 ; 0x2c5e0
@@ -96,13 +96,13 @@ MoveDeletion:
 ; 0x2c5ef
 
 .IntroText: ; 0x2c5ef
-	; Um… Oh, yes, I'm the MOVE DELETER. I can make #MON forget moves. Shall I make a #MON forget?
+	; Um… Oh, yes, I'm the MOVE DELETER. I can make #mon forget moves. Shall I make a #mon forget?
 	text_jump UnknownText_0x1c5f74
 	db "@"
 ; 0x2c5f4
 
 .AskWhichMonText: ; 0x2c5f4
-	; Which #MON?
+	; Which #mon?
 	text_jump UnknownText_0x1c5fd1
 	db "@"
 ; 0x2c5f9

@@ -49,7 +49,7 @@ UnknownText_0x19999c:
 UnknownText_0x199a0e:
 	text "My favorite radio"
 	line "program? I'd say"
-	cont "#MON MUSIC."
+	cont "#mon MUSIC."
 	done
 
 UnknownText_0x199a3d:

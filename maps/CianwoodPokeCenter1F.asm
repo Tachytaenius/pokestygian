@@ -43,11 +43,11 @@ UnknownText_0x9dbed:
 
 	para "He's always brag-"
 	line "ging about his"
-	cont "rare #MON."
+	cont "rare #mon."
 	done
 
 CianwoodGymGuyText:
-	text "The #MON GYM"
+	text "The #mon GYM"
 	line "trainers here are"
 	cont "macho bullies."
 
@@ -63,7 +63,7 @@ CianwoodGymGuyText:
 
 	para "So you should"
 	line "confound him with"
-	cont "psychic #MON."
+	cont "psychic #mon."
 
 	para "Wipe out his #-"
 	line "MON before they"
@@ -95,11 +95,11 @@ UnknownText_0x9ddf2:
 	text "Don't you get the"
 	line "urge to show off"
 
-	para "your #MON to"
+	para "your #mon to"
 	line "friends?"
 
 	para "I wish I could"
-	line "show the #MON I"
+	line "show the #mon I"
 
 	para "raised to my pal"
 	line "in VIOLET."
@@ -119,7 +119,7 @@ UnknownText_0x9de66:
 
 UnknownText_0x9ded7:
 	text "I love showing off"
-	line "the #MON that"
+	line "the #mon that"
 
 	para "I've raised."
 	line "Don't you?"
@@ -128,7 +128,7 @@ UnknownText_0x9ded7:
 	line "into a bunch of"
 
 	para "battles, and show"
-	line "off my #MON!"
+	line "off my #mon!"
 	done
 
 CianwoodPokeCenter1F_MapEventHeader:

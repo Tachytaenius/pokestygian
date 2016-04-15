@@ -75,7 +75,7 @@ UnknownText_0x18c042:
 	line "PEWTER GYM?"
 
 	para "The LEADER uses"
-	line "rock-type #MON."
+	line "rock-type #mon."
 	done
 
 UnknownText_0x18c080:
@@ -125,11 +125,11 @@ PewterCitySignText:
 
 PewterGymSignText:
 	text "PEWTER CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 	cont "LEADER: BROCK"
 
 	para "The Rock Solid"
-	line "#MON Trainer"
+	line "#mon Trainer"
 	done
 
 PewterMuseumSignText:

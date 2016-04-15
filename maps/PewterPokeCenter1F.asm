@@ -54,7 +54,7 @@ UnknownText_0x1a2f5d:
 	done
 
 UnknownText_0x1a2f75:
-	text "Most #MON get"
+	text "Most #mon get"
 	line "drowsy if they"
 
 	para "hear a JIGGLYPUFF"
@@ -64,7 +64,7 @@ UnknownText_0x1a2f75:
 	line "moves that can be"
 
 	para "used only while a"
-	line "#MON is asleep."
+	line "#mon is asleep."
 	done
 
 PewterPokeCenter1F_MapEventHeader:

@@ -32,7 +32,7 @@ UnknownText_0x693fa:
 
 	para "For the nicknames"
 	line "she gives to her"
-	cont "#MON, I mean."
+	cont "#mon, I mean."
 	done
 
 UnknownText_0x6945e:

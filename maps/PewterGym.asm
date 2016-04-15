@@ -86,9 +86,9 @@ UnknownText_0x1a28d0:
 	line "PEWTER GYM LEADER."
 
 	para "I'm an expert on"
-	line "rock-type #MON."
+	line "rock-type #mon."
 
-	para "My #MON are im-"
+	para "My #mon are im-"
 	line "pervious to most"
 
 	para "physical attacks."
@@ -129,7 +129,7 @@ UnknownText_0x1a2a57:
 	para "That BOULDERBADGE"
 	line "will make your"
 
-	para "#MON even more"
+	para "#mon even more"
 	line "powerful."
 	done
 
@@ -149,7 +149,7 @@ UnknownText_0x1a2ada:
 CamperJerrySeenText:
 	text "The trainers of"
 	line "this GYM use rock-"
-	cont "type #MON."
+	cont "type #mon."
 
 	para "The rock-type has"
 	line "high DEFENSE."

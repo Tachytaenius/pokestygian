@@ -34,7 +34,7 @@ UnknownText_0x7b222:
 	line "sisters:"
 
 	para "We take pride in"
-	line "serving #MON"
+	line "serving #mon"
 	cont "trainers."
 
 	para "When trainers talk"

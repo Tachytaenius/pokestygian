@@ -51,7 +51,7 @@ CeladonDeptStore3FDirectory:
 
 UnknownText_0x70d53:
 	text "I can't decide"
-	line "which #MON I"
+	line "which #mon I"
 
 	para "should use this TM"
 	line "on…"
@@ -59,7 +59,7 @@ UnknownText_0x70d53:
 
 UnknownText_0x70d86:
 	text "Uh-oh! I traded my"
-	line "#MON without"
+	line "#mon without"
 
 	para "removing the UP-"
 	line "GRADE from it."
@@ -79,7 +79,7 @@ UnknownText_0x70dc7:
 
 	para "The traded PORYGON"
 	line "turned into a dif-"
-	cont "ferent #MON!"
+	cont "ferent #mon!"
 	done
 
 UnknownText_0x70e61:
@@ -90,7 +90,7 @@ UnknownText_0x70e61:
 CeladonDeptStore3FDirectoryText:
 	text "3F: TM SHOP"
 
-	para "Make Your #MON"
+	para "Make Your #mon"
 	line "Stronger!"
 	done
 

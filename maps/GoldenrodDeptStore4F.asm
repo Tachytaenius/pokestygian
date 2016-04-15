@@ -41,7 +41,7 @@ GoldenrodDeptStore4FElevatorButton:
 
 UnknownText_0x55f08:
 	text "Hey. I love strong"
-	line "#MON."
+	line "#mon."
 
 	para "I feed them PRO-"
 	line "TEIN to crank up"
@@ -50,11 +50,11 @@ UnknownText_0x55f08:
 
 UnknownText_0x55f52:
 	text "IRON adds to your"
-	line "#MON's DEFENSE."
+	line "#mon's DEFENSE."
 	done
 
 UnknownText_0x55f74:
-	text "Some #MON"
+	text "Some #mon"
 	line "evolve only by"
 
 	para "being traded via a"
@@ -72,7 +72,7 @@ UnknownText_0x55f74:
 
 GoldenrodDeptStore4FDirectoryText:
 	text "Let Us Pump Up"
-	line "Your #MON!"
+	line "Your #mon!"
 
 	para "4F MEDICINE BOX"
 	done

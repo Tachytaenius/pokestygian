@@ -1432,7 +1432,7 @@ Softboiled_MilkDrinkFunction: ; f3df (3:73df)
 ; f44a (3:744a)
 
 .Text_CantBeUsed: ; 0xf44a
-	; That can't be used on this #MON.
+	; That can't be used on this #mon.
 	text_jump UnknownText_0x1c5bac
 	db "@"
 ; 0xf44f
@@ -1647,7 +1647,7 @@ PokeFlute: ; f50c
 ; 0xf571
 
 .AllSleepingMonWokeUp: ; 0xf571
-	; All sleeping #MON woke up.
+	; All sleeping #mon woke up.
 	text_jump UnknownText_0x1c5c28
 	db "@"
 ; 0xf576
@@ -2279,7 +2279,7 @@ CantGetOnYourBikeText: ; 0xf833
 ; 0xf838
 
 Ball_BoxIsFullText: ; 0xf838
-	; The #MON BOX is full. That can't be used now.
+	; The #mon BOX is full. That can't be used now.
 	text_jump UnknownText_0x1c5e3a
 	db "@"
 ; 0xf83d

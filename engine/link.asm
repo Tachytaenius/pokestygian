@@ -1530,7 +1530,7 @@ Function28926: ; 28926
 
 
 .Text_CantTradeLastMon: ; 0x28aaf
-	; If you trade that #MON, you won't be able to battle.
+	; If you trade that #mon, you won't be able to battle.
 	text_jump UnknownText_0x1c41b1
 	db "@"
 ; 0x28ab4

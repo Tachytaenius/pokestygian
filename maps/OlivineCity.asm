@@ -191,14 +191,14 @@ UnknownText_0x1a88fa:
 	para "Supposedly taking"
 	line "care of a sick"
 
-	para "#MON at the"
+	para "#mon at the"
 	line "LIGHTHOUSE."
 
 	para "Humph! Boo-hoo!"
 	line "Just let sick"
-	cont "#MON go!"
+	cont "#mon go!"
 
-	para "A #MON that"
+	para "A #mon that"
 	line "can't battle is"
 	cont "worthless!"
 
@@ -238,7 +238,7 @@ UnknownText_0x1a8b04:
 
 UnknownText_0x1a8b41:
 	text "Wow, you have a"
-	line "#DEX!"
+	line "#dex!"
 
 	para "That is just so"
 	line "awesome."
@@ -269,7 +269,7 @@ OlivineCityPortSignText:
 
 OlivineGymSignText:
 	text "OLIVINE CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 	cont "LEADER: JASMINE"
 
 	para "The Steel-Clad"

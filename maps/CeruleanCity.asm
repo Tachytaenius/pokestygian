@@ -169,7 +169,7 @@ UnknownText_0x1840bc:
 UnknownText_0x184144:
 	text "You're collecting"
 	line "every single kind"
-	cont "of #MON?"
+	cont "of #mon?"
 
 	para "That must be quite"
 	line "a challenge, but"
@@ -220,7 +220,7 @@ UnknownText_0x1842a9:
 	line "cave here that had"
 
 	para "horribly powerful"
-	line "#MON in it."
+	line "#mon in it."
 	done
 
 UnknownText_0x1842ee:
@@ -239,7 +239,7 @@ CeruleanCitySignText:
 
 CeruleanGymSignText:
 	text "CERULEAN CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 	cont "LEADER: MISTY"
 
 	para "The Tomboyish"

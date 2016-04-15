@@ -44,7 +44,7 @@ GoldenrodDeptStore2FElevatorButton:
 ; possibly unused
 UnknownText_0x55b7c:
 	text "We intend to sell"
-	line "items for #MON"
+	line "items for #mon"
 	cont "to hold."
 
 	para "This is a free"
@@ -54,7 +54,7 @@ UnknownText_0x55b7c:
 
 ; possibly unused
 UnknownText_0x55bd3:
-	text "By giving #MON"
+	text "By giving #mon"
 	line "items to hold, I"
 
 	para "bet trainers will"

@@ -37,7 +37,7 @@ BugCatcherScript_0x19161d:
 	jumptextfaceplayer UnknownText_0x19173b
 
 UnknownText_0x191620:
-	text "A sleeping #MON"
+	text "A sleeping #mon"
 	line "is lying in front"
 	cont "of DIGLETT'S CAVE."
 
@@ -50,7 +50,7 @@ UnknownText_0x191620:
 
 UnknownText_0x191698:
 	text "There used to be a"
-	line "sleeping #MON"
+	line "sleeping #mon"
 
 	para "lying in front of"
 	line "DIGLETT'S CAVE."

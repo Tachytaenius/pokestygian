@@ -181,7 +181,7 @@ Text_BootedHM: ; 0x2c8c4
 ; 0x2c8c9
 
 Text_ItContained: ; 0x2c8c9
-	; It contained @ . Teach @ to a #MON?
+	; It contained @ . Teach @ to a #mon?
 	text_jump UnknownText_0x1c0396
 	db "@"
 ; 0x2c8ce

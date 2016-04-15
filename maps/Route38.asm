@@ -325,7 +325,7 @@ FruitTreeScript_0x1a1f33:
 Bird_keeperTobySeenText:
 	text "Fly high into the"
 	line "sky, my beloved"
-	cont "bird #MON!"
+	cont "bird #mon!"
 	done
 
 Bird_keeperTobyBeatenText:
@@ -337,7 +337,7 @@ UnknownText_0x1a1f86:
 	text "I plan to train in"
 	line "CIANWOOD CITY to"
 
-	para "teach my #MON"
+	para "teach my #mon"
 	line "how to FLY."
 	done
 
@@ -357,7 +357,7 @@ UnknownText_0x1a200e:
 	line "many tests, I"
 
 	para "don't have much"
-	line "time for #MON."
+	line "time for #mon."
 
 	para "So when I do get"
 	line "to play, I really"
@@ -366,7 +366,7 @@ UnknownText_0x1a200e:
 
 LassDana1SeenText:
 	text "You seem to be"
-	line "good at #MON."
+	line "good at #mon."
 
 	para "If you are, how"
 	line "about giving me"
@@ -392,12 +392,12 @@ BeautyValerieSeenText:
 	line "cute trainer!"
 
 	para "May I see your"
-	line "#MON?"
+	line "#mon?"
 	done
 
 BeautyValerieBeatenText:
 	text "I'm glad I got to"
-	line "see your #MON!"
+	line "see your #mon!"
 	done
 
 UnknownText_0x1a2185:
@@ -411,7 +411,7 @@ SailorHarrySeenText:
 	line "seas, so I know"
 
 	para "about all sorts of"
-	line "#MON!"
+	line "#mon!"
 	done
 
 SailorHarryBeatenText:
@@ -424,12 +424,12 @@ UnknownText_0x1a220c:
 	line "ple around the"
 
 	para "world live happily"
-	line "with #MON."
+	line "with #mon."
 	done
 
 BeautyOliviaSeenText:
 	text "Don't you think my"
-	line "#MON and I are"
+	line "#mon and I are"
 	cont "beautiful?"
 	done
 
@@ -459,7 +459,7 @@ UnknownText_0x1a22fd:
 UnknownText_0x1a2324:
 	text "TRAINER TIPS"
 
-	para "If a #MON is"
+	para "If a #mon is"
 	line "trying to evolve,"
 	cont "you can stop it."
 
@@ -468,7 +468,7 @@ UnknownText_0x1a2324:
 	cont "tion."
 
 	para "That startles the"
-	line "#MON and stops"
+	line "#mon and stops"
 	cont "its evolution."
 	done
 

@@ -158,7 +158,7 @@ UnknownText_0x9d6f9:
 	para "Let me tell you,"
 	line "I'm tough!"
 
-	para "My #MON will"
+	para "My #mon will"
 	line "crush stones and"
 	cont "shatter bones!"
 
@@ -179,7 +179,7 @@ UnknownText_0x9d78a:
 	para "What?"
 	line "It has nothing to"
 
-	para "do with #MON?"
+	para "do with #mon?"
 	line "That's true!"
 
 	para "Come on. We shall"
@@ -202,13 +202,13 @@ UnknownText_0x9d835:
 
 UnknownText_0x9d84d:
 	text "STORMBADGE makes"
-	line "all #MON up to"
+	line "all #mon up to"
 
 	para "L70 obey, even"
 	line "traded ones."
 
 	para "It also lets your"
-	line "#MON use FLY"
+	line "#mon use FLY"
 
 	para "when you're not in"
 	line "a battle."
@@ -241,7 +241,7 @@ UnknownText_0x9d930:
 	done
 
 BlackbeltYoshiSeenText:
-	text "My #MON and I"
+	text "My #mon and I"
 	line "are bound togeth-"
 	cont "er by friendship."
 
@@ -256,7 +256,7 @@ BlackbeltYoshiBeatenText:
 UnknownText_0x9d9fa:
 	text "You seem to have a"
 	line "strong bond with"
-	cont "your #MON too!"
+	cont "your #mon too!"
 	done
 
 BlackbeltLaoSeenText:
@@ -269,7 +269,7 @@ BlackbeltLaoBeatenText:
 	done
 
 UnknownText_0x9da61:
-	text "Fighting #MON"
+	text "Fighting #mon"
 	line "are afraid of psy-"
 	cont "chics…"
 	done
@@ -292,7 +292,7 @@ UnknownText_0x9dac0:
 BlackbeltLungSeenText:
 	text "My raging fists"
 	line "will shatter your"
-	cont "#MON!"
+	cont "#mon!"
 	done
 
 BlackbeltLungBeatenText:
@@ -300,7 +300,7 @@ BlackbeltLungBeatenText:
 	done
 
 UnknownText_0x9db14:
-	text "My #MON lost…"
+	text "My #mon lost…"
 	line "My… my pride is"
 	cont "shattered…"
 	done

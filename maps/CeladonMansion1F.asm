@@ -45,7 +45,7 @@ CeladonMansion1fBookshelf:
 	jumpstd picturebookshelf
 
 CeladonMansionManagerText:
-	text "My dear #MON"
+	text "My dear #mon"
 	line "keep me company,"
 
 	para "so I don't ever"

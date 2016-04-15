@@ -31,7 +31,7 @@ UnknownText_0x9c00e:
 	line "generous."
 
 	para "He taught my"
-	line "#MON STRENGTH."
+	line "#mon STRENGTH."
 
 	para "Now it can move"
 	line "big boulders."
@@ -44,7 +44,7 @@ UnknownText_0x9c086:
 
 	para "I heard him brag-"
 	line "ging about his"
-	cont "rare #MON."
+	cont "rare #mon."
 	done
 
 OlivinePokeCenter1F_MapEventHeader:

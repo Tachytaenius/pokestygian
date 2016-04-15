@@ -29,20 +29,20 @@ UnknownText_0x7ec53:
 	para "Hmm… You appear to"
 	line "be raising your"
 
-	para "#MON in a kind"
+	para "#mon in a kind"
 	line "and loving manner."
 
-	para "#MON lovers"
+	para "#mon lovers"
 	line "come here to pay"
 
 	para "their respects to"
-	line "departed #MON."
+	line "departed #mon."
 
 	para "Please offer con-"
 	line "dolences for the"
 
 	para "souls of the de-"
-	line "parted #MON."
+	line "parted #mon."
 
 	para "I'm sure that will"
 	line "make them happy."
@@ -50,7 +50,7 @@ UnknownText_0x7ec53:
 
 UnknownText_0x7ed4d:
 	text "There are other"
-	line "graves of #MON"
+	line "graves of #mon"
 	cont "here, I think."
 
 	para "There are many"
@@ -60,12 +60,12 @@ UnknownText_0x7ed4d:
 
 UnknownText_0x7edb1:
 	text "I came with my mom"
-	line "to visit #MON"
+	line "to visit #mon"
 	cont "graves…"
 	done
 
 UnknownText_0x7eddb:
-	text "The #MON that"
+	text "The #mon that"
 	line "lived with me…"
 
 	para "I loved them like"

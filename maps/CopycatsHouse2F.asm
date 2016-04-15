@@ -205,7 +205,7 @@ MovementData_0x18afd0:
 
 UnknownText_0x18afda:
 	text "<PLAYER>: Hi! Do"
-	line "you like #MON?"
+	line "you like #mon?"
 
 	para "<PLAYER>: Uh, no, I"
 	line "just asked you."
@@ -303,7 +303,7 @@ UnknownText_0x18b2f5:
 
 UnknownText_0x18b316:
 	text "<PLAYER>: Hi. You"
-	line "must like #MON."
+	line "must like #mon."
 
 	para "<PLAYER>: No, not"
 	line "me. I asked you."
@@ -358,7 +358,7 @@ CopycatsDodrioText2:
 
 CopycatsHouse2FDollText:
 	text "This is a rare"
-	line "#MON! Huh?"
+	line "#mon! Huh?"
 
 	para "It's only a doll…"
 	done

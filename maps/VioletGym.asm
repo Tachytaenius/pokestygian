@@ -114,37 +114,37 @@ VioletGymStatue:
 
 UnknownText_0x68473:
 	text "I'm FALKNER, the"
-	line "VIOLET #MON GYM"
+	line "VIOLET #mon GYM"
 	cont "leader!"
 
 	para "People say you can"
 	line "clip flying-type"
 
-	para "#MON's wings"
+	para "#mon's wings"
 	line "with a jolt of"
 	cont "electricity…"
 
 	para "I won't allow such"
 	line "insults to bird"
-	cont "#MON!"
+	cont "#mon!"
 
 	para "I'll show you the"
 	line "real power of the"
 
 	para "magnificent bird"
-	line "#MON!"
+	line "#mon!"
 	done
 
 UnknownText_0x6854a:
 	text "…Darn! My dad's"
 	line "cherished bird"
-	cont "#MON…"
+	cont "#mon…"
 
 	para "All right."
 	line "Take this."
 
 	para "It's the official"
-	line "#MON LEAGUE"
+	line "#mon LEAGUE"
 	cont "ZEPHYRBADGE."
 	done
 
@@ -156,10 +156,10 @@ UnknownText_0x685af:
 UnknownText_0x685c8:
 	text "ZEPHYRBADGE"
 	line "raises the attack"
-	cont "power of #MON."
+	cont "power of #mon."
 
 	para "It also enables"
-	line "#MON to use"
+	line "#mon to use"
 
 	para "FLASH, if they"
 	line "have it, anytime."
@@ -170,7 +170,7 @@ UnknownText_0x685c8:
 
 UnknownText_0x68648:
 	text "By using a TM, a"
-	line "#MON will"
+	line "#mon will"
 
 	para "instantly learn a"
 	line "new move."
@@ -194,7 +194,7 @@ UnknownText_0x68648:
 	done
 
 UnknownText_0x68735:
-	text "There are #MON"
+	text "There are #mon"
 	line "GYMS in cities and"
 	cont "towns ahead."
 
@@ -217,7 +217,7 @@ Bird_keeperRodSeenText:
 	line "training night and"
 
 	para "day to become bird"
-	line "#MON masters."
+	line "#mon masters."
 
 	para "Come on!"
 	done

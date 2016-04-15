@@ -145,7 +145,7 @@ Bug_catcherKenBeatenText:
 
 UnknownText_0x75bd5:
 	text "You can find lots"
-	line "of #MON in the"
+	line "of #mon in the"
 	cont "trees of JOHTO!"
 	done
 

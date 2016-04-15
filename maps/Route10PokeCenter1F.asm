@@ -37,7 +37,7 @@ CooltrainerFScript_0x188bee:
 	jumptextfaceplayer UnknownText_0x188d0c
 
 UnknownText_0x188bf1:
-	text "A #MON CENTER"
+	text "A #mon CENTER"
 	line "near a cave?"
 
 	para "That's mighty"

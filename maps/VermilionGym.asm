@@ -116,7 +116,7 @@ UnknownText_0x192142:
 	cont "it takes guts!"
 
 	para "When it comes to"
-	line "electric #MON,"
+	line "electric #mon,"
 	cont "I'm number one!"
 
 	para "I've never lost on"
@@ -143,7 +143,7 @@ UnknownText_0x192277:
 UnknownText_0x192291:
 	text "SURGE: THUNDER-"
 	line "BADGE increases"
-	cont "#MON's speed. "
+	cont "#mon's speed. "
 
 	para "Consider it proof"
 	line "that you defeated"
@@ -157,7 +157,7 @@ UnknownText_0x192303:
 	line "Still slugging and"
 	cont "chugging away?"
 
-	para "My #MON and I"
+	para "My #mon and I"
 	line "are still at it!"
 	done
 
@@ -188,7 +188,7 @@ GuitaristVincentSeenText:
 	line "nized my potential"
 
 	para "with electric"
-	line "#MON."
+	line "#mon."
 
 	para "Think you can beat"
 	line "me?"

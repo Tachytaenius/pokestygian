@@ -67,13 +67,13 @@ UnknownText_0x1ad75c:
 
 	para "their respects to"
 	line "the departed souls"
-	cont "of #MON."
+	cont "of #mon."
 	done
 
 UnknownText_0x1ad7ac:
 	text "You need a #"
 	line "FLUTE to wake"
-	cont "sleeping #MON."
+	cont "sleeping #mon."
 
 	para "Every trainer has"
 	line "to know that!"
@@ -97,14 +97,14 @@ KantoRadioStationSignText:
 
 VolunteerPokemonHouseSignText:
 	text "LAVENDER VOLUNTEER"
-	line "#MON HOUSE"
+	line "#mon HOUSE"
 	done
 
 SoulHouseSignText:
 	text "SOUL HOUSE"
 
 	para "May the Souls of"
-	line "#MON Rest Easy"
+	line "#mon Rest Easy"
 	done
 
 LavenderTown_MapEventHeader:

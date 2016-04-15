@@ -352,7 +352,7 @@ FisherEdgarSeenText:
 
 	para "That's my"
 	line "relationship"
-	cont "with my #MON."
+	cont "with my #mon."
 	done
 
 FisherEdgarBeatenText:
@@ -371,7 +371,7 @@ UnknownText_0x19db6f:
 Bird_keeperVance1SeenText:
 	text "Do you know about"
 	line "the legendary bird"
-	cont "#MON?"
+	cont "#mon?"
 	done
 
 Bird_keeperVance1BeatenText:
@@ -384,7 +384,7 @@ UnknownText_0x19dbf3:
 	line "and MOLTRES are"
 
 	para "the three legend-"
-	line "ary bird #MON."
+	line "ary bird #mon."
 
 	para "I heard there are"
 	line "other legendary"
@@ -421,16 +421,16 @@ UnknownText_0x19dcfc:
 PokemaniacZachSeenText:
 	text "I'll do anything"
 	line "to get my hands on"
-	cont "rare #MON!"
+	cont "rare #mon!"
 	done
 
 PokemaniacZachBeatenText:
-	text "Oooh, your #MON"
+	text "Oooh, your #mon"
 	line "are so appealing."
 	done
 
 UnknownText_0x19dd7e:
-	text "If a #MON has"
+	text "If a #mon has"
 	line "different colors"
 
 	para "from usual, it's"

@@ -199,10 +199,10 @@ UnknownText_0x59278:
 	text "Done!"
 
 	para "I modified your"
-	line "#DEX."
+	line "#dex."
 
 	para "I added an"
-	line "optional #DEX"
+	line "optional #dex"
 
 	para "to store UNOWN"
 	line "data."
@@ -213,7 +213,7 @@ UnknownText_0x59278:
 	done
 
 UnknownText_0x592fa:
-	text "<PLAYER>'s #DEX"
+	text "<PLAYER>'s #dex"
 	line "was upgraded."
 	done
 
@@ -253,12 +253,12 @@ UnknownText_0x593ed:
 
 UnknownText_0x59445:
 	text "I wonder how many"
-	line "kinds of #MON"
+	line "kinds of #mon"
 	cont "are in the RUINS?"
 	done
 
 UnknownText_0x59478:
-	text "#MON appeared"
+	text "#mon appeared"
 	line "in the RUINS?"
 
 	para "That's incredible"
@@ -279,7 +279,7 @@ UnknownText_0x594cb:
 	line "to have been built"
 
 	para "as a habitat for"
-	line "#MON."
+	line "#mon."
 	done
 
 UnknownText_0x5954f:
@@ -362,7 +362,7 @@ UnknownText_0x597b6:
 	done
 
 UnknownText_0x597d9:
-	text "Mystery #MON"
+	text "Mystery #mon"
 	line "Name: UNOWN"
 
 	para "A total of 26"

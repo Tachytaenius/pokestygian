@@ -35,7 +35,7 @@ UnknownText_0x55dcc:
 
 	para "I use X SPEED in"
 	line "battle to speed up"
-	cont "my #MON."
+	cont "my #mon."
 	done
 
 UnknownText_0x55e15:

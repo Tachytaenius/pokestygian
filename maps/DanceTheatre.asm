@@ -139,7 +139,7 @@ MapDanceTheatreSignpost1Script:
 
 Kimono_girlNaoko2SeenText:
 	text "You have lovely"
-	line "#MON. May I see"
+	line "#mon. May I see"
 	cont "them in battle?"
 	done
 
@@ -156,7 +156,7 @@ UnknownText_0x99579:
 
 Kimono_girlSayoSeenText:
 	text "I always dance"
-	line "with my #MON."
+	line "with my #mon."
 
 	para "Of course, I also"
 	line "train them."
@@ -179,13 +179,13 @@ Kimono_girlZukiSeenText:
 	text "Isn't my barrette"
 	line "pretty?"
 
-	para "Oh. A #MON"
+	para "Oh. A #mon"
 	line "battle?"
 	done
 
 Kimono_girlZukiBeatenText:
 	text "I don't have any"
-	line "#MON left…"
+	line "#mon left…"
 	done
 
 UnknownText_0x99688:
@@ -216,12 +216,12 @@ UnknownText_0x99714:
 Kimono_girlMikiSeenText:
 	text "Do you like my"
 	line "dancing? I'm good"
-	cont "at #MON too."
+	cont "at #mon too."
 	done
 
 Kimono_girlMikiBeatenText:
 	text "Ooh, you're good"
-	line "at #MON too."
+	line "at #mon too."
 	done
 
 UnknownText_0x997a8:
@@ -231,7 +231,7 @@ UnknownText_0x997a8:
 	para "people who enjoy"
 	line "what I do."
 
-	para "My #MON keep my"
+	para "My #mon keep my"
 	line "spirits up too."
 	done
 
@@ -241,7 +241,7 @@ UnknownText_0x9980a:
 
 	para "dancers, they're"
 	line "also skilled at"
-	cont "#MON."
+	cont "#mon."
 
 	para "I always challenge"
 	line "them, but I've"
@@ -283,12 +283,12 @@ UnknownText_0x9999b:
 	text "That's SURF."
 
 	para "It's a move that"
-	line "lets #MON swim"
+	line "lets #mon swim"
 	cont "across water."
 	done
 
 UnknownText_0x999d5:
-	text "I wish my #MON"
+	text "I wish my #mon"
 	line "were as elegant as"
 	cont "the KIMONO GIRLS…"
 	done
@@ -303,13 +303,13 @@ UnknownText_0x99a24:
 	line "with his RHYDON."
 
 	para "Says he wants a"
-	line "#MON that can"
+	line "#mon that can"
 	cont "SURF and dance."
 
 	para "Is he trying to"
 	line "make a synchro-"
 	cont "nized swimming"
-	cont "#MON?"
+	cont "#mon?"
 	done
 
 UnknownText_0x99aaa:

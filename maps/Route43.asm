@@ -328,13 +328,13 @@ Route43MaxEther:
 	itemball MAX_ETHER
 
 PokemaniacBenSeenText:
-	text "I love #MON!"
+	text "I love #mon!"
 
 	para "That's why I"
 	line "started--and why"
 
 	para "I'll keep on col-"
-	line "lecting #MON!"
+	line "lecting #mon!"
 	done
 
 PokemaniacBenBeatenText:
@@ -345,7 +345,7 @@ PokemaniacBenBeatenText:
 UnknownText_0x19d2d2:
 	text "What else do I"
 	line "like besides"
-	cont "#MON?"
+	cont "#mon?"
 
 	para "MARY on the radio."
 	line "I bet she's cute!"
@@ -353,7 +353,7 @@ UnknownText_0x19d2d2:
 
 PokemaniacBrent1SeenText:
 	text "Hey! Do you have"
-	line "any rare #MON?"
+	line "any rare #mon?"
 	done
 
 PokemaniacBrent1BeatenText:
@@ -364,7 +364,7 @@ PokemaniacBrent1BeatenText:
 UnknownText_0x19d359:
 	text "I'd be happy just"
 	line "to own a single"
-	cont "rare #MON."
+	cont "rare #mon."
 	done
 
 PokemaniacRonSeenText:
@@ -373,7 +373,7 @@ PokemaniacRonSeenText:
 
 	para "Some <RIVAL> guy"
 	line "made fun of my"
-	cont "#MON!"
+	cont "#mon!"
 
 	para "Darn it! My #-"
 	line "MON's great!"
@@ -389,9 +389,9 @@ UnknownText_0x19d3f8:
 	line "people to like"
 
 	para "different types"
-	line "of #MON."
+	line "of #mon."
 
-	para "#MON isn't just"
+	para "#mon isn't just"
 	line "about having the"
 	cont "most powerful one."
 	done
@@ -416,7 +416,7 @@ UnknownText_0x19d4d3:
 	line "is the best for"
 
 	para "catching hooked"
-	line "#MON."
+	line "#mon."
 
 	para "It's much more"
 	line "effective than a"
@@ -425,7 +425,7 @@ UnknownText_0x19d4d3:
 
 CamperSpencerSeenText:
 	text "I can do so much"
-	line "with my #MON--"
+	line "with my #mon--"
 	cont "it's super-fun!"
 	done
 
@@ -456,7 +456,7 @@ PicnickerTiffany3BeatenText:
 
 UnknownText_0x19d618:
 	text "I'm having a pic-"
-	line "nic with #MON."
+	line "nic with #mon."
 
 	para "Won't you join us?"
 	done
@@ -484,7 +484,7 @@ UnknownText_0x19d6a2:
 UnknownText_0x19d6c9:
 	text "TRAINER TIPS"
 
-	para "All #MON have"
+	para "All #mon have"
 	line "pros and cons"
 
 	para "depending on their"
@@ -493,14 +493,14 @@ UnknownText_0x19d6c9:
 	para "If their types"
 	line "differ, a higher-"
 
-	para "level #MON may"
+	para "level #mon may"
 	line "lose in battle."
 
 	para "Learn which types"
 	line "are strong and"
 
 	para "weak against your"
-	line "#MON's type."
+	line "#mon's type."
 	done
 
 Route43_MapEventHeader:

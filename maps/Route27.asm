@@ -375,7 +375,7 @@ CooltrainerfReena1SeenText:
 	text "You shouldn't"
 	line "underestimate the"
 
-	para "wild #MON in"
+	para "wild #mon in"
 	line "these parts."
 	done
 
@@ -408,10 +408,10 @@ CooltrainerfMeganBeatenText:
 UnknownText_0x1a0cce:
 	text "I'm checking out"
 	line "pre- and post-"
-	cont "evolution #MON."
+	cont "evolution #mon."
 
 	para "Evolution really"
-	line "does make #MON"
+	line "does make #mon"
 	cont "stronger."
 
 	para "But evolved forms"
@@ -428,7 +428,7 @@ PsychicGilbertSeenText:
 	para "Mmmmmmm…"
 
 	para "I got it! You're"
-	line "on the #MON"
+	line "on the #mon"
 	cont "LEAGUE challenge!"
 	done
 
@@ -459,7 +459,7 @@ UnknownText_0x1a0e42:
 	line "me mimic bird"
 
 	para "whistles to com-"
-	line "mand #MON."
+	line "mand #mon."
 	done
 
 UnknownText_0x1a0e7f:

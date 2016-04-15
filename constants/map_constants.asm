@@ -240,7 +240,7 @@ MAP_NONE   EQU 0
 	mapgroup GOLDENROD_DEPT_STORE_4F,                     4,  8 ; 14
 	mapgroup GOLDENROD_DEPT_STORE_5F,                     4,  8 ; 15
 	mapgroup GOLDENROD_DEPT_STORE_6F,                     4,  8 ; 16
-	mapgroup GOLDENROD_DEPT_STORE_ELEVATOR,               2,  2 ; 17
+	mapgroup GOLDENROD_DEPT_STORE_ELEVATOR, 4, 4
 	mapgroup GOLDENROD_DEPT_STORE_ROOF,                   4,  8 ; 18
 	mapgroup GOLDENROD_GAME_CORNER,                       7, 10 ; 19
 	mapgroup GOLDENROD_POKECENTER_1F,                     4,  5 ; 20
@@ -268,8 +268,8 @@ MAP_NONE   EQU 0
 	newgroup                                                    ; 13
 
 	mapgroup ROUTE_1,                                    18, 10 ;  1
-	mapgroup PALLET_TOWN,                                 9, 10 ;  2
-	mapgroup REDS_HOUSE_1F,                               4,  4 ;  3
+	mapgroup PALLET_TOWN, 9, 10
+	mapgroup REDS_HOUSE_1F, 4, 4
 	mapgroup REDS_HOUSE_2F,                               4,  4 ;  4
 	mapgroup BLUES_HOUSE,                                 4,  4 ;  5
 	mapgroup OAKS_LAB,                                    6,  5 ;  6

@@ -39,7 +39,7 @@ UnknownText_0x99c48:
 
 UnknownText_0x99cd5:
 	text "If you use REVIVE,"
-	line "a #MON that's"
+	line "a #mon that's"
 
 	para "fainted will wake"
 	line "right up."

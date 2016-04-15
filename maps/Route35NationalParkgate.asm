@@ -243,9 +243,9 @@ UnknownText_0x6a2eb:
 	line "ple."
 
 	para "Using one of your"
-	line "#MON, catch a"
+	line "#mon, catch a"
 
-	para "bug #MON to be"
+	para "bug #mon to be"
 	line "judged."
 
 	para "Would you like to"
@@ -266,7 +266,7 @@ UnknownText_0x6a3c7:
 UnknownText_0x6a3e2:
 	text "The person who"
 	line "gets the strong-"
-	cont "est bug #MON"
+	cont "est bug #mon"
 	cont "is the winner."
 
 	para "You have 20"
@@ -277,13 +277,13 @@ UnknownText_0x6a3e2:
 	cont "done."
 
 	para "You can keep the"
-	line "last #MON you"
+	line "last #mon you"
 	cont "catch as your own."
 
 	para "Go out and catch"
 	line "the strongest bug"
 
-	para "#MON you can"
+	para "#mon you can"
 	line "find!"
 	done
 
@@ -291,14 +291,14 @@ UnknownText_0x6a4c6:
 	text "Uh-oh…"
 
 	para "You have more than"
-	line "one #MON."
+	line "one #mon."
 
 	para "You'll have to use"
 	line "@"
 	text_from_ram StringBuffer3
 	text ", the"
 
-	para "first #MON in"
+	para "first #mon in"
 	line "your party."
 
 	para "Is that OK with"
@@ -307,19 +307,19 @@ UnknownText_0x6a4c6:
 
 UnknownText_0x6a537:
 	text "Fine, we'll hold"
-	line "your other #MON"
+	line "your other #mon"
 	cont "while you compete."
 	done
 
 UnknownText_0x6a56b:
-	text "<PLAYER>'s #MON"
+	text "<PLAYER>'s #mon"
 	line "were left with the"
 	cont "CONTEST HELPER."
 	done
 
 UnknownText_0x6a597:
 	text "Please choose the"
-	line "#MON to be used"
+	line "#mon to be used"
 
 	para "in the Contest,"
 	line "then come see me."
@@ -333,13 +333,13 @@ UnknownText_0x6a5dc:
 
 UnknownText_0x6a608:
 	text "Uh-oh…"
-	line "The first #MON"
+	line "The first #mon"
 
 	para "in your party"
 	line "can't battle."
 
 	para "Please switch it"
-	line "with the #MON"
+	line "with the #mon"
 
 	para "you want to use,"
 	line "then come see me."
@@ -354,7 +354,7 @@ UnknownText_0x6a67c:
 
 	para "You have no room"
 	line "to put the bug"
-	cont "#MON you catch."
+	cont "#mon you catch."
 
 	para "Please make room"
 	line "in your party or"
@@ -367,11 +367,11 @@ UnknownText_0x6a71f:
 	text "Uh-oh…"
 	line "You have an EGG as"
 
-	para "the first #MON"
+	para "the first #mon"
 	line "in your party."
 
 	para "Please switch it"
-	line "with the #MON"
+	line "with the #mon"
 
 	para "you want to use,"
 	line "then come see me."
@@ -437,7 +437,7 @@ UnknownText_0x6a90e:
 	line "you also get to"
 
 	para "keep the bug"
-	line "#MON you may"
+	line "#mon you may"
 
 	para "have at the end of"
 	line "the contest."

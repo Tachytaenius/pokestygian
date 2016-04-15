@@ -45,7 +45,7 @@ UnknownText_0x71023:
 	text "I want to buy some"
 	line "items that raise"
 
-	para "#MON stats, but"
+	para "#mon stats, but"
 	line "I don't have"
 	cont "enough money…"
 	done

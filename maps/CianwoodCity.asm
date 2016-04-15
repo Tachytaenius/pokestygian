@@ -195,7 +195,7 @@ UnknownText_0x1a00f1:
 	para "It would be much"
 	line "easier if your"
 
-	para "#MON knew how"
+	para "#mon knew how"
 	line "to FLY…"
 	done
 
@@ -222,7 +222,7 @@ UnknownText_0x1a01e3:
 
 UnknownText_0x1a021d:
 	text "Teach FLY to your"
-	line "#MON."
+	line "#mon."
 
 	para "You will be able"
 	line "to FLY instantly"
@@ -257,7 +257,7 @@ UnknownText_0x1a0319:
 	para "They may be hiding"
 	line "something."
 
-	para "Your #MON could"
+	para "Your #mon could"
 	line "use ROCK SMASH to"
 	cont "break them."
 	done
@@ -328,7 +328,7 @@ UnknownText_0x1a05c3:
 	text "You're amazing,"
 	line "<PLAYER>!"
 
-	para "No wonder #MON"
+	para "No wonder #mon"
 	line "gravitate to you."
 
 	para "I get it now."
@@ -352,7 +352,7 @@ CianwoodCitySignText:
 
 CianwoodGymSignText:
 	text "CIANWOOD CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 
 	para "LEADER: CHUCK"
 

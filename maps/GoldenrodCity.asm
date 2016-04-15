@@ -354,10 +354,10 @@ UnknownText_0x198c36:
 UnknownText_0x198c83:
 	text "The man at that"
 	line "house rates your"
-	cont "#MON names."
+	cont "#mon names."
 
 	para "He can even rename"
-	line "your #MON."
+	line "your #mon."
 	done
 
 UnknownText_0x198ccf:
@@ -392,7 +392,7 @@ UnknownText_0x198d6d:
 	done
 
 UnknownText_0x198daa:
-	text "#MON? They're"
+	text "#mon? They're"
 	line "nothing more than"
 
 	para "tools for making"
@@ -431,7 +431,7 @@ GoldenrodCityRadioTowerSignText:
 
 GoldenrodDeptStoreSignText:
 	text "Full Selection of"
-	line "#MON Goods!"
+	line "#mon Goods!"
 
 	para "GOLDENROD CITY"
 	line "DEPT.STORE"
@@ -439,7 +439,7 @@ GoldenrodDeptStoreSignText:
 
 GoldenrodGymSignText:
 	text "GOLDENROD CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 	cont "LEADER: WHITNEY"
 
 	para "The Incredibly"
@@ -469,7 +469,7 @@ GoldenrodCityGameCornerSignText:
 GoldenrodCityNameRaterSignText:
 	text "NAME RATER"
 
-	para "Get Your #MON"
+	para "Get Your #mon"
 	line "Nicknames Rated"
 	done
 
@@ -496,7 +496,7 @@ GoldenrodCityFlowerShopSignText:
 
 UnknownText_0x199042:
 	text "I can teach your"
-	line "#MON amazing"
+	line "#mon amazing"
 
 	para "moves if you'd"
 	line "like."

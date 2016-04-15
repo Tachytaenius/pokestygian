@@ -182,7 +182,7 @@ UnknownText_0x987af:
 	line "are the protectors"
 
 	para "of the legendary"
-	line "#MON."
+	line "#mon."
 	done
 
 SageGakuSeenText:
@@ -193,7 +193,7 @@ SageGakuSeenText:
 	line "has the ability to"
 
 	para "touch the souls of"
-	line "#MON, a #MON"
+	line "#mon, a #mon"
 
 	para "will come forth to"
 	line "put that trainer"
@@ -205,7 +205,7 @@ SageGakuSeenText:
 	line "come true!"
 
 	para "The legendary"
-	line "#MON SUICUNE"
+	line "#mon SUICUNE"
 	cont "has arrived!"
 
 	para "We, the WISE TRIO,"
@@ -256,10 +256,10 @@ UnknownText_0x98a35:
 	para "The BRASS TOWER,"
 	line "which was said to"
 
-	para "awaken #MON,"
+	para "awaken #mon,"
 	line "and the TIN TOWER,"
 
-	para "where #MON were"
+	para "where #mon were"
 	line "said to rest."
 
 	para "The view from the"
@@ -271,7 +271,7 @@ UnknownText_0x98a35:
 	para "At the time, an"
 	line "immense, silver-"
 
-	para "colored #MON"
+	para "colored #mon"
 	line "was said to make"
 
 	para "its roost atop the"
@@ -313,7 +313,7 @@ UnknownText_0x98c6c:
 	line "trainer who is"
 
 	para "awaited by the"
-	line "legendary #MON?"
+	line "legendary #mon?"
 	done
 
 UnknownText_0x98cac:
@@ -325,7 +325,7 @@ UnknownText_0x98cac:
 	para "the responsibility"
 	line "of protecting the"
 
-	para "legendary #MON."
+	para "legendary #mon."
 	line "We are to allow"
 
 	para "passage only to"

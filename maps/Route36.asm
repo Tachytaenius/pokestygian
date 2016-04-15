@@ -448,7 +448,7 @@ UnknownText_0x1942f1:
 	line "jumped right up!"
 
 	para "It just has to be"
-	line "a #MON."
+	line "a #mon."
 
 	para "I bet it would be"
 	line "shocked out of its"
@@ -523,7 +523,7 @@ UnknownText_0x1945b8:
 	cont "to GOLDENROD CITY."
 
 	para "I wanted to go see"
-	line "the huge #MON"
+	line "the huge #mon"
 
 	para "CENTER they just"
 	line "opened…"
@@ -547,7 +547,7 @@ UnknownText_0x19469e:
 	cont "trace."
 
 	para "Oh! That tree was"
-	line "really a #MON?"
+	line "really a #mon?"
 	done
 
 PsychicMarkSeenText:
@@ -570,7 +570,7 @@ UnknownText_0x19471e:
 SchoolboyAlan1SeenText:
 	text "Thanks to my stud-"
 	line "ies, I'm ready for"
-	cont "any #MON!"
+	cont "any #mon!"
 	done
 
 SchoolboyAlan1BeatenText:
@@ -601,7 +601,7 @@ ArthurGivesGiftText:
 	done
 
 ArthurGaveGiftText:
-	text "ARTHUR: A #MON"
+	text "ARTHUR: A #mon"
 	line "that uses rock-"
 
 	para "type moves should"
@@ -637,7 +637,7 @@ UnknownText_0x19492e:
 UnknownText_0x19494c:
 	text "TRAINER TIPS"
 
-	para "#MON stats"
+	para "#mon stats"
 	line "vary--even within"
 	cont "the same species."
 
@@ -648,7 +648,7 @@ UnknownText_0x19494c:
 	line "ences will become"
 
 	para "pronounced as the"
-	line "#MON grow."
+	line "#mon grow."
 	done
 
 UnknownText_0x1949ee:

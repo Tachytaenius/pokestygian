@@ -7,7 +7,7 @@
 	db "LEADER@"
 	db "LEADER@"
 	db "RIVAL@"
-	db "#MON PROF.@"
+	db "#mon PROF.@"
 	db "Green goblin@"
 	db "<PKMN> TRAINER@"
 	db "ELITE FOUR@"

@@ -491,7 +491,7 @@ _OPT_IntroText1::
 
 _OPT_IntroText2::
 	text ""
-	line "#MON TALK!"
+	line "#mon TALK!"
 	done
 
 _OPT_IntroText3::
@@ -685,7 +685,7 @@ OPT_Speedy::
 	done
 
 _OPT_PokemonChannelText::
-	text "#MON"
+	text "#mon"
 	done
 
 _PokedexShowText::
@@ -698,7 +698,7 @@ _PokedexShowText::
 
 _BenIntroText1::
 	text ""
-	line "BEN: #MON MUSIC"
+	line "BEN: #mon MUSIC"
 	done
 
 _BenIntroText2::
@@ -740,12 +740,12 @@ _BenFernText2B::
 
 _BenFernText3A::
 	text ""
-	line "#MON March!"
+	line "#mon March!"
 	done
 
 _BenFernText3B::
 	text ""
-	line "#MON Lullaby!"
+	line "#mon Lullaby!"
 	done
 
 ; Lucky Channel
@@ -1118,7 +1118,7 @@ Text_RemainingTime::
 	done
 
 Text_YourPkmnsHPWasHealed::
-	text "Your #MON's HP"
+	text "Your #mon's HP"
 	line "was healed."
 	prompt
 
@@ -1302,7 +1302,7 @@ UnknownText_0x1bd34b::
 
 	para "I'll call you if I"
 	line "see another rare"
-	cont "#MON, OK?"
+	cont "#mon, OK?"
 	prompt
 
 UnknownText_0x1bd39e::
@@ -1349,7 +1349,7 @@ UnknownText_0x1bd445::
 	db "@@"
 
 UnknownText_0x1bd449::
-	text "I collect #MON."
+	text "I collect #mon."
 	line "Do you have"
 	cont "@"
 	text_from_ram StringBuffer1
@@ -1391,7 +1391,7 @@ UnknownText_0x1bd4f4::
 
 UnknownText_0x1bd512::
 	text "Hi, I'm looking"
-	line "for this #MON."
+	line "for this #mon."
 
 	para "If you have"
 	line "@"
@@ -1502,7 +1502,7 @@ UnknownText_0x1bd745::
 
 UnknownText_0x1bd77f::
 	text "Wow, that's a cute"
-	line "#MON."
+	line "#mon."
 
 	para "Where did you get"
 	line "it?"
@@ -1538,7 +1538,7 @@ UnknownText_0x1bd868::
 UnknownText_0x1bd88e::
 	text "Be careful."
 
-	para "#MON are your"
+	para "#mon are your"
 	line "friends. You need"
 	cont "to work as a team."
 
@@ -1627,7 +1627,7 @@ UnknownText_0x1bdaa7::
 UnknownText_0x1bdaa9::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"
-	cont "raise a #MON?"
+	cont "raise a #mon?"
 	done
 
 UnknownText_0x1bdad8::
@@ -1636,7 +1636,7 @@ UnknownText_0x1bdad8::
 	cont "about EGGS?"
 
 	para "I was raising"
-	line "#MON with my"
+	line "#mon with my"
 	cont "wife, you see."
 
 	para "We were shocked to"
@@ -1646,7 +1646,7 @@ UnknownText_0x1bdad8::
 	line "that?"
 
 	para "So, want me to"
-	line "raise a #MON?"
+	line "raise a #mon?"
 	done
 
 UnknownText_0x1bdb85::
@@ -1654,7 +1654,7 @@ UnknownText_0x1bdb85::
 	line "LADY."
 
 	para "Should I raise a"
-	line "#MON for you?"
+	line "#mon for you?"
 	done
 
 UnknownText_0x1bdbbb::
@@ -1664,7 +1664,7 @@ UnknownText_0x1bdbbb::
 
 	para "My husband and I"
 	line "were raising some"
-	cont "#MON, you see."
+	cont "#mon, you see."
 
 	para "We were shocked to"
 	line "find an EGG!"
@@ -1673,7 +1673,7 @@ UnknownText_0x1bdbbb::
 	line "could that be?"
 
 	para "Should I raise a"
-	line "#MON for you?"
+	line "#mon for you?"
 	done
 
 UnknownText_0x1bdc79::
@@ -1683,7 +1683,7 @@ UnknownText_0x1bdc79::
 
 UnknownText_0x1bdc97::
 	text "Oh? But you have"
-	line "just one #MON."
+	line "just one #mon."
 	prompt
 
 UnknownText_0x1bdcb8::
@@ -1734,7 +1734,7 @@ UnknownText_0x1bdd96::
 	text "."
 
 	para "If you want your"
-	line "#MON back, it"
+	line "#mon back, it"
 	cont "will cost ¥@"
 	deciram StringBuffer2 + 2, 3, 4
 	text "."
@@ -1742,7 +1742,7 @@ UnknownText_0x1bdd96::
 
 UnknownText_0x1bde04::
 	text "Perfect! Here's"
-	line "your #MON."
+	line "your #mon."
 	prompt
 
 UnknownText_0x1bde1f::
@@ -1761,7 +1761,7 @@ UnknownText_0x1bde32::
 	line "more time with us."
 
 	para "If you want your"
-	line "#MON back, it"
+	line "#mon back, it"
 	cont "will cost ¥100."
 	done
 
@@ -1791,18 +1791,18 @@ UnknownText_0x1bdf00::
 	text "Ah, it's you!"
 
 	para "We were raising"
-	line "your #MON, and"
+	line "your #mon, and"
 
 	para "my goodness, were"
 	line "we surprised!"
 
-	para "Your #MON had"
+	para "Your #mon had"
 	line "an EGG!"
 
 	para "We don't know how"
 	line "it got there, but"
 
-	para "your #MON had"
+	para "your #mon had"
 	line "it. You want it?"
 	done
 
@@ -1828,7 +1828,7 @@ UnknownText_0x1bdff2::
 	done
 
 UnknownText_0x1be024::
-	text "Which #MON"
+	text "Which #mon"
 	line "should I photo-"
 	cont "graph?"
 	prompt

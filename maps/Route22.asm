@@ -10,7 +10,7 @@ MapRoute22Signpost0Script:
 	jumptext UnknownText_0x7c005
 
 UnknownText_0x7c005:
-	text "#MON LEAGUE"
+	text "#mon LEAGUE"
 
 	para "VICTORY ROAD"
 	line "ENTRANCE"

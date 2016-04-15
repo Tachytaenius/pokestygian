@@ -126,13 +126,13 @@ UnknownText_0x5c94c:
 
 UnknownText_0x5c973:
 	text "ED: My PARASECT"
-	line "puts #MON to"
+	line "puts #mon to"
 	cont "sleep with SPORE."
 	done
 
 UnknownText_0x5c9a3:
 	text "NICK: I'm raising"
-	line "fast #MON for"
+	line "fast #mon for"
 	cont "battles."
 	done
 
@@ -142,7 +142,7 @@ UnknownText_0x5c9cc:
 	cont "winning."
 
 	para "I'm just looking"
-	line "for rare #MON."
+	line "for rare #mon."
 	done
 
 UnknownText_0x5ca15:
@@ -155,7 +155,7 @@ UnknownText_0x5ca15:
 
 UnknownText_0x5ca52:
 	text "BARRY: You should"
-	line "weaken bug #MON"
+	line "weaken bug #mon"
 
 	para "first, then throw"
 	line "a BALL."
@@ -163,7 +163,7 @@ UnknownText_0x5ca52:
 
 UnknownText_0x5ca8f:
 	text "CINDY: I love bug"
-	line "#MON."
+	line "#mon."
 
 	para "I guess you must"
 	line "like them too."
@@ -173,7 +173,7 @@ UnknownText_0x5cac8:
 	text "JOSH: I've been"
 	line "collecting bug"
 
-	para "#MON since I"
+	para "#mon since I"
 	line "was just a baby."
 
 	para "There's no way I'm"
@@ -185,12 +185,12 @@ UnknownText_0x5cb25:
 	line "got the time to"
 
 	para "chat, go find some"
-	line "bug #MON."
+	line "bug #mon."
 	done
 
 UnknownText_0x5cb64:
 	text "KIPP: I've studied"
-	line "about bug #MON"
+	line "about bug #mon"
 	cont "a lot."
 
 	para "I'm going to win"

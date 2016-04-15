@@ -156,7 +156,7 @@ UnknownText_0x56901:
 	done
 
 UnknownText_0x56942:
-	text "My #MON always"
+	text "My #mon always"
 	line "get paralyzed or"
 
 	para "poisoned when the"
@@ -185,7 +185,7 @@ UnknownText_0x56a2b:
 	line "are battling on"
 	cont "the road!"
 
-	para "A #MON fired a"
+	para "A #mon fired a"
 	line "flurry of leaves!"
 
 	para "That makes me feel"
@@ -206,7 +206,7 @@ UnknownText_0x56aa6:
 
 UnknownText_0x56b11:
 	text "A vending machine"
-	line "for #MON dolls?"
+	line "for #mon dolls?"
 
 	para "Insert money, then"
 	line "turn the crank…"

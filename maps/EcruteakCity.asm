@@ -154,7 +154,7 @@ UnknownText_0x1a421a:
 	done
 
 UnknownText_0x1a4269:
-	text "Three big #MON"
+	text "Three big #mon"
 	line "ran off in differ-"
 	cont "ent directions."
 	cont "What were they?"
@@ -165,7 +165,7 @@ UnknownText_0x1a42ac:
 	line "about OLIVINE"
 	cont "LIGHTHOUSE."
 
-	para "The #MON that"
+	para "The #mon that"
 	line "serves as the"
 
 	para "beacon fell ill."
@@ -174,7 +174,7 @@ UnknownText_0x1a42ac:
 	done
 
 UnknownText_0x1a4325:
-	text "The #MON at"
+	text "The #mon at"
 	line "OLIVINE LIGHTHOUSE"
 	cont "has been cured."
 
@@ -184,7 +184,7 @@ UnknownText_0x1a4325:
 	done
 
 UnknownText_0x1a4386:
-	text "I hear #MON are"
+	text "I hear #mon are"
 	line "rampaging at the"
 
 	para "LAKE OF RAGE. I'd"
@@ -198,11 +198,11 @@ UnknownText_0x1a43cb:
 	para "This tower burned"
 	line "in a fire. Three"
 
-	para "nameless #MON"
+	para "nameless #mon"
 	line "perished in it."
 
 	para "A rainbow-colored"
-	line "#MON descended"
+	line "#mon descended"
 
 	para "from the sky and"
 	line "resurrected them…"
@@ -238,7 +238,7 @@ TinTowerSignText:
 
 EcruteakGymSignText:
 	text "ECRUTEAK CITY"
-	line "#MON GYM"
+	line "#mon GYM"
 	cont "LEADER: MORTY"
 
 	para "The Mystic Seer of"

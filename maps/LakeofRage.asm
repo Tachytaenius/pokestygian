@@ -20,8 +20,9 @@ Return
 
 LakeofRage_MapEventHeader:: db 0, 0
 
-.Warps: db 1
+.Warps: db 2
 	warp_def 31, 15, 2, ELMS_LAB
+	warp_def 17, 23, 1, PALLET_TOWN
 
 .CoordEvents: db 0
 
@@ -32,10 +33,31 @@ LakeofRage_MapEventHeader:: db 0, 0
 	signpost 13, 13, SIGNPOST_READ, x6y6
 	signpost 12, 13, SIGNPOST_READ, x6y6
 
-.ObjectEvents: db 2
+.ObjectEvents: db 16
 	person_event SPRITE_POKE_BALL, 30, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, monactions, EVENT_109
 	person_event SPRITE_CHRIS_BIKE, 20, 37, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, armourActions, EVENT_10A
-
+	person_event SPRITE_BILL, 18, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 30, 17, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 15, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 12, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 18, 16, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 24, 34, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 30, 30, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_BILL, 30, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
+	person_event SPRITE_MORTY, 28, 10, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, bones1, EVENT_10B
+	person_event SPRITE_MORTY, 30, 36, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, bones2, EVENT_10C
+	person_event SPRITE_MORTY, 25, 25, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, skull1, EVENT_10D
+	person_event SPRITE_FISHING_GURU, 25, 24, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .gr, -1
+	person_event SPRITE_FISHING_GURU, 10, 29, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, .re, -1
+	person_event SPRITE_SILVER, 17, 22, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, .bannerScript, -1
+.bannerScript
+	jumpstd trashcan
+.gr
+	jumpstd daytotext
+.re
+	jumpstd goldenrodrockets
+.plantScript
+	jumpstd elevatorbutton
 .shrine
 	jumptext .intoShrine
 .intoShrine
@@ -323,4 +345,384 @@ INCLUDE "gfx/stygian/armour.pal"
 .noCanDo
 	text "There is no way to"
 	line "use that."
+	done
+bones1
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_10B
+	disappear 12
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You're able to"
+	line "destroy the"
+	cont "bones. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy the"
+	line "bones."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The bones are"
+	line "within reach."
+	cont "Touch them?"
+	prompt
+.touchItemText
+	text "You feel some"
+	line "bones."
+	done
+
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00	
+
+.lookAtPotion
+	lb bc, BANK(BonesPic), 6*7
+	ld hl, BonesPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.LOKitem
+	callasm .lookAtPotion
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see a pile of"
+	line "3 bones."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_10B
+	disappear 12
+	giveitem FULL_RESTORE, 3
+	iffalse .oops
+	jumptext .takeitemtext
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.takeitemquestion
+	text "You are able to"
+	line "take the bones."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the bones."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.Done
+	closetext
+	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "That cannot talk."
+	done
+bones2
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_10C
+	disappear 13
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You're able to"
+	line "destroy the"
+	cont "bones. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy the"
+	line "bones."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The bones are"
+	line "within reach."
+	cont "Touch them?"
+	prompt
+.touchItemText
+	text "You feel some"
+	line "bones."
+	done
+
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00	
+
+.lookAtPotion
+	lb bc, BANK(BonesPic), 6*7
+	ld hl, BonesPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.LOKitem
+	callasm .lookAtPotion
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see a pile of"
+	line "2 bones."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_10C
+	disappear 13
+	giveitem FULL_RESTORE, 2
+	iffalse .oops
+	jumptext .takeitemtext
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.takeitemquestion
+	text "You are able to"
+	line "take the bones."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the bones."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.Done
+	closetext
+	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "That cannot talk."
+	done
+skull1
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKitem
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.ATKitem
+	opentext
+	writetext .destroyItemQuestion
+	yesorno
+	iffalse .Done
+	setevent EVENT_10D
+	disappear 14
+	jumptext .itemDestroyed
+.destroyItemQuestion
+	text "You're able to"
+	line "destroy the"
+	cont "skull. Do so?"
+	prompt
+.itemDestroyed
+	text "You destroy the"
+	line "skull."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The skull is"
+	line "within reach."
+	cont "Touch it?"
+	prompt
+.touchItemText
+	text "You feel a"
+	line "skull."
+	done
+
+.PotionPalette
+	RGB 31, 31, 31
+INCLUDE "gfx/stygian/bones.pal"
+	RGB 00, 00, 00	
+
+.lookAtPotion
+	lb bc, BANK(SkullPic), 6*7
+	ld hl, SkullPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+
+	ld hl, .PotionPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.PotionPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret
+.LOKitem
+	callasm .lookAtPotion
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see a skull."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	opentext
+	writetext .takeitemquestion
+	callstd pokecenternurse ; now checks if the pack is full. true is yes. false is, well... no.
+	iftrue .oops
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_10D
+	disappear 14
+	giveitem FULL_HEAL, 1
+	iffalse .oops
+	jumptext .takeitemtext
+.oops
+	jumptext .packfull
+.packfull
+	text "But your pack is"
+	line "full."
+	done
+.takeitemquestion
+	text "You are able to"
+	line "take the skull."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the skull."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.Done
+	closetext
+	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "That cannot talk."
 	done

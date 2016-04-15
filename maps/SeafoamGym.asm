@@ -71,7 +71,7 @@ UnknownText_0x1ab548:
 	line "burned down."
 
 	para "My fire-breathing"
-	line "#MON and I are"
+	line "#mon and I are"
 
 	para "homeless because"
 	line "of the volcano."
@@ -121,7 +121,7 @@ UnknownText_0x1ab69d:
 
 UnknownText_0x1ab71c:
 	text "BLAINE: My fire"
-	line "#MON will be"
+	line "#mon will be"
 
 	para "even stronger."
 	line "Just you watch!"
@@ -149,7 +149,7 @@ SeafoamGymGuyWinText:
 	done
 
 SeafoamGymGuyWinText2:
-	text "A #MON GYM can"
+	text "A #mon GYM can"
 	line "be anywhere as"
 
 	para "long as the GYM"

@@ -3050,7 +3050,7 @@ TeleportFunction: ; cc61
 	ret
 
 .Text_ReturnToLastMonCenter: ; 0xccb1
-	; Return to the last #MON CENTER.
+	; Return to the last #mon CENTER.
 	text_jump UnknownText_0x1c071a
 	db "@"
 
@@ -3173,7 +3173,7 @@ AskStrengthScript:
 	end
 
 UnknownText_0xcd69: ; 0xcd69
-	; A #MON may be able to move this. Want to use STRENGTH?
+	; A #mon may be able to move this. Want to use STRENGTH?
 	text_jump UnknownText_0x1c07a0
 	db "@"
 
@@ -3183,7 +3183,7 @@ UnknownText_0xcd6e: ; 0xcd6e
 	db "@"
 
 UnknownText_0xcd73: ; 0xcd73
-	; A #MON may be able to move this.
+	; A #mon may be able to move this.
 	text_jump UnknownText_0x1c07f4
 	db "@"
 
@@ -3442,7 +3442,7 @@ AskHeadbuttScript: ; 0xcedc
 	end
 
 UnknownText_0xcee6: ; 0xcee6
-	; A #MON could be in this tree. Want to HEADBUTT it?
+	; A #mon could be in this tree. Want to HEADBUTT it?
 	text_jump UnknownText_0x1c08bc
 	db "@"
 
@@ -3536,7 +3536,7 @@ AskRockSmashScript: ; 0xcf5d
 	jumptext UnknownText_0xcf72
 
 UnknownText_0xcf72: ; 0xcf72
-	; Maybe a #MON can break this.
+	; Maybe a #mon can break this.
 	text_jump UnknownText_0x1c0906
 	db "@"
 
@@ -4548,7 +4548,7 @@ _BillsPC: ; e3fd
 	ret
 
 .Text_GottaHavePokemon: ; 0xe417
-	; You gotta have #MON to call!
+	; You gotta have #mon to call!
 	text_jump UnknownText_0x1c1006
 	db "@"
 
@@ -4663,7 +4663,7 @@ BillsPC_MovePKMNMenu: ; e4cd
 	ret
 
 .Text_MonHoldingMail: ; 0xe4f9
-	; There is a #MON holding MAIL. Please remove the MAIL.
+	; There is a #mon holding MAIL. Please remove the MAIL.
 	text_jump UnknownText_0x1c102b
 	db "@"
 
@@ -4698,12 +4698,12 @@ Functione512: ; unused
 	ret
 
 .Text_NoPKMN: ; 0xe52e
-	; You don't have a single #MON!
+	; You don't have a single #mon!
 	text_jump UnknownText_0x1c1062
 	db "@"
 
 .Text_ItsYourLastPKMN: ; 0xe533
-	; You can't deposit your last #MON!
+	; You can't deposit your last #mon!
 	text_jump UnknownText_0x1c1080
 	db "@"
 
@@ -4759,7 +4759,7 @@ Functione56d: ; unused
 	ret
 
 UnknownText_0xe57e: ; 0xe57e
-	; You can't take any more #MON.
+	; You can't take any more #mon.
 	text_jump UnknownText_0x1c10a2
 	db "@"
 
@@ -11622,7 +11622,7 @@ DisplayCaughtContestMonStats: ; cc000
 	db " THIS ", $4a, "  @"
 
 SwitchMonText: ; cc0c2
-	; Switch #MON?
+	; Switch #mon?
 	text_jump UnknownText_0x1c10cf
 	db "@"
 

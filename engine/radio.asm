@@ -321,7 +321,7 @@ OPT_IntroText1:
 	db "@"
 
 OPT_IntroText2:
-	; #MON TALK!
+	; #mon TALK!
 	text_jump _OPT_IntroText2
 	db "@"
 
@@ -604,7 +604,7 @@ OaksPkmnTalk10:
 	ret
 
 OPT_PokemonChannelText:
-	; #MON
+	; #mon
 	text_jump _OPT_PokemonChannelText
 	db "@"
 
@@ -621,7 +621,7 @@ OaksPkmnTalk11:
 	jp PlaceRadioString
 
 .pokemon_string
-	db "#MON@"
+	db "#mon@"
 
 OaksPkmnTalk12:
 	ld hl, wRadioTextDelay
@@ -633,7 +633,7 @@ OaksPkmnTalk12:
 	jp PlaceRadioString
 
 .pokemon_channel_string
-	db "#MON Channel@"
+	db "#mon Channel@"
 
 OaksPkmnTalk13:
 	ld hl, wRadioTextDelay
@@ -926,7 +926,7 @@ StartPokemonMusicChannel:
 	ret
 
 BenIntroText1:
-	; BEN: #MON MUSIC
+	; BEN: #mon MUSIC
 	text_jump _BenIntroText1
 	db "@"
 
@@ -966,12 +966,12 @@ BenFernText2B:
 	db "@"
 
 BenFernText3A:
-	; #MON March!
+	; #mon March!
 	text_jump _BenFernText3A
 	db "@"
 
 BenFernText3B:
-	; #MON Lullaby!
+	; #mon Lullaby!
 	text_jump _BenFernText3B
 	db "@"
 
@@ -1715,7 +1715,7 @@ PasswordTable:
 .Types:              db BUENA_STRING,  6, "FLYING@", "BUG@", "GRASS@"
 .Moves:              db BUENA_MOVE,   12, TACKLE, GROWL, MUD_SLAP
 .XItems:             db BUENA_ITEM,   12, X_ATTACK, X_DEFEND, X_SPEED
-.RadioStations:      db BUENA_STRING, 13, "#MON Talk@", "#MON Music@", "Lucky Channel@"
+.RadioStations:      db BUENA_STRING, 13, "#mon Talk@", "#mon Music@", "Lucky Channel@"
 
 BuenasPassword5:
 	ld hl, BuenaRadioText5

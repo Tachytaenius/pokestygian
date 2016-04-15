@@ -267,7 +267,7 @@ PhotoStudio: ; 16dc7
 ; 16e04
 
 .Text_AskWhichMon: ; 0x16e04
-	; Which #MON should I photo- graph?
+	; Which #mon should I photo- graph?
 	text_jump UnknownText_0x1be024
 	db "@"
 ; 0x16e09

@@ -118,7 +118,7 @@ UnknownText_0x9cfe1:
 	para "It's my pride and"
 	line "joy, there."
 
-	para "Give it to #MON"
+	para "Give it to #mon"
 	line "to restore HP!"
 
 	para "I'll give it to ya"
@@ -184,7 +184,7 @@ UnknownText_0x9d1c7:
 	para "It's a rare move"
 	line "that only works"
 
-	para "while the #MON"
+	para "while the #mon"
 	line "is asleep."
 
 	para "You best think how"

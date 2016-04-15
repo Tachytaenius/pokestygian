@@ -23,7 +23,7 @@ LassScript_0x9cad1:
 	jumptextfaceplayer UnknownText_0x9cb16
 
 UnknownText_0x9cad4:
-	text "Do your #MON"
+	text "Do your #mon"
 	line "already know the"
 
 	para "move for carrying"

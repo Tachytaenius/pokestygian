@@ -40,7 +40,7 @@ UnknownText_0x19698a:
 	text "It's great. I can"
 	line "store any number"
 
-	para "of #MON, and"
+	para "of #mon, and"
 	line "it's all free."
 	done
 
@@ -64,7 +64,7 @@ UnknownText_0x196a46:
 	line "CENTER upstairs"
 	cont "was just built."
 
-	para "I traded #MON"
+	para "I traded #mon"
 	line "there already!"
 	done
 

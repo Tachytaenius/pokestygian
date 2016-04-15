@@ -158,7 +158,7 @@ UnknownText_0x54dc1:
 UnknownText_0x54e02:
 	text "Whoa, wait. You"
 	line "can't carry any"
-	cont "more #MON."
+	cont "more #mon."
 	done
 
 UnknownText_0x54e2d:
@@ -179,11 +179,11 @@ UnknownText_0x54e42:
 
 UnknownText_0x54ea8:
 	text "Oh, you collect"
-	line "#MON? My son"
+	line "#mon? My son"
 	cont "BILL is an expert."
 
 	para "He just got called"
-	line "to the #MON"
+	line "to the #mon"
 
 	para "CENTER in ECRUTEAK"
 	line "CITY."
@@ -221,7 +221,7 @@ UnknownText_0x54fd9:
 
 UnknownText_0x54ff3:
 	text "My brother made"
-	line "the PC #MON"
+	line "the PC #mon"
 	cont "storage system."
 
 	para "I was going to"
@@ -238,7 +238,7 @@ UnknownText_0x55069:
 	text "My big brother"
 	line "BILL made the PC"
 
-	para "#MON storage"
+	para "#mon storage"
 	line "system."
 	done
 

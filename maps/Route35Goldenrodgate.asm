@@ -100,7 +100,7 @@ UnknownText_0x69ddd:
 	cont "a favor?"
 
 	para "Can you take this"
-	line "#MON with MAIL"
+	line "#mon with MAIL"
 	cont "to my friend?"
 
 	para "He's on ROUTE 31."
@@ -120,7 +120,7 @@ UnknownText_0x69e48:
 
 UnknownText_0x69eb8:
 	text "<PLAYER> received a"
-	line "#MON with MAIL."
+	line "#mon with MAIL."
 	done
 
 UnknownText_0x69ed6:
@@ -138,7 +138,7 @@ UnknownText_0x69ed6:
 
 UnknownText_0x69f56:
 	text "You can't carry"
-	line "another #MON…"
+	line "another #mon…"
 	done
 
 UnknownText_0x69f74:
@@ -176,14 +176,14 @@ UnknownText_0x6a00a:
 	done
 
 UnknownText_0x6a09a:
-	text "I like the #MON"
+	text "I like the #mon"
 	line "Lullaby they play"
 	cont "on the radio."
 	done
 
 UnknownText_0x6a0cb:
 	text "I wonder how many"
-	line "kinds of #MON"
+	line "kinds of #mon"
 
 	para "there are in the"
 	line "world."

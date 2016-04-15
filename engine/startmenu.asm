@@ -193,7 +193,7 @@ StartMenu:: ; 125cd
 .PokegearString	db $24, "gear@"
 .QuitString    	db "Quit@"
 
-.PokedexDesc  db   "#MON"
+.PokedexDesc  db   "#mon"
               next "database@"
 
 .PartyDesc    db   "Party ", $4a

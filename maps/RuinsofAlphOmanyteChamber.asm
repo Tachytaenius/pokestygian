@@ -143,7 +143,7 @@ UnknownText_0x58d01:
 	done
 
 UnknownText_0x58d26:
-	text "This #MON"
+	text "This #mon"
 	line "drifted in the"
 
 	para "sea by twisting"

@@ -205,7 +205,7 @@ UnknownText_0x7f2e3:
 	done
 
 UnknownText_0x7f32d:
-	text "Perk Up #MON"
+	text "Perk Up #mon"
 	line "with Mellow Sounds"
 
 	para "of the # FLUTE"
@@ -214,7 +214,7 @@ UnknownText_0x7f32d:
 
 UnknownText_0x7f36b:
 	text "Wow! A full rack"
-	line "of #MON CDs and"
+	line "of #mon CDs and"
 	cont "videos."
 
 	para "This must be the"

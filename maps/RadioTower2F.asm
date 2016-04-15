@@ -352,7 +352,7 @@ UnknownText_0x5d924:
 UnknownText_0x5d956:
 	text "Lullabies on the"
 	line "radio may make"
-	cont "#MON sleep."
+	cont "#mon sleep."
 	done
 
 UnknownText_0x5d983:
@@ -411,7 +411,7 @@ UnknownText_0x5db07:
 GruntM5SeenText:
 	text "We're TEAM ROCKET,"
 	line "the exploiters of"
-	cont "#MON!"
+	cont "#mon!"
 
 	para "We love being"
 	line "evil! Scared?"
@@ -698,7 +698,7 @@ UnknownText_0x5e426:
 	done
 
 UnknownText_0x5e430:
-	text "PROF.OAK'S #MON"
+	text "PROF.OAK'S #mon"
 	line "TALK"
 
 	para "The Hottest Show"
@@ -707,7 +707,7 @@ UnknownText_0x5e430:
 
 UnknownText_0x5e463:
 	text "Anywhere, Anytime"
-	line "#MON Radio"
+	line "#mon Radio"
 	done
 
 RadioTower2F_MapEventHeader:

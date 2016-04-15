@@ -258,7 +258,7 @@ CooltrainermJakeSeenText:
 	text "I'm making my"
 	line "final preparations"
 
-	para "for the #MON"
+	para "for the #mon"
 	line "LEAGUE."
 	done
 
@@ -293,7 +293,7 @@ CooltrainermGaven3BeatenText:
 	done
 
 UnknownText_0x1a4fe4:
-	text "To get to #MON"
+	text "To get to #mon"
 	line "LEAGUE, you have"
 
 	para "to get through"
@@ -344,16 +344,16 @@ CooltrainerfBeth1SeenText:
 	cont "win at any cost."
 
 	para "I felt sorry for"
-	line "his #MON."
+	line "his #mon."
 	done
 
 CooltrainerfBeth1BeatenText:
-	text "#MON aren't"
+	text "#mon aren't"
 	line "tools of war."
 	done
 
 UnknownText_0x1a51d9:
-	text "#MON are in-"
+	text "#mon are in-"
 	line "valuable, lifelong"
 	cont "partners."
 	done
@@ -375,7 +375,7 @@ PsychicRichardBeatenText:
 	done
 
 UnknownText_0x1a5278:
-	text "People and #MON"
+	text "People and #mon"
 	line "grow from their"
 	cont "experiences."
 
@@ -401,14 +401,14 @@ UnknownText_0x1a5326:
 	text "Just like in fish-"
 	line "ing, it's all over"
 
-	para "in #MON if you"
+	para "in #mon if you"
 	line "give up."
 	done
 
 UnknownText_0x1a5364:
 	text "ROUTE 26"
 
-	para "#MON LEAGUE"
+	para "#mon LEAGUE"
 	line "RECEPTION GATE"
 	done
 

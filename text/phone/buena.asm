@@ -368,13 +368,13 @@ UnknownText_0xa1717: ; 0xa1717
 
 UnknownText_0xa183d: ; 0xa183d
 	text "<PLAY_G>, what was"
-	line "the first #MON"
+	line "the first #mon"
 	cont "you ever caught?"
 
 	para "…Oh, really?"
 
 	para "I've seen lots of"
-	line "#MON around,"
+	line "#mon around,"
 
 	para "but I've never"
 	line "caught one."
@@ -383,7 +383,7 @@ UnknownText_0xa183d: ; 0xa183d
 	line "try sometime."
 
 	para "Did you know that"
-	line "the first #MON"
+	line "the first #mon"
 
 	para "MARY caught was a"
 	line "DROWZEE?"
@@ -401,7 +401,7 @@ UnknownText_0xa183d: ; 0xa183d
 	line "MEOWTH."
 
 	para "Let's chat about"
-	line "#MON again!"
+	line "#mon again!"
 
 	para "Bye-bye!"
 	done
@@ -443,7 +443,7 @@ UnknownText_0xa1ac0: ; 0xa1ac0
 	line "on the phone for"
 
 	para "hours about what"
-	line "#MON music they"
+	line "#mon music they"
 
 	para "should play on"
 	line "different days of"

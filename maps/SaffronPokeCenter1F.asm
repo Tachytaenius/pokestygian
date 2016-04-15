@@ -43,7 +43,7 @@ YoungsterScript_0x18a4a0:
 
 UnknownText_0x18a4a3:
 	text "What are JOHTO's"
-	line "#MON CENTERS"
+	line "#mon CENTERS"
 	cont "like?"
 
 	para "…Oh, I see. So"
@@ -59,7 +59,7 @@ UnknownText_0x18a4a3:
 
 UnknownText_0x18a532:
 	text "What are JOHTO's"
-	line "#MON CENTERS"
+	line "#mon CENTERS"
 	cont "like?"
 
 	para "…Oh, I see."

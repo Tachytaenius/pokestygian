@@ -116,19 +116,19 @@ UnknownText_0x69555:
 	line "favor to ask."
 
 	para "Would you take the"
-	line "#MON EGG?"
+	line "#mon EGG?"
 	done
 
 UnknownText_0x695c5:
 	text "We discovered that"
-	line "a #MON will not"
+	line "a #mon will not"
 
 	para "hatch until it"
 	line "grows in the EGG."
 
 	para "It also has to be"
 	line "with other active"
-	cont "#MON to hatch."
+	cont "#mon to hatch."
 
 	para "<PLAY_G>, you're"
 	line "the only person"
@@ -142,7 +142,7 @@ UnknownText_0x695c5:
 UnknownText_0x69693:
 	text "Oh, no. You can't"
 	line "carry any more"
-	cont "#MON with you."
+	cont "#mon with you."
 
 	para "I'll wait here"
 	line "while you make"
@@ -184,7 +184,7 @@ UnknownText_0x69791:
 
 UnknownText_0x69809:
 	text "A guy named BILL"
-	line "made the #MON"
+	line "made the #mon"
 	cont "PC storage system."
 	done
 
@@ -194,7 +194,7 @@ UnknownText_0x6983c:
 
 	para "TEAM ROCKET was up"
 	line "to no good with"
-	cont "#MON."
+	cont "#mon."
 
 	para "But justice pre-"
 	line "vailed--a young"
@@ -202,7 +202,7 @@ UnknownText_0x6983c:
 	done
 
 UnknownText_0x698b8:
-	text "#MON are smart."
+	text "#mon are smart."
 	line "They won't obey a"
 
 	para "trainer they don't"

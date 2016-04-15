@@ -185,14 +185,14 @@ GetNicknameLength: ; fb802
 
 NameRaterIntroText: ; 0xfb80f
 	; Hello, hello! I'm the NAME RATER.
-	; I rate the names of #MON.
+	; I rate the names of #mon.
 	; Would you like me to rate names?
 	text_jump UnknownText_0x1c0043
 	db "@"
 ; 0xfb814
 
 NameRaterWhichMonText: ; 0xfb814
-	; Which #MON's nickname should I rate for you?
+	; Which #mon's nickname should I rate for you?
 	text_jump UnknownText_0x1c00a0
 	db "@"
 ; 0xfb819
@@ -244,7 +244,7 @@ NameRaterSameAsBeforeText: ; 0xfb837
 ; 0xfb83c
 
 NameRaterDoneText: ; 0xfb83c
-	; All right. This #MON is now named @ .
+	; All right. This #mon is now named @ .
 	text_jump UnknownText_0x1c0272
 	db "@"
 ; 0xfb841

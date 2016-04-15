@@ -146,10 +146,8 @@
 	connection north, VIRIDIAN_CITY, ViridianCity, -3, 7, 13, ROUTE_1
 	connection south, PALLET_TOWN, PalletTown, 0, 0, 10, ROUTE_1
 
-	map_header_2 PalletTown, PALLET_TOWN, $f, NORTH | SOUTH
-	connection north, ROUTE_1, Route1, 0, 0, 10, PALLET_TOWN
-	connection south, ROUTE_21, Route21, 0, 0, 10, PALLET_TOWN
-
+	map_header_2 PalletTown, PALLET_TOWN, 9, 0
+	
 	map_header_2 Route21, ROUTE_21, $43, NORTH | SOUTH
 	connection north, PALLET_TOWN, PalletTown, 0, 0, 10, ROUTE_21
 	connection south, CINNABAR_ISLAND, CinnabarIsland, 0, 0, 10, ROUTE_21
@@ -444,7 +442,7 @@
 	map_header_2 GoldenrodDeptStore4F, GOLDENROD_DEPT_STORE_4F, $0, 0
 	map_header_2 GoldenrodDeptStore5F, GOLDENROD_DEPT_STORE_5F, $0, 0
 	map_header_2 GoldenrodDeptStore6F, GOLDENROD_DEPT_STORE_6F, $0, 0
-	map_header_2 GoldenrodDeptStoreElevator, GOLDENROD_DEPT_STORE_ELEVATOR, $0, 0
+	map_header_2 GoldenrodDeptStoreElevator, GOLDENROD_DEPT_STORE_ELEVATOR, 9, 0
 	map_header_2 GoldenrodDeptStoreRoof, GOLDENROD_DEPT_STORE_ROOF, $24, 0
 	map_header_2 GoldenrodGameCorner, GOLDENROD_GAME_CORNER, $0, 0
 	map_header_2 GoldenrodPokeCenter1F, GOLDENROD_POKECENTER_1F, $0, 0
@@ -462,7 +460,7 @@
 	map_header_2 VermilionGym, VERMILION_GYM, $0, 0
 	map_header_2 Route6SaffronGate, ROUTE_6_SAFFRON_GATE, $0, 0
 	map_header_2 Route6UndergroundEntrance, ROUTE_6_UNDERGROUND_ENTRANCE, $0, 0
-	map_header_2 RedsHouse1F, REDS_HOUSE_1F, $0, 0
+	map_header_2 RedsHouse1F, REDS_HOUSE_1F, 9, 0
 	map_header_2 RedsHouse2F, REDS_HOUSE_2F, $0, 0
 	map_header_2 BluesHouse, BLUES_HOUSE, $0, 0
 	map_header_2 OaksLab, OAKS_LAB, $0, 0

@@ -171,7 +171,7 @@ UnknownText_0x72cb0:
 
 	para "half the damage it"
 	line "inflicts to heal"
-	cont "your #MON."
+	cont "your #mon."
 
 	para "Please use it if"
 	line "it pleases you…"
@@ -240,7 +240,7 @@ UnknownText_0x72f01:
 
 TwinsJoandzoe1SeenText:
 	text "We'll show you"
-	line "#MON moves that"
+	line "#mon moves that"
 	cont "ERIKA taught us!"
 	done
 

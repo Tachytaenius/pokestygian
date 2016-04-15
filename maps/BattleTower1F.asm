@@ -372,9 +372,9 @@ Text_RightThisWayToYourBattleRoom: ; 0x9e60a
 Text_BattleTowerIntroduction_1: ; 0x9e62f
 	text "BATTLE TOWER is a"
 	line "facility made for"
-	cont "#MON battles."
+	cont "#mon battles."
 
-	para "Countless #MON"
+	para "Countless #mon"
 	line "trainers gather"
 
 	para "from all over to"
@@ -432,9 +432,9 @@ Text_BattleTowerIntroduction_1: ; 0x9e62f
 Text_BattleTowerIntroduction_2: ; 0x9e886
 	text "BATTLE TOWER is a"
 	line "facility made for"
-	cont "#MON battles."
+	cont "#mon battles."
 
-	para "Countless #MON"
+	para "Countless #mon"
 	line "trainers gather"
 
 	para "from all over to"
@@ -600,7 +600,7 @@ Text_ReadBattleTowerRules: ; 0x9ed3c
 	done
 
 Text_BattleTowerRules: ; 0x9ed72
-	text "Three #MON may"
+	text "Three #mon may"
 	line "enter battles."
 
 	para "All three must be"
@@ -610,7 +610,7 @@ Text_BattleTowerRules: ; 0x9ed72
 	line "hold must also be"
 	cont "different."
 
-	para "Certain #MON"
+	para "Certain #mon"
 	line "may also have"
 
 	para "level restrictions"
@@ -632,7 +632,7 @@ Text_BattleTower_LeftWithoutSaving:
 	done
 
 Text_YourPkmnWillBeHealedToFullHealth: ; 0x9ee92
-	text "Your #MON will"
+	text "Your #mon will"
 	line "be healed to full"
 	cont "health."
 	done
@@ -737,7 +737,7 @@ Text_RegisterRecordTimedOut_Mobile:
 
 Text_APkmnLevelExceeds: ; 0x9f1e5
 	text "One or more of"
-	line "your #MON's"
+	line "your #mon's"
 	cont "levels exceeds @"
 	deciram ScriptVar, 1, 3
 	text "."
@@ -779,7 +779,7 @@ Text_BattleTowerGranny: ; 0x9f2e3
 	line "in battle."
 
 	para "Making your"
-	line "#MON hold items"
+	line "#mon hold items"
 
 	para "is the key to"
 	line "winning battles."
@@ -790,10 +790,10 @@ Text_BattleTowerBugCatcher: ; 0x9f35b
 	line "how far I can go"
 
 	para "using just bug"
-	line "#MON."
+	line "#mon."
 
 	para "Don't let there be"
-	line "any fire #MON…"
+	line "any fire #mon…"
 	done
 
 BattleTower1F_MapEventHeader:

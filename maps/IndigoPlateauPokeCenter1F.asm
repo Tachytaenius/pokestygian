@@ -208,7 +208,7 @@ MovementData_0x180172:
 	step_end
 
 UnknownText_0x180178:
-	text "At the #MON"
+	text "At the #mon"
 	line "LEAGUE, you'll get"
 
 	para "tested by the"
@@ -225,7 +225,7 @@ UnknownText_0x1801f5:
 	text "Hold it."
 
 	para "You're going to"
-	line "take the #MON"
+	line "take the #mon"
 
 	para "LEAGUE challenge"
 	line "now?"
@@ -234,7 +234,7 @@ UnknownText_0x1801f5:
 	line "to happen."
 
 	para "My super-well-"
-	line "trained #MON"
+	line "trained #mon"
 
 	para "are going to pound"
 	line "you."
@@ -255,7 +255,7 @@ UnknownText_0x1802a4:
 
 	para "I… I have to think"
 	line "more about my"
-	cont "#MON…"
+	cont "#mon…"
 
 	para "Humph! Try not to"
 	line "lose!"

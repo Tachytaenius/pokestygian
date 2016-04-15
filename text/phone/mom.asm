@@ -57,7 +57,7 @@ UnknownText_0x1b411c: ; 0x1b411c
 	text "?"
 
 	para "Good luck on your"
-	line "#MON quest!"
+	line "#mon quest!"
 	done
 
 UnknownText_0x1b4150: ; 0x1b4150

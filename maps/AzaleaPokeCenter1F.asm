@@ -30,13 +30,13 @@ PokefanFScript_0x18db31:
 	jumptextfaceplayer UnknownText_0x18dc19
 
 UnknownText_0x18db34:
-	text "Do your #MON"
+	text "Do your #mon"
 	line "know HM moves?"
 
 	para "Those moves can"
 	line "be used even if"
 
-	para "your #MON has"
+	para "your #mon has"
 	line "fainted."
 	done
 
@@ -45,17 +45,17 @@ UnknownText_0x18db88:
 	line "created the system"
 
 	para "for storing"
-	line "#MON in a PC."
+	line "#mon in a PC."
 
 	para "BILL's PC can"
 	line "store up to 20"
-	cont "#MON per BOX."
+	cont "#mon per BOX."
 	done
 
 UnknownText_0x18dbee:
 	text "BILL's PC can"
 	line "store up to 20"
-	cont "#MON per BOX."
+	cont "#mon per BOX."
 	done
 
 UnknownText_0x18dc19:
@@ -69,7 +69,7 @@ UnknownText_0x18dc19:
 	line "special device."
 
 	para "Then you can catch"
-	line "#MON with it."
+	line "#mon with it."
 
 	para "Before # BALLS"
 	line "were invented,"

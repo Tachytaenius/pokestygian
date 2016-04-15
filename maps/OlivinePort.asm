@@ -363,7 +363,7 @@ UnknownText_0x74c35:
 
 	para "Different RODS"
 	line "catch different"
-	cont "#MON."
+	cont "#mon."
 	done
 
 UnknownText_0x74c76:
@@ -374,7 +374,7 @@ UnknownText_0x74c76:
 
 UnknownText_0x74ca2:
 	text "There are lots of"
-	line "#MON in KANTO."
+	line "#mon in KANTO."
 
 	para "I wish I could go…"
 	done

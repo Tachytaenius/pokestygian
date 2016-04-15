@@ -107,7 +107,7 @@ UnknownText_0x180793:
 
 	para "Fwahahahaha!"
 
-	para "#MON is not"
+	para "#mon is not"
 	line "merely about brute"
 
 	para "force--you shall"

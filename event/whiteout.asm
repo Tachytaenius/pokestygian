@@ -27,7 +27,7 @@ Script_Whiteout: ; 0x124ce
 ; 0x124f5
 
 .WhitedOutText: ; 0x124f5
-	; is out of useable #MON!  whited out!
+	; is out of useable #mon!  whited out!
 	text_jump UnknownText_0x1c0a4e
 	db "@"
 ; 0x124fa

@@ -306,25 +306,25 @@ PrintDayCareText: ; 1689b
 ; 168d2
 
 .DayCareManIntro: ; 0x168d2
-	; I'm the DAY-CARE MAN. Want me to raise a #MON?
+	; I'm the DAY-CARE MAN. Want me to raise a #mon?
 	text_jump UnknownText_0x1bdaa9
 	db "@"
 ; 0x168d7
 
 .DayCareManOddEgg: ; 0x168d7
-	; I'm the DAY-CARE MAN. Do you know about EGGS? I was raising #MON with my wife, you see. We were shocked to find an EGG! How incredible is that? So, want me to raise a #MON?
+	; I'm the DAY-CARE MAN. Do you know about EGGS? I was raising #mon with my wife, you see. We were shocked to find an EGG! How incredible is that? So, want me to raise a #mon?
 	text_jump UnknownText_0x1bdad8
 	db "@"
 ; 0x168dc
 
 .DayCareLadyIntro: ; 0x168dc
-	; I'm the DAY-CARE LADY. Should I raise a #MON for you?
+	; I'm the DAY-CARE LADY. Should I raise a #mon for you?
 	text_jump UnknownText_0x1bdb85
 	db "@"
 ; 0x168e1
 
 .DayCareLadyOddEgg: ; 0x168e1
-	; I'm the DAY-CARE LADY. Do you know about EGGS? My husband and I were raising some #MON, you see. We were shocked to find an EGG! How incredible could that be? Should I raise a #MON for you?
+	; I'm the DAY-CARE LADY. Do you know about EGGS? My husband and I were raising some #mon, you see. We were shocked to find an EGG! How incredible could that be? Should I raise a #mon for you?
 	text_jump UnknownText_0x1bdbbb
 	db "@"
 ; 0x168e6
@@ -336,7 +336,7 @@ PrintDayCareText: ; 1689b
 ; 0x168eb
 
 .JustOneMon: ; 0x168eb
-	; Oh? But you have just one #MON.
+	; Oh? But you have just one #mon.
 	text_jump UnknownText_0x1bdc97
 	db "@"
 ; 0x168f0
@@ -378,13 +378,13 @@ PrintDayCareText: ; 1689b
 ; 0x1690e
 
 .AskRetrieveMon: ; 0x1690e
-	; Your @ has grown a lot. By level, it's grown by @ . If you want your #MON back, it will cost ¥@ .
+	; Your @ has grown a lot. By level, it's grown by @ . If you want your #mon back, it will cost ¥@ .
 	text_jump UnknownText_0x1bdd96
 	db "@"
 ; 0x16913
 
 .PerfectHeresYourMon: ; 0x16913
-	; Perfect! Here's your #MON.
+	; Perfect! Here's your #mon.
 	text_jump UnknownText_0x1bde04
 	db "@"
 ; 0x16918
@@ -396,7 +396,7 @@ PrintDayCareText: ; 1689b
 ; 0x1691d
 
 .ImmediatelyWithdrawMon: ; 0x1691d
-	; Huh? Back already? Your @ needs a little more time with us. If you want your #MON back, it will cost ¥100.
+	; Huh? Back already? Your @ needs a little more time with us. If you want your #mon back, it will cost ¥100.
 	text_jump UnknownText_0x1bde32
 	db "@"
 ; 0x16922
@@ -478,7 +478,7 @@ Special_DayCareManOutside: ; 16936
 ; 16993
 
 .IntroText: ; 0x16993
-	; Ah, it's you! We were raising your #MON, and my goodness, were we surprised! Your #MON had an EGG! We don't know how it got there, but your #MON had it. You want it?
+	; Ah, it's you! We were raising your #mon, and my goodness, were we surprised! Your #mon had an EGG! We don't know how it got there, but your #mon had it. You want it?
 	text_jump UnknownText_0x1bdf00
 	db "@"
 ; 0x16998

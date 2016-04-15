@@ -527,7 +527,7 @@ TradedForText: ; 0xfcf80
 
 
 TradeIntroText1: ; 0xfcf97
-	; I collect #MON. Do you have @ ? Want to trade it for my @ ?
+	; I collect #mon. Do you have @ ? Want to trade it for my @ ?
 	text_jump UnknownText_0x1bd449
 	db "@"
 ; 0xfcf9c
@@ -559,7 +559,7 @@ TradeAfterText1: ; 0xfcfab
 
 TradeIntroText2:
 TradeIntroText3: ; 0xfcfb0
-	; Hi, I'm looking for this #MON. If you have @ , would you trade it for my @ ?
+	; Hi, I'm looking for this #mon. If you have @ , would you trade it for my @ ?
 	text_jump UnknownText_0x1bd512
 	db "@"
 ; 0xfcfb5

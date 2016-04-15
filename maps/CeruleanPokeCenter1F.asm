@@ -28,12 +28,12 @@ UnknownText_0x188221:
 	text "For battles, I'd"
 	line "much rather use"
 
-	para "#MON I've been"
+	para "#mon I've been"
 	line "raising, even if"
 
 	para "they're weaker"
 	line "than some newly"
-	cont "caught #MON."
+	cont "caught #mon."
 	done
 
 UnknownText_0x18828c:

@@ -103,7 +103,7 @@ PC_CheckPartyForPokemon: ; 15650
 ; 15663
 
 UnknownText_0x15663: ; 0x15663
-	; Bzzzzt! You must have a #MON to use this!
+	; Bzzzzt! You must have a #mon to use this!
 	text_jump UnknownText_0x1c1328
 	db "@"
 ; 0x15668
@@ -671,7 +671,7 @@ UnknownText_0x15a2c: ; 0x15a2c
 ; 0x15a31
 
 UnknownText_0x15a31: ; 0x15a31
-	; BILL's PC accessed. #MON Storage System opened.
+	; BILL's PC accessed. #mon Storage System opened.
 	text_jump UnknownText_0x1c1474
 	db "@"
 ; 0x15a36
@@ -683,7 +683,7 @@ UnknownText_0x15a36: ; 0x15a36
 ; 0x15a3b
 
 UnknownText_0x15a3b: ; 0x15a3b
-	; PROF.OAK's PC accessed. #DEX Rating System opened.
+	; PROF.OAK's PC accessed. #dex Rating System opened.
 	text_jump UnknownText_0x1c14d2
 	db "@"
 ; 0x15a40

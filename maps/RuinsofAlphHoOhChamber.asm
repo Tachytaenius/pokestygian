@@ -143,7 +143,7 @@ UnknownText_0x58685:
 	done
 
 UnknownText_0x586aa:
-	text "A #MON that"
+	text "A #mon that"
 	line "flew gracefully on"
 
 	para "rainbow-colored"

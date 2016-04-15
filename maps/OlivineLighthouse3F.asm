@@ -65,7 +65,7 @@ UnknownText_0x5b2df:
 	line "you go up?"
 
 	para "I want to visit"
-	line "the sick #MON,"
+	line "the sick #mon,"
 
 	para "but I can't get up"
 	line "there…"
@@ -88,7 +88,7 @@ UnknownText_0x5b384:
 	cont "visit the GYM."
 
 	para "The GYM LEADER's"
-	line "#MON type has"
+	line "#mon type has"
 
 	para "changed without me"
 	line "noticing."
@@ -108,7 +108,7 @@ GentlemanPrestonBeatenText:
 
 UnknownText_0x5b457:
 	text "JASMINE used to"
-	line "use rock #MON"
+	line "use rock #mon"
 	cont "like ONIX."
 	done
 

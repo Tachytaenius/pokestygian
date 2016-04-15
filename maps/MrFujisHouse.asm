@@ -58,12 +58,12 @@ UnknownText_0x7e8f1:
 UnknownText_0x7e940:
 	text "Some cold-hearted"
 	line "people stop caring"
-	cont "for their #MON."
+	cont "for their #mon."
 
 	para "Grandpa takes in"
 	line "the poor homeless"
 
-	para "#MON and takes"
+	para "#mon and takes"
 	line "care of them."
 	done
 

@@ -78,7 +78,7 @@ UnknownText_0x18486f:
 	done
 
 UnknownText_0x1848c8:
-	text "A #MON statue…"
+	text "A #mon statue…"
 
 	para "It looks very"
 	line "distinguished."

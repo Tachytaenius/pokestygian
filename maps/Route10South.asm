@@ -49,7 +49,7 @@ UnknownText_0x1ae43b:
 	done
 
 PokefanmRobertSeenText:
-	text "You like #MON,"
+	text "You like #mon,"
 	line "don't you?"
 
 	para "Me too!"
@@ -62,7 +62,7 @@ PokefanmRobertBeatenText:
 
 UnknownText_0x1ae4a9:
 	text "Look what you did"
-	line "to my #MON…"
+	line "to my #mon…"
 
 	para "I won't forget"
 	line "this…"

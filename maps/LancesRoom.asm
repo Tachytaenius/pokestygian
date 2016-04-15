@@ -235,7 +235,7 @@ UnknownText_0x180f67:
 	para "As the most power-"
 	line "ful trainer and as"
 
-	para "the #MON LEAGUE"
+	para "the #mon LEAGUE"
 	line "CHAMPION…"
 
 	para "I, LANCE the drag-"
@@ -267,7 +267,7 @@ UnknownText_0x181132:
 	line "truly powerful,"
 	cont "<PLAY_G>."
 
-	para "Your #MON have"
+	para "Your #mon have"
 	line "responded to your"
 
 	para "strong and up-"
@@ -277,7 +277,7 @@ UnknownText_0x181132:
 	line "will continue to"
 
 	para "grow strong with"
-	line "your #MON."
+	line "your #mon."
 	done
 
 UnknownText_0x1811dd:
@@ -305,10 +305,10 @@ UnknownText_0x18121b:
 	para "Your dedication,"
 	line "trust and love for"
 
-	para "your #MON made"
+	para "your #mon made"
 	line "this happen."
 
-	para "Your #MON were"
+	para "Your #mon were"
 	line "outstanding too."
 
 	para "Because they be-"

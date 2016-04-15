@@ -254,7 +254,7 @@ DudeMovementData2b:
 	step_end
 
 UnknownText_0x1a10a7:
-	text "#MON hide in"
+	text "#mon hide in"
 	line "the grass. Who"
 
 	para "knows when they'll"
@@ -265,12 +265,12 @@ CatchingTutorialIntroText:
 	text "I've seen you a"
 	line "couple times. How"
 
-	para "many #MON have"
+	para "many #mon have"
 	line "you caught?"
 
 	para "Would you like me"
 	line "to show you how to"
-	cont "catch #MON?"
+	cont "catch #mon?"
 	done
 
 CatchingTutorialDebriefText:
@@ -278,7 +278,7 @@ CatchingTutorialDebriefText:
 	line "it."
 
 	para "If you weaken them"
-	line "first, #MON are"
+	line "first, #mon are"
 	cont "easier to catch."
 	done
 
@@ -288,19 +288,19 @@ CatchingTutorialDeclinedText:
 	para "Anyway, if you"
 	line "want to catch"
 
-	para "#MON, you have"
+	para "#mon, you have"
 	line "to walk a lot."
 	done
 
 CatchingTutorialRepeatText:
 	text "Huh? You want me"
 	line "to show you how to"
-	cont "catch #MON?"
+	cont "catch #mon?"
 	done
 
 Route29YoungsterText:
 	text "Yo. How are your"
-	line "#MON?"
+	line "#mon?"
 
 	para "If they're weak"
 	line "and not ready for"
@@ -332,7 +332,7 @@ Route29FisherText:
 ; possibly unused
 Text_WaitingForDay:
 	text "I'm waiting for"
-	line "#MON that"
+	line "#mon that"
 
 	para "appear only in the"
 	line "daytime."
@@ -340,7 +340,7 @@ Text_WaitingForDay:
 
 Text_WaitingForNight:
 	text "I'm waiting for"
-	line "#MON that"
+	line "#mon that"
 
 	para "appear only at"
 	line "night."
@@ -348,7 +348,7 @@ Text_WaitingForNight:
 
 Text_WaitingForMorning:
 	text "I'm waiting for"
-	line "#MON that"
+	line "#mon that"
 
 	para "appear only in the"
 	line "morning."

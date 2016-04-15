@@ -36,7 +36,7 @@ MapRoute18Signpost0Script:
 
 Bird_keeperBorisSeenText:
 	text "If you're looking"
-	line "for #MON, you"
+	line "for #mon, you"
 
 	para "have to look in"
 	line "the tall grass."

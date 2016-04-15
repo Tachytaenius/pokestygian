@@ -108,7 +108,7 @@ UnknownText_0x7e2c0:
 	line "defeated me, I'll"
 
 	para "give you a rare"
-	line "fighting #MON."
+	line "fighting #mon."
 	done
 
 UnknownText_0x7e355:
@@ -121,7 +121,7 @@ UnknownText_0x7e36a:
 	line "fighting-type."
 
 	para "It evolves into a"
-	line "tougher #MON."
+	line "tougher #mon."
 
 	para "Keep up the hard"
 	line "work. I'll keep"

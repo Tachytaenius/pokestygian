@@ -87,7 +87,7 @@ UnknownText_0x19b1b6:
 	para "Would you like to"
 	line "join me?"
 
-	para "Oh, your #MON"
+	para "Oh, your #mon"
 	line "are a bit dirty."
 
 	para "Would you like me"
@@ -119,7 +119,7 @@ UnknownText_0x19b2aa:
 	line "look nice?"
 
 	para "It's such a cute"
-	line "#MON."
+	line "#mon."
 	done
 
 UnknownText_0x19b2fa:
