@@ -255,7 +255,7 @@ MasterBall::
 .text_
 	text "The Armageddon was"
 	line "a cataclysmic"
-	para "event, that turned"
+	para "event that turned"
 	line "the surface of"
 	para "this world, Maac,"
 	line "into a bloody,"

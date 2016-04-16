@@ -8,7 +8,7 @@ Route22_MapScriptHeader:
 VictoryRoadEntranceSign:
 	jumptext VictoryRoadEntranceSignText
 
-UnknownText_0x7c005:
+VictoryRoadEntranceSignText:
 	text "#mon LEAGUE"
 
 	para "VICTORY ROAD"

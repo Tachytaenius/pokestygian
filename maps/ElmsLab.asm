@@ -100,6 +100,7 @@ startshrineintro
 .good
 	writetext .gud
 .back
+	writetext .intro1
 	applymovement 4, .up
 	pause 10
 	applymovement 4, .depart
@@ -107,6 +108,66 @@ startshrineintro
 	setevent EVENT_KURT_GAVE_YOU_LURE_BALL
 	jump triggerswap
 	end
+.intro1
+	text "Moe: [Anyway… the"
+	line "Armageddon started"
+	para "two days ago. It"
+	line "reduced all life"
+	para "on the surface to"
+	line "a foul-smelling"
+	para "pool of blood,"
+	line "within a matter of"
+	para "hours. Some people"
+	line "managed to get to"
+	para "the Stygian Abyss,"
+	line "only suffering"
+	para "minor burns."
+	line "Others had bits of"
+	para "their heads sma-"
+	line "shed off by the"
+	para "deluge of hail-"
+	line "stones, or were"
+	para "eviscerated by the"
+	line "evil fiends that"
+	para "came up out of the"
+	line "earth. Those part-"
+	para "icular people are"
+	line "all dead. Before"
+	para "the Armageddon,"
+	line "you were an appre-"
+	para "ntice tinker,"
+	line "working for the"
+	para "blacksmith in the"
+	line "village of Ambon."
+	para "A giant hailstone"
+	line "hit you on your"
+	para "head, only making"
+	line "you unconscious."
+	para "Isaac, one of"
+	line "Ambon's mystics--"
+	para "present here right"
+	line "now-- sensed that"
+	para "the trauma had"
+	line "caused your high-"
+	para "level memory to be"
+	line "mostly destroyed."
+	para "Thus, you cannot"
+	line "recall any of what"
+	para "we are telling you"
+	line "had happened. We"
+	para "carried you down"
+	line "to the first level"
+	para "of the Stygian"
+	line "Abyss. Our attem-"
+	para "ts to wake you up"
+	line "all failed, as"
+	para "you, even while"
+	line "unconscious, atta-"
+	para "cked us. Thus, we"
+	line "had to leave you"
+	para "above the storage"
+	line "cache."
+	prompt
 .greetingsPlayer
 	text "Moe: [Greetings,"
 	line "<PLAYER>. Did you"
@@ -121,8 +182,8 @@ startshrineintro
 .Wha2
 	db $81 ; flags
 	db 2 ; items
-	db "[I'm <PLAYER>.]@"
-	db "[My name's <PLAYER>.]@"
+	db "[I am <PLAYER>.]@"
+	db "[It's <PLAYER>.]@"
 .DidYouFind
 	db $40
 	db 00, 00
@@ -138,7 +199,7 @@ startshrineintro
 	db "[What note?]@"
 .introduceMoe
 	text "???: [My name is"
-	line "Moe.]"
+	line "Moe. What's yours?]"
 	done
 
 .down
