@@ -104,10 +104,224 @@ startshrineintro
 	applymovement 4, .up
 	pause 10
 	applymovement 4, .depart
+	pause 5
+	applymovement 3, .isaacCome
+	showemote EMOTE_FISH, 3, 15
+	writetext .intro2
+	loadmenudata .How
+	verticalmenu
+	closewindow
+	writetext .intro3
+	applymovement 3, .isaacGo
+	pause 3
+	applymovement 2, .lanugoCome
+	showemote EMOTE_FISH, 2, 15
+	writetext .gems
+	applymovement 2, .lanugoGo
 	closetext
 	setevent EVENT_KURT_GAVE_YOU_LURE_BALL
 	jump triggerswap
-	end
+
+.lanugoCome
+	turn_head_up
+	step_up
+	turn_head_right
+	step_right
+	step_right
+	step_right
+	turn_head_down
+	step_down
+	step_down
+	step_down
+	turn_head_left
+	step_left
+	turn_head_down
+	step_end
+.lanugoGo
+	turn_head_right
+	step_right
+	turn_head_up
+	step_up
+	step_up
+	step_up
+	turn_head_left
+	step_left
+	step_left
+	step_left
+	turn_head_down
+	step_down
+	step_end
+.intro3
+	text "Isaac: [For this,"
+	line "I will let Lanugo,"
+	para "the green goblin,"
+	line "explain.]"
+	prompt
+.gems
+	text "Lanugo: [OK… y'see,"
+	line "the sixteen gems"
+	para "of greater travel"
+	line "are ancient arte-"
+	para "facts, left by the"
+	line "unknown creators"
+	para "of the Abyss. We"
+	line "only know that"
+	para "they are the key"
+	line "to leaving Maac"
+	para "for Rollennia."
+	line "However, there is"
+	para "a holy ghost of"
+	line "sorts, Eidolon,"
+	para "that does know"
+	line "what to do with"
+	para "them. But it is"
+	line "currently dormant."
+	para "You will need to"
+	line "gather the sixteen"
+	para "gems first for it"
+	line "to appear on the"
+	para "seventh level of"
+	line "the Abyss. As for"
+	para "actually acquiring"
+	line "the gems, we do"
+	para "have some leads to"
+	line "two of them, on"
+	para "levels one and two"
+	line "of the Abyss. We"
+	para "think that a group"
+	line "of nasty goblins;"
+	para "grey ones (on this"
+	line "level) hold one of"
+	para "the gems of grea-"
+	line "ter travel. They"
+	para "are truly virtue-"
+	line "less, deserving"
+	para "death. If you can"
+	line "kill them all,"
+	para "not only will you"
+	line "avenge the deaths"
+	para "of many innocent"
+	line "people, you might"
+	para "find one of the"
+	line "gems. You'll know"
+	para "that it is a gem"
+	line "because it is lit-"
+	para "erally unseeable."
+	line "You will see void,"
+	para "but that's fine,"
+	line "because of the"
+	para "contrast against"
+	line "the objects that"
+	para "surround it. You"
+	line "will have to take"
+	para "it. As for the"
+	line "other gem, we do"
+	para "think that a nice"
+	line "group of creatures"
+	para "called lizardmen"
+	line "have one. If you"
+	para "can communicate"
+	line "with them, and"
+	para "reason with them,"
+	line "I'm sure they'll"
+	para "give it to you."
+	line "Also, you want to"
+	para "know why you, spe-"
+	line "cifically, are the"
+	para "one to embark on"
+	line "this quest, yes?"
+	para "Isaac, our mystic,"
+	line "sensed that you"
+	para "bear the arcane"
+	line "mark of Eula. This"
+	para "means that you are"
+	line "a pillar of exist-"
+	para "ence, an entity"
+	line "that we literally"
+	para "could not exist"
+	line "without. Your soul"
+	para "always has subsi-"
+	line "sted, does now,"
+	para "and always will."
+	line "Because of this"
+	para "random occurence"
+	line "choosing you, your"
+	para "soul, while alive,"
+	line "is able to manipu-"
+	para "late existence in"
+	line "such a way that"
+	para "Maac's population"
+	line "may leave through"
+	para "the Abyss to Roll-"
+	line "ennia. Now go, and"
+	cont "save us all!]"
+	prompt
+.isaacCome
+	turn_head_right
+	step_right
+	turn_head_down
+	step_down
+	step_end
+.isaacGo
+	turn_head_up
+	step_up
+	turn_head_left
+	step_left
+	turn_head_up
+	step_end
+.intro2
+	text "Isaac: [So far,"
+	line "no-one knows what"
+	para "may have caused"
+	line "the Armageddon. We"
+	para "do, however, think"
+	line "we may have a sol-"
+	para "ution to this cri-"
+	line "sis. We move to"
+	para "another world."
+	line "I have scanned the"
+	para "inner planes of"
+	line "existence, and all"
+	para "of the worlds ins-"
+	line "ide are suffering"
+	para "from the corrupt"
+	line "forces of the Arm-"
+	para "ageddon. I can"
+	line "still scan the"
+	para "outer planes of"
+	line "existence, and it"
+	para "seems that none of"
+	line "them do suffer it."
+	para "Thus, we have dec-"
+	line "ided that the pop-"
+	para "ulation of Maac"
+	line "shall leave this"
+	para "world to travel to"
+	line "a promising one in"
+	para "the outer planes"
+	line "called Rollennia."
+	para "However, it is not"
+	line "possible to travel"
+	para "there by convent-"
+	line "ional means."
+	para "You will have to"
+	line "collect sixteen"
+	para "gems, to craft two"
+	line "orbs, one for a"
+	para "source, Maac, and"
+	line "one for a destina-"
+	para "tion, Rollennia."
+	line "At the bottom of"
+	para "the Stygian Abyss"
+	line "is a great orb of"
+	para "arcanite-- the"
+	line "Stygian Sun. This,"
+	para "along with the"
+	line "sixteen gems of"
+	para "greater travel, is"
+	line "the key to our"
+	cont "salvation.]"
+	done
 .intro1
 	text "Moe: [Anyway… the"
 	line "Armageddon started"
@@ -163,10 +377,26 @@ startshrineintro
 	line "all failed, as"
 	para "you, even while"
 	line "unconscious, atta-"
-	para "cked us. Thus, we"
-	line "had to leave you"
-	para "above the storage"
-	line "cache."
+	para "cked us, in your"
+	line "temporary madness."
+	para "Thus, we left you"
+	line "above the storage"
+	para "cache, where you"
+	line "could wake up and"
+	para "find a few items."
+	line "We placed a magic"
+	para "boulder, blocking"
+	line "the exit out of"
+	para "the storage cache,"
+	line "that would disa-"
+	para "ppear once you had"
+	line "acquired the items"
+	para "we deemed impor-"
+	line "tant, to make sure"
+	para "you wouldn't leave"
+	line "unprepared. Isaac"
+	para "will talk to you"
+	line "now.]"
 	prompt
 .greetingsPlayer
 	text "Moe: [Greetings,"
@@ -184,6 +414,17 @@ startshrineintro
 	db 2 ; items
 	db "[I am <PLAYER>.]@"
 	db "[It's <PLAYER>.]@"
+.How
+	db $40 ; flags
+	db 00, 00 ; start coords
+	db 11, 19 ; end coords
+	dw .How2
+	db 1 ; default option
+.How2
+	db $81 ; flags
+	db 2 ; items
+	db "[How?]@"
+	db "[By what means?]@"
 .DidYouFind
 	db $40
 	db 00, 00
@@ -215,9 +456,7 @@ startshrineintro
 .depart
 	step_up
 	step_up
-	step_end
-.getThemInView
-	step_up
+	turn_head_left
 	step_end
 
 .moeSurprise:
