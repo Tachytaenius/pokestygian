@@ -402,7 +402,7 @@ INCLUDE "gfx/stygian/gel.pal"
 
 .alreadyGotDex
 	text "You already"
-	line "have a #nav."
+	line "have a #dex."
 	done
 
 .USEmon
@@ -507,14 +507,14 @@ INCLUDE "gfx/stygian/gel.pal"
 	iffalse .Done
 	jumptext .touchBookDesc
 .touchBookQuestion
-	text "The #nav is in"
+	text "The #dex is in"
 	line "your reach of"
 	cont "touch. Touch it?"
 	prompt
 .touchBookDesc
 	text "You feel the rough"
 	line "edges of a #-"
-	cont "nav."
+	cont "dex."
 	done
 .TLKbook
 	jumptext .talkmap
@@ -524,7 +524,7 @@ INCLUDE "gfx/stygian/gel.pal"
 	jumptext .lookBook
 .lookBook
 	text "You see a"
-	line "#nav."
+	line "#dex."
 	done
 .INGbook
 	jumptext .ingestmapNo
@@ -537,7 +537,6 @@ INCLUDE "gfx/stygian/gel.pal"
 	yesorno
 	iffalse .Done
 	setflag ENGINE_POKEDEX
-	setflag ENGINE_POKEGEAR
 	setflag ENGINE_MAP_CARD
 	disappear 3
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
@@ -553,12 +552,12 @@ INCLUDE "gfx/stygian/gel.pal"
 	done
 .ablebook
 	text "You are able to"
-	line "take the #nav."
+	line "take the #dex."
 	prompt
 .nothingHappensDex
 	text "Nothing happens as"
 	line "you take the #-"
-	cont "nav."
+	cont "dex."
 	done
 .nothingHappensMon
 	text "Nothing happens as"

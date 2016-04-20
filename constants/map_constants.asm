@@ -141,7 +141,7 @@ MAP_NONE   EQU 0
 
 	newgroup                                                    ;  5
 
-	mapgroup BLACKTHORN_GYM_1F,                           9,  5 ;  1
+	mapgroup BLACKTHORN_GYM_1F, 9, 5
 	mapgroup BLACKTHORN_GYM_2F,                           9,  5 ;  2
 	mapgroup BLACKTHORN_DRAGON_SPEECH_HOUSE,              4,  4 ;  3
 	mapgroup BLACKTHORN_EMYS_HOUSE,                       4,  4 ;  4
@@ -150,7 +150,7 @@ MAP_NONE   EQU 0
 	mapgroup MOVE_DELETERS_HOUSE,                         4,  4 ;  7
 	mapgroup ROUTE_45,                                   45, 10 ;  8
 	mapgroup ROUTE_46,                                   18, 10 ;  9
-	mapgroup BLACKTHORN_CITY,                            18, 20 ; 10
+	mapgroup BLACKTHORN_CITY, 18, 20
 
 	newgroup                                                    ;  6
 
@@ -382,7 +382,7 @@ MAP_NONE   EQU 0
 	mapgroup CELADON_POKECENTER_2F_BETA,                  4,  8 ; 18
 	mapgroup CELADON_GAME_CORNER,                         7, 10 ; 19
 	mapgroup CELADON_GAME_CORNER_PRIZE_ROOM,              3,  3 ; 20
-	mapgroup CELADON_GYM,                                 9,  5 ; 21
+	mapgroup CELADON_GYM, 9, 5
 	mapgroup CELADON_CAFE,                                4,  6 ; 22
 	mapgroup ROUTE_16_FUCHSIA_SPEECH_HOUSE,               4,  4 ; 23
 	mapgroup ROUTE_16_GATE,                               4,  5 ; 24

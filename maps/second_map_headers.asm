@@ -37,9 +37,7 @@
 
 	map_header_2 LakeofRage, LAKE_OF_RAGE, 9, 0
 
-	map_header_2 BlackthornCity, BLACKTHORN_CITY, $71, SOUTH | WEST
-	connection south, ROUTE_45, Route45, 0, 0, 10, BLACKTHORN_CITY
-	connection west, ROUTE_44, Route44, 9, 0, 9, BLACKTHORN_CITY
+	map_header_2 BlackthornCity, BLACKTHORN_CITY, 9, 0
 
 	map_header_2 SilverCaveOutside, SILVER_CAVE_OUTSIDE, $2c, EAST
 	connection east, ROUTE_28, Route28, 9, 0, 9, SILVER_CAVE_OUTSIDE
@@ -385,7 +383,7 @@
 	map_header_2 EcruteakMart, ECRUTEAK_MART, $0, 0
 	map_header_2 EcruteakGym, ECRUTEAK_GYM, $0, 0
 	map_header_2 EcruteakItemfinderHouse, ECRUTEAK_ITEMFINDER_HOUSE, $0, 0
-	map_header_2 BlackthornGym1F, BLACKTHORN_GYM_1F, $0, 0
+	map_header_2 BlackthornGym1F, BLACKTHORN_GYM_1F, 9, 0
 	map_header_2 BlackthornGym2F, BLACKTHORN_GYM_2F, $0, 0
 	map_header_2 BlackthornDragonSpeechHouse, BLACKTHORN_DRAGON_SPEECH_HOUSE, $0, 0
 	map_header_2 BlackthornEmysHouse, BLACKTHORN_EMYS_HOUSE, $0, 0
@@ -531,7 +529,7 @@
 	map_header_2 CeladonPokeCenter2FBeta, CELADON_POKECENTER_2F_BETA, $0, 0
 	map_header_2 CeladonGameCorner, CELADON_GAME_CORNER, $0, 0
 	map_header_2 CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $0, 0
-	map_header_2 CeladonGym, CELADON_GYM, $0, 0
+	map_header_2 CeladonGym, CELADON_GYM, 9, 0
 	map_header_2 CeladonCafe, CELADON_CAFE, $0, 0
 	map_header_2 Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $0, 0
 	map_header_2 Route16Gate, ROUTE_16_GATE, $0, 0

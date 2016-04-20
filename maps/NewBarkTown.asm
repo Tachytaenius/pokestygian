@@ -328,6 +328,7 @@ NewBarkTown_MapEventHeader:
 .encounterBoris:
 	checkevent EVENT_ROUTE_30_YOUNGSTER_JOEY
 	iftrue .leave
+	setlasttalked 2
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	applymovement PLAYER, .lookUp
 	jump .ATKgob

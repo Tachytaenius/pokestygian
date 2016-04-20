@@ -19,7 +19,10 @@ PalletTown_MapEventHeader:
 	db 0
 
 .Signposts:
-	db 0
+	db 3
+	signpost 16, 5, SIGNPOST_READ, .cavern
+	signpost 1, 11, SIGNPOST_READ, .king
+	signpost 1, 3, SIGNPOST_READ, .loo
 
 .PersonEvents:
 	db 5
@@ -28,6 +31,22 @@ PalletTown_MapEventHeader:
 	person_event SPRITE_CAL, 15, 11, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 0, -1, -1, PAL_OW_TREE, PERSONTYPE_SCRIPT, 0, .stdGoblin, -1
 	person_event SPRITE_CAL, 7, 16, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 0, -1, -1, PAL_OW_TREE, PERSONTYPE_SCRIPT, 0, .stdGoblin, -1
 	person_event SPRITE_CAL, 8, 17, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_TREE, PERSONTYPE_SCRIPT, 0, .stdGoblin, -1
+.cavern
+	jumptext .cavern_
+.cavern_
+	text "Passage to cavern."
+	done
+.king
+	jumptext .king_
+.king_
+	text "Passage to king's"
+	line "quarters."
+	done
+.loo
+	jumptext .loo_
+.loo_
+	text "Passage to loo."
+	done
 .plantScript
 	jumpstd elevatorbutton
 .USEno

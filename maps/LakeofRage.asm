@@ -20,18 +20,21 @@ Return
 
 LakeofRage_MapEventHeader:: db 0, 0
 
-.Warps: db 2
+.Warps: db 3
 	warp_def 31, 15, 2, ELMS_LAB
 	warp_def 17, 23, 1, PALLET_TOWN
+	warp_def 11, 13, 1, BLACKTHORN_CITY
 
 .CoordEvents: db 0
 
-.BGEvents: db 5
+.BGEvents: db 7
 	signpost 32, 15, SIGNPOST_READ, .shrine
 	signpost 32, 9, SIGNPOST_READ, y16x4
 	signpost 33, 9, SIGNPOST_READ, y16x4
 	signpost 13, 13, SIGNPOST_READ, x6y6
 	signpost 12, 13, SIGNPOST_READ, x6y6
+	signpost 17, 23, SIGNPOST_READ, .gobset
+	signpost 11, 13, SIGNPOST_READ, .ruins
 
 .ObjectEvents: db 16
 	person_event SPRITE_POKE_BALL, 30, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, monactions, EVENT_109
@@ -50,6 +53,17 @@ LakeofRage_MapEventHeader:: db 0, 0
 	person_event SPRITE_FISHING_GURU, 25, 24, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .gr, -1
 	person_event SPRITE_FISHING_GURU, 10, 29, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, .re, -1
 	person_event SPRITE_SILVER, 17, 22, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, .bannerScript, -1
+.gobset
+	jumptext .gobset_
+.gobset_
+	text "Passage to green"
+	line "goblin settlement."
+	done
+.ruins
+	jumptext .ruins_
+.ruins_
+	text "Passage to ruins."
+	done
 .bannerScript
 	jumpstd trashcan
 .gr

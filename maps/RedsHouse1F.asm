@@ -12,11 +12,17 @@ RedsHouse1F_MapEventHeader:: db 0, 0
 
 .CoordEvents: db 0
 
-.BGEvents: db 0
+.BGEvents: db 1
+	signpost 6, 3, SIGNPOST_READ, .gobset
 
 .ObjectEvents: db 1
 	person_event SPRITE_CAL, 2, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_TREE, PERSONTYPE_SCRIPT, 0, .VernixScript, -1
-
+.gobset
+	jumptext .gobset_
+.gobset_
+	text "Passage to green"
+	line "goblin settlement."
+	done
 .USEno
 	jumptext .cannotUse
 .cannotUse
@@ -42,8 +48,25 @@ RedsHouse1F_MapEventHeader:: db 0, 0
 	line "not! You are"
 	cont "able, though."
 	done
+.notice
+	text "The green goblin"
+	line "notices you."
+	prompt
+.name
+	text "???: Greetings."
+	line "I am Vernix."
+	prompt
+.go
+	opentext
+	writetext .notice
+	writetext .name
+	closetext
+	jump .back
 .VernixScript
 	showemote EMOTE_SAD, LAST_TALKED, 15
+	checkevent EVENT_10E
+	iffalse .go
+.back
 	callasm StartMenuSecondary
 	if_equal 1, .ATKno
 	if_equal 2, .TCHVernix
@@ -88,6 +111,7 @@ RedsHouse1F_MapEventHeader:: db 0, 0
 	done
 .loopVernix
 	writetext .anyMore
+	buttonsound
 	jump .loopReturn
 .TLKVernix
 	opentext

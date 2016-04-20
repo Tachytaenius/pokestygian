@@ -52,7 +52,7 @@ _OptionsMenu: ; e41d0
 	call DelayFrames
 	jr .joypad_loop
 
-.ExitOptions
+.ExitOptions:
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -76,7 +76,7 @@ StringOptions: ; e4241
 	db "        :<LNBRK>"
 	db "Frame<LNBRK>"
 	db "        :Type<LNBRK>"
-	db "Cancel@"
+	db "Apply@"
 ; e42d6
 
 
@@ -94,7 +94,7 @@ endr
 	jp [hl] ; jump to the code of the current highlighted item
 ; e42e5
 
-.Pointers
+.Pointers:
 	dw Options_TextSpeed
 	dw Options_BattleScene
 	dw Options_BattleStyle
@@ -118,29 +118,29 @@ Options_TextSpeed: ; e42f5
 	jr c, .Increase
 	ld c, FAST_TEXT +- 1
 
-.Increase
+.Increase:
 	inc c
 	ld a, e
 	jr .Save
 
-.LeftPressed
+.LeftPressed:
 	ld a, c
 	and a
 	jr nz, .Decrease
 	ld c, SLOW_TEXT + 1
 
-.Decrease
+.Decrease:
 	dec c
 	ld a, d
 
-.Save
+.Save:
 	ld b, a
 	ld a, [Options]
 	and $f0
 	or b
 	ld [Options], a
 
-.NonePressed
+.NonePressed:
 	ld b, 0
 	ld hl, .Strings
 rept 2
@@ -155,17 +155,17 @@ endr
 	ret
 ; e4331
 
-.Strings
+.Strings:
 	dw .Fast
 	dw .Mid
 	dw .Slow
 
-.Fast
-	db "FAST@"
-.Mid
-	db "MID @"
-.Slow
-	db "SLOW@"
+.Fast:
+	db "Fast@"
+.Mid:
+	db "Medi@"
+.Slow:
+	db "Slow@"
 ; e4346
 
 
@@ -203,36 +203,36 @@ Options_BattleScene: ; e4365
 	jr nz, .ToggleOn
 	jr .ToggleOff
 
-.LeftPressed
+.LeftPressed:
 	bit BATTLE_SCENE, [hl]
 	jr z, .ToggleOff
 	jr .ToggleOn
 
-.NonePressed
+.NonePressed:
 	bit BATTLE_SCENE, [hl]
 	jr z, .ToggleOn
 	jr .ToggleOff
 
-.ToggleOn
+.ToggleOn:
 	res BATTLE_SCENE, [hl]
 	ld de, .On
 	jr .Display
 
-.ToggleOff
+.ToggleOff:
 	set BATTLE_SCENE, [hl]
 	ld de, .Off
 
-.Display
+.Display:
 	hlcoord 11, 5
 	call PlaceString
 	and a
 	ret
 ; e4398
 
-.On
-	db "ON @"
-.Off
-	db "OFF@"
+.On:
+	db "On @"
+.Off:
+	db "Off@"
 ; e43a0
 
 
@@ -247,35 +247,35 @@ Options_BattleStyle: ; e43a0
 	jr nz, .ToggleShift
 	jr .ToggleSet
 
-.LeftPressed
+.LeftPressed:
 	bit BATTLE_SHIFT, [hl]
 	jr z, .ToggleSet
 	jr .ToggleShift
 
-.NonePressed
+.NonePressed:
 	bit BATTLE_SHIFT, [hl]
 	jr nz, .ToggleSet
 
-.ToggleShift
+.ToggleShift:
 	res BATTLE_SHIFT, [hl]
 	ld de, .Shift
 	jr .Display
 
-.ToggleSet
+.ToggleSet:
 	set BATTLE_SHIFT, [hl]
 	ld de, .Set
 
-.Display
+.Display:
 	hlcoord 11, 7
 	call PlaceString
 	and a
 	ret
 ; e43d1
 
-.Shift
-	db "SHIFT@"
-.Set
-	db "SET  @"
+.Shift:
+	db "Shift@"
+.Set:
+	db "Set  @"
 ; e43dd
 
 
@@ -290,42 +290,42 @@ Options_Sound: ; e43dd
 	jr nz, .SetMono
 	jr .SetStereo
 
-.LeftPressed
+.LeftPressed:
 	bit STEREO, [hl]
 	jr z, .SetStereo
 	jr .SetMono
 
-.NonePressed
+.NonePressed:
 	bit STEREO, [hl]
 	jr nz, .ToggleStereo
 	jr .ToggleMono
 
-.SetMono
+.SetMono:
 	res STEREO, [hl]
 	call RestartMapMusic
 
-.ToggleMono
+.ToggleMono:
 	ld de, .Mono
 	jr .Display
 
-.SetStereo
+.SetStereo:
 	set STEREO, [hl]
 	call RestartMapMusic
 
-.ToggleStereo
+.ToggleStereo:
 	ld de, .Stereo
 
-.Display
+.Display:
 	hlcoord 11, 9
 	call PlaceString
 	and a
 	ret
 ; e4416
 
-.Mono
-	db "MONO  @"
-.Stereo
-	db "STEREO@"
+.Mono:
+	db "Mono  @"
+.Stereo:
+	db "Stereo@"
 ; e4424
 
 
@@ -341,26 +341,26 @@ Options_Print: ; e4424
 	jr c, .Increase
 	ld c, -1
 
-.Increase
+.Increase:
 	inc c
 	ld a, e
 	jr .Save
 
-.LeftPressed
+.LeftPressed:
 	ld a, c
 	and a
 	jr nz, .Decrease
 	ld c, 5
 
-.Decrease
+.Decrease:
 	dec c
 	ld a, d
 
-.Save
+.Save:
 	ld b, a
 	ld [GBPrinter], a
 
-.NonePressed
+.NonePressed:
 	ld b, $0
 	ld hl, .Strings
 rept 2
@@ -375,23 +375,23 @@ endr
 	ret
 ; e445a
 
-.Strings
+.Strings:
 	dw .Lightest
 	dw .Lighter
 	dw .Normal
 	dw .Darker
 	dw .Darkest
 
-.Lightest
-	db "LIGHTEST@"
-.Lighter
-	db "LIGHTER @"
-.Normal
-	db "NORMAL  @"
-.Darker
-	db "DARKER  @"
-.Darkest
-	db "DARKEST @"
+.Lightest:
+	db "Lightest@"
+.Lighter:
+	db "Lighter @"
+.Normal:
+	db "Normal  @"
+.Darker:
+	db "Darker  @"
+.Darkest:
+	db "Darkest @"
 ; e4491
 
 
@@ -409,22 +409,22 @@ GetPrinterSetting: ; e4491
 	lb de, PRINT_LIGHTER, PRINT_DARKER ; the 2 values next to this setting
 	ret
 
-.IsLightest
+.IsLightest:
 	ld c, 0
 	lb de, PRINT_DARKEST, PRINT_LIGHTER ; the 2 values next to this setting
 	ret
 
-.IsLight
+.IsLight:
 	ld c, 1
 	lb de, PRINT_LIGHTEST, PRINT_NORMAL ; the 2 values next to this setting
 	ret
 
-.IsDark
+.IsDark:
 	ld c, 3
 	lb de, PRINT_NORMAL, PRINT_DARKEST ; the 2 values next to this setting
 	ret
 
-.IsDarkest
+.IsDarkest:
 	ld c, 4
 	lb de, PRINT_DARKER, PRINT_LIGHTEST ; the 2 values next to this setting
 	ret
@@ -441,34 +441,34 @@ Options_MenuAccount: ; e44c1
 	jr nz, .ToggleOff
 	jr .ToggleOn
 
-.LeftPressed
+.LeftPressed:
 	bit MENU_ACCOUNT, [hl]
 	jr z, .ToggleOn
 	jr .ToggleOff
 
-.NonePressed
+.NonePressed:
 	bit MENU_ACCOUNT, [hl]
 	jr nz, .ToggleOn
 
-.ToggleOff
+.ToggleOff:
 	res MENU_ACCOUNT, [hl]
 	ld de, .Off
 	jr .Display
 
-.ToggleOn
+.ToggleOn:
 	set MENU_ACCOUNT, [hl]
 	ld de, .On
 
-.Display
+.Display:
 	hlcoord 11, 13
 	call PlaceString
 	and a
 	ret
 ; e44f2
 
-.Off
+.Off:
 	db "Off@"
-.On
+.On:
 	db "On @"
 ; e44fa
 
@@ -483,19 +483,19 @@ Options_Frame: ; e44fa
 	and a
 	ret
 
-.RightPressed
+.RightPressed:
 	ld a, [hl]
 	inc a
 	jr .Save
 
-.LeftPressed
+.LeftPressed:
 	ld a, [hl]
 	dec a
 
-.Save
+.Save:
 	and $7
 	ld [hl], a
-UpdateFrame:: ; e4512
+UpdateFrame: ; e4512
 	ld a, [TextBoxFrame]
 	hlcoord 16, 15 ; where on the screen the number is drawn
 	add "1"
@@ -512,7 +512,7 @@ Options_Cancel: ; e4520
 	and a
 	ret
 
-.Exit
+.Exit:
 	scf
 	ret
 ; e452a
@@ -527,25 +527,25 @@ OptionsControl: ; e452a
 	and a
 	ret
 
-.DownPressed
+.DownPressed:
 	ld a, [hl] ; load the cursor position to a
-	cp $6 ; maximum number of items in option menu
+	cp $7 ; maximum number of items in option menu
 	jr nz, .CheckFive
 	ld [hl], $0
 	scf
 	ret
 
-.CheckFive ; I have no idea why this exists...
+.CheckFive: ; I have no idea why this exists...
 	cp $5
 	jr nz, .Increase
 	ld [hl], $5
 
-.Increase
+.Increase:
 	inc [hl]
 	scf
 	ret
 
-.UpPressed
+.UpPressed:
 	ld a, [hl]
 	cp $6
 	jr nz, .NotSix
@@ -553,12 +553,12 @@ OptionsControl: ; e452a
 	scf
 	ret
 
-.NotSix
+.NotSix:
 	and a
 	jr nz, .Decrease
-	ld [hl], $7 ; number of option items +1
+	ld [hl], $8 ; number of option items +1
 
-.Decrease
+.Decrease:
 	dec [hl]
 	scf
 	ret

@@ -1234,7 +1234,7 @@ YoungsterGroup:
 ; ================
 
 	; YOUNGSTER (2)
-	db "MIKEY@"
+	db "???@"
 	db 0 ; normal
 
 	; party
@@ -1246,19 +1246,18 @@ YoungsterGroup:
 ; ================
 
 	; YOUNGSTER (3)
-	db "ALBERT@"
+	db "???@"
 	db 0 ; normal
 
 	; party
-	db 6, RATTATA
-	db 8, ZUBAT
+	db 3, RATTATA
 
 	db $ff ; end
 
 ; ================
 
 	; YOUNGSTER (4)
-	db "GORDON@"
+	db "???@"
 	db 0 ; normal
 
 	; party
@@ -1269,7 +1268,7 @@ YoungsterGroup:
 ; ================
 
 	; YOUNGSTER (5)
-	db "SAMUEL@"
+	db "Borg@"
 	db 0 ; normal
 
 	; party
@@ -1283,7 +1282,7 @@ YoungsterGroup:
 ; ================
 
 	; YOUNGSTER (6)
-	db "IAN@"
+	db "Lerp@"
 	db 0 ; normal
 
 	; party

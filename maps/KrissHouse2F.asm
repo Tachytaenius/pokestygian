@@ -6,10 +6,7 @@ KrissHouse2F_MapScriptHeader:
 	dw off2, 1
 
 .MapCallbacks:
-	db 1
-
-	; callbacks
-	dbw 1, SetSpawn
+	db 0
 
 .Trigger1:
 	checkevent EVENT_KRISS_HOUSE_MOM_1
@@ -57,19 +54,6 @@ StartGameIntro:
 .Up
 	turn_head_up
 	step_end
-
-.SkipInizialization
-	return
-	
-SetSpawn
-	return
-
-
-	db 0, 0, 0 ; filler
-	
-.Warp
-	warp NONE, $0, $0
-	end
 
 KrissHouse2F_MapEventHeader
 	; filler

@@ -17,10 +17,17 @@ GoldenrodDeptStoreElevator_MapEventHeader:
 	db 0
 
 .Signposts:
-	db 0
+	db 1
+	signpost 6, 3, SIGNPOST_READ, .gobset
 
 .PersonEvents:
 	db 1
 	person_event SPRITE_BILL, 4, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
 .plantScript
 	jumpstd elevatorbutton
+.gobset
+	jumptext .gobset_
+.gobset_
+	text "Passage to green"
+	line "goblin settlement."
+	done
