@@ -72,8 +72,8 @@ NewBarkTown_MapEventHeader:
 	cont "it?"
 	prompt
 .GreyGoblinBoris1SeenText:
-	text "???: <``>Heh… heh…"
-	line "heh…<''>"
+	text "???: [Heh… heh…"
+	line "heh…]"
 	prompt
 	
 .GreyGoblinBoris1BeatenText:
@@ -246,7 +246,7 @@ NewBarkTown_MapEventHeader:
 	db "Provoke@"
 	db "Cancel@"
 .borisHuh
-	text "???: <``>Huh!??!<''>"
+	text "???: [Huh!??!]"
 	prompt
 .borisDead
 	text "???: [Ack!!]"

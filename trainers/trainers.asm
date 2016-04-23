@@ -1261,33 +1261,29 @@ YoungsterGroup:
 	db 0 ; normal
 
 	; party
-	db 10, WOOPER
+	db , WOOPER
 
 	db $ff ; end
 
 ; ================
 
 	; YOUNGSTER (5)
-	db "Borg@"
+	db "???@"
 	db 0 ; normal
 
 	; party
-	db 7, RATTATA
-	db 10, SANDSHREW
-	db 8, SPEAROW
-	db 8, SPEAROW
+	db 7, SANDSHREW
 
 	db $ff ; end
 
 ; ================
 
 	; YOUNGSTER (6)
-	db "Lerp@"
+	db "???@"
 	db 0 ; normal
 
 	; party
-	db 10, MANKEY
-	db 12, DIGLETT
+	db 8, DIGLETT
 
 	db $ff ; end
 

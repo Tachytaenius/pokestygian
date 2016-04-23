@@ -36,7 +36,7 @@ LakeofRage_MapEventHeader:: db 0, 0
 	signpost 17, 23, SIGNPOST_READ, .gobset
 	signpost 11, 13, SIGNPOST_READ, .ruins
 
-.ObjectEvents: db 16
+.ObjectEvents: db 17
 	person_event SPRITE_POKE_BALL, 30, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_RED, PERSONTYPE_SCRIPT, 0, monactions, EVENT_109
 	person_event SPRITE_CHRIS_BIKE, 20, 37, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, armourActions, EVENT_10A
 	person_event SPRITE_BILL, 18, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, .plantScript, -1
