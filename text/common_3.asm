@@ -303,9 +303,8 @@ UnknownText_0x1c0bd8::
 	prompt
 
 UnknownText_0x1c0bee::
-	text "OAK: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that!"
+	text "This isn't the"
+	line "time to use that."
 	prompt
 
 Text_YouDontHaveAPkmn::

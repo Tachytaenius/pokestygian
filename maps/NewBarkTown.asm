@@ -42,8 +42,8 @@ NewBarkTown_MapEventHeader:
 .gate:
 	jumptext .gateread
 .gateread
-	text "Opening to"
-	line "storage cache."
+	text "Passage to storage"
+	line "cache."
 	prompt
 .rockHammer
 	checkevent EVENT_106
@@ -53,7 +53,7 @@ NewBarkTown_MapEventHeader:
 	yesorno
 	iffalse .Done
 	setevent EVENT_106
-	giveitem CARD_KEY, 1
+	giveitem CARD_KEY
 	jumptext .takehammernothing
 .Done:
 	closetext

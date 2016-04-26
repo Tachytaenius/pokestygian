@@ -452,7 +452,9 @@ DoPlayerMovement:: ; 80000
 	add hl, de
 	ld a, [hl]
 	ld [wd04e], a
-
+	
+	callba AddExp
+	
 	ld a, 4
 	ret
 

@@ -13,6 +13,7 @@ BlackthornGym1F_MapScriptHeader:
 	setevent EVENT_116
 	setevent EVENT_117
 	setevent EVENT_118
+	setevent EVENT_130
 .finish
 	return
 
@@ -37,18 +38,18 @@ BlackthornGym1F_MapEventHeader:
 	signpost 16, 3, SIGNPOST_READ, .ruins
 
 .PersonEvents:
-	db 10
+	db 11
 	person_event SPRITE_CAL, 13, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_110
 	person_event SPRITE_CAL, 11, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_111
 	person_event SPRITE_CAL, 9, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_112
 	person_event SPRITE_FISHING_GURU, 13, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_113
 	person_event SPRITE_FISHING_GURU, 11, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_114
 	person_event SPRITE_FISHING_GURU, 9, 2, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_115
-	person_event SPRITE_FISHING_GURU, 2, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_116
 	person_event SPRITE_FISHING_GURU, 4, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_117
+	person_event SPRITE_FISHING_GURU, 2, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, blood, EVENT_116
 	person_event SPRITE_SNES, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .ItemFragment_MoneySix1actions, EVENT_118
+	person_event SPRITE_CAL, 4, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_11A
 	person_event SPRITE_CAL, 2, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_119
-	person_event SPRITE_CAL, 4, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_11A 
 .ItemFragment_MoneySix1actions
 	showemote EMOTE_SAD, LAST_TALKED, 15
 	callasm StartMenuSecondary
@@ -207,10 +208,10 @@ encounterggob2
 	callasm LoadDeadGrey
 	startbattle
 	reloadmapafterbattle
-	disappear 6
+	disappear 3
 	setevent EVENT_111
 	clearevent EVENT_114
-	appear 5
+	appear 6
 .leave
 	end
 .look
@@ -220,7 +221,8 @@ encounterggob2
 	text "???: [Spien!]"
 	prompt
 .enemyloses
-	text "???: [Nein so was!]"
+	text "???: [Nein so"
+	line "was!]"
 	done
 .playerloses
 	text ""
@@ -300,7 +302,7 @@ encounterggob1
 	startbattle
 	reloadmapafterbattle
 	disappear 2
-	setevent EVENT_ROUTE_30_YOUNGSTER_JOEY
+	setevent EVENT_110
 	clearevent EVENT_113
 	appear 5
 .leave
@@ -309,17 +311,17 @@ encounterggob1
 	turn_head_right
 	step_end
 .huh
-	text "???: [A-ha!]"
+	text "???: [Achtung!]"
 	prompt
 .enemyloses
-	text "???: [!!]"
+	text "???: [Aiieee!!]"
 	done
 .playerloses
 	text ""
 	done
 encounterborg
-	setlasttalked 10
-	checkevent EVENT_119
+	setlasttalked 11
+	checkevent EVENT_11A
 	iftrue .leave
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	applymovement PLAYER, .look
@@ -333,9 +335,9 @@ encounterborg
 	callasm LoadDeadGrey
 	startbattle
 	reloadmapafterbattle
-	disappear 10
-	setevent EVENT_119
-	clearevent EVENT_116
+	disappear 11
+	setevent EVENT_11A
+	clearevent EVENT_117
 	appear 8
 .leave
 	end
@@ -354,8 +356,8 @@ encounterborg
 	text ""
 	done
 encounterlerp
-	setlasttalked 11
-	checkevent EVENT_11A
+	setlasttalked 12
+	checkevent EVENT_119
 	iftrue .leave
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	applymovement PLAYER, .look
@@ -369,10 +371,12 @@ encounterlerp
 	callasm LoadDeadGrey
 	startbattle
 	reloadmapafterbattle
-	disappear 11
-	setevent EVENT_11A
-	clearevent EVENT_117
+	disappear 12
+	setevent EVENT_119
+	clearevent EVENT_116
 	appear 9
+	clearevent EVENT_118
+	appear 10
 .leave
 	end
 .look

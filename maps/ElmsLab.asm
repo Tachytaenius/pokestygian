@@ -15,8 +15,27 @@ triggerswap
 	dotrigger 1
 off
 	end
-
+skipPrompt
+	call GetJoypad
+	ld a, [hJoyPressed]
+	cp 0
+	jr z, skipPrompt
+	bit 1, a
+	jr nz, .yes
+	ld a, FALSE
+	ld [ScriptVar], a
+	ret
+.yes
+	ld a, TRUE
+	ld [ScriptVar], a
+	ret
 startshrineintro
+	opentext
+	writetext .skipInstructions
+	buttonsound
+	callasm skipPrompt
+	iftrue .skip
+	closetext
 	setlasttalked 4
 	showemote EMOTE_SHOCK, LAST_TALKED, 30
 	pause 15
@@ -45,6 +64,10 @@ startshrineintro
 	if_equal 4, .directions
 	writetext .thatWasStupid
 	jump .back
+.skipInstructions
+	text "Push B to skip or"
+	line "otherwise to play."
+	done
 .thatWasStupid
 	text "Moe: [That was not"
 	line "a good thing. Oh,"
@@ -118,6 +141,7 @@ startshrineintro
 	showemote EMOTE_FISH, 2, 15
 	writetext .gems
 	applymovement 2, .lanugoGo
+.skip
 	closetext
 	setevent EVENT_KURT_GAVE_YOU_LURE_BALL
 	jump triggerswap
@@ -490,6 +514,20 @@ ElmsLab_MapEventHeader:
 	person_event SPRITE_SILVER, 1, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, .bannerScript, -1
 	person_event SPRITE_SILVER, 1, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, .bannerScript, -1
 	person_event SPRITE_BILL, 2, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, plantScript, -1
+.signActions
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKno
+	if_equal 2, .TCHsign
+	if_equal 3, .TLKno
+	if_equal 4, .LOKsign
+	if_equal 5, .INGno
+	if_equal 6, .TKEno
+	if_equal 7, .USEno
+.TCHsign
+.LOKsign
+	end
+
 .leavetext2
 	jumptext .textleave2
 .textleave2

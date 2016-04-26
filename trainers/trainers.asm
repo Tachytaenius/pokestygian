@@ -1261,7 +1261,7 @@ YoungsterGroup:
 	db 0 ; normal
 
 	; party
-	db , WOOPER
+	db 7, WOOPER
 
 	db $ff ; end
 

@@ -389,7 +389,7 @@ Item2Attributes:
 	item_attribute   200, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; CARD KEY
-	item_attribute     256, 0,                 0, CANT_SELECT, ITEM, ITEMMENU_NOUSE,   ITEMMENU_NOUSE
+	item_attribute     0, 0,                 0, CANT_SELECT | CANT_TOSS, KEY_ITEM, ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; MACHINE PART
 	item_attribute     0, 0,                 0, CANT_SELECT | CANT_TOSS, KEY_ITEM, ITEMMENU_NOUSE,   ITEMMENU_NOUSE

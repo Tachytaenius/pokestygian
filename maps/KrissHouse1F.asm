@@ -42,8 +42,7 @@ KrissHouse1F_MapEventHeader:
 	line "initial room."
 	done
 .warp2text
-	text "Opening to"
-	line "square."
+	text "Passage to square."
 	done
 .NotePalette
 	RGB 31, 31, 31
@@ -537,7 +536,6 @@ INCLUDE "gfx/stygian/gel.pal"
 	yesorno
 	iffalse .Done
 	setflag ENGINE_POKEDEX
-	setflag ENGINE_MAP_CARD
 	disappear 3
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	closetext

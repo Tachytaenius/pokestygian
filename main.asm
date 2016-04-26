@@ -11428,6 +11428,66 @@ _PhysicalSpecialSplit:: ;Determines if a move is Physical or Special  ; credit t
 	db MOVETYPE_SPECIAL  ; WHIRLPOOL
 	db MOVETYPE_SPECIAL  ; BEAT_UP
 
+AddExp::
+	ld a, 2
+	call RandomRange
+	cp 0
+	ret nz
+
+	ld a, [WalkEXPCounter]
+	cp $ff
+	jr z, .addLevel
+	inc a
+	ld [WalkEXPCounter], a
+	ret
+
+.addLevel
+	ld a, [WalkLVLCounter]
+	cp $ff
+	ret z
+	
+	inc a
+	ld [WalkLVLCounter], a
+	
+	ld a, "@"
+	ld hl, wSeerCaughtLevelString
+	ld bc, 4
+	call ByteFill
+
+	ld hl, wSeerCaughtLevelString
+	ld de, WalkLVLCounter
+	lb bc, PRINTNUM_RIGHTALIGN | 1, 3
+	call PrintNum
+
+	call OpenText
+	ld hl, Text_GainedALevel
+	call PrintText
+	call CloseText
+	
+	ld a, 0
+	ld [WalkEXPCounter], a	
+	ret
+
+Text_GainedALevel
+	text "You have attained"
+	line "level @"
+	text_from_ram wSeerCaughtLevelString
+	text "."
+	prompt
+
+DeductLevels::
+	ld a, [WalkLVLCounter]
+	cp b
+	jr nc, .yes
+	or a
+	ret
+
+.yes
+	sub b
+	ld [WalkLVLCounter], a
+	scf
+	ret
+
 INCLUDE "engine/std_scripts.asm"
 
 INCLUDE "engine/phone_scripts.asm"

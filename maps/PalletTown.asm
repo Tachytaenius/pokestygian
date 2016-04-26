@@ -270,7 +270,7 @@ bill
 	text "???: […]"
 	done
 .anyMore
-	text "???: […]"
+	text "??? grunts."
 	done
 .loopVernix
 	writetext .anyMore

@@ -2680,8 +2680,13 @@ wErinFightCount::    ds 1
 EventFlags:: ; da72
 	flag_array NUM_EVENTS
 ; db6c
+WalkEXPCounter::
+	ds 1
+WalkLVLCounter::
+	ds 1
 
-	ds 6
+	ds 4 ; so far unused
+
 
 wCurBox:: ; db72
 	ds 1
