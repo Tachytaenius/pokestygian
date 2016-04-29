@@ -291,9 +291,6 @@ returnLoop
 	ld [ScriptVar], a
 	ret
 .advice
-	writetext .sure
-	yesorno
-	iffalse returnLoop
 	callstd homepage
 	jump returnLoop
 HomepageScript:
@@ -322,12 +319,21 @@ HomepageScript:
 	iftrue .check1
 	callasm .TryAdvice
 	iffalse failAndReturn
+	writetext .sure
+	yesorno
+	iffalse .done
 	callasm .AdviceYes
 	writetext .advice1
 	setevent EVENT_63F
+.done
 	end
-
+.sure
+	text "Are you sure?"
+	prompt
 .check1
+	writetext .sure
+	yesorno
+	iffalse .done
 	writetext .advice1
 	writetext .levelsBack
 	end
