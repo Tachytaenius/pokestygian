@@ -198,7 +198,7 @@ returnLoop
 	db 5 ; items
 	db "¥255 (1LV)@"
 	db "1 <PO><KE> orb (1LV)@"
-	db "5 <PO><KE> orb (5LVs)@"
+	db "5 <PO><KE> orbs (5LVs)@"
 	db "Advice (2LVs)@"
 	db "Cancel@"
 
