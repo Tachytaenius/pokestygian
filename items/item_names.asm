@@ -29,7 +29,7 @@
 	db "Carbos@"
 	db "Lucky punch@"
 	db "Calcium@"
-	db "Rare candy@"
+	db "# orb@"
 	db "X accuracy@"
 	db "Leaf stone@"
 	db "Metal powder@"
@@ -64,7 +64,7 @@
 	db "Max ether@"
 	db "Elixer@"
 	db "Red scale@"
-	db "Secretpotion@"
+	db "Gem@" ; secret potion
 	db "S.s.ticket@"
 	db "Mystery egg@"
 	db "Clear bell@"
@@ -113,7 +113,7 @@
 	db "Spell tag@"
 	db "Ragecandybar@"
 	db "Gs ball@"
-	db "Blue card@"
+	db "Gem@" ; blue card
 	db "Miracle seed@"
 	db "Thick club@"
 	db "Focus band@"
@@ -130,7 +130,7 @@
 	db "Lost item@"
 	db "Stardust@"
 	db "Star piece@"
-	db "Basement key@"
+	db "Gem@" ; basement key
 	db "Pass@"
 	db "Teru-sama@"
 	db "Teru-sama@"
@@ -254,3 +254,5 @@
 	db "Teru-sama@"
 	db "Teru-sama@"
 	db "?@"
+
+; gem count = 3

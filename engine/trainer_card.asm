@@ -252,9 +252,9 @@ TrainerCard_PrintTopHalfOfCard: ; 25299 (9:5299)
 ; 252ec (9:52ec)
 
 .Name_Money: ; 252ec
-	db   "NAME/"
+	db   "Name/"
 	next ""
-	next "MONEY@"
+	next "Money@"
 
 .ID_No: ; 252f9
 	db $27, $28, $ff ; ID NO
@@ -281,6 +281,88 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	hlcoord 2, 8
 	ld de, .StatusTilemap
 	call TrainerCardSetup_PlaceTilemapString
+	
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 0, a
+	jr z, .nextSource1
+	
+	hlcoord 2, 14
+	ld a, "."
+	call ByteFill
+.nextSource1
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 1, a
+	jr z, .nextSource2
+	
+	hlcoord 3, 14
+	ld a, "."
+	call ByteFill
+.nextSource2
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 2, a
+	jr z, .nextSource3
+	
+	hlcoord 4, 14
+	ld a, "."
+	call ByteFill
+.nextSource3
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 3, a
+	jr z, .nextSource4
+	
+	hlcoord 5, 14
+	ld a, "."
+	call ByteFill
+.nextSource4
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 4, a
+	jr z, .nextSource5
+	
+	hlcoord 6, 14
+	ld a, "."
+	call ByteFill
+.nextSource5
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 5, a
+	jr z, .nextSource6
+	
+	hlcoord 7, 14
+	ld a, "."
+	call ByteFill
+.nextSource6
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 6, a
+	jr z, .nextSource7
+	
+	hlcoord 8, 14
+	ld a, "."
+	call ByteFill
+.nextSource7
+	ld bc, 1
+	
+	ld a, [SourceGems]
+	bit 7, a
+	jr z, .nextDestination1
+	
+	hlcoord 9, 14
+	ld a, "."
+	call ByteFill
+.nextDestination1
+	;ok we're done here, move along
 	ld a, [StatusFlags] ; pokedex
 	bit 0, a
 	ret nz
@@ -290,8 +372,8 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	ret
 
 .Dex_PlayTime
-	db   "#dex"
-	next "Play time@@"
+	db   "#dex", "<LNBRK>", "Play time"
+	next "Gems/", "<LNBRK>", "××××××××", "<LNBRK>", "××××××××@@"
 
 .Badges
 	db "  Badges▶@"
@@ -435,7 +517,7 @@ TrainerCard_Page2_3_PlaceLeadersFaces: ; 253f4 (9:53f4)
 	ret
 
 TrainerCard_Page1_PrintGameTime: ; 25415 (9:5415)
-	hlcoord 11, 12
+	hlcoord 11, 11
 	ld de, GameTimeHours
 	lb bc, 2, 4
 	call PrintNum
@@ -446,7 +528,7 @@ TrainerCard_Page1_PrintGameTime: ; 25415 (9:5415)
 	ld a, [hVBlankCounter]
 	and $1f
 	ret nz
-	hlcoord 15, 12
+	hlcoord 15, 11
 	ld a, [hl]
 	xor %01010001 ; $7F <--> $2E
 	ld [hl], a

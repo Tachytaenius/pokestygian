@@ -683,7 +683,7 @@ HitConfusion: ; 343a5
 
 BattleCommand_CheckObedience: ; 343db
 ; checkobedience
-
+	ret ; nope. no you don't.
 	; Enemy can't disobey
 	ld a, [hBattleTurn]
 	and a

@@ -11429,11 +11429,14 @@ _PhysicalSpecialSplit:: ;Determines if a move is Physical or Special  ; credit t
 	db MOVETYPE_SPECIAL  ; BEAT_UP
 
 AddExp::
+	ld a, [PlayerAttributes]
+	bit 0, a
+	jr nz, .skip
 	ld a, 2
 	call RandomRange
 	cp 0
 	ret nz
-
+.skip
 	ld a, [WalkEXPCounter]
 	cp $ff
 	jr z, .addLevel
@@ -11485,6 +11488,16 @@ DeductLevels::
 .yes
 	sub b
 	ld [WalkLVLCounter], a
+	scf
+	ret
+	
+TestLevelDeduction::
+	ld a, [WalkLVLCounter]
+	cp b
+	jr nc, .yes
+	or a
+	ret
+.yes
 	scf
 	ret
 
@@ -12556,6 +12569,8 @@ PlantPic::
 INCBIN "gfx/stygian/plant.2bpp"
 ArmourPic::
 INCBIN "gfx/stygian/armour.2bpp"
+GemPic::
+INCBIN "gfx/stygian/gem.2bpp"
 ;people
 GoblinPic::
 INCBIN "gfx/trainers/youngster.2bpp"
@@ -12569,7 +12584,7 @@ INCBIN "gfx/trainers/lt_surge.2bpp"
 DeadGoblinPic::
 INCBIN "gfx/stygian/youngster_dead.2bpp"
 
-SECTION "stadium2", ROMX[$8000-$220], BANK[$7F]
+SECTION "stadium2", ROMX
 
 IF DEF(CRYSTAL11)
 INCBIN "misc/stadium2_2.bin"

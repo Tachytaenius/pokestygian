@@ -1,34 +1,34 @@
-	db "Bulbasaur@"
-	db "Ivysaur@@@"
-	db "Venusaur@@"
-	db "Charmander"
-	db "Charmeleon"
-	db "Charizard@"
-	db "Squirtle@@"
-	db "Wartortle@"
-	db "Blastoise@"
-	db "Caterpie@@"
-	db "Metapod@@@"
-	db "Butterfree"
-	db "Weedle@@@@"
-	db "Kakuna@@@@"
-	db "Beedrill@@"
-	db "Pidgey@@@@"
-	db "Pidgeotto@"
-	db "Pidgeot@@@"
-	db "Rattata@@@"
-	db "Raticate@@"
-	db "Spearow@@@"
-	db "Fearow@@@@"
-	db "Ekans@@@@@"
-	db "Arbok@@@@@"
+	db "Bulbasaur@";
+	db "Ivysaur@@@";
+	db "Venusaur@@";
+	db "Charmander";
+	db "Charmeleon";
+	db "Charizard@";
+	db "Squirtle@@";
+	db "Wartortle@";
+	db "Blastoise@";
+	db "Caterpie@@";
+	db "Metapod@@@";
+	db "Butterfree";
+	db "Weedle@@@@";
+	db "Kakuna@@@@";
+	db "Beedrill@@";
+	db "Pidgey@@@@";
+	db "Pidgeotto@";
+	db "Pidgeot@@@";
+	db "Rattata@@@";
+	db "Raticate@@";
+	db "Spearow@@@";
+	db "Fearow@@@@";
+	db "Ekans@@@@@";
+	db "Arbok@@@@@";
 	db "Pikachu@@@"
 	db "Raichu@@@@"
-	db "Sandshrew@"
-	db "Sandslash@"
-	db "Nidoran@@@"
-	db "Nidorin@@@"
-	db "Nidak@@@@@"
+	db "Sandshrew@";
+	db "Sandslash@";
+	db "Nidoran@@@";
+	db "Nidorin@@@";
+	db "Nidak@@@@@";
 	db "@@@@@@@@@@" ; to be decided
 	db "@@@@@@@@@@" ; to be decided
 	db "@@@@@@@@@@" ; to be decided
@@ -71,7 +71,7 @@
 	db "Victreebel"
 	db "Tentacool@"
 	db "Tentacruel"
-	db "Geodude@@@"
+	db "Geodude@@@";
 	db "Graveler@@"
 	db "Golem@@@@@"
 	db "Ponyta@@@@"

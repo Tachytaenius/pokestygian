@@ -1005,7 +1005,12 @@ INCLUDE "gfx/trainers/will.pal"
 	text "That cannot talk."
 	done
 .ankhScript
+	callasm .floor1
 	jumpstd tv
+.floor1
+	ld a, 1
+	ld [AnkhFloorBuffer], a
+	ret
 .bannerScript
 	jumpstd trashcan
 plantScript

@@ -38,7 +38,7 @@ BlackthornGym1F_MapEventHeader:
 	signpost 16, 3, SIGNPOST_READ, .ruins
 
 .PersonEvents:
-	db 11
+	db 12
 	person_event SPRITE_CAL, 13, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_110
 	person_event SPRITE_CAL, 11, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_111
 	person_event SPRITE_CAL, 9, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_112
@@ -50,6 +50,7 @@ BlackthornGym1F_MapEventHeader:
 	person_event SPRITE_SNES, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, .ItemFragment_MoneySix1actions, EVENT_118
 	person_event SPRITE_CAL, 4, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_11A
 	person_event SPRITE_CAL, 2, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, dummy, EVENT_119
+	person_event SPRITE_BUGSY, 4, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_OW_SILVER, PERSONTYPE_SCRIPT, 0, gem, EVENT_200
 .ItemFragment_MoneySix1actions
 	showemote EMOTE_SAD, LAST_TALKED, 15
 	callasm StartMenuSecondary
@@ -393,3 +394,115 @@ encounterlerp
 .playerloses
 	text ""
 	done
+gem
+	showemote EMOTE_SAD, LAST_TALKED, 15
+	callasm StartMenuSecondary
+	if_equal 1, .ATKno
+	if_equal 2, .TCHitem
+	if_equal 3, .TLKmap
+	if_equal 4, .LOKitem
+	if_equal 5, .INGmap
+	if_equal 6, .TKEitem
+	if_equal 7, .USEitem
+	end
+.INGmap
+	jumptext .ingestmapNo
+.ingestmapNo
+	text "That is not"
+	line "edible."
+	done
+.Done
+	closetext
+	end
+.ATKno
+	jumptext .noAtk
+.noAtk
+	text "No! You may"
+	line "not! You are"
+	cont "able, though."
+	done
+.TLKmap
+	jumptext .talkmap
+.talkmap
+	text "That cannot talk."
+	done
+.TCHitem
+	opentext
+	writetext .touchItemQuestion
+	yesorno
+	iffalse .Done
+	jumptext .touchItemText
+.touchItemQuestion
+	text "The gem is within"
+	line "reach. Touch it?"
+	prompt
+.touchItemText
+	text "You feel the conf-"
+	line "using surface of a"
+	para "gem of greater"
+	line "travel."
+	done
+.LOKitem
+	callasm .lookAtMoney
+	waitbutton
+	jumptext .lookAtItem
+.lookAtItem
+	text "You see void."
+	done
+.USEitem
+	jumptext .pickUpFirst
+.pickUpFirst
+	text "There is no way"
+	line "to use that."
+	done
+.TKEitem
+	
+	opentext
+	writetext .takeitemquestion
+	writetext .doSo
+	yesorno
+	iffalse .Done
+	setevent EVENT_200
+	disappear 13
+	callasm .givegem
+	jumptext .takeitemtext
+.takeitemquestion
+	text "You are able to"
+	line "take the gem."
+	prompt
+.takeitemtext
+	text "Nothing happens"
+	line "as you take"
+	cont "the gem."
+	done
+.doSo
+	text "Do so?"
+	prompt
+.givegem
+	ld hl, SourceGems
+	set 0, [hl]
+	ret
+.MoneyPalette
+	RGB 31, 31, 31
+	RGB 20, 20, 20
+	RGB 10, 10, 10
+	RGB 00, 00, 00
+.lookAtMoney
+	lb bc, BANK(GemPic), 6*7
+	ld hl, GemPic
+	ld a, h
+	ld [ItempicPointer], a
+	ld a, l
+	ld [ItempicPointer + 1], a
+	
+	ld hl, .MoneyPalette
+	ld a, h
+	ld [wPaletteHighBuffer], a
+	ld a, l
+	ld [wPaletteLowBuffer], a
+	
+	ld a, BANK(.MoneyPalette)
+	ld [wPaletteBankBuffer], a
+	
+	callba Itempic
+	ret

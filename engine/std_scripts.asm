@@ -105,8 +105,9 @@ TVScript:
 	if_equal 4, .LOKankh
 	if_equal 5, INGno
 	if_equal 6, TKEno
-	if_equal 7, USEno
+	if_equal 7, .USEankh
 	end
+
 .Done
 	closetext
 	end
@@ -158,9 +159,206 @@ TVScript:
 	RGB 31, 31, 31
 INCLUDE "gfx/stygian/ankh.pal"
 	RGB 00, 00, 00
-HomepageScript:
-	farjumptext HomepageText
+.USEankh
+	opentext
+returnLoop
+	callasm .prepareForWhat
+	writetext .what
+	loadmenudata .What
+	verticalmenu
+	closewindow
+	if_equal 1, .money
+	if_equal 2, .candies
+	if_equal 3, .manyCandies
+	if_equal 4, .advice
+	closetext
+	end
+.prepareForWhat
+	ld a, "@"
+	ld hl, wSeerCaughtLevelString
+	ld bc, 4
+	call ByteFill
 
+	ld hl, wSeerCaughtLevelString
+	ld de, WalkLVLCounter
+	lb bc, PRINTNUM_RIGHTALIGN | 1, 3
+	call PrintNum
+	ret
+.sure
+	text "Are you sure?"
+	prompt
+.What
+	db $40 ; flags
+	db 00, 00 ; start coords
+	db 11, 19 ; end coords
+	dw .What2
+	db 1 ; default option
+.What2
+	db $81 ; flags
+	db 5 ; items
+	db "¥255 (1LV)@"
+	db "1 <PO><KE> orb (1LV)@"
+	db "5 <PO><KE> orb (5LVs)@"
+	db "Advice (2LVs)@"
+	db "Cancel@"
+
+.what
+	text "Pray for what?"
+	line "Levels: @"
+	text_from_ram wSeerCaughtLevelString
+	text "."
+	prompt
+.money
+	callasm .moneyTry
+	iffalse failAndReturn
+	writetext .sure
+	yesorno
+	iffalse returnLoop
+	callasm .moneyYes
+	givemoney 0, 255
+	writetext .prayedForMoney
+	jump returnLoop
+.prayedForMoney
+	text "You get ¥255."
+	prompt
+.moneyYes
+	ld b, 1
+	callba DeductLevels
+	ret
+.moneyTry
+	ld a, FALSE
+	ld [ScriptVar], a
+	ld b, 1
+	callba TestLevelDeduction
+	ret nc
+	ld a, TRUE
+	ld [ScriptVar], a
+	ret
+
+.candies
+	callasm .candiesTry
+	iffalse failAndReturn
+	writetext .sure
+	yesorno
+	iffalse returnLoop
+	callasm .candiesYes
+	giveitem RARE_CANDY, 1
+	writetext .prayedForCandies
+	jump returnLoop
+.prayedForCandies
+	text "You get 1 #"
+	line "orb."
+	prompt
+.candiesYes
+	ld b, 1
+	callba DeductLevels
+	ret
+.candiesTry
+	ld a, FALSE
+	ld [ScriptVar], a
+	ld b, 1
+	callba TestLevelDeduction
+	ret nc
+	ld a, TRUE
+	ld [ScriptVar], a
+	ret
+
+.manyCandies
+	callasm .many_candiesTry
+	iffalse failAndReturn
+	writetext .sure
+	yesorno
+	iffalse returnLoop
+	callasm .many_candiesYes
+	giveitem RARE_CANDY, 5
+	writetext .prayedFormany_candies
+	jump returnLoop
+.prayedFormany_candies
+	text "You get 5 #"
+	line "orbs."
+	prompt
+.many_candiesYes
+	ld b, 5
+	callba DeductLevels
+	ret
+.many_candiesTry
+	ld a, FALSE
+	ld [ScriptVar], a
+	ld b, 5
+	callba TestLevelDeduction
+	ret nc
+	ld a, TRUE
+	ld [ScriptVar], a
+	ret
+.advice
+	writetext .sure
+	yesorno
+	iffalse returnLoop
+	callstd homepage
+	jump returnLoop
+HomepageScript:
+	callasm .floor
+	if_equal 1, .stygianAbyssFloor1
+	jumptext .unknownFloor
+.unknownFloor
+	text "Unknown floor."
+	done
+.AdviceYes
+	ld b, 2
+	callba DeductLevels
+	ret
+.TryAdvice
+	ld a, FALSE
+	ld [ScriptVar], a
+	ld b, 2
+	callba TestLevelDeduction
+	ret nc
+	ld a, TRUE
+	ld [ScriptVar], a
+	ret
+.stygianAbyssFloor1
+	opentext
+	checkevent EVENT_63F
+	iftrue .check1
+	callasm .TryAdvice
+	iffalse failAndReturn
+	callasm .AdviceYes
+	writetext .advice1
+	setevent EVENT_63F
+	end
+
+.check1
+	writetext .advice1
+	writetext .levelsBack
+	end
+.floor
+	ld a, [AnkhFloorBuffer]
+	ld [ScriptVar], a
+	ret
+.advice1
+	text "Ankh: [If you are"
+	line "having trouble"
+	para "finding your way"
+	line "through the cavern"
+	para "to get to the"
+	line "ruins, look for a"
+	para "dead end path in"
+	line "the square. Search"
+	cont "around there.]"
+	prompt
+.levelsBack
+	text "Ankh: [That piece"
+	line "of advice was free"
+	para "because you had"
+	line "already heard it.]"
+	prompt
+failAndReturn::
+	writetext .notEnoughLevels
+	jump returnLoop
+.notEnoughLevels
+	text "You do not have"
+	line "enough levels."
+	prompt
 Radio1Script:
 	opentext
 	writebyte MAPRADIO_POKEMON_CHANNEL

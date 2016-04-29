@@ -1551,6 +1551,7 @@ wd002::
 wTempDayOfWeek::
 wApricorns::
 PhoneScriptBank::
+AnkhFloorBuffer::
 LuckyNumberDigit1Buffer::
 wCurrentRadioLine::
 wMovementBufferCount::
@@ -2684,8 +2685,14 @@ WalkEXPCounter::
 	ds 1
 WalkLVLCounter::
 	ds 1
-
-	ds 4 ; so far unused
+SourceGems::
+	ds 1
+DestinationGems::
+	ds 1
+PlayerAttributes::
+	ds 1
+UnusedSaveByte::
+	ds 1 ; so far unused
 
 
 wCurBox:: ; db72
