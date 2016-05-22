@@ -151,9 +151,9 @@ TrainerClassAttributes: ; 3959c
 	dw CONTEXT_USE + SWITCH_OFTEN
 
 ; Janine
-	db DIRE_HIT, 0 ; items
-	db 25 ; base reward
-	dw AI_BASIC + AI_SETUP + AI_SMART + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	db POTION, 0 ; items
+	db 8 ; base reward
+	dw AI_BASIC + AI_OFFENSIVE + AI_STATUS
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
 ; Cooltrainerm

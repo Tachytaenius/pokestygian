@@ -57,10 +57,12 @@ RedsHouse1F_MapEventHeader:: db 0, 0
 	line "I am Vernix."
 	prompt
 .go
+	faceplayer
 	opentext
 	writetext .notice
 	writetext .name
 	closetext
+	setevent EVENT_10E
 	jump .back
 .VernixScript
 	showemote EMOTE_SAD, LAST_TALKED, 15

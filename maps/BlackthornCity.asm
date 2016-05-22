@@ -21,8 +21,6 @@ BlackthornCity_MapEventHeader:: db 0, 0
 
 .ObjectEvents: db 0
 
-
-
 cavern
 	jumptext .text
 .text

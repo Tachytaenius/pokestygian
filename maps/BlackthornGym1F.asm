@@ -456,7 +456,6 @@ gem
 	line "to use that."
 	done
 .TKEitem
-	
 	opentext
 	writetext .takeitemquestion
 	writetext .doSo

@@ -12578,6 +12578,8 @@ ElfPic::
 INCBIN "gfx/trainers/erika.2bpp"
 HumanPic::
 INCBIN "gfx/trainers/hiker.2bpp"
+HumanFemalePic::
+INCBIN "gfx/trainers/janine.2bpp"
 LizardmanPic::
 INCBIN "gfx/trainers/lt_surge.2bpp"
 ;dead people
