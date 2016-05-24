@@ -147,7 +147,7 @@ SabrinaSprite: ; 147fc
 ; 14802
 
 CooltrainerMSprite: ; 14802
-	sprite_header CooltrainerMSpriteGFX, 3, WALKING_SPRITE, PAL_OW_BLUE
+	sprite_header CooltrainerMSpriteGFX, 3, WALKING_SPRITE, PAL_OW_RED
 ; 14808
 
 CooltrainerFSprite: ; 14808
