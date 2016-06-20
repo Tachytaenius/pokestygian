@@ -3827,8 +3827,6 @@ BikeFunction: ; d0b3
 Script_GetOnBike: ; 0xd13e
 	reloadmappart
 	writecode VAR_MOVEMENT, PLAYER_BIKE
-	waitbutton
-	closetext
 	
 	writebyte (1 << 7) | (PAL_OW_SILVER << 4)
     special Special_SetPlayerPalette
@@ -3838,7 +3836,6 @@ Script_GetOnBike: ; 0xd13e
 
 Script_GetOnBike_Register: ; 0xd14e
 	writecode VAR_MOVEMENT, PLAYER_BIKE
-	closetext
 	
 	writebyte (1 << 7) | (PAL_OW_SILVER << 4)
     special Special_SetPlayerPalette
@@ -3853,10 +3850,8 @@ Script_GetOnBike_Register: ; 0xd14e
 Script_GetOffBike: ; 0xd158
 	reloadmappart
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
-	waitbutton
 
 FinishGettingOffBike:
-	closetext
 	
 	writebyte (1 << 7) | (PAL_OW_RED << 4)
     special Special_SetPlayerPalette
