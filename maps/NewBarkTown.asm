@@ -315,6 +315,7 @@ NewBarkTown_MapEventHeader:
 	writetext .withinReachBoris
 	yesorno
 	iffalse .Done
+	closetext
 	jump .ATKgob
 .LOKgob
 	callasm .lookAtGGob

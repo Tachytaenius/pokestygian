@@ -549,6 +549,7 @@ ElmsLab_MapEventHeader:
 	writetext .withinReachlanugo
 	yesorno
 	iffalse .Done
+	closetext
 	faceplayer
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .lanugoWhat
@@ -682,6 +683,7 @@ ElmsLab_MapEventHeader:
 	writetext .withinReachMoe
 	yesorno
 	iffalse .Done
+	closetext
 	faceplayer
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .moeWhat
@@ -899,6 +901,7 @@ INCLUDE "gfx/trainers/will.pal"
 	writetext .withinReachIsaac
 	yesorno
 	iffalse .Done
+	closetext
 	faceplayer
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .IsaacWhat

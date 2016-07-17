@@ -685,17 +685,17 @@ BlackGlassesDesc:
 	db   "Powers up dark-"
 	next "type moves. (HOLD)@"
 
-SlowpokeTailDesc:
-	db   "Very tasty. Sell"
-	next "high.@"
+SlowpokeTailDesc: ; PAINSAW
+	db   "Raise damage dealt"
+	next "by 7Ö. (HOLD)@"
 
 PinkBowDesc:
 	db   "Powers up normal-"
 	next "type moves. (HOLD)@"
 
-StickDesc:
-	db   "An ordinary stick."
-	next "Sell low.@"
+StickDesc: ; MAGIC SCARF
+	db   "Lower damage taken"
+	next "by 7Ö. (HOLD)@"
 
 SmokeBallDesc:
 	db   "Escape from wild"

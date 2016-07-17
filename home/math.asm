@@ -86,25 +86,9 @@ SubtractSigned:: ; 3136
 ; 313d
 
 ReduceNumberByAPercent:: ; thanks PikalaxALT!
-	; number in bc, percentage in a
-	push af
-	ld a, b
-	ld [hMultiplicand + 1], a
-	ld a, c
-	ld [hMultiplicand + 2], a
-	xor a
-	ld [hMultiplicand], a
-	pop bc
-	ld a, 100
-	sub b
-	ld [hMultiplier], a
-	call Multiply
-	ld a, 100
-	ld [hDivisor], a
-	ld b, 4
-	call Divide
-	ld a, [hQuotient + 1]
-	ld b, a
-	ld a, [hQuotient + 2]
-	ld c, a
+	callba _ReduceNumberByAPercent
+	ret
+
+Add17PercentOfDeToDe::
+	callba _Add17PercentOfDeToDe
 	ret

@@ -223,6 +223,7 @@ TrainerCard_PrintTopHalfOfCard: ; 25299 (9:5299)
 	ld d, 5
 	call TrainerCard_InitBorder
 	hlcoord 2, 2
+	hlcoord 2, 2
 	ld de, .Name_Money
 	call PlaceString
 	hlcoord 2, 4
@@ -289,7 +290,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource1
 	
 	hlcoord 2, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource1
 	ld bc, 1
@@ -299,7 +300,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource2
 	
 	hlcoord 3, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource2
 	ld bc, 1
@@ -309,7 +310,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource3
 	
 	hlcoord 4, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource3
 	ld bc, 1
@@ -319,7 +320,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource4
 	
 	hlcoord 5, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource4
 	ld bc, 1
@@ -329,7 +330,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource5
 	
 	hlcoord 6, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource5
 	ld bc, 1
@@ -339,7 +340,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource6
 	
 	hlcoord 7, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource6
 	ld bc, 1
@@ -349,7 +350,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextSource7
 	
 	hlcoord 8, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextSource7
 	ld bc, 1
@@ -359,9 +360,89 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr z, .nextDestination1
 	
 	hlcoord 9, 14
-	ld a, "."
+	ld a, "ä"
 	call ByteFill
 .nextDestination1
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 0, a
+	jr z, .nextDestination2
+	
+	hlcoord 2, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination2
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 1, a
+	jr z, .nextDestination3
+	
+	hlcoord 3, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination3
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 2, a
+	jr z, .nextDestination4
+	
+	hlcoord 4, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination4
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 3, a
+	jr z, .nextDestination5
+	
+	hlcoord 5, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination5
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 4, a
+	jr z, .nextDestination6
+	
+	hlcoord 6, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination6
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 5, a
+	jr z, .nextDestination7
+	
+	hlcoord 7, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination7
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 6, a
+	jr z, .nextDestination8
+	
+	hlcoord 8, 15
+	ld a, "ä"
+	call ByteFill
+.nextDestination8
+	ld bc, 1
+	
+	ld a, [DestinationGems]
+	bit 7, a
+	jr z, .done
+	
+	hlcoord 9, 15
+	ld a, "ä"
+	call ByteFill
+.done
 	;ok we're done here, move along
 	ld a, [StatusFlags] ; pokedex
 	bit 0, a
@@ -373,7 +454,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 
 .Dex_PlayTime
 	db   "#dex", "<LNBRK>", "Play time"
-	next "Gems/", "<LNBRK>", "××××××××", "<LNBRK>", "××××××××@@"
+	next "Gems/", "<LNBRK>", "ÄÄÄÄÄÄÄÄ", "<LNBRK>", "ÄÄÄÄÄÄÄÄ@@"
 
 .Badges
 	db "  Badges▶@"

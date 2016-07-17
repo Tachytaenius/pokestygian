@@ -100,9 +100,9 @@
 	db "Teru-sama@"
 	db "Pnk apricorn@"
 	db "Blackglasses@"
-	db "Slowpoketail@"
+	db "Painsaw@" ; SLOWPOKETAIL
 	db "Pink bow@"
-	db "Magic Scarf@"
+	db "Magic Scarf@" ; STICK
 	db "Smoke ball@"
 	db "Nevermeltice@"
 	db "Magnet@"

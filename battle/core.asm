@@ -2802,7 +2802,7 @@ PlayerMonFaintHappinessMod: ; 3d1aa
 	ld [wBattleResult], a
 	ld a, [wWhichMonFaintedFirst]
 	and a
-	ret z
+	ret
 ; 3d1f8
 
 AskUseNextPokemon: ; 3d1f8
@@ -6261,18 +6261,28 @@ LoadEnemyMon: ; 3e8eb
 .WildItem
 ; In a wild battle, we pull from the item slots in BaseData
 
-; Force Item1
-; Used for Ho-Oh, Lugia and Snorlax encounters
-	ld a, [BattleType]
-	cp BATTLETYPE_FORCEITEM
-	ld a, [BaseItems]
-	jr z, .UpdateItem
-
-; Failing that, it's all up to chance
 ;  Effective chances:
 ;    75% None
 ;    23% Item1
 ;     2% Item2
+
+	call Random
+	res 7, a
+	res 6, a
+	cp 0
+	jr nz, .skip
+	
+	call Random
+	bit 0, a
+	jr z, .chainsaw
+	
+	ld a, STICK
+	jr .UpdateItem
+
+.chainsaw
+	ld a, SLOWPOKETAIL
+	jr .UpdateItem
+.skip
 
 ; 25% chance of getting an item
 	call BattleRandom
@@ -6286,7 +6296,6 @@ LoadEnemyMon: ; 3e8eb
 	ld a, [BaseItems]
 	jr nc, .UpdateItem
 	ld a, [BaseItems+1]
-
 
 .UpdateItem
 	ld [EnemyMonItem], a

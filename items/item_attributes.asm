@@ -317,13 +317,13 @@ Item2Attributes:
 	item_attribute   100, HELD_DARK_BOOST,     10,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; SLOWPOKETAIL
-	item_attribute  9800, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
+	item_attribute   16384, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; PINK BOW
 	item_attribute   100, HELD_NORMAL_BOOST,   10,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; STICK
-	item_attribute   200, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
+	item_attribute   16384, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; SMOKE BALL
 	item_attribute   200, HELD_ESCAPE,          0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE

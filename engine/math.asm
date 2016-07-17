@@ -194,3 +194,63 @@ _Divide:: ; 673e
 
 	ret
 ; 67c1
+
+_Add17PercentOfDeToDe::
+	; de = de * 117 / 100
+	ld a, e
+	ld [hMultiplicand], a
+	ld a, d
+	ld [hMultiplicand + 1], a
+	xor a
+	ld [hMultiplicand + 2], a
+	ld a, 117
+	ld [hMultiplier], a
+	call Multiply
+	ld a, [hProduct]
+	ld [hDividend], a
+	ld a, [hProduct + 1]
+	ld [hDividend + 1], a
+	ld a, [hProduct + 2]
+	ld [hDividend + 2], a
+	ld a, [hProduct + 3]
+	ld [hDividend + 3], a
+	ld b, 4
+	ld a, 100
+	ld [hDivisor], a
+	call Divide
+	ld a, [hQuotient + 2]
+	cp 0
+	jr nz, .capped
+	ld a, [hQuotient + 1]
+	ld d, a
+	ld a, [hQuotient]
+	ld e, a
+	ret
+	
+.capped
+	ld de, %1111111111111111
+	ret
+	
+_ReduceNumberByAPercent::
+	; number in bc, percentage in a
+	push af
+	ld a, b
+	ld [hMultiplicand + 1], a
+	ld a, c
+	ld [hMultiplicand + 2], a
+	xor a
+	ld [hMultiplicand], a
+	pop bc
+	ld a, 100
+	sub b
+	ld [hMultiplier], a
+	call Multiply
+	ld a, 100
+	ld [hDivisor], a
+	ld b, 4
+	call Divide
+	ld a, [hQuotient + 1]
+	ld b, a
+	ld a, [hQuotient + 2]
+	ld c, a
+	ret

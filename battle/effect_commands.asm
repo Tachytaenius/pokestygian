@@ -1233,7 +1233,6 @@ BattleCommand_Critical: ; 34631
 	ld c, 0
 
 	cp CHANSEY
-	jr nz, .Farfetchd
 	ld a, [hl]
 	cp LUCKY_PUNCH
 	jr nz, .FocusEnergy
@@ -1241,13 +1240,6 @@ BattleCommand_Critical: ; 34631
 ; +2 critical level
 	ld c, 2
 	jr .Tally
-
-.Farfetchd
-	cp FARFETCH_D
-	jr nz, .FocusEnergy
-	ld a, [hl]
-	cp STICK
-	jr nz, .FocusEnergy
 
 ; +2 critical level
 	ld c, 2
@@ -1699,7 +1691,7 @@ BattleCommand_DamageVariation: ; 34cfd
 	ld hl, BattleMonItem
 	ld a, [hBattleTurn]
 	and a
-	jr z, .player
+	jr nz, .player
 	ld hl, EnemyMonItem ; enemy
 
 .player
@@ -1707,15 +1699,37 @@ BattleCommand_DamageVariation: ; 34cfd
 	ld hl, CurDamage
 	cp STICK
 	jr nz, .skip
-	ld b, [hl]
 	ld a, [hli]
+	ld b, a
+	ld a, [hl]
 	ld c, a
+	ld a, 17
 	call ReduceNumberByAPercent ; thanks PikalaxALT!
 	ld a, b
 	ld [CurDamage], a
 	ld a, c
 	ld [CurDamage + 1], a
 .skip
+	ld hl, BattleMonItem
+	ld a, [hBattleTurn]
+	and a
+	jr z, .player2
+	ld hl, EnemyMonItem ; enemy
+.player2
+	ld a, [hl]
+	ld hl, CurDamage
+	cp SLOWPOKETAIL
+	ret nz
+	ld a, [hli]
+	ld d, a
+	ld a, [hl]
+	ld e, a
+	ld a, 17
+	call Add17PercentOfDeToDe
+	ld a, d
+	ld [CurDamage], a
+	ld a, e
+	ld [CurDamage + 1], a
 	ret
 ; 34d32
 

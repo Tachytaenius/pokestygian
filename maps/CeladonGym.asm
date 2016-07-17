@@ -89,6 +89,7 @@ CeladonGym_MapEventHeader:: db 0, 0
 	yesorno
 	iffalse .Done
 	faceplayer
+	closetext
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .VernixWhat
 .withinReachVernix
@@ -247,6 +248,7 @@ stdHuman
 	yesorno
 	iffalse .Done
 	faceplayer
+	closetext
 	showemote EMOTE_FISH, LAST_TALKED, 15
 	jumptext .VernixWhat
 .withinReachVernix
